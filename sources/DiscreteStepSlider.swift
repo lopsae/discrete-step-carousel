@@ -5,21 +5,22 @@
 
 
 import SwiftUI
+import PreviewUtilities
 
 
 struct PrototypeSlider: View {
 
-    @Binding var selectedValue: Float
+    @Binding var selectedValue: Double
 
     // Possible values for `selectedValue`
-    private(set) var values: [Float]
+    private(set) var values: [Double]
     // Spacing between the mark for each value.
-    private(set) var spacing: CGFloat = 20
-    
-    @State private var scrollOffset: CGFloat = 0
-    @State private var isDragging = false
+    private(set) var spacing: Double = 20
 
-    init(_ values: [Float], selectedValue: Binding<Float>) {
+    @State private var selectedIndex: Int = 0
+
+
+    init(_ values: [Double], selectedValue: Binding<Double>) {
         self.values = values
         self._selectedValue = selectedValue
     }
@@ -50,7 +51,10 @@ struct PrototypeSlider: View {
                 Text(String(format: "%.1f", selectedValue))
                     .monospacedDigit()
                     .font(.system(size: 17, weight: .medium))
-                
+                Text("\(selectedIndex)")
+                    .font(.caption)
+                    .monospacedDigit()
+
                 // Indicator arrow
                 Image(systemName: "arrowtriangle.down.fill")
                     .font(.system(size: 10))
@@ -69,8 +73,9 @@ struct PrototypeSlider: View {
                         HStack(spacing: 0) {
                             // Leading spacer to center first item
                             Color.clear
-                                .frame(width: geometry.size.width / 2)
-                            
+                                .frame(width: (geometry.size.width - spacing) / 2)
+                                .debugOutline()
+
                             // Marks for each value
                             ForEach(Array(values.enumerated()), id: \.offset) { index, value in
                                 VStack(spacing: 0) {
@@ -94,19 +99,33 @@ struct PrototypeSlider: View {
                             
                             // Trailing spacer to center last item
                             Color.clear
-                                .frame(width: geometry.size.width / 2)
+                                .frame(width: (geometry.size.width - spacing) / 2)
+                                .debugOutline()
                         }
-                        .scrollTargetLayout()
                     }
-                    .scrollPosition(id: .init(
-                        get: { currentIndex },
-                        set: { newValue in
-                            if let newIndex = newValue, newIndex < values.count {
-                                selectedValue = values[newIndex]
-                            }
-                        }
-                    ))
-                    .scrollTargetBehavior(.viewAligned)
+                    .onScrollGeometryChange(for: Int.self, of: { scrollGeometry in
+                        let index = (scrollGeometry.contentOffset.x / spacing).rounded().toInt
+                        return max(0, min(index, values.count - 1))
+                    }, action: { oldValue, newValue in
+                        selectedIndex = newValue
+//                        print(newValue)
+                    })
+//                    .scrollPosition(.init(get: {
+//                        ScrollPosition.init(edge: .leading)
+//                    }, set: { position in
+//                        print(position.x?.description)
+//                    }))
+//                    .scrollPosition(id: .init(
+//                        get: { currentIndex },
+//                        set: { newValue in
+//                            if let newIndex = newValue, newIndex < values.count {
+//                                selectedValue = values[newIndex]
+//                            }
+//                        }
+//                    ))
+                    .scrollTargetBehavior(
+                        DiscreteStepScrollTargetBehavior(step: spacing)
+                    )
                 }
                 .frame(height: 60)
             }
@@ -129,9 +148,54 @@ struct PrototypeSlider: View {
 }
 
 
+extension PrototypeSlider {
+
+    struct DiscreteStepScrollTargetBehavior: ScrollTargetBehavior {
+        let step: Double
+
+        func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
+            print("target: \(target.rect.origin.x), vel: \(context.velocity.dx), orig: \(context.originalTarget.rect.origin.x)")
+            let targetX = target.rect.origin.x
+            target.rect.origin.x = round(targetX / step) * step
+        }
+    }
+
+}
+
+
 #Preview {
-    @Previewable @State var selectedValue: Float = 1.5
-    let values: [Float] = Array(stride(from: 0.0, to: 3.0, by: 0.1))
+    @Previewable @State var selectedValue: Double = 1.5
+    let values: [Double] = Array(stride(from: 0.0, to: 3.0, by: 0.1))
     PrototypeSlider(values, selectedValue: $selectedValue)
+}
+
+
+#Preview("Scroll targets") {
+    Image(systemName: "arrowtriangle.down.fill")
+    GeometryReader { geometry in
+        ScrollView(.horizontal) {
+            HStack(spacing: 0) {
+                // Leading spacer to center first item
+                Color.clear
+                    .frame(width: (geometry.size.width - 20) / 2)
+                    .border(.blue, width: 2)
+
+                ForEach(0..<10) { index in
+                    Color.clear
+                        .frame(width: 20)
+                        .border(.red, width: 2)
+                }
+
+                // Trailing spacer to center last item
+                Color.clear
+                    .frame(width: (geometry.size.width - 20) / 2)
+                    .border(.blue, width: 2)
+            }
+        } // ScrollView
+        .scrollTargetBehavior(
+            PrototypeSlider.DiscreteStepScrollTargetBehavior(step: 20)
+        )
+        .frame(height: 100)
+    } // GeometryReader
 }
 
