@@ -34,27 +34,27 @@ struct PrototypeSlider: View {
 
 
     var body: some View {
-        GeometryReader { geometry in
-            VStack(spacing: 4) {
-                // Selected value display
-                Text(selectedValue.formatted(.number.precision(.fractionLength(1))))
-                    .monospacedDigit()
-                Text(selectedIndex.description)
-                    .font(.caption)
-                    .monospacedDigit()
+        VStack(spacing: 4) {
+            // Selected value display
+            Text(selectedValue.formatted(.number.precision(.fractionLength(1))))
+                .monospacedDigit()
+            Text(selectedIndex.description)
+                .font(.caption)
+                .monospacedDigit()
 
-                // Indicator arrow
-                Image(systemName: "arrowtriangle.down.fill")
-                    .font(.caption)
+            // Indicator arrow
+            Image(systemName: "arrowtriangle.down.fill")
+                .font(.caption)
 
-                // Scrollable slider marks
-                ZStack {
-                    // Center reference line (highlighted)
-                    Rectangle()
-                        .fill(.primary)
-                        .frame(width: markWidth)
+            // Scrollable slider marks
+            ZStack {
+                // Center reference line (highlighted)
+                Rectangle()
+                    .fill(.primary)
+                    .frame(width: markWidth)
 
-                    // Scrollable content
+                // Scrollable content
+                GeometryReader { geometry in
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 0) {
                             // Leading spacer to center first item
@@ -72,7 +72,7 @@ struct PrototypeSlider: View {
                                 }
                                 .frame(width: spacing)
                             }
-                            
+
                             // Trailing spacer to center last item
                             Color.teal
                                 .frame(width: (geometry.size.width - spacing) / 2)
@@ -89,15 +89,10 @@ struct PrototypeSlider: View {
                         selectedIndex = newValue
                         selectedValue = values[selectedIndex]
                     }
-
-                } // ZStack
-                .frame(height: scrollViewHeight)
-            } // VStack
-            .frame(width: geometry.size.width)
-        } // GeometryReader
-        // TODO: move geometry reader to an internal position, to be constrained by height
-        .frame(height: 130)
-        .debugOutline()
+                } // GeometryReader
+            } // ZStack
+            .frame(height: scrollViewHeight)
+        } // VStack
     }
 
 }
