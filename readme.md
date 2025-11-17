@@ -1,4 +1,4 @@
-Continuous Step Slider
-======================
+Discrete Step Slider
+====================
 
-Prototype library for a continuous step slider control.
+Prototype library for a discrete step slider control.
