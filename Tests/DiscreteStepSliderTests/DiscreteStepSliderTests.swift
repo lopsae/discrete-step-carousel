@@ -2,5 +2,15 @@ import Testing
 @testable import DiscreteStepSlider
 
 @Test func example() async throws {
-    // Write your test here and use APIs like `#expect(...)` to check expected conditions.
+    let parts: [String] = [
+        "sphinx",
+        "of",
+        "black",
+        "quartz",
+        "judge",
+        "my",
+        "vow"
+    ]
+
+    #expect(parts.joined(separator: " ") == "sphinx of black quartz judge my vow")
 }
