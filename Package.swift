@@ -26,7 +26,8 @@ let package = Package(
         ),
         .testTarget(
             name: "DiscreteStepSliderTests",
-            dependencies: ["DiscreteStepSlider"]
+            dependencies: ["DiscreteStepSlider"],
+            path: "tst",
         ),
     ]
 )
