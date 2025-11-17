@@ -84,8 +84,7 @@ struct PrototypeSlider: View {
                     )
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                         let index = (scrollGeometry.contentOffset.x / spacing).rounded().toInt
-                        // TODO: clamp
-                        return max(0, min(index, values.count - 1))
+                        return index.clamped(to: 0..<values.count)
                     } action: { oldValue, newValue in
                         selectedIndex = newValue
                         selectedValue = values[selectedIndex]
