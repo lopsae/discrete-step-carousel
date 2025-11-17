@@ -22,12 +22,12 @@ let package = Package(
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DiscreteStepSlider",
-            path: "src"
+            path: "sources"
         ),
         .testTarget(
             name: "DiscreteStepSliderTests",
             dependencies: ["DiscreteStepSlider"],
-            path: "tst",
+            path: "tests",
         ),
     ]
 )

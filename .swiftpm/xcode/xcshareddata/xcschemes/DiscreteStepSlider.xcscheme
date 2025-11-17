@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:tst/plans/DiscreteStepSlider.xctestplan"
+            reference = "container:tests/plans/DiscreteStepSlider.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
