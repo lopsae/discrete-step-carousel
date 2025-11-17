@@ -8,7 +8,7 @@
 # Started from scratch.
 
 
-# Xcode Package project
+# Xcode package project
 .DS_Store
 /.build
 /Packages
