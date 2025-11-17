@@ -17,11 +17,17 @@ let package = Package(
             targets: ["DiscreteStepSlider"]
         ),
     ],
+    dependencies: [
+        .package(path: "../preview-utilities"),
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DiscreteStepSlider",
+            dependencies: [
+                .product(name: "PreviewUtilities", package: "preview-utilities")
+            ],
             path: "sources"
         ),
         .testTarget(
