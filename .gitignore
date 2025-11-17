@@ -10,3 +10,7 @@
 
 ## User settings
 xcuserdata/
+
+
+## DS Store files
+.DS_Store
