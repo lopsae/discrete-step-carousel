@@ -37,26 +37,23 @@ struct PrototypeSlider: View {
         GeometryReader { geometry in
             VStack(spacing: 4) {
                 // Selected value display
-                Text(String(format: "%.1f", selectedValue))
+                Text(selectedValue.formatted(.number.precision(.fractionLength(1))))
                     .monospacedDigit()
-                    .font(.system(size: 17, weight: .medium))
-                Text("\(selectedIndex)")
+                Text(selectedIndex.description)
                     .font(.caption)
                     .monospacedDigit()
 
                 // Indicator arrow
                 Image(systemName: "arrowtriangle.down.fill")
-                    .font(.system(size: 10))
-                    .foregroundStyle(.primary)
-                
+                    .font(.caption)
+
                 // Scrollable slider marks
                 ZStack {
                     // Center reference line (highlighted)
                     Rectangle()
                         .fill(.primary)
                         .frame(width: markWidth)
-                        .opacity(0.8)
-                    
+
                     // Scrollable content
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 0) {
@@ -99,6 +96,7 @@ struct PrototypeSlider: View {
             } // VStack
             .frame(width: geometry.size.width)
         } // GeometryReader
+        // TODO: move geometry reader to an internal position, to be constrained by height
         .frame(height: 130)
         .debugOutline()
     }
@@ -112,7 +110,6 @@ extension PrototypeSlider {
         let step: Double
 
         func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
-            // print("target: \(target.rect.origin.x), vel: \(context.velocity.dx), orig: \(context.originalTarget.rect.origin.x)")
             let targetX = target.rect.origin.x
             target.rect.origin.x = round(targetX / step) * step
         }
@@ -131,25 +128,30 @@ extension PrototypeSlider {
 
 
 #Preview("Example: scrollTargetBehavior") {
+    let gradient = LinearGradient(
+        colors: [.orange, .orange.opacity(0.8)],
+        startPoint: .leading,
+        endPoint: .trailing)
+    let spacing: CGFloat = 30
     Image(systemName: "arrowtriangle.down.fill")
     GeometryReader { geometry in
         ScrollView(.horizontal) {
             HStack(spacing: 0) {
                 // Leading spacer to center first item
-                Color.clear
-                    .frame(width: (geometry.size.width - 20) / 2)
-                    .border(.blue, width: 2)
+                Color.teal
+                    .frame(width: (geometry.size.width - spacing) / 2)
+                    .opacity(0.2)
 
                 ForEach(0..<10) { index in
-                    Color.clear
-                        .frame(width: 20)
-                        .border(.red, width: 2)
+                    Rectangle()
+                        .fill(gradient)
+                        .frame(width: spacing)
                 }
 
                 // Trailing spacer to center last item
-                Color.clear
-                    .frame(width: (geometry.size.width - 20) / 2)
-                    .border(.blue, width: 2)
+                Color.teal
+                    .frame(width: (geometry.size.width - spacing) / 2)
+                    .opacity(0.2)
             }
         } // ScrollView
         .scrollTargetBehavior(
