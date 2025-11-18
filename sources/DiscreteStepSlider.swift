@@ -13,6 +13,7 @@ struct PrototypeSlider: View {
     @Binding var selectedValue: Double
 
     @State private var selectedIndex: Int = 0
+    @State private var scrollPosition: ScrollPosition = .init()
 
     // Possible values for `selectedValue`
     private(set) var values: [Double]
@@ -37,6 +38,7 @@ struct PrototypeSlider: View {
             x: (selectedIndex.toDouble * spacing / ((values.count - 1).toDouble * spacing)),
             y: 0.5)
 
+        scrollPosition.scrollTo(x: selectedIndex.toDouble * spacing)
     }
 
 
@@ -90,6 +92,7 @@ struct PrototypeSlider: View {
                         DiscreteStepScrollTargetBehavior(step: spacing)
                     )
                     .defaultScrollAnchor(initialAnchor, for: .initialOffset)
+                    .scrollPosition($scrollPosition)
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                         let index = (scrollGeometry.contentOffset.x / spacing).rounded().toInt
                         return index.clamped(to: 0..<values.count)
