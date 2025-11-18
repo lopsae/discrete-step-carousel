@@ -12,24 +12,31 @@ struct PrototypeSlider: View {
 
     @Binding var selectedValue: Double
 
-    // Possible values for `selectedValue`
-    private(set) var values: [Double]
-    // Spacing between the mark for each value.
-    private(set) var spacing: Double = 20
-
     @State private var selectedIndex: Int = 0
 
+    // Possible values for `selectedValue`
+    private(set) var values: [Double]
 
-    private let scrollViewHeight: CGFloat = 60
-    private let markWidth: CGFloat = 2
-    private let markHeight: CGFloat = 40
+    private var initialAnchor: UnitPoint
+
+    // Spacing between the mark for each value.
+    private(set) var spacing: Double = 20
+    private let scrollViewHeight: Double = 60
+    private let markWidth: Double = 2
+    private let markHeight: Double = 40
 
 
     init(_ values: [Double], selectedValue: Binding<Double>) {
+        let selectedIndex = values.firstIndex(of: selectedValue.wrappedValue) ?? 0
+
         self.values = values
+        self.selectedIndex = selectedIndex
         self._selectedValue = selectedValue
 
-        // TODO: scroll view to starting position, use defaultScrollAnchor
+        self.initialAnchor = .init(
+            x: (selectedIndex.toDouble * spacing / ((values.count - 1).toDouble * spacing)),
+            y: 0.5)
+
     }
 
 
@@ -82,6 +89,7 @@ struct PrototypeSlider: View {
                     .scrollTargetBehavior(
                         DiscreteStepScrollTargetBehavior(step: spacing)
                     )
+                    .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                         let index = (scrollGeometry.contentOffset.x / spacing).rounded().toInt
                         return index.clamped(to: 0..<values.count)
@@ -113,8 +121,21 @@ extension PrototypeSlider {
 
 
 #Preview {
-    @Previewable @State var selectedValue: Double = 1.5
+    @Previewable @State var selectedValue: Double = 1.6
     let values: [Double] = Array(stride(from: 0.0, to: 3.01, by: 0.2))
+
+    // TODO: upon modification of binding, scroll should modify its position
+    HStack {
+        let indices: [Int] = [1, 3, 5, 10]
+        ForEach(indices, id: \.self) { index in
+            let value = values[index]
+            let label = value.formatted(.number.precision(.fractionLength(1)))
+            Button(label) {
+                selectedValue = value
+            }
+            .buttonStyle(.borderedProminent)
+        }
+    }
     PrototypeSlider(values, selectedValue: $selectedValue)
     Text("Selection: \(selectedValue, format: .number.precision(.fractionLength(1)))")
         .monospaced()
