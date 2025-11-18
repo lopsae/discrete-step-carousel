@@ -12,12 +12,13 @@ struct PrototypeSlider: View {
 
     @Binding var selectedValue: Double
 
+    // Possible values for `selectedValue`.
+    let values: [Double]
+    let animated: Bool
+
     @State private var selectedIndex: Int = 0
     @State private var scrollPosition: ScrollPosition = .init()
     @State private var isInIdlePhase: Bool = false
-
-    // Possible values for `selectedValue`
-    private(set) var values: [Double]
 
     private var initialAnchor: UnitPoint
 
@@ -28,12 +29,13 @@ struct PrototypeSlider: View {
     private let markHeight: Double = 40
 
 
-    init(_ values: [Double], selectedValue: Binding<Double>) {
+    init(_ values: [Double], selectedValue: Binding<Double>, animated: Bool = false) {
         let selectedIndex = values.firstIndex(of: selectedValue.wrappedValue) ?? 0
 
         self.values = values
         self.selectedIndex = selectedIndex
         self._selectedValue = selectedValue
+        self.animated = animated
 
         self.initialAnchor = .init(
             x: (selectedIndex.toDouble * spacing / ((values.count - 1).toDouble * spacing)),
@@ -93,7 +95,7 @@ struct PrototypeSlider: View {
                     .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                     .scrollPosition($scrollPosition)
                     .onScrollPhaseChange { oldPhase, newPhase in
-                        isInIdlePhase = (newPhase == .idle)
+                        isInIdlePhase = newPhase == .idle
                     }
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                         let index = (scrollGeometry.contentOffset.x / spacing).rounded().toInt
@@ -104,10 +106,16 @@ struct PrototypeSlider: View {
                     }
                     .onChange(of: selectedValue) { oldValue, newValue in
                         // Only respond to external changes, not user-interaction changes.
-                        guard isInIdlePhase else { return }
+                        guard isInIdlePhase,
+                              let newIndex = values.firstIndex(of: newValue)
+                        else { return }
 
-                        if let newIndex = values.firstIndex(of: newValue) {
-                            selectedIndex = newIndex
+                        selectedIndex = newIndex
+                        if animated {
+                            withAnimation {
+                                scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
+                            }
+                        } else {
                             scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
                         }
                     }
@@ -136,6 +144,7 @@ extension PrototypeSlider {
 
 #Preview {
     @Previewable @State var selectedValue: Double = 1.6
+    @Previewable @State var animated: Bool = false
     let values: [Double] = Array(stride(from: 0.0, to: 3.01, by: 0.2))
 
     VStack {
@@ -145,6 +154,7 @@ extension PrototypeSlider {
                 let value = values[index]
                 let label = value.formatted(.number.precision(.fractionLength(1)))
                 Button(label) {
+                    animated = false
                     selectedValue = value
                 }
                 .buttonStyle(.borderedProminent)
@@ -159,15 +169,14 @@ extension PrototypeSlider {
                 // TODO: animation does not seem to trigger
                 // maybe because the update to scrollPosition happens until onChange, which may not happen within the animation block
                 Button(label) {
-                    withAnimation {
-                        selectedValue = value
-                    }
+                    animated = true
+                    selectedValue = value
                 }
                 .buttonStyle(.borderedProminent)
             }
         }
     }
-    PrototypeSlider(values, selectedValue: $selectedValue)
+    PrototypeSlider(values, selectedValue: $selectedValue, animated: animated)
     Text("Selection: \(selectedValue, format: .number.precision(.fractionLength(1)))")
         .monospaced()
 }
