@@ -14,6 +14,7 @@ struct PrototypeSlider: View {
 
     @State private var selectedIndex: Int = 0
     @State private var scrollPosition: ScrollPosition = .init()
+    @State private var isInIdlePhase: Bool = false
 
     // Possible values for `selectedValue`
     private(set) var values: [Double]
@@ -37,8 +38,6 @@ struct PrototypeSlider: View {
         self.initialAnchor = .init(
             x: (selectedIndex.toDouble * spacing / ((values.count - 1).toDouble * spacing)),
             y: 0.5)
-
-        scrollPosition.scrollTo(x: selectedIndex.toDouble * spacing)
     }
 
 
@@ -93,12 +92,24 @@ struct PrototypeSlider: View {
                     )
                     .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                     .scrollPosition($scrollPosition)
+                    .onScrollPhaseChange { oldPhase, newPhase in
+                        isInIdlePhase = (newPhase == .idle)
+                    }
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                         let index = (scrollGeometry.contentOffset.x / spacing).rounded().toInt
                         return index.clamped(to: 0..<values.count)
                     } action: { oldValue, newValue in
                         selectedIndex = newValue
                         selectedValue = values[selectedIndex]
+                    }
+                    .onChange(of: selectedValue) { oldValue, newValue in
+                        // Only respond to external changes, not user-interaction changes.
+                        guard isInIdlePhase else { return }
+
+                        if let newIndex = values.firstIndex(of: newValue) {
+                            selectedIndex = newIndex
+                            scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
+                        }
                     }
                 } // GeometryReader
             } // ZStack
@@ -127,16 +138,33 @@ extension PrototypeSlider {
     @Previewable @State var selectedValue: Double = 1.6
     let values: [Double] = Array(stride(from: 0.0, to: 3.01, by: 0.2))
 
-    // TODO: upon modification of binding, scroll should modify its position
-    HStack {
-        let indices: [Int] = [1, 3, 5, 10]
-        ForEach(indices, id: \.self) { index in
-            let value = values[index]
-            let label = value.formatted(.number.precision(.fractionLength(1)))
-            Button(label) {
-                selectedValue = value
+    VStack {
+        HStack {
+            let indices: [Int] = [0, 3, 5]
+            ForEach(indices, id: \.self) { index in
+                let value = values[index]
+                let label = value.formatted(.number.precision(.fractionLength(1)))
+                Button(label) {
+                    selectedValue = value
+                }
+                .buttonStyle(.borderedProminent)
             }
-            .buttonStyle(.borderedProminent)
+        }
+        Text("Animated:")
+        HStack {
+            let indices: [Int] = [11, 13, 15]
+            ForEach(indices, id: \.self) { index in
+                let value = values[index]
+                let label = value.formatted(.number.precision(.fractionLength(1)))
+                // TODO: animation does not seem to trigger
+                // maybe because the update to scrollPosition happens until onChange, which may not happen within the animation block
+                Button(label) {
+                    withAnimation {
+                        selectedValue = value
+                    }
+                }
+                .buttonStyle(.borderedProminent)
+            }
         }
     }
     PrototypeSlider(values, selectedValue: $selectedValue)
