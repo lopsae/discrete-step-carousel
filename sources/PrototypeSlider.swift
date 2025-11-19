@@ -60,9 +60,6 @@ struct PrototypeSlider: View {
 
     @Binding var position: Position
 
-    // TODO: still necessary?
-    @State private var isInIdlePhase: Bool = false
-
     private var initialAnchor: UnitPoint
 
     // Spacing between the mark for each value.
@@ -135,10 +132,6 @@ struct PrototypeSlider: View {
                     )
                     .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                     .scrollPosition($position.scrollPosition)
-                    .onScrollPhaseChange { oldPhase, newPhase in
-                        // TODO: check and anotate how phasechange works for user interaction, immediate changes, and animations
-                        isInIdlePhase = newPhase == .idle
-                    }
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                         let index = (scrollGeometry.contentOffset.x / position.spacing).rounded().toInt
                         let clampedIndex = index.clamped(to: 0..<position.values.count)
