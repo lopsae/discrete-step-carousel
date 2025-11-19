@@ -191,41 +191,53 @@ extension PrototypeSlider {
         selectedValue: 1.6,
         spacing: 20)
 
-    VStack {
-        Text("Immediate:")
-        HStack {
-            let indices: [Int] = [0, 3, 5]
-            ForEach(indices, id: \.self) { index in
-                let value = sliderPosition.values[index]
-                let label = value.formatted(.number.precision(.fractionLength(1)))
-                Button(label) {
-                    sliderPosition.selectValue(value)
-                }
-                .buttonStyle(.borderedProminent)
-            }
-        }
-        Text("Animated:")
-        HStack {
-            let indices: [Int] = [11, 13, 15]
-            ForEach(indices, id: \.self) { index in
-                let value = sliderPosition.values[index]
-                let label = value.formatted(.number.precision(.fractionLength(1)))
-                Button(label) {
-                    withAnimation {
-                        sliderPosition.selectValue(value)
-                    }
-                }
-                .buttonStyle(.borderedProminent)
-            }
-        }
-    }
     PrototypeSlider(position: $sliderPosition)
+        .onAppear {
+            print("✴️ Preview Appeared")
+        }
         .onChange(of: sliderPosition.selectedValue) { oldValue, newValue in
             // TODO: add print of when the value/index is changed, to show how value sometimes has additional updates
-            print("Selected value changed: \(sliderPosition.selectedValue)")
+            print("selectedValue changed: \(sliderPosition.selectedValue)")
         }
+
     Text("Selection: \(sliderPosition.selectedValue, format: .number.precision(.fractionLength(1)))")
         .monospaced()
+
+    List {
+        Section("Immediate") {
+            HStack {
+                let indices: [Int] = [0, 3, 5]
+                ForEach(indices, id: \.self) { index in
+                    let value = sliderPosition.values[index]
+                    let formattedValue = value.formatted(.number.precision(.fractionLength(1)))
+                    Button(formattedValue) {
+                        print("➡️ Selecting by Value: \(formattedValue)")
+                        sliderPosition.selectValue(value)
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+            } // HStack
+            .maxWidthFrame()
+        } // Section
+
+        Section("Animated") {
+            HStack {
+                let indices: [Int] = [11, 13, 15]
+                ForEach(indices, id: \.self) { index in
+                    let value = sliderPosition.values[index]
+                    let formattedValue = value.formatted(.number.precision(.fractionLength(1)))
+                    Button(formattedValue) {
+                        print("➡️ Animated selecting by Value: \(formattedValue)")
+                        withAnimation {
+                            sliderPosition.selectValue(value)
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                }
+            } // HStack
+            .maxWidthFrame()
+        } // Section
+    }
 }
 
 
