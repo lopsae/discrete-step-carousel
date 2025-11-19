@@ -8,85 +8,88 @@ import SwiftUI
 import PreviewUtilities
 
 
+// TODO: values should be generic
+// TODO: support vertical slider
 struct PrototypeSlider: View {
 
-    struct SliderPosition {
-//        var selectedValue: Double
-//        var scrollOffset: CGPoint
 
+    struct Position {
+        // TODO: values could be updated through position too
+        let values: [Double]
+        let spacing: Double
+
+        // These properties only should be updated through the available functions, not directly.
+        var selectedValue: Double
+        var selectedIndex: Int
         var scrollPosition: ScrollPosition
 
-//        var scrollPosition: ScrollPosition {
-//            get {
-//                print("gettting point.x: \(scrollOffset.x)")
-//                return .init(point: scrollOffset)
-//            }
-//            mutating set {
-//                print("setting: \(newValue)")
-//                if let newPoint = newValue.point {
-//                    print("setting point.x: \(newPoint.x)")
-//                    scrollOffset = newPoint
-//                }
-//            }
-//        }
+        init(values: [Double], selectedValue: Double, spacing: Double) {
+            self.values = values
+            self.selectedValue = selectedValue
+            self.spacing = spacing
+
+            let selectedIndex = values.firstIndex(of: selectedValue) ?? 0
+            self.selectedIndex = selectedIndex
+            self.scrollPosition = ScrollPosition()
+        }
+
+
+        mutating func selectValue(_ value: Double) {
+            guard let index = values.firstIndex(of: value)
+            else { return }
+
+            selectedValue = value
+            // TODO: could also call selectIndex
+            selectedIndex = index
+            scrollPosition.scrollTo(x: index.toDouble * spacing)
+        }
+
+
+        mutating func selectIndex(_ index: Int) {
+            guard values.indices.contains(index)
+            else { return }
+
+            // TODO: is this necessary? or will it update as the view scrolls?
+            selectedValue = values[index]
+            selectedIndex = index
+            scrollPosition.scrollTo(x: index.toDouble * spacing)
+        }
+
     }
 
-    // TODO: make slider position the single point of truth, containing both selectedValue and ScrollPosition
-    // with functions to scroll to a given value that internally always modify the scroll position
-    @Binding var selectedValue: Double
-    @Binding var sliderPosition: SliderPosition
 
-    // Possible values for `selectedValue`.
-    let values: [Double]
-//    let animated: Bool
+    @Binding var position: Position
 
-    @State private var selectedIndex: Int = 0
-//    @State private var scrollPosition: ScrollPosition = .init()
+    // TODO: still necessary?
     @State private var isInIdlePhase: Bool = false
 
     private var initialAnchor: UnitPoint
 
     // Spacing between the mark for each value.
-    private(set) var spacing: Double = 20
     private let scrollViewHeight: Double = 60
     private let markWidth: Double = 2
     private let markHeight: Double = 40
 
 
-    init(
-        _ values: [Double],
-        selectedValue: Binding<Double>,
-        sliderPosition: Binding<SliderPosition>
-        /*animated: Bool = false*/
-    ) {
-        let selectedIndex = values.firstIndex(of: selectedValue.wrappedValue) ?? 0
+    init(position positionBinding: Binding<Position>) {
+        self._position = positionBinding
 
-        self.values = values
-        self.selectedIndex = selectedIndex
-        self._selectedValue = selectedValue
-        self._sliderPosition = sliderPosition
-//        self.animated = animated
-
+        let positionValue = positionBinding.wrappedValue
+        let selectedIndex = positionValue.selectedIndex.toDouble
+        let spacing  = positionValue.spacing
+        let valuesCount = positionValue.values.count.toDouble
         self.initialAnchor = .init(
-            x: (selectedIndex.toDouble * spacing / ((values.count - 1).toDouble * spacing)),
+            x: (selectedIndex * spacing / ((valuesCount - 1) * spacing)),
             y: 0.5)
-
-//        self.sliderPosition.selectedValue = selectedValue.wrappedValue
-//        self.sliderPosition.scrollOffset = CGPoint(
-//            x: selectedIndex.toDouble * spacing,
-//            y: 0)
-//
-//        print("init:\(self.sliderPosition.scrollOffset.x)")
-
     }
 
 
     var body: some View {
         VStack(spacing: 4) {
             // Selected value display
-            Text(selectedValue.formatted(.number.precision(.fractionLength(1))))
+            Text(position.selectedValue.formatted(.number.precision(.fractionLength(1))))
                 .monospacedDigit()
-            Text(selectedIndex.description)
+            Text(position.selectedIndex.description)
                 .font(.caption)
                 .monospacedDigit()
 
@@ -107,56 +110,58 @@ struct PrototypeSlider: View {
                         HStack(spacing: 0) {
                             // Leading spacer to center first item
                             Color.teal
-                                .frame(width: (geometry.size.width - spacing) / 2)
+                                .frame(width: (geometry.size.width - position.spacing) / 2)
                                 .opacity(0.0)
 
                             // Marks for each value
-                            ForEach(Array(values.enumerated()), id: \.offset) { index, value in
+                            ForEach(Array(position.values.enumerated()), id: \.offset) { index, value in
                                 VStack(spacing: 0) {
                                     // Tick mark
                                     Rectangle()
                                         .fill( .tertiary)
                                         .frame(width: markWidth, height: markHeight)
                                 }
-                                .frame(width: spacing)
+                                .frame(width: position.spacing)
                             }
 
                             // Trailing spacer to center last item
                             Color.teal
-                                .frame(width: (geometry.size.width - spacing) / 2)
+                                .frame(width: (geometry.size.width - position.spacing) / 2)
                                 .opacity(0.0)
                         }
                     } // ScrollView
                     .scrollTargetBehavior(
-                        DiscreteStepScrollTargetBehavior(step: spacing)
+                        DiscreteStepScrollTargetBehavior(step: position.spacing)
                     )
                     .defaultScrollAnchor(initialAnchor, for: .initialOffset)
-                    .scrollPosition($sliderPosition.scrollPosition)
+                    .scrollPosition($position.scrollPosition)
                     .onScrollPhaseChange { oldPhase, newPhase in
+                        // TODO: check and anotate how phasechange works for user interaction, immediate changes, and animations
                         isInIdlePhase = newPhase == .idle
                     }
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
-                        let index = (scrollGeometry.contentOffset.x / spacing).rounded().toInt
-                        return index.clamped(to: 0..<values.count)
+                        let index = (scrollGeometry.contentOffset.x / position.spacing).rounded().toInt
+                        let clampedIndex = index.clamped(to: 0..<position.values.count)
+                        return clampedIndex
                     } action: { oldValue, newValue in
-                        selectedIndex = newValue
-                        selectedValue = values[selectedIndex]
+                        position.selectedIndex = newValue
+                        position.selectedValue = position.values[newValue]
                     }
-                    .onChange(of: selectedValue) { oldValue, newValue in
-                        // Only respond to external changes, not user-interaction changes.
-                        guard isInIdlePhase,
-                              let newIndex = values.firstIndex(of: newValue)
-                        else { return }
-
-                        selectedIndex = newIndex
-//                        if animated {
-//                            withAnimation {
-//                                scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
-//                            }
-//                        } else {
-                        sliderPosition.scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
-//                        }
-                    }
+//                    .onChange(of: position.selectedValue) { oldValue, newValue in
+//                        // Only respond to external changes, not user-interaction changes.
+//                        guard isInIdlePhase,
+//                              let newIndex = position.values.firstIndex(of: newValue)
+//                        else { return }
+//
+//                        position.selectedIndex = newIndex
+////                        if animated {
+////                            withAnimation {
+////                                scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
+////                            }
+////                        } else {
+//                        position.sliderPosition.scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
+////                        }
+//                    }
                 } // GeometryReader
             } // ZStack
             .frame(height: scrollViewHeight)
@@ -181,20 +186,20 @@ extension PrototypeSlider {
 
 
 #Preview {
-    @Previewable @State var selectedValue: Double = 1.6
-    @Previewable @State var sliderPosition: PrototypeSlider.SliderPosition = .init(scrollPosition: .init())
-//    @Previewable @State var animated: Bool = false
-    let values: [Double] = Array(stride(from: 0.0, to: 3.01, by: 0.2))
+    @Previewable @State var sliderPosition: PrototypeSlider.Position = .init(
+        values: Array(stride(from: 0.0, to: 3.01, by: 0.2)),
+        selectedValue: 1.6,
+        spacing: 20)
 
     VStack {
+        Text("Immediate:")
         HStack {
             let indices: [Int] = [0, 3, 5]
             ForEach(indices, id: \.self) { index in
-                let value = values[index]
+                let value = sliderPosition.values[index]
                 let label = value.formatted(.number.precision(.fractionLength(1)))
                 Button(label) {
-//                    animated = false
-                    selectedValue = value
+                    sliderPosition.selectValue(value)
                 }
                 .buttonStyle(.borderedProminent)
             }
@@ -203,26 +208,23 @@ extension PrototypeSlider {
         HStack {
             let indices: [Int] = [11, 13, 15]
             ForEach(indices, id: \.self) { index in
-                let value = values[index]
+                let value = sliderPosition.values[index]
                 let label = value.formatted(.number.precision(.fractionLength(1)))
-                // TODO: animation does not seem to trigger
-                // maybe because the update to scrollPosition happens until onChange, which may not happen within the animation block
                 Button(label) {
-//                    animated = true
-//                    selectedValue = value
                     withAnimation {
-                        sliderPosition.scrollPosition.scrollTo(x: index.toDouble * 20)// scrollOffset = CGPoint(
-//                            x: index.toDouble * 20,
-//                            y: 0.0)
-                        print("sliderTo \(sliderPosition.scrollPosition.x)")
+                        sliderPosition.selectValue(value)
                     }
                 }
                 .buttonStyle(.borderedProminent)
             }
         }
     }
-    PrototypeSlider(values, selectedValue: $selectedValue, sliderPosition: $sliderPosition /*animated: animated*/)
-    Text("Selection: \(selectedValue, format: .number.precision(.fractionLength(1)))")
+    PrototypeSlider(position: $sliderPosition)
+        .onChange(of: sliderPosition.selectedValue) { oldValue, newValue in
+            // TODO: add print of when the value/index is changed, to show how value sometimes has additional updates
+            print("Selected value changed: \(sliderPosition.selectedValue)")
+        }
+    Text("Selection: \(sliderPosition.selectedValue, format: .number.precision(.fractionLength(1)))")
         .monospaced()
 }
 
