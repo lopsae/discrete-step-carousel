@@ -10,14 +10,38 @@ import PreviewUtilities
 
 struct PrototypeSlider: View {
 
+    struct SliderPosition {
+//        var selectedValue: Double
+//        var scrollOffset: CGPoint
+
+        var scrollPosition: ScrollPosition
+
+//        var scrollPosition: ScrollPosition {
+//            get {
+//                print("gettting point.x: \(scrollOffset.x)")
+//                return .init(point: scrollOffset)
+//            }
+//            mutating set {
+//                print("setting: \(newValue)")
+//                if let newPoint = newValue.point {
+//                    print("setting point.x: \(newPoint.x)")
+//                    scrollOffset = newPoint
+//                }
+//            }
+//        }
+    }
+
+    // TODO: make slider position the single point of truth, containing both selectedValue and ScrollPosition
+    // with functions to scroll to a given value that internally always modify the scroll position
     @Binding var selectedValue: Double
+    @Binding var sliderPosition: SliderPosition
 
     // Possible values for `selectedValue`.
     let values: [Double]
-    let animated: Bool
+//    let animated: Bool
 
     @State private var selectedIndex: Int = 0
-    @State private var scrollPosition: ScrollPosition = .init()
+//    @State private var scrollPosition: ScrollPosition = .init()
     @State private var isInIdlePhase: Bool = false
 
     private var initialAnchor: UnitPoint
@@ -29,17 +53,31 @@ struct PrototypeSlider: View {
     private let markHeight: Double = 40
 
 
-    init(_ values: [Double], selectedValue: Binding<Double>, animated: Bool = false) {
+    init(
+        _ values: [Double],
+        selectedValue: Binding<Double>,
+        sliderPosition: Binding<SliderPosition>
+        /*animated: Bool = false*/
+    ) {
         let selectedIndex = values.firstIndex(of: selectedValue.wrappedValue) ?? 0
 
         self.values = values
         self.selectedIndex = selectedIndex
         self._selectedValue = selectedValue
-        self.animated = animated
+        self._sliderPosition = sliderPosition
+//        self.animated = animated
 
         self.initialAnchor = .init(
             x: (selectedIndex.toDouble * spacing / ((values.count - 1).toDouble * spacing)),
             y: 0.5)
+
+//        self.sliderPosition.selectedValue = selectedValue.wrappedValue
+//        self.sliderPosition.scrollOffset = CGPoint(
+//            x: selectedIndex.toDouble * spacing,
+//            y: 0)
+//
+//        print("init:\(self.sliderPosition.scrollOffset.x)")
+
     }
 
 
@@ -93,7 +131,7 @@ struct PrototypeSlider: View {
                         DiscreteStepScrollTargetBehavior(step: spacing)
                     )
                     .defaultScrollAnchor(initialAnchor, for: .initialOffset)
-                    .scrollPosition($scrollPosition)
+                    .scrollPosition($sliderPosition.scrollPosition)
                     .onScrollPhaseChange { oldPhase, newPhase in
                         isInIdlePhase = newPhase == .idle
                     }
@@ -111,13 +149,13 @@ struct PrototypeSlider: View {
                         else { return }
 
                         selectedIndex = newIndex
-                        if animated {
-                            withAnimation {
-                                scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
-                            }
-                        } else {
-                            scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
-                        }
+//                        if animated {
+//                            withAnimation {
+//                                scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
+//                            }
+//                        } else {
+                        sliderPosition.scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
+//                        }
                     }
                 } // GeometryReader
             } // ZStack
@@ -144,7 +182,8 @@ extension PrototypeSlider {
 
 #Preview {
     @Previewable @State var selectedValue: Double = 1.6
-    @Previewable @State var animated: Bool = false
+    @Previewable @State var sliderPosition: PrototypeSlider.SliderPosition = .init(scrollPosition: .init())
+//    @Previewable @State var animated: Bool = false
     let values: [Double] = Array(stride(from: 0.0, to: 3.01, by: 0.2))
 
     VStack {
@@ -154,7 +193,7 @@ extension PrototypeSlider {
                 let value = values[index]
                 let label = value.formatted(.number.precision(.fractionLength(1)))
                 Button(label) {
-                    animated = false
+//                    animated = false
                     selectedValue = value
                 }
                 .buttonStyle(.borderedProminent)
@@ -169,14 +208,20 @@ extension PrototypeSlider {
                 // TODO: animation does not seem to trigger
                 // maybe because the update to scrollPosition happens until onChange, which may not happen within the animation block
                 Button(label) {
-                    animated = true
-                    selectedValue = value
+//                    animated = true
+//                    selectedValue = value
+                    withAnimation {
+                        sliderPosition.scrollPosition.scrollTo(x: index.toDouble * 20)// scrollOffset = CGPoint(
+//                            x: index.toDouble * 20,
+//                            y: 0.0)
+                        print("sliderTo \(sliderPosition.scrollPosition.x)")
+                    }
                 }
                 .buttonStyle(.borderedProminent)
             }
         }
     }
-    PrototypeSlider(values, selectedValue: $selectedValue, animated: animated)
+    PrototypeSlider(values, selectedValue: $selectedValue, sliderPosition: $sliderPosition /*animated: animated*/)
     Text("Selection: \(selectedValue, format: .number.precision(.fractionLength(1)))")
         .monospaced()
 }
