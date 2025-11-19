@@ -34,23 +34,26 @@ struct PrototypeSlider: View {
         }
 
 
+        // TODO: document
+        // updates selected value and repositions the slider.
+        // When animated, selected value will be updated once, and then updated several times as
+        // the animation progresses until the selectedValue is reached again
         mutating func selectValue(_ value: Double) {
             guard let index = values.firstIndex(of: value)
             else { return }
 
             selectedValue = value
-            // TODO: could also call selectIndex
-            selectedIndex = index
-            scrollPosition.scrollTo(x: index.toDouble * spacing)
+            selectIndex(index)
         }
 
 
+        // TODO: document
+        // updates the position of the slider to the selected index, and along this the selected value.
+        // when animated, the selected value will update several times as the animation progresses.
         mutating func selectIndex(_ index: Int) {
             guard values.indices.contains(index)
             else { return }
 
-            // TODO: is this necessary? or will it update as the view scrolls?
-            selectedValue = values[index]
             selectedIndex = index
             scrollPosition.scrollTo(x: index.toDouble * spacing)
         }
@@ -174,7 +177,6 @@ extension PrototypeSlider {
             print("✴️ Preview Appeared")
         }
         .onChange(of: sliderPosition.selectedValue) { oldValue, newValue in
-            // TODO: add print of when the value/index is changed, to show how value sometimes has additional updates
             print("selectedValue changed: \(sliderPosition.selectedValue)")
         }
 
