@@ -147,21 +147,6 @@ struct PrototypeSlider: View {
                         position.selectedIndex = newValue
                         position.selectedValue = position.values[newValue]
                     }
-//                    .onChange(of: position.selectedValue) { oldValue, newValue in
-//                        // Only respond to external changes, not user-interaction changes.
-//                        guard isInIdlePhase,
-//                              let newIndex = position.values.firstIndex(of: newValue)
-//                        else { return }
-//
-//                        position.selectedIndex = newIndex
-////                        if animated {
-////                            withAnimation {
-////                                scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
-////                            }
-////                        } else {
-//                        position.sliderPosition.scrollPosition.scrollTo(x: newIndex.toDouble * spacing)
-////                        }
-//                    }
                 } // GeometryReader
             } // ZStack
             .frame(height: scrollViewHeight)
@@ -215,6 +200,20 @@ extension PrototypeSlider {
                         sliderPosition.selectValue(value)
                     }
                     .buttonStyle(.borderedProminent)
+                    .monospaced()
+                }
+            } // HStack
+            .maxWidthFrame()
+
+            HStack {
+                let indices: [Int] = [1, 4, 6]
+                ForEach(indices, id: \.self) { index in
+                    Button("[\(index)]") {
+                        print("➡️ Selecting by Index: [\(index)]")
+                        sliderPosition.selectIndex(index)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .monospaced()
                 }
             } // HStack
             .maxWidthFrame()
@@ -233,6 +232,22 @@ extension PrototypeSlider {
                         }
                     }
                     .buttonStyle(.borderedProminent)
+                    .monospaced()
+                }
+            } // HStack
+            .maxWidthFrame()
+
+            HStack {
+                let indices: [Int] = [10, 12, 14]
+                ForEach(indices, id: \.self) { index in
+                    Button("[\(index)]") {
+                        print("➡️ Animated selecting by Index: [\(index)]")
+                        withAnimation {
+                            sliderPosition.selectIndex(index)
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .monospaced()
                 }
             } // HStack
             .maxWidthFrame()
