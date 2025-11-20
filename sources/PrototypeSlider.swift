@@ -165,6 +165,11 @@ struct PrototypeSlider: View {
     Text("Selection: \(sliderPosition.selectedValue, format: .number.precision(.fractionLength(1)))")
         .monospaced()
 
+    Text("Scroll position: \(sliderPosition.scrollPosition.x, default: "nil")")
+        .monospaced()
+    Text("Scroll positioned-by-user: \(sliderPosition.scrollPosition.isPositionedByUser, default: "nil")")
+        .monospaced()
+
     List {
         Section("Immediate") {
             HStack {
