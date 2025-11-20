@@ -8,16 +8,15 @@ import SwiftUI
 
 
 #Preview {
-    @Previewable @State var sliderPosition: DiscreteStepSlider.Position = .init(
-        values: Array(stride(from: 0.0, to: 3.01, by: 0.2)),
-        selectedValue: 1.6,
+    @Previewable @State var sliderPosition: DiscreteStepSlider<String>.Position = .init(
+        values: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"],
+        selectedValue: "H",
         spacing: 20)
 
     // Selected value display.
     HistoricValue(
         label: "value:",
-        value: sliderPosition.selectedValue,
-        format: FloatingPointFormatStyle.number.precision(.fractionLength(1)))
+        value: sliderPosition.selectedValue)
 
     // Indicator arrow.
     Image(systemName: "arrowtriangle.down.fill")
@@ -46,9 +45,8 @@ import SwiftUI
                 let indices: [Int] = [0, 3, 5]
                 ForEach(indices, id: \.self) { index in
                     let value = sliderPosition.values[index]
-                    let formattedValue = value.formatted(.number.precision(.fractionLength(1)))
-                    Button(formattedValue) {
-                        print("➡️ Selecting by Value: \(formattedValue)")
+                    Button(value) {
+                        print("➡️ Selecting by Value: \(value)")
                         sliderPosition.selectValue(value)
                     }
                     .buttonStyle(.borderedProminent)
@@ -76,9 +74,8 @@ import SwiftUI
                 let indices: [Int] = [11, 13, 15]
                 ForEach(indices, id: \.self) { index in
                     let value = sliderPosition.values[index]
-                    let formattedValue = value.formatted(.number.precision(.fractionLength(1)))
-                    Button(formattedValue) {
-                        print("➡️ Animated selecting by Value: \(formattedValue)")
+                    Button(value) {
+                        print("➡️ Animated selecting by Value: \(value)")
                         withAnimation {
                             sliderPosition.selectValue(value)
                         }
