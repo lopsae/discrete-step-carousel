@@ -152,20 +152,6 @@ struct DiscreteStepSlider: View {
 }
 
 
-extension DiscreteStepSlider {
-
-    struct DiscreteStepScrollTargetBehavior: ScrollTargetBehavior {
-        let step: Double
-
-        func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
-            let targetX = target.rect.origin.x
-            target.rect.origin.x = round(targetX / step) * step
-        }
-    }
-
-}
-
-
 #Preview {
     @Previewable @State var sliderPosition: DiscreteStepSlider.Position = .init(
         values: Array(stride(from: 0.0, to: 3.01, by: 0.2)),
@@ -249,40 +235,4 @@ extension DiscreteStepSlider {
         } // Section
     }
 }
-
-
-#Preview("Example: scrollTargetBehavior") {
-    let gradient = LinearGradient(
-        colors: [.orange, .orange.opacity(0.8)],
-        startPoint: .leading,
-        endPoint: .trailing)
-    let spacing: CGFloat = 30
-    Image(systemName: "arrowtriangle.down.fill")
-    GeometryReader { geometry in
-        ScrollView(.horizontal) {
-            HStack(spacing: 0) {
-                // Leading spacer to center first item
-                Color.teal
-                    .frame(width: (geometry.size.width - spacing) / 2)
-                    .opacity(0.2)
-
-                ForEach(0..<10) { index in
-                    Rectangle()
-                        .fill(gradient)
-                        .frame(width: spacing)
-                }
-
-                // Trailing spacer to center last item
-                Color.teal
-                    .frame(width: (geometry.size.width - spacing) / 2)
-                    .opacity(0.2)
-            }
-        } // ScrollView
-        .scrollTargetBehavior(
-            PrototypeSlider.DiscreteStepScrollTargetBehavior(step: 20)
-        )
-        .frame(height: 100)
-    } // GeometryReader
-}
-
 
