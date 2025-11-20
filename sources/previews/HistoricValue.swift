@@ -7,23 +7,29 @@
 import SwiftUI
 
 
-struct HistoricValue: View {
+struct HistoricValue<Value: Equatable, Formatter: FormatStyle>: View
+where Formatter.FormatInput == Value, Formatter.FormatOutput == String
+{
 
-    @State private var history: [Double] = []
+    @State private var history: [Value] = []
 
     let label: String
-    let value: Double
+    let value: Value
+    let formatter: Formatter?
 
     let historyToKeep: Int = 10
 
 
-    init(_ label: String, value: Double) {
-        self.value = value
+    init(label: String, value: Value, format formatter: Formatter?) {
         self.label = label
+        self.value = value
+        self.formatter = formatter
     }
 
+
     var body: some View {
-        Text(value.formatted(.number.precision(.fractionLength(1))))
+        let valueString = formatter?.format(value) ?? String(describing: value)
+        Text(valueString)
             .monospacedDigit()
             // Historic values placed in an overlay so that these never modify the size of the
             // main text.
@@ -45,9 +51,11 @@ struct HistoricValue: View {
     @ViewBuilder
     private var historicValues: some View {
         ForEach(history.enumerated(), id: \.offset) { index, historicValue in
-            Text(historicValue.formatted(.number.precision(.fractionLength(1))))
+            let valueString = formatter?.format(historicValue) ?? String(describing: historicValue)
+            Text(valueString)
                 .font(.caption)
                 .monospacedDigit()
+                .fixedSize()
                 .opacity(1.0 - (index.asDouble / historyToKeep.asDouble))
                 .offset(x: ((index.asDouble + 1.0) * 25.0) + 5.0)
         }
@@ -64,4 +72,19 @@ struct HistoricValue: View {
             }
     }
 
+}
+
+
+extension HistoricValue where Formatter == NeverFormatStyle<Value> {
+
+    init(label: String, value: Value) {
+        self.init(label: label, value: value, format: nil)
+    }
+
+}
+
+
+// Dummy implementation of FormatStyle to provide HistoricValue initializers without format.
+struct NeverFormatStyle<Input>: FormatStyle {
+    func format(_ value: Input) -> String { "" }
 }

@@ -14,7 +14,10 @@ import SwiftUI
         spacing: 20)
 
     // Selected value display.
-    HistoricValue("value:", value: sliderPosition.selectedValue)
+    HistoricValue(
+        label: "value:",
+        value: sliderPosition.selectedValue,
+        format: FloatingPointFormatStyle.number.precision(.fractionLength(1)))
 
     // Indicator arrow.
     Image(systemName: "arrowtriangle.down.fill")
@@ -32,11 +35,9 @@ import SwiftUI
         }
 
     // Selected index display.
-    // TODO:
-//    HistoricValue("index:", value: sliderPosition.selectedIndex)
-    Text(sliderPosition.selectedIndex.description)
-        .font(.caption)
-        .monospacedDigit()
+    HistoricValue(
+        label: "index:",
+        value: sliderPosition.selectedIndex)
 
     List {
         Section("Immediate") {
