@@ -8,9 +8,8 @@ import SwiftUI
 import PreviewUtilities
 
 
-// TODO: values should be generic
 // TODO: support vertical slider
-struct DiscreteStepSlider: View {
+struct DiscreteStepSlider<Value: Equatable>: View {
 
     @Binding var position: Position
 
@@ -37,20 +36,8 @@ struct DiscreteStepSlider: View {
 
     var body: some View {
         VStack(spacing: 4) {
-            // Selected value display
-            Text(position.selectedValue.formatted(.number.precision(.fractionLength(1))))
-                .monospacedDigit()
-            Text(position.selectedIndex.description)
-                .font(.caption)
-                .monospacedDigit()
-
-            // Indicator arrow
-            Image(systemName: "arrowtriangle.down.fill")
-                .font(.caption)
-
-            // Scrollable slider marks
             ZStack {
-                // Center reference line (highlighted)
+                // Center selection mark
                 Rectangle()
                     .fill(.primary)
                     .frame(width: markWidth)
@@ -112,14 +99,14 @@ extension DiscreteStepSlider {
         /// Collection of possible values the slider can select. Each value is represented by a
         /// mark or a custom view in order.
         // TODO: values could be updated through position too
-        let values: [Double]
+        let values: [Value]
 
         /// Space available in the slider to select each values.
         let spacing: Double
 
         // These properties only should be updated through the available functions, not directly.
         // TODO: can these be set as internal(set)? or fileprivate(set)?
-        var selectedValue: Double
+        var selectedValue: Value
         var selectedIndex: Int
         var scrollPosition: ScrollPosition
 
@@ -129,9 +116,9 @@ extension DiscreteStepSlider {
         ///   - values: All possible values the slider can select, in the order these will be
         ///     displayed.
         ///   - selectedValue: Initial value to be selected. If this value cannot be found in
-        ///     `values`, and index of `0` will be selected instead.
+        ///     `values`, an index of `0` will be selected instead.
         ///   - spacing: Space available in the slider to select each value.
-        init(values: [Double], selectedValue: Double, spacing: Double) {
+        init(values: [Value], selectedValue: Value, spacing: Double) {
             self.values = values
             self.selectedValue = selectedValue
             self.spacing = spacing
@@ -155,7 +142,7 @@ extension DiscreteStepSlider {
         /// If `value` cannot be found in `values`, the current selection remains unchanged.
         ///
         /// - Parameter value: The new value to select.
-        mutating func selectValue(_ value: Double) {
+        mutating func selectValue(_ value: Value) {
             guard let index = values.firstIndex(of: value)
             else { return }
 
@@ -193,6 +180,14 @@ extension DiscreteStepSlider {
         selectedValue: 1.6,
         spacing: 20)
 
+    // Selected value display.
+    Text(sliderPosition.selectedValue.formatted(.number.precision(.fractionLength(1))))
+        .monospacedDigit()
+
+    // Indicator arrow.
+    Image(systemName: "arrowtriangle.down.fill")
+        .font(.caption)
+
     DiscreteStepSlider(position: $sliderPosition)
         .onAppear {
             print("✴️ Preview Appeared")
@@ -204,8 +199,10 @@ extension DiscreteStepSlider {
             print("selectedIndex changed: \(sliderPosition.selectedIndex)")
         }
 
-    Text("Selection: \(sliderPosition.selectedValue, format: .number.precision(.fractionLength(1)))")
-        .monospaced()
+    // Selected index display.
+    Text(sliderPosition.selectedIndex.description)
+        .font(.caption)
+        .monospacedDigit()
 
     List {
         Section("Immediate") {
