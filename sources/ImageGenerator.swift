@@ -5,13 +5,15 @@
 
 
 import SwiftUI
+import CryptoKit
 
 
 class ImageGenerator {
 
-    func generateImage(with text: String) async -> Image {
+    // TODO: double check the implications of nonisolated
+    nonisolated func generateImage(with text: String) async -> Image {
         // Simulate async work
-        let millis = (500..<2000).randomElement()!
+        let millis = (1000..<2500).randomElement()!
         try? await Task.sleep(for: .milliseconds(millis))
 
         // Generate a consistent color from the text
@@ -112,22 +114,30 @@ class ImageGenerator {
         #endif
     }
     
-    /// Generate deterministic color components from a string
-    private func colorComponentsFromString(_ string: String) -> (hue: CGFloat, saturation: CGFloat, brightness: CGFloat) {
-        // Use the string's hash to generate consistent values
-        var hash = string.hashValue
-        
-        // Ensure positive value
-        if hash < 0 {
-            hash = -hash
-        }
-        
-        // Generate hue, saturation, and brightness values
-        let hue = CGFloat(hash % 360) / 360.0
-        let saturation = 0.6 + CGFloat((hash / 360) % 40) / 100.0  // 0.6 - 1.0
-        let brightness = 0.5 + CGFloat((hash / 14400) % 30) / 100.0  // 0.5 - 0.8
-        
+    /// Generates deterministic color components for the given `string`.
+    private func colorComponentsFromString(_ string: String) -> (hue: Double, saturation: Double, brightness: Double) {
+        let hash = persistentHash(for: string)
+
+        let hue: Double = (hash % 360).asDouble / 360.0
+        // In the range: 0.6 - 1.0.
+        let saturation: Double = 0.6 + (hash % 40).asDouble / 100.0
+        // In the range: 0.5 - 0.8.
+        let brightness: Double = 0.5 + (hash % 30).asDouble / 100.0
+
         return (hue, saturation, brightness)
+    }
+
+
+    private func persistentHash(for input: String) -> Int {
+        guard let inputData = input.data(using: .utf8)
+        else { return 0 }
+
+        let hashed: SHA256Digest = SHA256.hash(data: inputData)
+        let intValue: Int = hashed.reduce(0) { partialResult, int8 in
+            partialResult + Int(int8)
+        }
+
+        return intValue
     }
 
 }
@@ -165,13 +175,15 @@ class ImageGenerator {
         }.frame(width: 100, height: 100)
     }
     .task {
-        imageOne = await imageGenerator.generateImage(with: "1")
+        imageOne = await imageGenerator.generateImage(with: "One")
     }
     .task {
-        imageTwo = await imageGenerator.generateImage(with: "2")
+        imageTwo = await imageGenerator.generateImage(with: "Two")
     }
     .task {
-        imageThree = await imageGenerator.generateImage(with: "3")
+        imageThree = await imageGenerator.generateImage(with: "Three")
     }
+
+    Spacer()
 
 }
