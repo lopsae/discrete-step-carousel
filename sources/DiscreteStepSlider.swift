@@ -12,55 +12,6 @@ import PreviewUtilities
 // TODO: support vertical slider
 struct DiscreteStepSlider: View {
 
-
-    struct Position {
-        // TODO: values could be updated through position too
-        let values: [Double]
-        let spacing: Double
-
-        // These properties only should be updated through the available functions, not directly.
-        var selectedValue: Double
-        var selectedIndex: Int
-        var scrollPosition: ScrollPosition
-
-        init(values: [Double], selectedValue: Double, spacing: Double) {
-            self.values = values
-            self.selectedValue = selectedValue
-            self.spacing = spacing
-
-            let selectedIndex = values.firstIndex(of: selectedValue) ?? 0
-            self.selectedIndex = selectedIndex
-            self.scrollPosition = ScrollPosition()
-        }
-
-
-        // TODO: document
-        // updates selected value and repositions the slider.
-        // When animated, selected value will be updated once, and then updated several times as
-        // the animation progresses until the selectedValue is reached again
-        mutating func selectValue(_ value: Double) {
-            guard let index = values.firstIndex(of: value)
-            else { return }
-
-            selectedValue = value
-            selectIndex(index)
-        }
-
-
-        // TODO: document
-        // updates the position of the slider to the selected index, and along this the selected value.
-        // when animated, the selected value will update several times as the animation progresses.
-        mutating func selectIndex(_ index: Int) {
-            guard values.indices.contains(index)
-            else { return }
-
-            selectedIndex = index
-            scrollPosition.scrollTo(x: index.toDouble * spacing)
-        }
-
-    }
-
-
     @Binding var position: Position
 
     private var initialAnchor: UnitPoint
@@ -152,6 +103,90 @@ struct DiscreteStepSlider: View {
 }
 
 
+extension DiscreteStepSlider {
+
+    /// A type for definining values and spacing for a `DiscreteStepSlider`, and for accessing or
+    /// updating the selected value or index.
+    struct Position {
+
+        /// Collection of possible values the slider can select. Each value is represented by a
+        /// mark or a custom view in order.
+        // TODO: values could be updated through position too
+        let values: [Double]
+
+        /// Space available in the slider to select each values.
+        let spacing: Double
+
+        // These properties only should be updated through the available functions, not directly.
+        // TODO: can these be set as internal(set)? or fileprivate(set)?
+        var selectedValue: Double
+        var selectedIndex: Int
+        var scrollPosition: ScrollPosition
+
+
+        /// Creates a new Position for a DiscreteSlider.
+        /// - Parameters:
+        ///   - values: All possible values the slider can select, in the order these will be
+        ///     displayed.
+        ///   - selectedValue: Initial value to be selected. If this value cannot be found in
+        ///     `values`, and index of `0` will be selected instead.
+        ///   - spacing: Space available in the slider to select each value.
+        init(values: [Double], selectedValue: Double, spacing: Double) {
+            self.values = values
+            self.selectedValue = selectedValue
+            self.spacing = spacing
+
+            let selectedIndex = values.firstIndex(of: selectedValue) ?? 0
+            self.selectedIndex = selectedIndex
+            self.scrollPosition = ScrollPosition()
+        }
+
+
+        /// Updates the slider selection to the given `value`.
+        ///
+        /// This function can be called within `withAnimation` for an animated selection. When
+        /// animated, `selectedValue` will be updated immediately once to the new `value`, and then
+        /// updated again several times as the animation progresses until `value` is reached again.
+        /// `selectedIndex` will likewise be updated to the selected index, and then update
+        /// several times during the animation.
+        ///
+        /// Use ``selectIndex(_:)`` to prevent the initial change in `selectedValue` from happening.
+        ///
+        /// If `value` cannot be found in `values`, the current selection remains unchanged.
+        ///
+        /// - Parameter value: The new value to select.
+        mutating func selectValue(_ value: Double) {
+            guard let index = values.firstIndex(of: value)
+            else { return }
+
+            selectedValue = value
+            selectIndex(index)
+        }
+
+
+        /// Updates the slider selection to the value at the given `index` in `values`.
+        ///
+        /// This function can be called within `withAnimation` for an animated selection. When
+        /// animated, `selectedIndex` will be updated immediately once to the new `index`, and then
+        /// updated again several times as the animation progresses until `index` is reached again.
+        /// `selectedValue` will update only as the animation happens, until the value at `index`
+        /// is reached at the end of the animation.
+        ///
+        /// If `index` is not a valid index for `values`, the current selection remains unchanged.
+        /// - Parameter index: The index for the value in `values` to select.
+        mutating func selectIndex(_ index: Int) {
+            guard values.indices.contains(index)
+            else { return }
+
+            selectedIndex = index
+            scrollPosition.scrollTo(x: index.toDouble * spacing)
+        }
+
+    }
+
+}
+
+
 #Preview {
     @Previewable @State var sliderPosition: DiscreteStepSlider.Position = .init(
         values: Array(stride(from: 0.0, to: 3.01, by: 0.2)),
@@ -164,6 +199,9 @@ struct DiscreteStepSlider: View {
         }
         .onChange(of: sliderPosition.selectedValue) { oldValue, newValue in
             print("selectedValue changed: \(sliderPosition.selectedValue)")
+        }
+        .onChange(of: sliderPosition.selectedIndex) { oldValue, newValue in
+            print("selectedIndex changed: \(sliderPosition.selectedIndex)")
         }
 
     Text("Selection: \(sliderPosition.selectedValue, format: .number.precision(.fractionLength(1)))")
