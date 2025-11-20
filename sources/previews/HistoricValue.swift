@@ -99,3 +99,10 @@ extension HistoricValue where Formatter == NeverFormatStyle<Value> {
 struct NeverFormatStyle<Input>: FormatStyle {
     func format(_ value: Input) -> String { "" }
 }
+
+
+// TODO: add preview, using a formatter
+// HistoricValue(
+//label: "value:",
+//value: sliderPosition.selectedValue,
+//format: FloatingPointFormatStyle.number.precision(.fractionLength(1)))
