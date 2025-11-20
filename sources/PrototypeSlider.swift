@@ -8,13 +8,10 @@ import SwiftUI
 import PreviewUtilities
 
 
-// TODO: values should be generic
-// TODO: support vertical slider
 struct PrototypeSlider: View {
 
 
     struct Position {
-        // TODO: values could be updated through position too
         let values: [Double]
         let spacing: Double
 
@@ -34,8 +31,7 @@ struct PrototypeSlider: View {
         }
 
 
-        // TODO: document
-        // updates selected value and repositions the slider.
+        // Updates selected value and repositions the slider.
         // When animated, selected value will be updated once, and then updated several times as
         // the animation progresses until the selectedValue is reached again
         mutating func selectValue(_ value: Double) {
@@ -47,9 +43,9 @@ struct PrototypeSlider: View {
         }
 
 
-        // TODO: document
-        // updates the position of the slider to the selected index, and along this the selected value.
-        // when animated, the selected value will update several times as the animation progresses.
+        // Updates the position of the slider to the selected index, and along this the selected
+        // value. When animated, the selected value will update several times as the animation
+        // progresses.
         mutating func selectIndex(_ index: Int) {
             guard values.indices.contains(index)
             else { return }
