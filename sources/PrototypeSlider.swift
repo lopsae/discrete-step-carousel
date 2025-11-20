@@ -51,7 +51,7 @@ struct PrototypeSlider: View {
             else { return }
 
             selectedIndex = index
-            scrollPosition.scrollTo(x: index.toDouble * spacing)
+            scrollPosition.scrollTo(x: index.asDouble * spacing)
         }
 
     }
@@ -71,9 +71,9 @@ struct PrototypeSlider: View {
         self._position = positionBinding
 
         let positionValue = positionBinding.wrappedValue
-        let selectedIndex = positionValue.selectedIndex.toDouble
+        let selectedIndex = positionValue.selectedIndex.asDouble
         let spacing  = positionValue.spacing
-        let valuesCount = positionValue.values.count.toDouble
+        let valuesCount = positionValue.values.count.asDouble
         self.initialAnchor = .init(
             x: (selectedIndex * spacing / ((valuesCount - 1) * spacing)),
             y: 0.5)
@@ -132,7 +132,7 @@ struct PrototypeSlider: View {
                     .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                     .scrollPosition($position.scrollPosition)
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
-                        let index = (scrollGeometry.contentOffset.x / position.spacing).rounded().toInt
+                        let index = (scrollGeometry.contentOffset.x / position.spacing).rounded().asInt
                         let clampedIndex = index.clamped(to: 0..<position.values.count)
                         return clampedIndex
                     } action: { oldValue, newValue in
