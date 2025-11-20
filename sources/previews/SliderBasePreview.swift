@@ -37,7 +37,8 @@ import SwiftUI
     // Selected index display.
     HistoricValue(
         label: "index:",
-        value: sliderPosition.selectedIndex)
+        value: sliderPosition.selectedIndex
+    ).history(spacing: 20)
 
     List {
         Section("Immediate") {

@@ -19,6 +19,9 @@ where Formatter.FormatInput == Value, Formatter.FormatOutput == String
 
     let historyToKeep: Int = 10
 
+    private(set) var historyPadding: Double = 5.0
+    private(set) var historySpacing: Double = 25.0
+
 
     init(label: String, value: Value, format formatter: Formatter?) {
         self.label = label
@@ -48,6 +51,14 @@ where Formatter.FormatInput == Value, Formatter.FormatOutput == String
     }
 
 
+    func history(padding: Double? = nil, spacing: Double? = nil) -> Self {
+        var copy = self
+        if let padding { copy.historyPadding = padding }
+        if let spacing { copy.historySpacing = spacing }
+        return copy
+    }
+
+
     @ViewBuilder
     private var historicValues: some View {
         ForEach(history.enumerated(), id: \.offset) { index, historicValue in
@@ -57,7 +68,7 @@ where Formatter.FormatInput == Value, Formatter.FormatOutput == String
                 .monospacedDigit()
                 .fixedSize()
                 .opacity(1.0 - (index.asDouble / historyToKeep.asDouble))
-                .offset(x: ((index.asDouble + 1.0) * 25.0) + 5.0)
+                .offset(x: ((index.asDouble + 1.0) * historySpacing) + historyPadding)
         }
     }
 
