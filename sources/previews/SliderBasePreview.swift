@@ -7,7 +7,7 @@
 import SwiftUI
 
 
-#Preview {
+#Preview(traits: .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSlider<String>.Position = .init(
         values: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"],
         selectedValue: "H",
