@@ -9,7 +9,8 @@ import PreviewUtilities
 
 
 // TODO: support vertical slider
-struct DiscreteStepSlider<Value: Equatable>: View {
+struct DiscreteStepSlider<Values: Collection> : View
+where Values.Element: Equatable {
 
     @Binding var position: Position
 
@@ -25,11 +26,12 @@ struct DiscreteStepSlider<Value: Equatable>: View {
         self._position = positionBinding
 
         let positionValue = positionBinding.wrappedValue
-        let selectedIndex = positionValue.selectedIndex.asDouble
+
+        let selectedIndexDistance = positionValue.values.distanceFromStart(to: positionValue.selectedIndex)
         let spacing  = positionValue.spacing
         let valuesCount = positionValue.values.count.asDouble
         self.initialAnchor = .init(
-            x: (selectedIndex * spacing / ((valuesCount - 1) * spacing)),
+            x: (selectedIndexDistance.asDouble * spacing / ((valuesCount - 1) * spacing)),
             y: 0.5)
     }
 
@@ -74,12 +76,14 @@ struct DiscreteStepSlider<Value: Equatable>: View {
                     .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                     .scrollPosition($position.scrollPosition)
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
-                        let index = (scrollGeometry.contentOffset.x / position.spacing).rounded().asInt
-                        let clampedIndex = index.clamped(to: 0..<position.values.count)
-                        return clampedIndex
-                    } action: { oldValue, newValue in
-                        position.selectedIndex = newValue
-                        position.selectedValue = position.values[newValue]
+                        let indexDistance = (scrollGeometry.contentOffset.x / position.spacing).rounded().asInt
+                        // TODO: function to clamp to a valid index
+                        let clampedIndexDistance = indexDistance.clamped(to: 0..<position.values.count)
+                        return clampedIndexDistance
+                    } action: { oldValue, newIndexDistance in
+                        let newIndex = position.values.index(offsetBy: newIndexDistance)
+                        position.selectedIndex = newIndex
+                        position.selectedValue = position.values[newIndex]
                     }
                 } // GeometryReader
             } // ZStack
@@ -99,15 +103,15 @@ extension DiscreteStepSlider {
         /// Collection of possible values the slider can select. Each value is represented by a
         /// mark or a custom view in order.
         // TODO: values could be updated through position too
-        let values: [Value]
+        let values: Values
 
         /// Space available in the slider to select each values.
         let spacing: Double
 
         // These properties only should be updated through the available functions, not directly.
         // TODO: can these be set as internal(set)? or fileprivate(set)?
-        var selectedValue: Value
-        var selectedIndex: Int
+        var selectedValue: Values.Element
+        var selectedIndex: Values.Index
         var scrollPosition: ScrollPosition
 
 
@@ -118,12 +122,12 @@ extension DiscreteStepSlider {
         ///   - selectedValue: Initial value to be selected. If this value cannot be found in
         ///     `values`, an index of `0` will be selected instead.
         ///   - spacing: Space available in the slider to select each value.
-        init(values: [Value], selectedValue: Value, spacing: Double) {
+        init(values: Values, selectedValue: Values.Element, spacing: Double) {
             self.values = values
             self.selectedValue = selectedValue
             self.spacing = spacing
 
-            let selectedIndex = values.firstIndex(of: selectedValue) ?? 0
+            let selectedIndex = values.firstIndex(of: selectedValue) ?? values.startIndex
             self.selectedIndex = selectedIndex
             self.scrollPosition = ScrollPosition()
         }
@@ -142,7 +146,7 @@ extension DiscreteStepSlider {
         /// If `value` cannot be found in `values`, the current selection remains unchanged.
         ///
         /// - Parameter value: The new value to select.
-        mutating func selectValue(_ value: Value) {
+        mutating func selectValue(_ value: Values.Element) {
             guard let index = values.firstIndex(of: value)
             else { return }
 
@@ -161,12 +165,13 @@ extension DiscreteStepSlider {
         ///
         /// If `index` is not a valid index for `values`, the current selection remains unchanged.
         /// - Parameter index: The index for the value in `values` to select.
-        mutating func selectIndex(_ index: Int) {
+        mutating func selectIndex(_ index: Values.Index) {
             guard values.indices.contains(index)
             else { return }
 
             selectedIndex = index
-            scrollPosition.scrollTo(x: index.asDouble * spacing)
+            let indexDistance = values.distance(from: values.startIndex, to: index)
+            scrollPosition.scrollTo(x: indexDistance.asDouble * spacing)
         }
 
     }
