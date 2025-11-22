@@ -77,9 +77,7 @@ where Values.Element: Equatable {
                     .scrollPosition($position.scrollPosition)
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                         let indexDistance = (scrollGeometry.contentOffset.x / position.spacing).rounded().asInt
-                        // TODO: function to clamp to a valid distance
-                        let totalDistance = position.values.distance(fromStartTo: position.values.endIndex)
-                        let clampedIndexDistance = indexDistance.clamped(to: 0..<totalDistance)
+                        let clampedIndexDistance = position.values.clampDistance(indexDistance)
                         return clampedIndexDistance ?? 0
                     } action: { oldValue, newIndexDistance in
                         let newIndex = position.values.index(offsetBy: newIndexDistance)
