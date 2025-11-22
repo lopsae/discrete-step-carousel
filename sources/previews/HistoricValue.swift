@@ -174,7 +174,7 @@ struct NeverFormatStyle<Input>: FormatStyle {
 #Preview("Formatted") {
 
     @Previewable @State var value: Double = 0.12345
-    var step: Double = 0.12345
+    let step: Double = 0.12345
 
     HistoricValue(
         label: "value:",
