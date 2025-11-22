@@ -134,7 +134,7 @@ struct PrototypeSlider: View {
                     .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                         let index = (scrollGeometry.contentOffset.x / position.spacing).rounded().asInt
                         let clampedIndex = index.clamped(to: 0..<position.values.count)
-                        return clampedIndex
+                        return clampedIndex ?? 0
                     } action: { oldValue, newValue in
                         position.selectedIndex = newValue
                         position.selectedValue = position.values[newValue]
