@@ -143,7 +143,7 @@ class ImageGenerator {
 }
 
 
-#Preview {
+#Preview("Simple Example") {
     @Previewable @State var imageOne: Image?
     @Previewable @State var imageTwo: Image?
     @Previewable @State var imageThree: Image?
@@ -186,4 +186,145 @@ class ImageGenerator {
 
     Spacer()
 
+}
+
+
+struct ImageStatus: Identifiable {
+    let id: String
+    var isVisible: Bool = false
+    var isLoading: Bool = false
+    var isLoaded: Bool = false
+
+    var statusColor: Color {
+        if isLoaded {
+            return .green
+        } else if isLoading {
+            return .orange
+        } else if isVisible {
+            return .gray
+        } else {
+            return .clear
+        }
+    }
+
+    var statusText: String {
+        if isLoaded {
+            return "Loaded"
+        } else if isLoading {
+            return "Loading..."
+        } else if isVisible {
+            return "Visible"
+        } else {
+            return "Not visible"
+        }
+    }
+
+}
+
+#Preview("LazyHStack Example") {
+
+    
+    @Previewable @State var imageStatuses: [String: ImageStatus] = {
+        Dictionary(uniqueKeysWithValues: String.natoPhoneticAlphabet.map { ($0, ImageStatus(id: $0)) })
+    }()
+    
+    @Previewable @State var loadedImages: [String: Image] = [:]
+    
+    let imageGenerator = ImageGenerator()
+    let items = String.natoPhoneticAlphabet
+    
+    VStack(spacing: 20) {
+        // Horizontal ScrollView with LazyHStack
+        ScrollView(.horizontal) {
+            LazyHStack(spacing: 16) {
+                ForEach(items, id: \.self) { item in
+                    VStack {
+                        Group {
+                            if let image = loadedImages[item] {
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fit)
+                            } else {
+                                Rectangle()
+                                    .fill(.secondary)
+                                    .overlay {
+                                        ProgressView()
+                                    }
+                            }
+                        }
+                        .frame(width: 120, height: 120)
+                        .clipShape(RoundedRectangle(cornerRadius: 8))
+                        
+                        Text(item)
+                            .font(.caption)
+                            .lineLimit(1)
+                    }
+                    .onAppear {
+                        // Mark as visible
+                        imageStatuses[item]?.isVisible = true
+                        
+                        // Start loading if not already loaded
+                        guard loadedImages[item] == nil else { return }
+                        
+                        imageStatuses[item]?.isLoading = true
+                        
+                        Task {
+                            let image = await imageGenerator.generateImage(with: item)
+                            loadedImages[item] = image
+                            imageStatuses[item]?.isLoading = false
+                            imageStatuses[item]?.isLoaded = true
+                        }
+                    }
+                    .onDisappear {
+                        // Mark as not visible
+                        imageStatuses[item]?.isVisible = false
+                    }
+                }
+            }
+            .padding(.horizontal)
+        }
+        .frame(height: 160)
+        
+        Divider()
+        
+        // Grid showing status
+        ScrollView {
+            Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
+                // Header
+                GridRow {
+                    Text("Item")
+                        .font(.headline)
+                        .gridColumnAlignment(.leading)
+                    
+                    Text("Status")
+                        .font(.headline)
+                        .gridColumnAlignment(.center)
+                }
+                
+                Divider()
+                    .gridCellUnsizedAxes(.horizontal)
+                
+                // Status rows
+                ForEach(items, id: \.self) { item in
+                    if let status = imageStatuses[item] {
+                        GridRow {
+                            Text(item)
+                                .font(.body)
+                            
+                            HStack(spacing: 8) {
+                                Circle()
+                                    .fill(status.statusColor)
+                                    .frame(width: 12, height: 12)
+                                
+                                Text(status.statusText)
+                                    .font(.caption)
+                                    .foregroundStyle(.secondary)
+                            }
+                        }
+                    }
+                }
+            }
+            .padding()
+        }
+    }
 }
