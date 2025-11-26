@@ -13,7 +13,7 @@ class ImageGenerator {
     // TODO: double check the implications of nonisolated
     nonisolated func generateImage(with text: String) async -> Image {
         // Simulate async work
-        let millis = (1000..<2500).randomElement()!
+        let millis = (2000..<4000).randomElement()!
         try? await Task.sleep(for: .milliseconds(millis))
 
         // Generate a consistent color from the text
@@ -189,52 +189,44 @@ class ImageGenerator {
 }
 
 
-struct ImageStatus: Identifiable {
-    let id: String
-    var isVisible: Bool = false
-    var isLoading: Bool = false
-    var isLoaded: Bool = false
+enum ImageStatus: String {
+    case idle
+    case loading
+    case ready
 
     var statusColor: Color {
-        if isLoaded {
-            return .green
-        } else if isLoading {
-            return .orange
-        } else if isVisible {
-            return .gray
-        } else {
-            return .clear
+        switch self {
+        case .idle:    .gray
+        case .loading: .orange
+        case .ready:   .green
         }
     }
 
     var statusText: String {
-        if isLoaded {
-            return "Loaded"
-        } else if isLoading {
-            return "Loading..."
-        } else if isVisible {
-            return "Visible"
-        } else {
-            return "Not visible"
+        switch self {
+        case .idle:    "Idle"
+        case .loading: "Loading"
+        case .ready:   "Ready"
         }
     }
 
 }
 
+// TODO: enum for visibility needs to be a separate one
+
 #Preview("LazyHStack Example") {
 
-    
     @Previewable @State var imageStatuses: [String: ImageStatus] = {
-        Dictionary(uniqueKeysWithValues: String.natoPhoneticAlphabet.map { ($0, ImageStatus(id: $0)) })
+        // TODO: convenience fuction to map to dictionary
+        Dictionary(uniqueKeysWithValues: String.natoPhoneticAlphabet.map { ($0, .idle )})
     }()
-    
+
     @Previewable @State var loadedImages: [String: Image] = [:]
-    
+
     let imageGenerator = ImageGenerator()
     let items = String.natoPhoneticAlphabet
-    
+
     VStack(spacing: 20) {
-        // Horizontal ScrollView with LazyHStack
         ScrollView(.horizontal) {
             LazyHStack(spacing: 16) {
                 ForEach(items, id: \.self) { item in
@@ -260,25 +252,20 @@ struct ImageStatus: Identifiable {
                             .lineLimit(1)
                     }
                     .onAppear {
-                        // Mark as visible
-                        imageStatuses[item]?.isVisible = true
-                        
-                        // Start loading if not already loaded
-                        guard loadedImages[item] == nil else { return }
-                        
-                        imageStatuses[item]?.isLoading = true
-                        
+                        guard loadedImages[item] == nil else {
+                            // TODO: Mark as visible?
+                            return
+                        }
+
+                        imageStatuses[item] = .loading
+                        // TODO: experiment with a task group and cancelations
                         Task {
                             let image = await imageGenerator.generateImage(with: item)
                             loadedImages[item] = image
-                            imageStatuses[item]?.isLoading = false
-                            imageStatuses[item]?.isLoaded = true
+                            imageStatuses[item] = .ready
                         }
                     }
-                    .onDisappear {
-                        // Mark as not visible
-                        imageStatuses[item]?.isVisible = false
-                    }
+                    // TODO: try to track visibility using ScrollTarget identifiers
                 }
             }
             .padding(.horizontal)
