@@ -226,15 +226,16 @@ class ImageGenerator {
 }
 
 
-enum ImageStatus: String {
+enum GenerationStatus {
+
     case idle
-    case loading
+    case generating
     case ready
 
     var statusColor: Color {
         switch self {
         case .idle:    .gray
-        case .loading: .orange
+        case .generating: .orange
         case .ready:   .green
         }
     }
@@ -242,19 +243,36 @@ enum ImageStatus: String {
     var statusText: String {
         switch self {
         case .idle:    "Idle"
-        case .loading: "Loading"
+        case .generating: "Generating"
         case .ready:   "Ready"
         }
     }
 
 }
 
-// TODO: enum for visibility needs to be a separate one
+
+enum ScrollStatus {
+
+    case outsideBounds
+    case visible
+
+    var statusColor: Color {
+        switch self {
+        case .outsideBounds: .gray
+        case .visible: .teal
+        }
+    }
+
+}
+
 
 #Preview("LazyHStack Example", traits: .fixedLayout(width: 400, height: 800)) {
 
-    @Previewable @State var imageStatuses: [String: ImageStatus] =
+    @Previewable @State var generationStatuses: [String: GenerationStatus] =
         String.natoPhoneticAlphabet.dictionaryMap(value: .idle)
+
+    @Previewable @State var scrollStatuses: [String: ScrollStatus] =
+        String.natoPhoneticAlphabet.dictionaryMap(value: .outsideBounds)
 
     @Previewable @State var loadedImages: [String: Image] = [:]
 
@@ -289,25 +307,35 @@ enum ImageStatus: String {
                     }
                     .onAppear {
                         guard loadedImages[item] == nil else {
-                            // TODO: Mark as visible?
                             return
                         }
 
-                        imageStatuses[item] = .loading
+                        generationStatuses[item] = .generating
                         // TODO: experiment with a task group and cancelations
                         Task {
                             let image = await imageGenerator.generateImage(with: item)
                             loadedImages[item] = image
-                            imageStatuses[item] = .ready
+                            generationStatuses[item] = .ready
                         }
                     }
-                    // TODO: try to track visibility using ScrollTarget identifiers
-                }
-            }
+                } // ForEach
+            } // LazyHStack
+            .scrollTargetLayout()
             .padding(.horizontal)
-        }
+        } // ScrollView
         .frame(height: 160)
-        
+        // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
+        // which is far more that the visible items.
+        .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
+            // TODO: test how this works with safe areas!
+            // TODO: beter way to keep track of visible items, use an array instead
+            scrollStatuses = String.natoPhoneticAlphabet.dictionaryMap(value: .outsideBounds)
+            for identifier in identifiers {
+                scrollStatuses[identifier] = .visible
+            }
+        }
+
+
         Divider()
         
         // Grid showing status
@@ -321,7 +349,7 @@ enum ImageStatus: String {
                     
                     Text("Status")
                         .font(.headline)
-                        .gridColumnAlignment(.center)
+                        .gridColumnAlignment(.leading)
                 }
                 
                 Divider()
@@ -329,25 +357,30 @@ enum ImageStatus: String {
                 
                 // Status rows
                 ForEach(items, id: \.self) { item in
-                    if let status = imageStatuses[item] {
-                        GridRow {
-                            Text(item)
-                                .font(.body)
-                            
-                            HStack(spacing: 8) {
-                                Circle()
-                                    .fill(status.statusColor)
-                                    .frame(width: 12, height: 12)
-                                
-                                Text(status.statusText)
-                                    .font(.caption)
-                                    .foregroundStyle(.secondary)
-                            }
+                    let generationStatus = generationStatuses[item]
+                    let scrollStatus = scrollStatuses[item]
+                    GridRow {
+                        Text(item)
+                            .font(.body)
+
+                        HStack(spacing: 8) {
+                            Circle()
+                                .fill(scrollStatus?.statusColor ?? .red)
+                                .frame(width: 12, height: 12)
+
+                            Circle()
+                                .fill(generationStatus?.statusColor ?? .red)
+                                .frame(width: 12, height: 12)
+
+                            Text(generationStatus?.statusText ?? "Missing")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
                         }
                     }
                 }
-            }
+            } // Grid
+            .maxWidthFrame()
             .padding()
-        }
+        } // ScrollView
     }
 }
