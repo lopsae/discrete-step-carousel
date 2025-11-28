@@ -4,8 +4,9 @@
 //
 
 
-import SwiftUI
 import CryptoKit
+import RegexBuilder
+import SwiftUI
 
 
 class ImageGenerator {
@@ -16,28 +17,49 @@ class ImageGenerator {
         let brightness: CGFloat
     }
 
-    // TODO: double check the implications of nonisolated
-    nonisolated func generateImage(with text: String) async -> Image {
+
+    let size: CGSize
+
+
+    init(size: CGSize) {
+        self.size = size
+    }
+
+
+    @concurrent
+    func generateImage(with text: String) async -> Image {
         // TODO: track in what thread this is running
 
-        // Simulate async work
+        // Simulate async work.
         let millis = (2000..<4000).randomElement()!
         try? await Task.sleep(for: .milliseconds(millis))
 
-        // Generate a consistent color from the text
+        let threadString = threadInfo()
         let components = colorComponentsFromString(text)
 
-        // Create the image using Core Graphics (off main thread)
-        let size = CGSize(width: 200, height: 200)
-        let scale: CGFloat = 2.0
+        return buildImage(text: text, caption: threadString, components: components)
+    }
 
-        return buildImage(text: text, size: size, scale: scale, components: components)
+
+    func threadInfo() -> String {
+        let name = Thread.isMainThread ? "Main" : "Background"
+        let threadDescription = Thread.current.description
+        let threadNumber = threadDescription.firstMatch {
+            Regex {
+                One("number = ")
+                Capture {
+                    OneOrMore(.digit)
+                }
+            }
+        }?.1
+
+        return "\(name)-\(threadNumber, default: "nil")"
     }
 
 
     #if canImport(AppKit)
-    private func buildImage(text: String, size: CGSize, scale: CGFloat, components: Components) -> Image {
-        let nsImage = NSImage(size: size, flipped: false) { nsRect in
+    private func buildImage(text: String, caption: String, components: Components) -> Image {
+        let nsImage = NSImage(size: size, flipped: true) { nsRect in
             // Background.
             let backgroundColor = NSColor(
                 hue: components.hue,
@@ -47,25 +69,14 @@ class ImageGenerator {
             backgroundColor.setFill()
             nsRect.fill()
 
-            // Setup shadow.
+            // Shadow.
             let shadow = NSShadow()
             shadow.shadowOffset = CGSize(width: 1, height: -3)
-            shadow.shadowBlurRadius = 5
-            shadow.shadowColor = NSColor.black.withAlphaComponent(0.3)
+            shadow.shadowBlurRadius = 3
+            shadow.shadowColor = NSColor.black.withAlphaComponent(0.5)
             shadow.set()
 
-            // Text with shadow.
-            let attributedString = NSAttributedString(string: text, attributes: [
-                .font: NSFont.boldSystemFont(ofSize: 40),
-                .foregroundColor: NSColor.white,
-                .paragraphStyle: NSParagraphStyle.make {
-                    $0.alignment = .center
-                }
-            ])
-            let textSize = attributedString.size()
-            let textRect = textSize.centered(in: nsRect)
-
-            attributedString.draw(in: textRect)
+            self.drawStrings(text: text, caption: caption)
             return true
         }
 
@@ -75,9 +86,8 @@ class ImageGenerator {
 
 
     #if canImport(UIKit)
-    private func buildImage(text: String, size: CGSize, scale: CGFloat, components: Components) -> Image {
+    private func buildImage(text: String, caption: String, components: Components) -> Image {
         let format = UIGraphicsImageRendererFormat()
-        format.scale = scale
         let renderer = UIGraphicsImageRenderer(size: size, format: format)
         let uiImage = renderer.image { context in
             // Background.
@@ -91,30 +101,54 @@ class ImageGenerator {
 
             let cgContext = context.cgContext
 
-            // Setup shadow.
+            // Shadow.
             cgContext.setShadow(
-                offset: CGSize(width: 1, height: -3),
-                blur: 5,
-                color: UIColor.black.withAlphaComponent(0.3).cgColor
+                offset: CGSize(width: 1, height: 3),
+                blur: 3,
+                color: UIColor.black.withAlphaComponent(0.5).cgColor
             )
 
-            // Text.
-            let attributedString = NSAttributedString(string: text, attributes: [
-                .font: UIFont.boldSystemFont(ofSize: 40),
-                .foregroundColor: UIColor.white,
-                .paragraphStyle: NSParagraphStyle.make {
-                    $0.alignment = .center
-                }
-            ])
-            let textSize = attributedString.size()
-            let textRect = textSize.centered(in: size)
-
-            attributedString.draw(in: textRect)
+            drawStrings(text: text, caption: caption)
         }
 
         return Image(uiImage: uiImage)
     }
     #endif
+
+
+    private func drawStrings(text: String, caption: String) {
+        #if canImport(AppKit)
+        typealias PlatformFont = NSFont
+        typealias PlatformColor = NSColor
+        #elseif canImport(UIKit)
+        typealias PlatformFont = UIFont
+        typealias PlatformColor = UIColor
+        #endif
+
+        let textAttrString = NSAttributedString(string: text, attributes: [
+            .font: PlatformFont.preferredFont(forTextStyle: .headline),
+            .foregroundColor: PlatformColor.white,
+            .paragraphStyle: NSParagraphStyle.make {
+                $0.alignment = .center
+            }
+        ])
+        let textSize = textAttrString.size()
+        let textRect = textSize.centered(in: size)
+
+        let captionAttrString = NSAttributedString(string: caption, attributes: [
+            .font:  PlatformFont.preferredFont(forTextStyle: .caption1),
+            .foregroundColor: PlatformColor.white,
+            .paragraphStyle: NSParagraphStyle.make {
+                $0.alignment = .center
+            }
+        ])
+        let captionSize = captionAttrString.size()
+        var captionRect = captionSize.centered(in: size)
+        captionRect.origin.y = textRect.maxY + 0
+
+        textAttrString.draw(in: textRect)
+        captionAttrString.draw(in: captionRect)
+    }
 
 
     /// Generates deterministic color components for the given `string`.
@@ -150,7 +184,9 @@ class ImageGenerator {
     @Previewable @State var imageOne: Image?
     @Previewable @State var imageTwo: Image?
     @Previewable @State var imageThree: Image?
-    let imageGenerator = ImageGenerator()
+
+    let imageSide: CGFloat = 100
+    let imageGenerator = ImageGenerator(size: .init(square: imageSide))
 
     VStack {
         Group {
@@ -175,7 +211,7 @@ class ImageGenerator {
             } else {
                 Rectangle().fill(.secondary)
             }
-        }.frame(width: 100, height: 100)
+        }.frame(square: imageSide)
     }
     .task {
         imageOne = await imageGenerator.generateImage(with: "One")
@@ -226,7 +262,8 @@ enum ImageStatus: String {
 
     @Previewable @State var loadedImages: [String: Image] = [:]
 
-    let imageGenerator = ImageGenerator()
+    let imageSide: Double = 120
+    let imageGenerator = ImageGenerator(size: .init(square: imageSide))
     let items = String.natoPhoneticAlphabet
 
     VStack(spacing: 20) {
@@ -247,7 +284,7 @@ enum ImageStatus: String {
                                     }
                             }
                         }
-                        .frame(width: 120, height: 120)
+                        .frame(square: imageSide)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         
                         Text(item)
