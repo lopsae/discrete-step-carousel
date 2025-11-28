@@ -67,13 +67,7 @@ class ImageGenerator {
                 .paragraphStyle: paragraphStyle
             ])
             let textSize = attributedString.size()
-            // TODO: function to center a rect in other rect
-            let textRect = CGRect(
-                x: (size.width - textSize.width) / 2,
-                y: (size.height - textSize.height) / 2,
-                width: textSize.width,
-                height: textSize.height
-            )
+            let textRect = textSize.centered(in: size)
 
             attributedString.draw(in: textRect)
         }
@@ -114,12 +108,7 @@ class ImageGenerator {
             .paragraphStyle: paragraphStyle
         ])
         let textSize = attributedString.size()
-        let textRect = CGRect(
-            x: (size.width - textSize.width) / 2,
-            y: (size.height - textSize.height) / 2,
-            width: textSize.width,
-            height: textSize.height
-        )
+        let textRect = textSize.centered(in: size)
 
         attributedString.draw(in: textRect)
 
