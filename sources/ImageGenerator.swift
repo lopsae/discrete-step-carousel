@@ -35,6 +35,45 @@ class ImageGenerator {
     }
 
 
+    #if canImport(AppKit)
+    private func buildImage(text: String, size: CGSize, scale: CGFloat, components: Components) -> Image {
+        let nsImage = NSImage(size: size, flipped: false) { nsRect in
+            // Background.
+            let backgroundColor = NSColor(
+                hue: components.hue,
+                saturation: components.saturation,
+                brightness: components.brightness,
+                alpha: 1.0)
+            backgroundColor.setFill()
+            nsRect.fill()
+
+            // Setup shadow.
+            let shadow = NSShadow()
+            shadow.shadowOffset = CGSize(width: 1, height: -3)
+            shadow.shadowBlurRadius = 5
+            shadow.shadowColor = NSColor.black.withAlphaComponent(0.3)
+            shadow.set()
+
+            // Text with shadow.
+            let attributedString = NSAttributedString(string: text, attributes: [
+                .font: NSFont.boldSystemFont(ofSize: 40),
+                .foregroundColor: NSColor.white,
+                .paragraphStyle: NSParagraphStyle.make {
+                    $0.alignment = .center
+                }
+            ])
+            let textSize = attributedString.size()
+            let textRect = textSize.centered(in: nsRect)
+
+            attributedString.draw(in: textRect)
+            return true
+        }
+
+        return Image(nsImage: nsImage)
+    }
+    #endif
+
+
     #if canImport(UIKit)
     private func buildImage(text: String, size: CGSize, scale: CGFloat, components: Components) -> Image {
         let format = UIGraphicsImageRendererFormat()
@@ -60,12 +99,12 @@ class ImageGenerator {
             )
 
             // Text.
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .center
             let attributedString = NSAttributedString(string: text, attributes: [
                 .font: UIFont.boldSystemFont(ofSize: 40),
                 .foregroundColor: UIColor.white,
-                .paragraphStyle: paragraphStyle
+                .paragraphStyle: NSParagraphStyle.make {
+                    $0.alignment = .center
+                }
             ])
             let textSize = attributedString.size()
             let textRect = textSize.centered(in: size)
@@ -74,45 +113,6 @@ class ImageGenerator {
         }
 
         return Image(uiImage: uiImage)
-    }
-    #endif
-
-
-    #if canImport(AppKit)
-    private func buildImage(text: String, size: CGSize, scale: CGFloat, components: Components) -> Image {
-        let nsImage = NSImage(size: size, flipped: false) { nsRect in
-            // Background.
-            let backgroundColor = NSColor(
-                hue: components.hue,
-                saturation: components.saturation,
-                brightness: components.brightness,
-                alpha: 1.0)
-            backgroundColor.setFill()
-            nsRect.fill()
-
-            // Setup shadow.
-            let shadow = NSShadow()
-            shadow.shadowOffset = CGSize(width: 1, height: -3)
-            shadow.shadowBlurRadius = 5
-            shadow.shadowColor = NSColor.black.withAlphaComponent(0.3)
-            shadow.set()
-
-            // Text with shadow.
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .center
-            let attributedString = NSAttributedString(string: text, attributes: [
-                .font: NSFont.boldSystemFont(ofSize: 40),
-                .foregroundColor: NSColor.white,
-                .paragraphStyle: paragraphStyle
-            ])
-            let textSize = attributedString.size()
-            let textRect = textSize.centered(in: nsRect)
-
-            attributedString.draw(in: textRect)
-            return true
-        }
-
-        return Image(nsImage: nsImage)
     }
     #endif
 
