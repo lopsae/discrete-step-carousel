@@ -80,42 +80,39 @@ class ImageGenerator {
 
     #if canImport(AppKit)
     private func buildImage(text: String, size: CGSize, scale: CGFloat, components: Components) -> Image {
-        let image = NSImage(size: size)
-        // TODO: deprecated!
-        image.lockFocus()
+        let nsImage = NSImage(size: size, flipped: false) { nsRect in
+            // Background.
+            let backgroundColor = NSColor(
+                hue: components.hue,
+                saturation: components.saturation,
+                brightness: components.brightness,
+                alpha: 1.0)
+            backgroundColor.setFill()
+            nsRect.fill()
 
-        // Background.
-        let backgroundColor = NSColor(
-            hue: components.hue,
-            saturation: components.saturation,
-            brightness: components.brightness,
-            alpha: 1.0)
-        backgroundColor.setFill()
-        CGRect(origin: .zero, size: size).fill()
+            // Setup shadow.
+            let shadow = NSShadow()
+            shadow.shadowOffset = CGSize(width: 1, height: -3)
+            shadow.shadowBlurRadius = 5
+            shadow.shadowColor = NSColor.black.withAlphaComponent(0.3)
+            shadow.set()
 
-        // Setup shadow.
-        let shadow = NSShadow()
-        shadow.shadowOffset = CGSize(width: 1, height: -3)
-        shadow.shadowBlurRadius = 5
-        shadow.shadowColor = NSColor.black.withAlphaComponent(0.3)
-        shadow.set()
+            // Text with shadow.
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            let attributedString = NSAttributedString(string: text, attributes: [
+                .font: NSFont.boldSystemFont(ofSize: 40),
+                .foregroundColor: NSColor.white,
+                .paragraphStyle: paragraphStyle
+            ])
+            let textSize = attributedString.size()
+            let textRect = textSize.centered(in: nsRect)
 
-        // Text with shadow.
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.alignment = .center
-        let attributedString = NSAttributedString(string: text, attributes: [
-            .font: NSFont.boldSystemFont(ofSize: 40),
-            .foregroundColor: NSColor.white,
-            .paragraphStyle: paragraphStyle
-        ])
-        let textSize = attributedString.size()
-        let textRect = textSize.centered(in: size)
+            attributedString.draw(in: textRect)
+            return true
+        }
 
-        attributedString.draw(in: textRect)
-
-        image.unlockFocus()
-
-        return Image(nsImage: image)
+        return Image(nsImage: nsImage)
     }
     #endif
 
