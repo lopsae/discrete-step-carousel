@@ -10,83 +10,109 @@ import CryptoKit
 
 class ImageGenerator {
 
+    private struct Components {
+        let hue: CGFloat
+        let saturation: CGFloat
+        let brightness: CGFloat
+    }
+
     // TODO: double check the implications of nonisolated
     nonisolated func generateImage(with text: String) async -> Image {
+        // TODO: track in what thread this is running
+
         // Simulate async work
         let millis = (2000..<4000).randomElement()!
         try? await Task.sleep(for: .milliseconds(millis))
 
         // Generate a consistent color from the text
-        let (hue, saturation, brightness) = colorComponentsFromString(text)
-        
+        let components = colorComponentsFromString(text)
+
         // Create the image using Core Graphics (off main thread)
         let size = CGSize(width: 200, height: 200)
         let scale: CGFloat = 2.0
-        
-        #if canImport(UIKit)
+
+        return buildImage(text: text, size: size, scale: scale, components: components)
+    }
+
+
+    #if canImport(UIKit)
+    private func buildImage(text: String, size: CGSize, scale: CGFloat, components: Components) -> Image {
         let format = UIGraphicsImageRendererFormat()
         format.scale = scale
-        
         let renderer = UIGraphicsImageRenderer(size: size, format: format)
         let uiImage = renderer.image { context in
-            // Fill background with color
-            let backgroundColor = UIColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+            // Background.
+            let backgroundColor = UIColor(
+                hue: components.hue,
+                saturation: components.saturation,
+                brightness: components.brightness,
+                alpha: 1.0)
+            // TODO: could use color.setFill, and context.fillRect?
             context.cgContext.setFillColor(backgroundColor.cgColor)
             context.cgContext.fill(CGRect(origin: .zero, size: size))
-            
-            // Draw text
-            let attributes: [NSAttributedString.Key: Any] = [
+
+            // Setup shadow.
+            context.cgContext.setShadow(
+                offset: CGSize(width: 1, height: -3),
+                blur: 5,
+                color: UIColor.black.withAlphaComponent(0.3).cgColor
+            )
+
+            // Text.
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            let attributedString = NSAttributedString(string: text, attributes: [
                 .font: UIFont.boldSystemFont(ofSize: 40),
                 .foregroundColor: UIColor.white,
-                .paragraphStyle: {
-                    let style = NSMutableParagraphStyle()
-                    style.alignment = .center
-                    return style
-                }()
-            ]
-            
-            let attributedString = NSAttributedString(string: text, attributes: attributes)
+                .paragraphStyle: paragraphStyle
+            ])
             let textSize = attributedString.size()
+            // TODO: function to center a rect in other rect
             let textRect = CGRect(
                 x: (size.width - textSize.width) / 2,
                 y: (size.height - textSize.height) / 2,
                 width: textSize.width,
                 height: textSize.height
             )
-            
-            // Draw shadow
-            context.cgContext.setShadow(
-                offset: CGSize(width: 0, height: 1),
-                blur: 2,
-                color: UIColor.black.withAlphaComponent(0.3).cgColor
-            )
-            
+
             attributedString.draw(in: textRect)
         }
-        
+
         return Image(uiImage: uiImage)
-        
-        #elseif canImport(AppKit)
+    }
+    #endif
+
+
+    #if canImport(AppKit)
+    private func buildImage(text: String, size: CGSize, scale: CGFloat, components: Components) -> Image {
         let image = NSImage(size: size)
+        // TODO: deprecated!
         image.lockFocus()
-        
-        // Fill background with color
-        let backgroundColor = NSColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
+
+        // Background.
+        let backgroundColor = NSColor(
+            hue: components.hue,
+            saturation: components.saturation,
+            brightness: components.brightness,
+            alpha: 1.0)
         backgroundColor.setFill()
-        NSRect(origin: .zero, size: size).fill()
-        
-        // Draw text
-        let attributes: [NSAttributedString.Key: Any] = [
+        CGRect(origin: .zero, size: size).fill()
+
+        // Setup shadow.
+        let shadow = NSShadow()
+        shadow.shadowOffset = CGSize(width: 1, height: -3)
+        shadow.shadowBlurRadius = 5
+        shadow.shadowColor = NSColor.black.withAlphaComponent(0.3)
+        shadow.set()
+
+        // Text with shadow.
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        let attributedString = NSAttributedString(string: text, attributes: [
             .font: NSFont.boldSystemFont(ofSize: 40),
             .foregroundColor: NSColor.white,
-            .paragraphStyle: {
-                let style = NSMutableParagraphStyle()
-                style.alignment = .center
-                return style
-            }()
-        ]
-        
-        let attributedString = NSAttributedString(string: text, attributes: attributes)
+            .paragraphStyle: paragraphStyle
+        ])
         let textSize = attributedString.size()
         let textRect = CGRect(
             x: (size.width - textSize.width) / 2,
@@ -94,28 +120,18 @@ class ImageGenerator {
             width: textSize.width,
             height: textSize.height
         )
-        
-        // Draw with shadow
-        let shadow = NSShadow()
-        shadow.shadowOffset = CGSize(width: 0, height: -1)
-        shadow.shadowBlurRadius = 2
-        shadow.shadowColor = NSColor.black.withAlphaComponent(0.3)
-        shadow.set()
-        
+
         attributedString.draw(in: textRect)
-        
+
         image.unlockFocus()
-        
+
         return Image(nsImage: image)
-        
-        #else
-        // Fallback: return a system image
-        return Image(systemName: "photo")
-        #endif
     }
-    
+    #endif
+
+
     /// Generates deterministic color components for the given `string`.
-    private func colorComponentsFromString(_ string: String) -> (hue: Double, saturation: Double, brightness: Double) {
+    private func colorComponentsFromString(_ string: String) -> Components {
         let hash = persistentHash(for: string)
 
         let hue: Double = (hash % 360).asDouble / 360.0
@@ -124,7 +140,7 @@ class ImageGenerator {
         // In the range: 0.5 - 0.8.
         let brightness: Double = 0.5 + (hash % 30).asDouble / 100.0
 
-        return (hue, saturation, brightness)
+        return .init(hue: hue, saturation: saturation, brightness: brightness)
     }
 
 
@@ -214,7 +230,7 @@ enum ImageStatus: String {
 
 // TODO: enum for visibility needs to be a separate one
 
-#Preview("LazyHStack Example") {
+#Preview("LazyHStack Example", traits: .fixedLayout(width: 400, height: 700)) {
 
     @Previewable @State var imageStatuses: [String: ImageStatus] = {
         // TODO: convenience fuction to map to dictionary
