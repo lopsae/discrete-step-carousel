@@ -28,8 +28,6 @@ class ImageGenerator {
 
     @concurrent
     func generateImage(with text: String) async -> Image {
-        // TODO: track in what thread this is running
-
         // Simulate async work.
         let millis = (2000..<4000).randomElement()!
         try? await Task.sleep(for: .milliseconds(millis))
@@ -255,10 +253,8 @@ enum ImageStatus: String {
 
 #Preview("LazyHStack Example", traits: .fixedLayout(width: 400, height: 800)) {
 
-    @Previewable @State var imageStatuses: [String: ImageStatus] = {
-        // TODO: convenience fuction to map to dictionary
-        Dictionary(uniqueKeysWithValues: String.natoPhoneticAlphabet.map { ($0, .idle )})
-    }()
+    @Previewable @State var imageStatuses: [String: ImageStatus] =
+        String.natoPhoneticAlphabet.dictionaryMap(value: .idle)
 
     @Previewable @State var loadedImages: [String: Image] = [:]
 
