@@ -47,12 +47,13 @@ class ImageGenerator {
                 saturation: components.saturation,
                 brightness: components.brightness,
                 alpha: 1.0)
-            // TODO: could use color.setFill, and context.fillRect?
-            context.cgContext.setFillColor(backgroundColor.cgColor)
-            context.cgContext.fill(CGRect(origin: .zero, size: size))
+            backgroundColor.setFill()
+            context.fill(size.rect())
+
+            let cgContext = context.cgContext
 
             // Setup shadow.
-            context.cgContext.setShadow(
+            cgContext.setShadow(
                 offset: CGSize(width: 1, height: -3),
                 blur: 5,
                 color: UIColor.black.withAlphaComponent(0.3).cgColor
@@ -219,7 +220,7 @@ enum ImageStatus: String {
 
 // TODO: enum for visibility needs to be a separate one
 
-#Preview("LazyHStack Example", traits: .fixedLayout(width: 400, height: 700)) {
+#Preview("LazyHStack Example", traits: .fixedLayout(width: 400, height: 800)) {
 
     @Previewable @State var imageStatuses: [String: ImageStatus] = {
         // TODO: convenience fuction to map to dictionary
