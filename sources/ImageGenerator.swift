@@ -323,11 +323,12 @@ enum ScrollStatus {
             .scrollTargetLayout()
             .padding(.horizontal)
         } // ScrollView
+        .debugOutline(options: .safeAreaInsets, .infoOutside)
         .frame(height: 160)
+        .safeAreaPadding(.horizontal, 30)
         // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
         // which is far more that the visible items.
         .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
-            // TODO: test how this works with safe areas!
             // TODO: beter way to keep track of visible items, use an array instead
             scrollStatuses = String.natoPhoneticAlphabet.dictionaryMap(value: .outsideBounds)
             for identifier in identifiers {
