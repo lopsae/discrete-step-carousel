@@ -62,7 +62,6 @@ struct PrototypeSlider: View {
     private var initialAnchor: UnitPoint
 
     // Spacing between the mark for each value.
-    private let scrollViewHeight: Double = 60
     private let markWidth: Double = 2
     private let markHeight: Double = 40
 
@@ -141,7 +140,6 @@ struct PrototypeSlider: View {
                     }
                 } // GeometryReader
             } // ZStack
-            .frame(height: scrollViewHeight)
         } // VStack
     }
 
@@ -155,6 +153,8 @@ struct PrototypeSlider: View {
         spacing: 20)
 
     PrototypeSlider(position: $sliderPosition)
+        .frame(height: 120)
+        .debugOutline(options: .size, .infoOutside)
         .onAppear {
             print("✴️ Preview Appeared")
         }
@@ -164,6 +164,7 @@ struct PrototypeSlider: View {
 
     Text("Selection: \(sliderPosition.selectedValue, format: .number.precision(.fractionLength(1)))")
         .monospaced()
+        .padding(.top, 20)
 
     Text("Scroll position: \(sliderPosition.scrollPosition.x, default: "nil")")
         .monospaced()
