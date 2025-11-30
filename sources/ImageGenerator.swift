@@ -251,36 +251,24 @@ enum GenerationStatus {
 }
 
 
-enum ScrollStatus {
-
-    case outsideBounds
-    case visible
-
-    var statusColor: Color {
-        switch self {
-        case .outsideBounds: .gray
-        case .visible: .teal
-        }
-    }
-
-}
-
-
 #Preview("LazyHStack Example", traits: .fixedLayout(width: 400, height: 800)) {
 
     @Previewable @State var generationStatuses: [String: GenerationStatus] =
         String.natoPhoneticAlphabet.dictionaryMap(value: .idle)
 
-    @Previewable @State var scrollStatuses: [String: ScrollStatus] =
-        String.natoPhoneticAlphabet.dictionaryMap(value: .outsideBounds)
-
+    @Previewable @State var visibleScrollTargets: [String] = []
     @Previewable @State var loadedImages: [String: Image] = [:]
+
+    @Previewable @State var scrollContentSize: Double = 0.0
 
     let imageSide: Double = 120
     let imageGenerator = ImageGenerator(size: .init(square: imageSide))
     let items = String.natoPhoneticAlphabet
 
     VStack(spacing: 20) {
+        Text("ContentSize: \(scrollContentSize.formatted(.number.precision(.fractionLength(2))))")
+            .monospaced()
+
         ScrollView(.horizontal) {
             LazyHStack(spacing: 16) {
                 ForEach(items, id: \.self) { item in
@@ -289,7 +277,7 @@ enum ScrollStatus {
                             if let image = loadedImages[item] {
                                 image
                                     .resizable()
-                                    .aspectRatio(contentMode: .fit)
+                                    .aspectRatio(contentMode: .fill)
                             } else {
                                 Rectangle()
                                     .fill(.secondary)
@@ -298,7 +286,10 @@ enum ScrollStatus {
                                     }
                             }
                         }
-                        .frame(square: imageSide)
+                        // Different frame options to see how ScrollView contentSize works with different sized items.
+//                        .frame(square: imageSide)
+//                        .frame(width: item.count.asDouble * 30, height: imageSide)
+                        .frame(width: item == "Alfa" ? 500 : imageSide, height: imageSide)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
                         
                         Text(item)
@@ -323,22 +314,23 @@ enum ScrollStatus {
             .scrollTargetLayout()
             .padding(.horizontal)
         } // ScrollView
-        .debugOutline(options: .safeAreaInsets, .infoOutside)
+        .debugOutline(options: .allGeometry, .infoOutside)
         .frame(height: 160)
         .safeAreaPadding(.horizontal, 30)
         // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
         // which is far more that the visible items.
         .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
-            // TODO: beter way to keep track of visible items, use an array instead
-            scrollStatuses = String.natoPhoneticAlphabet.dictionaryMap(value: .outsideBounds)
-            for identifier in identifiers {
-                scrollStatuses[identifier] = .visible
-            }
+            visibleScrollTargets = identifiers
+        }
+        .onScrollGeometryChange(for: Double.self) { scrollGeometry in
+            scrollGeometry.contentSize.width
+        } action: { oldValue, newValue in
+            scrollContentSize = newValue
         }
 
 
         Divider()
-        
+
         // Grid showing status
         ScrollView {
             Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
@@ -359,14 +351,14 @@ enum ScrollStatus {
                 // Status rows
                 ForEach(items, id: \.self) { item in
                     let generationStatus = generationStatuses[item]
-                    let scrollStatus = scrollStatuses[item]
+                    let isVisible = visibleScrollTargets.contains(item)
                     GridRow {
                         Text(item)
                             .font(.body)
 
                         HStack(spacing: 8) {
                             Circle()
-                                .fill(scrollStatus?.statusColor ?? .red)
+                                .fill(isVisible ? .blue : .gray.opacity(0.5))
                                 .frame(width: 12, height: 12)
 
                             Circle()
