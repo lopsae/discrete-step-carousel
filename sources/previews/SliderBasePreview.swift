@@ -8,7 +8,7 @@ import SwiftUI
 
 
 #Preview(traits: .fixedLayout(width: 400, height: 400)) {
-    @Previewable @State var sliderPosition: DiscreteStepSlider.Position = .init(
+    @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: String.alphabet.prefix(upTo: 16).map(\.localizedUppercase),
         selectedValue: "H",
         spacing: 20)
@@ -22,16 +22,21 @@ import SwiftUI
     Image(systemName: "arrowtriangle.down.fill")
         .font(.caption)
 
-    DiscreteStepSlider(position: $sliderPosition)
-        .onAppear {
-            print("✴️ Preview Appeared")
-        }
-        .onChange(of: sliderPosition.selectedValue) { oldValue, newValue in
-            print("selectedValue changed: \(sliderPosition.selectedValue)")
-        }
-        .onChange(of: sliderPosition.selectedIndex) { oldValue, newValue in
-            print("selectedIndex changed: \(sliderPosition.selectedIndex)")
-        }
+    DiscreteStepSlider(position: $sliderPosition) { _ in
+        Rectangle()
+            .fill(.orange.tertiary)
+            .frame(width: 2)
+    }
+    .frame(height: 44)
+    .onAppear {
+        print("✴️ Preview Appeared")
+    }
+    .onChange(of: sliderPosition.selectedValue) { oldValue, newValue in
+        print("selectedValue changed: \(sliderPosition.selectedValue)")
+    }
+    .onChange(of: sliderPosition.selectedIndex) { oldValue, newValue in
+        print("selectedIndex changed: \(sliderPosition.selectedIndex)")
+    }
 
     // Selected index display.
     HistoricValue(
@@ -71,7 +76,7 @@ import SwiftUI
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [11, 13, 15]
+                let indices: [Int] = [0, 11, 13, 15]
                 ForEach(indices, id: \.self) { index in
                     let value = sliderPosition.values[index]
                     Button(value) {
