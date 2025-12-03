@@ -226,7 +226,7 @@ class ImageGenerator {
 }
 
 
-enum GenerationStatus {
+private enum GenerationStatus {
 
     case idle
     case generating
