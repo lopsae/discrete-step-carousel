@@ -108,3 +108,183 @@ import SwiftUI
         } // Section
     }
 }
+
+
+#Preview("With Images", traits: .fixedLayout(width: 400, height: 400)) {
+    @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
+        values: String.alphabet.map(\.localizedUppercase),
+        selectedValue: "Z",
+        spacing: 60)
+    @Previewable @State var generationStatuses: [String: GenerationStatus] =
+        String.alphabet.map(\.localizedUppercase).dictionaryMap(value: .idle)
+    @Previewable @State var images: [String: Image] = [:]
+
+    let imageGenerator = ImageGenerator(size: .init(square: 50))
+
+    // Selected value display.
+    HistoricValue(
+        label: "value:",
+        value: sliderPosition.selectedValue)
+
+    // Indicator arrow.
+    Image(systemName: "arrowtriangle.downwell.fill")
+        .font(.caption)
+
+    DiscreteStepSlider(position: $sliderPosition) { item in
+        Group {
+            if let image = images[item] {
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                Rectangle()
+                    .fill(.secondary)
+            }
+        }
+        .frame(square: 50)
+        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .onAppear {
+            guard images[item] == nil else {
+                return
+            }
+
+            generationStatuses[item] = .generating
+            Task {
+                let image = await imageGenerator.generateImage(with: item)
+                images[item] = image
+                generationStatuses[item] = .ready
+            }
+        }
+    }
+    .frame(height: 60)
+
+    // Selected index display.
+    HistoricValue(
+        label: "index:",
+        value: sliderPosition.selectedIndex
+    ).history(spacing: 20)
+
+    List {
+        Section("Immediate") {
+            HStack {
+                let indices: [Int] = [0, 3, 5]
+                ForEach(indices, id: \.self) { index in
+                    let value = sliderPosition.values[index]
+                    Button(value) {
+                        sliderPosition.selectValue(value)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .monospaced()
+                }
+            } // HStack
+            .maxWidthFrame()
+
+            HStack {
+                let indices: [Int] = [1, 4, 6]
+                ForEach(indices, id: \.self) { index in
+                    Button("[\(index)]") {
+                        sliderPosition.selectIndex(index)
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .monospaced()
+                }
+            } // HStack
+            .maxWidthFrame()
+        } // Section
+
+        Section("Animated") {
+            HStack {
+                let indices: [Int] = [0, 11, 13, 15]
+                ForEach(indices, id: \.self) { index in
+                    let value = sliderPosition.values[index]
+                    Button(value) {
+                        withAnimation {
+                            sliderPosition.selectValue(value)
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .monospaced()
+                }
+            } // HStack
+            .maxWidthFrame()
+
+            HStack {
+                let indices: [Int] = [10, 12, 14]
+                ForEach(indices, id: \.self) { index in
+                    Button("[\(index)]") {
+                        withAnimation {
+                            sliderPosition.selectIndex(index)
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
+                    .monospaced()
+                }
+            } // HStack
+            .maxWidthFrame()
+        } // Section
+
+        Section("Status") {
+            Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
+                // Header
+                GridRow {
+                    Text("Item")
+                        .font(.headline)
+                        .gridColumnAlignment(.leading)
+
+                    Text("Status")
+                        .font(.headline)
+                        .gridColumnAlignment(.leading)
+                }
+
+                Divider()
+                    .gridCellUnsizedAxes(.horizontal)
+
+                // Status rows
+                ForEach(sliderPosition.values, id: \.self) { item in
+                    let generationStatus = generationStatuses[item]
+                    GridRow {
+                        Text(item)
+                            .font(.body)
+
+                        HStack(spacing: 8) {
+                            Circle()
+                                .fill(generationStatus?.statusColor ?? .red)
+                                .frame(width: 12, height: 12)
+
+                            Text(generationStatus?.statusText ?? "Missing")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                }
+            } // Grid
+            .maxWidthFrame()
+        }
+    }
+}
+
+
+// TODO: structure is repeated in ImageGenerator, figure out way to share it, or allow generationStatus to provide that state.
+private enum GenerationStatus {
+
+    case idle
+    case generating
+    case ready
+
+    var statusColor: Color {
+        switch self {
+        case .idle:    .gray
+        case .generating: .orange
+        case .ready:   .green
+        }
+    }
+
+    var statusText: String {
+        switch self {
+        case .idle:    "Idle"
+        case .generating: "Generating"
+        case .ready:   "Ready"
+        }
+    }
+
+}

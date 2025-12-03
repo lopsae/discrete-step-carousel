@@ -53,7 +53,8 @@ where Values.Element: Equatable {
             // Scrollable content
             GeometryReader { geometry in
                 ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 0.0) {
+                    // TODO: test if AnyLayout/HStackLayout/VStackLayout can provide vertican and horisontal slider funcionality
+                    LazyHStack(spacing: 0.0) {
                         // Leading spacer to center first item
                         Color.teal
                             .frame(width: (geometry.size.width - position.spacing) / 2)
