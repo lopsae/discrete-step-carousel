@@ -1,5 +1,4 @@
 // swift-tools-version: 6.2
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 // https://theswiftdev.com/the-swift-package-manifest-file/
 
@@ -14,7 +13,6 @@ let package = Package(
         .macOS(.v26)
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
             name: "DiscreteStepSlider",
             targets: ["DiscreteStepSlider"]
@@ -24,14 +22,16 @@ let package = Package(
         .package(path: "../preview-utilities"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
             name: "DiscreteStepSlider",
             dependencies: [
                 .product(name: "PreviewUtilities", package: "preview-utilities")
             ],
-            path: "sources"
+            path: "sources",
+            swiftSettings: [
+                .defaultIsolation(MainActor.self)
+            ]
+
         ),
         .testTarget(
             name: "DiscreteStepSliderTests",
@@ -40,3 +40,29 @@ let package = Package(
         ),
     ]
 )
+
+// Target settings.
+for target in package.targets {
+    target.swiftSettings?.append(contentsOf: [
+        // https://developer.apple.com/documentation/xcode/build-settings-reference#Approachable-Concurrency
+        // https://developer.apple.com/documentation/xcode/build-settings-reference#Approachable-Concurrency
+        // https://useyourloaf.com/blog/approachable-concurrency-in-swift-packages/
+        // https://www.avanderlee.com/concurrency/approachable-concurrency-in-swift-6-2-a-clear-guide/
+
+        .defaultIsolation(MainActor.self),
+
+        // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0461-async-function-isolation.md
+        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+
+        // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0470-isolated-conformances.md
+        .enableUpcomingFeature("InferIsolatedConformances"),
+
+        // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0401-remove-property-wrapper-isolation.md
+        .enableUpcomingFeature("DisableOutwardActorInference"),
+
+        // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0418-inferring-sendable-for-methods.md
+        .enableUpcomingFeature("InferSendableFromCaptures"),
+
+        .enableUpcomingFeature("GlobalActorIsolatedTypesUsability"),
+    ])
+}
