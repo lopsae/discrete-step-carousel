@@ -28,42 +28,55 @@ class ImageGeneratorStore {
         if let image = await images[text] {
             return image
         }
-        await markAsGenerating(text: text)
+        let generationThreadNumber = ThreadInfo.currentDisplayNumber()
+        await markAsGenerating(text: text, threadName: generationThreadNumber ?? "nil")
 
+        let storageThreadNumber = ThreadInfo.currentDisplayNumber()
         let image = await generator.generateImage(with: text)
-        await storeImage(image, text: text)
+        await storeImage(
+            image, text: text,
+            threadName: storageThreadNumber ?? "nil",
+            generationThreadName: generationThreadNumber ?? "nil"
+        )
 
         return image
     }
 
 
-    private func markAsGenerating(text: String) {
-        status[text] = .generating
+    private func markAsGenerating(text: String, threadName: String) {
+        status[text] = .generating(threadName: threadName)
     }
 
 
-    private func storeImage(_ image: Image, text: String) {
+    private func storeImage(
+        _ image: Image,
+        text: String,
+        threadName: String,
+        generationThreadName: String
+    ) {
         images[text] = image
-        status[text] = .ready
+        status[text] = .stored(threadName: threadName, generationThreadName: generationThreadName)
     }
 
 
     enum GenerationStatus {
 
-        case generating
-        case ready
+        case generating(threadName: String)
+        case stored(threadName: String, generationThreadName: String)
 
         var statusColor: Color {
             switch self {
             case .generating: .orange
-            case .ready:   .green
+            case .stored:     .green
             }
         }
 
         var statusText: String {
             switch self {
-            case .generating: "Generating"
-            case .ready:   "Ready"
+            case let .generating(threadName):
+                "Generating in \(threadName)"
+            case let .stored(threadName, generationThreadName):
+                "Stored in \(threadName), gen:\(generationThreadName)"
             }
         }
 
@@ -236,8 +249,7 @@ nonisolated final class ImageGenerator: Sendable {
 
 nonisolated struct ThreadInfo {
 
-    static func currentDisplayName() -> String {
-        let name = Thread.isMainThread ? "Main" : "Background"
+    static func currentDisplayNumber() -> String? {
         let threadDescription = Thread.current.description
         let threadNumber = threadDescription.firstMatch {
             Regex {
@@ -248,7 +260,13 @@ nonisolated struct ThreadInfo {
             }
         }?.1
 
-        return "\(name)-\(threadNumber, default: "nil")"
+        return threadNumber?.description
+    }
+
+    static func currentDisplayName() -> String {
+        let name = Thread.isMainThread ? "Main" : "Background"
+        let number = currentDisplayNumber()
+        return "\(name) \(number, default: "nil")"
     }
 
 }
