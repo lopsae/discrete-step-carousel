@@ -28,23 +28,24 @@ class ImageGeneratorStore {
         if let image = await images[text] {
             return image
         }
-        let generationThreadNumber = ThreadInfo.currentDisplayNumber()
-        await markAsGenerating(text: text, threadName: generationThreadNumber ?? "nil")
+        let requestThreadNumber = ThreadInfo.currentDisplayNumber()
+        await markAsRequested(text: text, threadName: requestThreadNumber)
 
         let storageThreadNumber = ThreadInfo.currentDisplayNumber()
-        let image = await generator.generateImage(with: text)
+        let generateTuple = await generator.generateImage(with: text)
         await storeImage(
-            image, text: text,
-            threadName: storageThreadNumber ?? "nil",
-            generationThreadName: generationThreadNumber ?? "nil"
+            generateTuple.image, text: text,
+            threadName: storageThreadNumber,
+            requestThreadName: requestThreadNumber,
+            generationThreadName: generateTuple.threadNumber
         )
 
-        return image
+        return generateTuple.image
     }
 
 
-    private func markAsGenerating(text: String, threadName: String) {
-        status[text] = .generating(threadName: threadName)
+    private func markAsRequested(text: String, threadName: String) {
+        status[text] = .requested(threadName: threadName)
     }
 
 
@@ -52,31 +53,39 @@ class ImageGeneratorStore {
         _ image: Image,
         text: String,
         threadName: String,
+        requestThreadName: String,
         generationThreadName: String
     ) {
         images[text] = image
-        status[text] = .stored(threadName: threadName, generationThreadName: generationThreadName)
+        status[text] = .stored(
+            threadName: threadName,
+            requestThreadName: requestThreadName,
+            generationThreadName: generationThreadName)
     }
 
 
     enum GenerationStatus {
 
-        case generating(threadName: String)
-        case stored(threadName: String, generationThreadName: String)
+        case requested(threadName: String)
+        case stored(threadName: String, requestThreadName: String, generationThreadName: String)
 
         var statusColor: Color {
             switch self {
-            case .generating: .orange
-            case .stored:     .green
+            case .requested: .orange
+            case .stored:    .green
             }
         }
 
         var statusText: String {
             switch self {
-            case let .generating(threadName):
-                "Generating in \(threadName)"
-            case let .stored(threadName, generationThreadName):
-                "Stored in \(threadName), gen:\(generationThreadName)"
+            case let .requested(threadName):
+                "Requested in \(threadName)"
+            case let .stored(
+                threadName,
+                requestThreadName: requestThreadName,
+                generationThreadName: generationThreadName
+            ):
+                "Stored in \(threadName) ← gen:\(generationThreadName) ← req:\(requestThreadName)"
             }
         }
 
@@ -107,20 +116,21 @@ nonisolated final class ImageGenerator: Sendable {
     // + default isolated class with async function running in default main and concurrent threads, called from main and background threads
 
     // Package settings use the `NonisolatedNonsendingByDefault` upcoming feature, in which async
-    // functions by default will use the actor where these are called. To use the cooperative
-    // thread pool `@concurrent` is necessary.
+    // async functions by default will use the actor where it is called. Use `@concurrent` to use
+    // the cooperative thread pool.
     @concurrent
-    func generateImage(with text: String) async -> Image {
+    func generateImage(with text: String) async -> (image: Image, threadNumber: String) {
         // Simulate async work.
         let millis = (2000..<4000).randomElement()!
         // TODO: if canceled an additional status could be recorded
         try? await Task.sleep(for: .milliseconds(millis))
 
         let threadName = ThreadInfo.currentDisplayName()
+        let threadNumber = ThreadInfo.currentDisplayNumber()
         let components = colorComponentsFromString(text)
 
         let image = buildImage(text: text, caption: threadName, components: components)
-        return image
+        return (image: image, threadNumber: threadNumber)
     }
 
 
@@ -249,7 +259,7 @@ nonisolated final class ImageGenerator: Sendable {
 
 nonisolated struct ThreadInfo {
 
-    static func currentDisplayNumber() -> String? {
+    static func currentDisplayNumber() -> String {
         let threadDescription = Thread.current.description
         let threadNumber = threadDescription.firstMatch {
             Regex {
@@ -260,13 +270,13 @@ nonisolated struct ThreadInfo {
             }
         }?.1
 
-        return threadNumber?.description
+        return threadNumber?.description ?? "nil"
     }
 
     static func currentDisplayName() -> String {
         let name = Thread.isMainThread ? "Main" : "Background"
         let number = currentDisplayNumber()
-        return "\(name) \(number, default: "nil")"
+        return "\(name) \(number)"
     }
 
 }
@@ -310,13 +320,13 @@ nonisolated struct ThreadInfo {
         // TODO: use frame and roundedRect in the other views
     }
     .task {
-        imageOne = await imageGenerator.generateImage(with: "One")
+        imageOne = await imageGenerator.generateImage(with: "One").image
     }
     .task {
-        imageTwo = await imageGenerator.generateImage(with: "Two")
+        imageTwo = await imageGenerator.generateImage(with: "Two").image
     }
     .task {
-        imageThree = await imageGenerator.generateImage(with: "Three")
+        imageThree = await imageGenerator.generateImage(with: "Three").image
     }
 
     Spacer()
