@@ -5,7 +5,6 @@
 
 
 import CryptoKit
-import RegexBuilder
 import SwiftUI
 
 
@@ -257,35 +256,10 @@ nonisolated final class ImageGenerator: Sendable {
 }
 
 
-nonisolated struct ThreadInfo {
-
-    static func currentDisplayNumber() -> String {
-        let threadDescription = Thread.current.description
-        let threadNumber = threadDescription.firstMatch {
-            Regex {
-                One("number = ")
-                Capture {
-                    OneOrMore(.digit)
-                }
-            }
-        }?.1
-
-        return threadNumber?.description ?? "nil"
-    }
-
-    static func currentDisplayName() -> String {
-        let name = Thread.isMainThread ? "Main" : "Background"
-        let number = currentDisplayNumber()
-        return "\(name) \(number)"
-    }
-
-}
-
-
 // MARK: - Previews
 
 
-#Preview("Simple Example") {
+#Preview {
     @Previewable @State var imageOne: Image?
     @Previewable @State var imageTwo: Image?
     @Previewable @State var imageThree: Image?
@@ -334,7 +308,7 @@ nonisolated struct ThreadInfo {
 }
 
 
-#Preview("LazyHStack Example", traits: .fixedLayout(width: 400, height: 800)) {
+#Preview("LazyHStack", traits: .fixedLayout(width: 400, height: 800)) {
 
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
     @Previewable @State var visibleScrollTargets: [String] = []
