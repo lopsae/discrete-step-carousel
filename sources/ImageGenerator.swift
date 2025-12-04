@@ -9,9 +9,75 @@ import RegexBuilder
 import SwiftUI
 
 
-class ImageGenerator {
+@MainActor @Observable
+class ImageGeneratorStore {
 
-    private struct Components {
+    let generator: ImageGenerator
+
+    private(set) var status: [String: GenerationStatus] = [:]
+    private(set) var images: [String: Image] = [:]
+
+
+    init(size: CGSize) {
+        generator = .init(size: size)
+    }
+
+
+    // TODO: can this be, or should this be concurrent?
+    func generateImage(with text: String) async -> Image {
+        if let image = images[text] {
+            return image
+        }
+        status[text] = .generating
+
+        let image = await generator.generateImage(with: text)
+        images[text] = image
+        status[text] = .ready
+
+        return image
+    }
+
+
+//    private func markAsGenerating(text: String) {
+//        status[text] = .generating
+//    }
+
+
+//    private func storeImage(_ image: Image, text: String) {
+//        images[text] = image
+//        status[text] = .ready
+//    }
+
+
+    enum GenerationStatus {
+
+        case generating
+        case ready
+
+        var statusColor: Color {
+            switch self {
+            case .generating: .orange
+            case .ready:   .green
+            }
+        }
+
+        var statusText: String {
+            switch self {
+            case .generating: "Generating"
+            case .ready:   "Ready"
+            }
+        }
+
+    }
+
+}
+
+// Since this class is not marked with @MainActor, by default its async functions run in the
+// cooperative thread.
+// TODO: This default may have changed recently or there might be settings to change it, add a note about it here.
+final class ImageGenerator: Sendable {
+
+    private struct Components: Sendable {
         let hue: CGFloat
         let saturation: CGFloat
         let brightness: CGFloat
@@ -26,16 +92,17 @@ class ImageGenerator {
     }
 
 
-    @concurrent
     func generateImage(with text: String) async -> Image {
         // Simulate async work.
         let millis = (2000..<4000).randomElement()!
+        // TODO: if canceled an additional status could be recorded
         try? await Task.sleep(for: .milliseconds(millis))
 
         let threadString = threadInfo()
         let components = colorComponentsFromString(text)
 
-        return buildImage(text: text, caption: threadString, components: components)
+        let image = buildImage(text: text, caption: threadString, components: components)
+        return image
     }
 
 
@@ -178,6 +245,9 @@ class ImageGenerator {
 }
 
 
+// MARK: - Previews
+
+
 #Preview("Simple Example") {
     @Previewable @State var imageOne: Image?
     @Previewable @State var imageTwo: Image?
@@ -210,6 +280,7 @@ class ImageGenerator {
                 Rectangle().fill(.secondary)
             }
         }.frame(square: imageSide)
+        // TODO: use frame and roundedRect in the other views
     }
     .task {
         imageOne = await imageGenerator.generateImage(with: "One")
@@ -226,43 +297,13 @@ class ImageGenerator {
 }
 
 
-private enum GenerationStatus {
-
-    case idle
-    case generating
-    case ready
-
-    var statusColor: Color {
-        switch self {
-        case .idle:    .gray
-        case .generating: .orange
-        case .ready:   .green
-        }
-    }
-
-    var statusText: String {
-        switch self {
-        case .idle:    "Idle"
-        case .generating: "Generating"
-        case .ready:   "Ready"
-        }
-    }
-
-}
-
-
 #Preview("LazyHStack Example", traits: .fixedLayout(width: 400, height: 800)) {
 
-    @Previewable @State var generationStatuses: [String: GenerationStatus] =
-        String.natoPhoneticAlphabet.dictionaryMap(value: .idle)
-
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
     @Previewable @State var visibleScrollTargets: [String] = []
-    @Previewable @State var loadedImages: [String: Image] = [:]
-
     @Previewable @State var scrollContentSize: Double = 0.0
 
     let imageSide: Double = 120
-    let imageGenerator = ImageGenerator(size: .init(square: imageSide))
     let items = String.natoPhoneticAlphabet
 
     VStack(spacing: 20) {
@@ -274,7 +315,7 @@ private enum GenerationStatus {
                 ForEach(items, id: \.self) { item in
                     VStack {
                         Group {
-                            if let image = loadedImages[item] {
+                            if let image = imageGenerator.images[item] {
                                 image
                                     .resizable()
                                     .aspectRatio(contentMode: .fill)
@@ -287,26 +328,25 @@ private enum GenerationStatus {
                             }
                         }
                         // Different frame options to see how ScrollView contentSize works with different sized items.
-//                        .frame(square: imageSide)
-//                        .frame(width: item.count.asDouble * 30, height: imageSide)
+                        // .frame(square: imageSide)
+                        // .frame(width: item.count.asDouble * 30, height: imageSide)
                         .frame(width: item == "Alfa" ? 500 : imageSide, height: imageSide)
                         .clipShape(RoundedRectangle(cornerRadius: 8))
-                        
+
                         Text(item)
                             .font(.caption)
                             .lineLimit(1)
                     }
+                    // TODO: should this be a task instead?
                     .onAppear {
-                        guard loadedImages[item] == nil else {
+                        guard imageGenerator.status[item] == nil else {
+                            // Image already requested.
                             return
                         }
 
-                        generationStatuses[item] = .generating
                         // TODO: experiment with a task group and cancelations
                         Task {
-                            let image = await imageGenerator.generateImage(with: item)
-                            loadedImages[item] = image
-                            generationStatuses[item] = .ready
+                            await imageGenerator.generateImage(with: item)
                         }
                     }
                 } // ForEach
@@ -327,7 +367,6 @@ private enum GenerationStatus {
         } action: { oldValue, newValue in
             scrollContentSize = newValue
         }
-
 
         Divider()
 
@@ -350,7 +389,7 @@ private enum GenerationStatus {
                 
                 // Status rows
                 ForEach(items, id: \.self) { item in
-                    let generationStatus = generationStatuses[item]
+                    let generationStatus = imageGenerator.status[item]
                     let isVisible = visibleScrollTargets.contains(item)
                     GridRow {
                         Text(item)
@@ -362,10 +401,10 @@ private enum GenerationStatus {
                                 .frame(width: 12, height: 12)
 
                             Circle()
-                                .fill(generationStatus?.statusColor ?? .red)
+                                .fill(generationStatus?.statusColor ?? .gray)
                                 .frame(width: 12, height: 12)
 
-                            Text(generationStatus?.statusText ?? "Missing")
+                            Text(generationStatus?.statusText ?? "Idle")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
                         }
