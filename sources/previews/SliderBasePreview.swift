@@ -150,8 +150,8 @@ import SwiftUI
 
             generationStatuses[item] = .generating
             Task {
-                let image = await imageGenerator.generateImage(with: item)
-                images[item] = image
+                let generationTuple = await imageGenerator.generateImage(with: item)
+                images[item] = generationTuple.image
                 generationStatuses[item] = .ready
             }
         }
