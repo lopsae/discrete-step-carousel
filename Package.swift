@@ -55,14 +55,6 @@ for target in package.targets {
         .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
 
         // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0470-isolated-conformances.md
-        .enableUpcomingFeature("InferIsolatedConformances"),
-
-        // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0401-remove-property-wrapper-isolation.md
-        .enableUpcomingFeature("DisableOutwardActorInference"),
-
-        // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0418-inferring-sendable-for-methods.md
-        .enableUpcomingFeature("InferSendableFromCaptures"),
-
-        .enableUpcomingFeature("GlobalActorIsolatedTypesUsability"),
+        .enableUpcomingFeature("InferIsolatedConformances")
     ])
 }
