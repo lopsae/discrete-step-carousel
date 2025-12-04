@@ -23,30 +23,29 @@ class ImageGeneratorStore {
     }
 
 
-    // TODO: can this be, or should this be concurrent?
+    @concurrent
     func generateImage(with text: String) async -> Image {
-        if let image = images[text] {
+        if let image = await images[text] {
             return image
         }
-        status[text] = .generating
+        await markAsGenerating(text: text)
 
         let image = await generator.generateImage(with: text)
-        images[text] = image
-        status[text] = .ready
+        await storeImage(image, text: text)
 
         return image
     }
 
 
-//    private func markAsGenerating(text: String) {
-//        status[text] = .generating
-//    }
+    private func markAsGenerating(text: String) {
+        status[text] = .generating
+    }
 
 
-//    private func storeImage(_ image: Image, text: String) {
-//        images[text] = image
-//        status[text] = .ready
-//    }
+    private func storeImage(_ image: Image, text: String) {
+        images[text] = image
+        status[text] = .ready
+    }
 
 
     enum GenerationStatus {
@@ -72,10 +71,9 @@ class ImageGeneratorStore {
 
 }
 
-// Since this class is not marked with @MainActor, by default its async functions run in the
-// cooperative thread.
-// TODO: This default may have changed recently or there might be settings to change it, add a note about it here.
-final class ImageGenerator: Sendable {
+// Package settings use the MainActor default isolation. `nonisolated` is necessary to allow
+// functions in this class to run in the cooperative thread pool.
+nonisolated final class ImageGenerator: Sendable {
 
     private struct Components: Sendable {
         let hue: CGFloat
@@ -91,34 +89,25 @@ final class ImageGenerator: Sendable {
         self.size = size
     }
 
+    // TODO: add some tests for the following cases:
+    // + nonisolated class with async function running in inherited main and background threads
+    // + default isolated class with async function running in default main and concurrent threads, called from main and background threads
 
+    // Package settings use the `NonisolatedNonsendingByDefault` upcoming feature, in which async
+    // functions by default will use the actor where these are called. To use the cooperative
+    // thread pool `@concurrent` is necessary.
+    @concurrent
     func generateImage(with text: String) async -> Image {
         // Simulate async work.
         let millis = (2000..<4000).randomElement()!
         // TODO: if canceled an additional status could be recorded
         try? await Task.sleep(for: .milliseconds(millis))
 
-        let threadString = threadInfo()
+        let threadName = ThreadInfo.currentDisplayName()
         let components = colorComponentsFromString(text)
 
-        let image = buildImage(text: text, caption: threadString, components: components)
+        let image = buildImage(text: text, caption: threadName, components: components)
         return image
-    }
-
-
-    func threadInfo() -> String {
-        let name = Thread.isMainThread ? "Main" : "Background"
-        let threadDescription = Thread.current.description
-        let threadNumber = threadDescription.firstMatch {
-            Regex {
-                One("number = ")
-                Capture {
-                    OneOrMore(.digit)
-                }
-            }
-        }?.1
-
-        return "\(name)-\(threadNumber, default: "nil")"
     }
 
 
@@ -240,6 +229,26 @@ final class ImageGenerator: Sendable {
         }
 
         return intValue
+    }
+
+}
+
+
+nonisolated struct ThreadInfo {
+
+    static func currentDisplayName() -> String {
+        let name = Thread.isMainThread ? "Main" : "Background"
+        let threadDescription = Thread.current.description
+        let threadNumber = threadDescription.firstMatch {
+            Regex {
+                One("number = ")
+                Capture {
+                    OneOrMore(.digit)
+                }
+            }
+        }?.1
+
+        return "\(name)-\(threadNumber, default: "nil")"
     }
 
 }
