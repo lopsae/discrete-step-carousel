@@ -259,52 +259,37 @@ nonisolated final class ImageGenerator: Sendable {
 // MARK: - Previews
 
 
-#Preview {
-    @Previewable @State var imageOne: Image?
-    @Previewable @State var imageTwo: Image?
-    @Previewable @State var imageThree: Image?
+#Preview(traits: .headerFooter(.fixedHeader)) {      
+    @Previewable @State var images: [(text: String, image: Image?)] = [
+        ("One",   nil),
+        ("Two",   nil),
+        ("Three", nil),
+        ("Four",  nil),
+        ("Five",  nil),
+    ]
 
     let imageSide: CGFloat = 100
     let imageGenerator = ImageGenerator(size: .init(square: imageSide))
 
     VStack {
-        Group {
-            if let imageOne {
-                imageOne.resizable()
-            } else {
-                Rectangle().fill(.secondary)
+        ForEach(images.enumerated(), id: \.offset) { index, tuple in
+            Group {
+                if let image = tuple.image {
+                    image.resizable()
+                } else {
+                    Rectangle().fill(.secondary)
+                }
             }
-        }.frame(width: 100, height: 100)
-
-        Group {
-            if let imageTwo {
-                imageTwo.resizable()
-            } else {
-                Rectangle().fill(.secondary)
+            .frame(square: imageSide)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .task {
+                let image = await imageGenerator.generateImage(with: tuple.text).image
+                var mutableTuple = tuple
+                mutableTuple.image = image
+                images[index] = mutableTuple
             }
-        }.frame(width: 100, height: 100)
-
-        Group {
-            if let imageThree {
-                imageThree.resizable()
-            } else {
-                Rectangle().fill(.secondary)
-            }
-        }.frame(square: imageSide)
-        // TODO: use frame and roundedRect in the other views
-    }
-    .task {
-        imageOne = await imageGenerator.generateImage(with: "One").image
-    }
-    .task {
-        imageTwo = await imageGenerator.generateImage(with: "Two").image
-    }
-    .task {
-        imageThree = await imageGenerator.generateImage(with: "Three").image
-    }
-
-    Spacer()
-
+        }
+    } // VStack
 }
 
 
