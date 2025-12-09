@@ -35,6 +35,7 @@ where Values.Element: Equatable {
         let selectedIndexDistance = positionValue.values.distance(fromStartTo: positionValue.selectedIndex)
         let spacing  = positionValue.spacing
         let valuesCount = positionValue.values.count.asDouble
+        // FIXME: Double check initial selection is still working after using content margins
         self.initialAnchor = .init(
             x: (selectedIndexDistance.asDouble * spacing / ((valuesCount - 1) * spacing)),
             y: 0.5)
@@ -55,11 +56,6 @@ where Values.Element: Equatable {
                 ScrollView(.horizontal, showsIndicators: false) {
                     // TODO: test if AnyLayout/HStackLayout/VStackLayout can provide vertican and horisontal slider funcionality
                     LazyHStack(spacing: 0.0) {
-                        // Leading spacer to center first item
-                        Color.teal
-                            .frame(width: (geometry.size.width - position.spacing) / 2)
-                            .opacity(0.0)
-
                         // Marks for each value.
                         // Identified by offset to ensure each item has an unique identifier,
                         // irregardless of the contents of `values`.
@@ -67,11 +63,6 @@ where Values.Element: Equatable {
                             markContent(value)
                             .frame(width: position.spacing, alignment: .center)
                         }
-
-                        // Trailing spacer to center last item
-                        Color.teal
-                            .frame(width: (geometry.size.width - position.spacing) / 2)
-                            .opacity(0.0)
                     }
                 } // ScrollView
                 .scrollTargetBehavior(
@@ -79,8 +70,10 @@ where Values.Element: Equatable {
                 )
                 .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                 .scrollPosition($position.scrollPosition)
+                .contentMargins(.horizontal, .all((geometry.size.width - position.spacing) / 2), for: .scrollContent)
                 .onScrollGeometryChange(for: Int.self) { scrollGeometry in
-                    let indexDistance = (scrollGeometry.contentOffset.x / position.spacing).rounded().asInt
+                    let contentPosition = scrollGeometry.contentOffset.x + scrollGeometry.contentInsets.leading
+                    let indexDistance = (contentPosition / position.spacing).rounded().asInt
                     let clampedIndexDistance = position.values.clampDistance(indexDistance)
                     return clampedIndexDistance ?? 0
                 } action: { oldValue, newIndexDistance in
@@ -105,6 +98,7 @@ where Values.Element: Equatable {
     // TODO: values could be updated through position too
     let values: Values
 
+    // TODO: rename to markWidth
     /// Space available in the slider to select each values.
     let spacing: Double
 
