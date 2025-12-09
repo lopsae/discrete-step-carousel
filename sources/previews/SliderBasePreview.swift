@@ -7,7 +7,7 @@
 import SwiftUI
 
 
-#Preview(traits: .fixedLayout(width: 400, height: 400)) {
+#Preview("Default", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: String.alphabet.map(\.localizedUppercase),
         selectedValue: "H",
@@ -45,7 +45,11 @@ import SwiftUI
     HistoricValue(
         label: "index:",
         value: sliderPosition.selectedIndex
-    ).history(spacing: 20)
+    )
+    .history(spacing: 20)
+    .padding(.bottom)
+
+    Divider()
 
     List {
         VStack {
@@ -122,19 +126,13 @@ import SwiftUI
 }
 
 
-// FIXME: update to use ImageGeneratorStorage
-
 #Preview("With Images", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: String.alphabet.map(\.localizedUppercase),
         selectedValue: "Z",
         spacing: 100)
-    @Previewable @State var generationStatuses: [String: GenerationStatus] =
-        String.alphabet.map(\.localizedUppercase).dictionaryMap(value: .idle)
-    @Previewable @State var images: [String: Image] = [:]
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 50))
     @Previewable @State var sliderContentWidth: CGFloat = 0.0
-
-    let imageGenerator = ImageGenerator(size: .init(square: 50))
 
     // Selected value display.
     HistoricValue(
@@ -147,7 +145,7 @@ import SwiftUI
 
     DiscreteStepSlider(position: $sliderPosition) { item in
         Group {
-            if let image = images[item] {
+            if let image = imageGenerator.images[item] {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
@@ -159,17 +157,9 @@ import SwiftUI
         .frame(width: 80, height: 50)
         // TODO: convenience function
         .clipShape(RoundedRectangle(cornerRadius: 8))
-        .onAppear {
-            guard images[item] == nil else {
-                return
-            }
-
-            generationStatuses[item] = .generating
-            Task {
-                let generationTuple = await imageGenerator.generateImage(with: item)
-                images[item] = generationTuple.image
-                generationStatuses[item] = .ready
-            }
+        .task {
+            guard imageGenerator.status[item] == nil else { return }
+            await imageGenerator.generateImage(with: item)
         }
     }
     .frame(height: 60)
@@ -179,7 +169,9 @@ import SwiftUI
     HistoricValue(
         label: "index:",
         value: sliderPosition.selectedIndex
-    ).history(spacing: 20)
+    )
+    .history(spacing: 20)
+    .padding(.bottom)
 
     Divider()
 
@@ -252,15 +244,15 @@ import SwiftUI
                 spacing: 0.0
             ) {
                 ForEach(sliderPosition.values, id: \.self) { item in
-                    let generationStatus = generationStatuses[item]
+                    let generationStatus = imageGenerator.status[item]
                     HStack {
                         Text(item)
                             .frame(width: 15, alignment: .leading)
                         Circle()
-                            .fill(generationStatus?.statusColor ?? .red)
+                            .fill(generationStatus?.statusColor ?? .gray)
                             .frame(square: 15)
                         
-                        Text(generationStatus?.statusText ?? "Missing")
+                        Text(generationStatus?.statusText ?? "Idle")
                             .font(.caption)
                             .lineLimit(1)
                             .maxWidthFrame(alignment: .leading)
@@ -279,30 +271,4 @@ import SwiftUI
                 .monospaced()
         }
     } // List
-}
-
-
-// TODO: structure is repeated in ImageGenerator, figure out way to share it, or allow generationStatus to provide that state.
-private enum GenerationStatus {
-
-    case idle
-    case generating
-    case ready
-
-    var statusColor: Color {
-        switch self {
-        case .idle:    .gray
-        case .generating: .orange
-        case .ready:   .green
-        }
-    }
-
-    var statusText: String {
-        switch self {
-        case .idle:    "Idle"
-        case .generating: "Generating"
-        case .ready:   "Ready"
-        }
-    }
-
 }
