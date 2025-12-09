@@ -9,9 +9,10 @@ import SwiftUI
 
 #Preview(traits: .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
-        values: String.alphabet.prefix(upTo: 16).map(\.localizedUppercase),
+        values: String.alphabet.map(\.localizedUppercase),
         selectedValue: "H",
         spacing: 20)
+    @Previewable @State var sliderContentWidth: CGFloat = 0.0
 
     // Selected value display.
     HistoricValue(
@@ -23,11 +24,13 @@ import SwiftUI
         .font(.caption)
 
     DiscreteStepSlider(position: $sliderPosition) { _ in
+        // TODO: default marker, move into DiscreteStepSlider
         Rectangle()
             .fill(.orange.tertiary)
             .frame(width: 2)
     }
     .frame(height: 44)
+    .onScrollGeometryChange(of: \.contentSize.width, binding: $sliderContentWidth)
     .onAppear {
         print("✴️ Preview Appeared")
     }
@@ -45,9 +48,18 @@ import SwiftUI
     ).history(spacing: 20)
 
     List {
+        VStack {
+            Text("ContentWidth: \(sliderContentWidth, format: .fractionLength(2))")
+                .monospaced()
+                .maxWidthFrame()
+            Text("expected: \(sliderPosition.spacing * sliderPosition.values.count.asDouble, format: .fractionLength(2))")
+                .font(.caption)
+                .monospaced()
+        }
+
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 3, 5]
+                let indices: [Int] = [0, 3, 9, sliderPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = sliderPosition.values[index]
                     Button(value) {
@@ -61,7 +73,7 @@ import SwiftUI
             .maxWidthFrame()
 
             HStack {
-                let indices: [Int] = [1, 4, 6]
+                let indices: [Int] = [1, 6, 12]
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
                         print("➡️ Selecting by Index: [\(index)]")
@@ -76,7 +88,7 @@ import SwiftUI
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 11, 13, 15]
+                let indices: [Int] = [0, 11, 13, sliderPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = sliderPosition.values[index]
                     Button(value) {
@@ -110,14 +122,18 @@ import SwiftUI
 }
 
 
-#Preview("With Images", traits: .fixedLayout(width: 400, height: 400)) {
+// FIXME: update grid to use all space
+// FIXME: update to use ImageGeneratorStorage
+
+#Preview("With Images", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: String.alphabet.map(\.localizedUppercase),
         selectedValue: "Z",
-        spacing: 60)
+        spacing: 100)
     @Previewable @State var generationStatuses: [String: GenerationStatus] =
         String.alphabet.map(\.localizedUppercase).dictionaryMap(value: .idle)
     @Previewable @State var images: [String: Image] = [:]
+    @Previewable @State var sliderContentWidth: CGFloat = 0.0
 
     let imageGenerator = ImageGenerator(size: .init(square: 50))
 
@@ -127,7 +143,7 @@ import SwiftUI
         value: sliderPosition.selectedValue)
 
     // Indicator arrow.
-    Image(systemName: "arrowtriangle.downwell.fill")
+    Image(systemName: "arrowtriangle.down.fill")
         .font(.caption)
 
     DiscreteStepSlider(position: $sliderPosition) { item in
@@ -141,7 +157,8 @@ import SwiftUI
                     .fill(.secondary)
             }
         }
-        .frame(square: 50)
+        .frame(width: 80, height: 50)
+        // TODO: convenience function
         .clipShape(RoundedRectangle(cornerRadius: 8))
         .onAppear {
             guard images[item] == nil else {
@@ -157,6 +174,7 @@ import SwiftUI
         }
     }
     .frame(height: 60)
+    .onScrollGeometryChange(of: \.contentSize.width, binding: $sliderContentWidth)
 
     // Selected index display.
     HistoricValue(
@@ -164,7 +182,18 @@ import SwiftUI
         value: sliderPosition.selectedIndex
     ).history(spacing: 20)
 
+    Divider()
+
     List {
+        VStack {
+            Text("ContentWidth: \(sliderContentWidth, format: .fractionLength(2))")
+                .monospaced()
+                .maxWidthFrame()
+            Text("expected: \(sliderPosition.spacing * sliderPosition.values.count.asDouble, format: .fractionLength(2))")
+                .font(.caption)
+                .monospaced()
+        }
+
         Section("Immediate") {
             HStack {
                 let indices: [Int] = [0, 3, 5]
