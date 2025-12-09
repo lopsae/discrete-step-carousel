@@ -49,10 +49,10 @@ import SwiftUI
 
     List {
         VStack {
-            Text("ContentWidth: \(sliderContentWidth, format: .fractionLength(2))")
+            Text("ContentWidth: \(shortFraction: sliderContentWidth)")
                 .monospaced()
                 .maxWidthFrame()
-            Text("expected: \(sliderPosition.spacing * sliderPosition.values.count.asDouble, format: .fractionLength(2))")
+            Text("expected: \(shortFraction: sliderPosition.spacing * sliderPosition.values.count.asDouble)")
                 .font(.caption)
                 .monospaced()
         }
@@ -186,10 +186,10 @@ import SwiftUI
 
     List {
         VStack {
-            Text("ContentWidth: \(sliderContentWidth, format: .fractionLength(2))")
+            Text("ContentWidth: \(shortFraction: sliderContentWidth)")
                 .monospaced()
                 .maxWidthFrame()
-            Text("expected: \(sliderPosition.spacing * sliderPosition.values.count.asDouble, format: .fractionLength(2))")
+            Text("expected: \(shortFraction: sliderPosition.spacing * sliderPosition.values.count.asDouble)")
                 .font(.caption)
                 .monospaced()
         }

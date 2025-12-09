@@ -302,7 +302,7 @@ nonisolated final class ImageGenerator: Sendable {
     let imageSide: Double = 120
     let items = String.natoPhoneticAlphabet
 
-    Text("ContentSize: \(scrollContentSize, format: .fractionLength(2))")
+    Text("ContentSize: \(shortFraction: scrollContentSize)")
         .monospaced()
 
     ScrollView(.horizontal) {
