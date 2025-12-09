@@ -242,19 +242,19 @@ import SwiftUI
             .maxWidthFrame()
         } // Section
 
-        LazyVGrid(
-            columns: [
-                .init(.flexible()),
-                .init(.flexible()),
-                .init(.flexible())
-            ],
-            alignment: .leading,
+        LazyHGrid(
+            rows: Array(
+                repeating: .init(.flexible()),
+                count: (sliderPosition.values.count.asDouble / 3.0).rounded(.up).asInt
+            ),
+            alignment: .top,
+            spacing: 20.0
         ) {
             ForEach(sliderPosition.values, id: \.self) { item in
                 let generationStatus = generationStatuses[item]
                 HStack {
                     Text(item)
-                        .frame(width: 20, alignment: .leading)
+                        .frame(width: 15, alignment: .leading)
                     Circle()
                         .fill(generationStatus?.statusColor ?? .red)
                         .frame(square: 15)
@@ -262,10 +262,10 @@ import SwiftUI
                     Text(generationStatus?.statusText ?? "Missing")
                         .font(.caption)
                         .lineLimit(1)
-                        .maxWidthFrame(alignment: .leading)
+                        .frame(width: 50, alignment: .leading)
                 }
             }
-        } // LazyVGrid
+        } // LazyHGrid
 
         VStack {
             Text("ContentWidth: \(shortFraction: sliderContentWidth)")
