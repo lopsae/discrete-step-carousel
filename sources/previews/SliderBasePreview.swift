@@ -122,7 +122,6 @@ import SwiftUI
 }
 
 
-// FIXME: update grid to use all space
 // FIXME: update to use ImageGeneratorStorage
 
 #Preview("With Images", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
@@ -185,18 +184,9 @@ import SwiftUI
     Divider()
 
     List {
-        VStack {
-            Text("ContentWidth: \(shortFraction: sliderContentWidth)")
-                .monospaced()
-                .maxWidthFrame()
-            Text("expected: \(shortFraction: sliderPosition.spacing * sliderPosition.values.count.asDouble)")
-                .font(.caption)
-                .monospaced()
-        }
-
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 3, 5]
+                let indices: [Int] = [0, 3, 5, sliderPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = sliderPosition.values[index]
                     Button(value) {
@@ -223,7 +213,7 @@ import SwiftUI
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 11, 13, 15]
+                let indices: [Int] = [0, 11, 15, sliderPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = sliderPosition.values[index]
                     Button(value) {
@@ -252,44 +242,40 @@ import SwiftUI
             .maxWidthFrame()
         } // Section
 
-        Section("Status") {
-            Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
-                // Header
-                GridRow {
-                    Text("Item")
-                        .font(.headline)
-                        .gridColumnAlignment(.leading)
+        LazyVGrid(
+            columns: [
+                .init(.flexible()),
+                .init(.flexible()),
+                .init(.flexible())
+            ],
+            alignment: .leading,
+        ) {
+            ForEach(sliderPosition.values, id: \.self) { item in
+                let generationStatus = generationStatuses[item]
+                HStack {
+                    Text(item)
+                        .frame(width: 20, alignment: .leading)
+                    Circle()
+                        .fill(generationStatus?.statusColor ?? .red)
+                        .frame(square: 15)
 
-                    Text("Status")
-                        .font(.headline)
-                        .gridColumnAlignment(.leading)
+                    Text(generationStatus?.statusText ?? "Missing")
+                        .font(.caption)
+                        .lineLimit(1)
+                        .maxWidthFrame(alignment: .leading)
                 }
+            }
+        } // LazyVGrid
 
-                Divider()
-                    .gridCellUnsizedAxes(.horizontal)
-
-                // Status rows
-                ForEach(sliderPosition.values, id: \.self) { item in
-                    let generationStatus = generationStatuses[item]
-                    GridRow {
-                        Text(item)
-                            .font(.body)
-
-                        HStack(spacing: 8) {
-                            Circle()
-                                .fill(generationStatus?.statusColor ?? .red)
-                                .frame(width: 12, height: 12)
-
-                            Text(generationStatus?.statusText ?? "Missing")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
-                    }
-                }
-            } // Grid
-            .maxWidthFrame()
+        VStack {
+            Text("ContentWidth: \(shortFraction: sliderContentWidth)")
+                .monospaced()
+                .maxWidthFrame()
+            Text("expected: \(shortFraction: sliderPosition.spacing * sliderPosition.values.count.asDouble)")
+                .font(.caption)
+                .monospaced()
         }
-    }
+    } // List
 }
 
 
