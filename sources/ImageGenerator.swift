@@ -22,7 +22,7 @@ class ImageGeneratorStore {
     }
 
 
-    @concurrent
+    @concurrent @discardableResult
     func generateImage(with text: String) async -> Image {
         if let image = await images[text] {
             return image
@@ -297,12 +297,12 @@ nonisolated final class ImageGenerator: Sendable {
 
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
     @Previewable @State var visibleScrollTargets: [String] = []
-    @Previewable @State var scrollContentSize: Double = 0.0
+    @Previewable @State var scrollContentSize: CGFloat = 0.0
 
     let imageSide: Double = 120
     let items = String.natoPhoneticAlphabet
 
-    Text("ContentSize: \(scrollContentSize.formatted(.number.precision(.fractionLength(2))))")
+    Text("ContentSize: \(scrollContentSize, format: .fractionLength(2))")
         .monospaced()
 
     ScrollView(.horizontal) {
@@ -331,18 +331,15 @@ nonisolated final class ImageGenerator: Sendable {
                     Text(item)
                         .font(.caption)
                         .lineLimit(1)
-                }
-                // TODO: should this be a task instead?
-                .onAppear {
+                } // VStack
+                .task {
                     guard imageGenerator.status[item] == nil else {
                         // Image already requested.
                         return
                     }
 
                     // TODO: experiment with a task group and cancelations
-                    Task {
-                        await imageGenerator.generateImage(with: item)
-                    }
+                    await imageGenerator.generateImage(with: item)
                 }
             } // ForEach
         } // LazyHStack
@@ -357,12 +354,7 @@ nonisolated final class ImageGenerator: Sendable {
     .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
         visibleScrollTargets = identifiers
     }
-    // TODO: possible utility function, similar to onGeometryChange
-    .onScrollGeometryChange(for: Double.self) { scrollGeometry in
-        scrollGeometry.contentSize.width
-    } action: { oldValue, newValue in
-        scrollContentSize = newValue
-    }
+    .onScrollGeometryChange(of: \.contentSize.width, binding: $scrollContentSize)
 
     Divider()
 
