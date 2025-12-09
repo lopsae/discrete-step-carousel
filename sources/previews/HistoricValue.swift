@@ -8,7 +8,9 @@ import SwiftUI
 
 
 struct HistoricValue<Value: Equatable, Formatter: FormatStyle>: View
-where Formatter.FormatInput == Value, Formatter.FormatOutput == String
+where
+    Formatter.FormatInput == Value,
+    Formatter.FormatOutput == String
 {
 
     @State private var history: [Value] = []
@@ -24,7 +26,14 @@ where Formatter.FormatInput == Value, Formatter.FormatOutput == String
     private(set) var historyEdge: Edge = .trailing
 
 
-    init(label: String, value: Value, format formatter: Formatter?) {
+    init(label: String, value: Value, format formatter: Formatter) {
+        self.label = label
+        self.value = value
+        self.formatter = formatter
+    }
+
+
+    fileprivate init(label: String, value: Value, maybeFormat formatter: Formatter?) {
         self.label = label
         self.value = value
         self.formatter = formatter
@@ -98,11 +107,12 @@ where Formatter.FormatInput == Value, Formatter.FormatOutput == String
 
 }
 
+// TODO: add extension to allow for nil format
 
 extension HistoricValue where Formatter == NeverFormatStyle<Value> {
 
     init(label: String, value: Value) {
-        self.init(label: label, value: value, format: nil)
+        self.init(label: label, value: value, maybeFormat: nil)
     }
 
 }
@@ -176,27 +186,43 @@ struct NeverFormatStyle<Input>: FormatStyle {
     @Previewable @State var value: Double = 0.12345
     let step: Double = 0.12345
 
-    HistoricValue(
-        label: "value:",
-        value: value,
-        format: FloatingPointFormatStyle.number.precision(.fractionLength(2))
-    )
-    .history(spacing: 35)
+    HistoricValue(label: "value:", value: value, format: .shortFraction)
+        .history(spacing: 35)
 
     Text("raw: \(value)")
         .font(.caption)
         .monospacedDigit()
 
     HStack {
-        Button("Add", systemImage: "plus") {
+        Button {
             value += step
-        }
+        } label: {
+            Label {
+                Text("Add")
+            } icon: {
+                ZStack {
+                    // Invisible text to prevent button size to collapse to image size.
+                    Text("M").hidden()
+                    Image(systemName: "plus")
+                }
+            }
+        } // Button
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
 
-        Button("Substract", systemImage: "minus") {
+        Button {
             value -= step
-        }
+        } label: {
+            Label {
+                Text("Substract")
+            } icon: {
+                ZStack {
+                    // Invisible text to prevent button size to collapse to image size.
+                    Text("M").hidden()
+                    Image(systemName: "minus")
+                }
+            }
+        } // Button
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
     }
