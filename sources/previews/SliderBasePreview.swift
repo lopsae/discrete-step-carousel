@@ -242,30 +242,33 @@ import SwiftUI
             .maxWidthFrame()
         } // Section
 
-        LazyHGrid(
-            rows: Array(
-                repeating: .init(.flexible()),
-                count: (sliderPosition.values.count.asDouble / 3.0).rounded(.up).asInt
-            ),
-            alignment: .top,
-            spacing: 20.0
-        ) {
-            ForEach(sliderPosition.values, id: \.self) { item in
-                let generationStatus = generationStatuses[item]
-                HStack {
-                    Text(item)
-                        .frame(width: 15, alignment: .leading)
-                    Circle()
-                        .fill(generationStatus?.statusColor ?? .red)
-                        .frame(square: 15)
-
-                    Text(generationStatus?.statusText ?? "Missing")
-                        .font(.caption)
-                        .lineLimit(1)
-                        .frame(width: 50, alignment: .leading)
-                }
+        GeometryReader { geometry in
+            LazyHGrid(
+                rows: Array(
+                    repeating: .init(.flexible()),
+                    count: (sliderPosition.values.count.asDouble / 3.0).rounded(.up).asInt
+                ),
+                alignment: .top,
+                spacing: 0.0
+            ) {
+                ForEach(sliderPosition.values, id: \.self) { item in
+                    let generationStatus = generationStatuses[item]
+                    HStack {
+                        Text(item)
+                            .frame(width: 15, alignment: .leading)
+                        Circle()
+                            .fill(generationStatus?.statusColor ?? .red)
+                            .frame(square: 15)
+                        
+                        Text(generationStatus?.statusText ?? "Missing")
+                            .font(.caption)
+                            .lineLimit(1)
+                            .maxWidthFrame(alignment: .leading)
+                    }
+                    .frame(width: geometry.size.width / 3.0)
+                } // LazyHGrid
             }
-        } // LazyHGrid
+        }.frame(height: 200)
 
         VStack {
             Text("ContentWidth: \(shortFraction: sliderContentWidth)")
