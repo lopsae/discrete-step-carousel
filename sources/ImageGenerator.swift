@@ -259,7 +259,7 @@ nonisolated final class ImageGenerator: Sendable {
 // MARK: - Previews
 
 
-#Preview(traits: .headerFooter(.fixedHeader)) {      
+#Preview(traits: .fixedHeader) {
     @Previewable @State var images: [(text: String, image: Image?)] = [
         ("One",   nil),
         ("Two",   nil),
@@ -293,7 +293,7 @@ nonisolated final class ImageGenerator: Sendable {
 }
 
 
-#Preview("LazyHStack", traits: .fixedLayout(width: 400, height: 800)) {
+#Preview("LazyHStack", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
 
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
     @Previewable @State var visibleScrollTargets: [String] = []
@@ -302,113 +302,96 @@ nonisolated final class ImageGenerator: Sendable {
     let imageSide: Double = 120
     let items = String.natoPhoneticAlphabet
 
-    VStack(spacing: 20) {
-        Text("ContentSize: \(scrollContentSize.formatted(.number.precision(.fractionLength(2))))")
-            .monospaced()
+    Text("ContentSize: \(scrollContentSize.formatted(.number.precision(.fractionLength(2))))")
+        .monospaced()
 
-        ScrollView(.horizontal) {
-            LazyHStack(spacing: 16) {
-                ForEach(items, id: \.self) { item in
-                    VStack {
-                        Group {
-                            if let image = imageGenerator.images[item] {
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            } else {
-                                Rectangle()
-                                    .fill(.secondary)
-                                    .overlay {
-                                        ProgressView()
-                                    }
-                            }
-                        }
-                        // Different frame options to see how ScrollView contentSize works with different sized items.
-                        // .frame(square: imageSide)
-                        // .frame(width: item.count.asDouble * 30, height: imageSide)
-                        .frame(width: item == "Alfa" ? 500 : imageSide, height: imageSide)
-                        .clipShape(RoundedRectangle(cornerRadius: 8))
-
-                        Text(item)
-                            .font(.caption)
-                            .lineLimit(1)
-                    }
-                    // TODO: should this be a task instead?
-                    .onAppear {
-                        guard imageGenerator.status[item] == nil else {
-                            // Image already requested.
-                            return
-                        }
-
-                        // TODO: experiment with a task group and cancelations
-                        Task {
-                            await imageGenerator.generateImage(with: item)
+    ScrollView(.horizontal) {
+        LazyHStack(spacing: 16) {
+            ForEach(items, id: \.self) { item in
+                VStack {
+                    Group {
+                        if let image = imageGenerator.images[item] {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                        } else {
+                            Rectangle()
+                                .fill(.secondary)
+                                .overlay {
+                                    ProgressView()
+                                }
                         }
                     }
-                } // ForEach
-            } // LazyHStack
-            .scrollTargetLayout()
-            .padding(.horizontal)
-        } // ScrollView
-        .debugOutline(options: .allGeometry, .infoOutside)
-        .frame(height: 160)
-        .safeAreaPadding(.horizontal, 30)
-        // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
-        // which is far more that the visible items.
-        .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
-            visibleScrollTargets = identifiers
-        }
-        .onScrollGeometryChange(for: Double.self) { scrollGeometry in
-            scrollGeometry.contentSize.width
-        } action: { oldValue, newValue in
-            scrollContentSize = newValue
-        }
+                    // Different frame options to see how ScrollView contentSize works with different sized items.
+                    // .frame(square: imageSide)
+                    // .frame(width: item.count.asDouble * 30, height: imageSide)
+                    .frame(width: item == "Alfa" ? 500 : imageSide, height: imageSide)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
 
-        Divider()
-
-        // Grid showing status
-        ScrollView {
-            Grid(alignment: .leading, horizontalSpacing: 12, verticalSpacing: 8) {
-                // Header
-                GridRow {
-                    Text("Item")
-                        .font(.headline)
-                        .gridColumnAlignment(.leading)
-                    
-                    Text("Status")
-                        .font(.headline)
-                        .gridColumnAlignment(.leading)
+                    Text(item)
+                        .font(.caption)
+                        .lineLimit(1)
                 }
-                
-                Divider()
-                    .gridCellUnsizedAxes(.horizontal)
-                
-                // Status rows
-                ForEach(items, id: \.self) { item in
-                    let generationStatus = imageGenerator.status[item]
-                    let isVisible = visibleScrollTargets.contains(item)
-                    GridRow {
-                        Text(item)
-                            .font(.body)
+                // TODO: should this be a task instead?
+                .onAppear {
+                    guard imageGenerator.status[item] == nil else {
+                        // Image already requested.
+                        return
+                    }
 
-                        HStack(spacing: 8) {
-                            Circle()
-                                .fill(isVisible ? .blue : .gray.opacity(0.5))
-                                .frame(width: 12, height: 12)
-
-                            Circle()
-                                .fill(generationStatus?.statusColor ?? .gray)
-                                .frame(width: 12, height: 12)
-
-                            Text(generationStatus?.statusText ?? "Idle")
-                                .font(.caption)
-                                .foregroundStyle(.secondary)
-                        }
+                    // TODO: experiment with a task group and cancelations
+                    Task {
+                        await imageGenerator.generateImage(with: item)
                     }
                 }
-            } // Grid
-            .maxWidthFrame()
-            .padding()
-        } // ScrollView
+            } // ForEach
+        } // LazyHStack
+        .scrollTargetLayout()
+        .padding(.horizontal)
+    } // ScrollView
+    .debugOutline()
+    .frame(height: 160)
+    .safeAreaPadding(.horizontal, 30)
+    // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
+    // which is far more that the visible items.
+    .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
+        visibleScrollTargets = identifiers
     }
+    // TODO: possible utility function, similar to onGeometryChange
+    .onScrollGeometryChange(for: Double.self) { scrollGeometry in
+        scrollGeometry.contentSize.width
+    } action: { oldValue, newValue in
+        scrollContentSize = newValue
+    }
+
+    Divider()
+
+    ScrollView {
+        Grid(alignment: .leading, horizontalSpacing: 20) {
+            ForEach(items, id: \.self) { item in
+                let generationStatus = imageGenerator.status[item]
+                let isVisible = visibleScrollTargets.contains(item)
+                GridRow {
+                    Text(item)
+                        .font(.body)
+
+                    HStack(spacing: 8) {
+                        Circle()
+                            .fill(isVisible ? .blue : .gray.opacity(0.5))
+                            .frame(width: 12, height: 12)
+
+                        Circle()
+                            .fill(generationStatus?.statusColor ?? .gray)
+                            .frame(width: 12, height: 12)
+
+                        Text(generationStatus?.statusText ?? "Idle")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                            .maxWidthFrame(alignment: .leading)
+                    }
+                } // GridRow
+            } // ForEach
+        } // Grid
+        .padding()
+    } // ScrollView
 }
