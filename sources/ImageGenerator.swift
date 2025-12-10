@@ -320,17 +320,22 @@ nonisolated final class ImageGenerator: Sendable {
         LazyHStack(spacing: 16) {
             ForEach(items, id: \.self) { item in
                 VStack {
-                    Group {
-                        if let image = imageGenerator.images[item] {
+                    ZStack {
+                        let maybeImage = imageGenerator.images[item]
+                        Rectangle()
+                            .fill(.secondary)
+                            .overlay {
+                                if maybeImage == nil {
+                                    ProgressView()
+                                        .transition(.blurReplace.animation(.linear(duration: 1.0)))
+                                }
+                            }
+
+                        if let image = maybeImage {
                             image
                                 .resizable()
                                 .aspectRatio(contentMode: .fill)
-                        } else {
-                            Rectangle()
-                                .fill(.secondary)
-                                .overlay {
-                                    ProgressView()
-                                }
+                                .transition(.opacity.animation(.linear(duration: 1.0).delay(1.0)))
                         }
                     }
                     // Different frame options to see how ScrollView contentSize works with different sized items.
