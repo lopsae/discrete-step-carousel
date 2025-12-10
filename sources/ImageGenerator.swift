@@ -22,6 +22,9 @@ class ImageGeneratorStore {
     }
 
 
+    var size: CGSize { generator.size }
+
+
     @concurrent @discardableResult
     func generateImage(with text: String) async -> Image {
         if let image = await images[text] {
@@ -273,17 +276,16 @@ nonisolated final class ImageGenerator: Sendable {
 // MARK: - Previews
 
 
-#Preview("Basic", traits: .fixedHeader) {
+#Preview("Generator", traits: .fixedHeader) {
     @Previewable @State var images: [(text: String, image: Image?)] = [
         ("One",   nil),
         ("Two",   nil),
         ("Three", nil),
         ("Four",  nil),
-        ("Five",  nil),
+        ("Five",  nil)
     ]
 
-    let imageSide: CGFloat = 100
-    let imageGenerator = ImageGenerator(size: .init(square: imageSide))
+    let imageGenerator = ImageGenerator(size: .init(square: 100))
 
     VStack {
         ForEach(images.enumerated(), id: \.offset) { index, tuple in
@@ -294,7 +296,7 @@ nonisolated final class ImageGenerator: Sendable {
                     Rectangle().fill(.secondary)
                 }
             }
-            .frame(square: imageSide)
+            .frame(size: imageGenerator.size)
             .clipShape(RoundedRectangle(cornerRadius: 8))
             .task {
                 let image = await imageGenerator.generateImage(with: tuple.text).image
@@ -304,4 +306,61 @@ nonisolated final class ImageGenerator: Sendable {
             }
         }
     } // VStack
+}
+
+
+#Preview("Storage", traits: .fixedHeader) {
+    @Previewable @State var items: [String] = ["One", "Two", "Three", "Four"]
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 100))
+
+    VStack {
+        ForEach(items.enumerated(), id: \.offset) { index, item in
+            Group {
+                if let image = imageGenerator.images[item] {
+                    image.resizable()
+                } else {
+                    Rectangle().fill(.secondary)
+                }
+            }
+            .frame(size: imageGenerator.size)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .task {
+                await imageGenerator.generateImage(with: item)
+            }
+        }
+    } // VStack
+    .padding(.bottom)
+
+    Divider()
+
+    Grid(alignment: .leading) {
+        GridRow {
+            Text("Item").bold()
+            Text("Status").bold()
+        }
+
+        Divider()
+            .gridCellUnsizedAxes(.horizontal)
+
+        ForEach(items, id: \.self) { item in
+            let generationStatus = imageGenerator.status[item]
+            GridRow {
+                Text(item)
+                    .font(.body)
+
+                HStack(spacing: 8) {
+                    Circle()
+                        .fill(generationStatus?.statusColor ?? .gray)
+                        .frame(square: 12)
+
+                    Text(generationStatus?.statusText ?? "Idle")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .maxWidthFrame(alignment: .leading)
+                }
+            }
+        }
+    } // Grid
+    .maxWidthFrame()
+    .padding()
 }
