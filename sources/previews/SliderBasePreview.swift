@@ -234,33 +234,32 @@ import SwiftUI
             .maxWidthFrame()
         } // Section
 
-        GeometryReader { geometry in
-            LazyHGrid(
-                rows: Array(
-                    repeating: .init(.flexible()),
-                    count: (sliderPosition.values.count.asDouble / 3.0).rounded(.up).asInt
-                ),
-                alignment: .top,
-                spacing: 0.0
-            ) {
-                ForEach(sliderPosition.values, id: \.self) { item in
-                    let generationStatus = imageGenerator.status[item]
-                    HStack {
-                        Text(item)
-                            .frame(width: 15, alignment: .leading)
-                        Circle()
-                            .fill(generationStatus?.statusColor ?? .gray)
-                            .frame(square: 15)
-                        
-                        Text(generationStatus?.statusText ?? "Idle")
-                            .font(.caption)
-                            .lineLimit(1)
-                            .maxWidthFrame(alignment: .leading)
-                    }
-                    .frame(width: geometry.size.width / 3.0)
-                } // LazyHGrid
-            }
-        }.frame(height: 200)
+        let columns: Int = 3
+        LazyVGrid(
+            columns: Array(
+                repeating: .init(.flexible()),
+                count: columns
+            ),
+            alignment: .leading,
+            spacing: 4.0
+        ) {
+
+            ForEach(sliderPosition.values.columnMajorReordered(columns: columns), id: \.self) { item in
+                let generationStatus = imageGenerator.status[item]
+                HStack {
+                    Text(item)
+                        .frame(width: 15, alignment: .leading)
+                    Circle()
+                        .fill(generationStatus?.statusColor ?? .gray)
+                        .frame(square: 15)
+
+                    Text(generationStatus?.statusText ?? "Idle")
+                        .font(.caption)
+                        .lineLimit(1)
+                        .maxWidthFrame(alignment: .leading)
+                }
+            } // ForEach
+        } // LazyVGrid
 
         VStack {
             Text("ContentWidth: \(shortFraction: sliderContentWidth)")
