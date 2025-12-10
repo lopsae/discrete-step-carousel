@@ -88,6 +88,20 @@ class ImageGeneratorStore {
             }
         }
 
+
+        var compactStatusText: String {
+            switch self {
+            case let .requested(threadName):
+                "req:\(threadName)"
+            case let .stored(
+                threadName,
+                requestThreadName: requestThreadName,
+                generationThreadName: generationThreadName
+            ):
+                "s:\(threadName) ← g:\(generationThreadName) ← r:\(requestThreadName)"
+            }
+        }
+
     }
 
 }
@@ -259,7 +273,7 @@ nonisolated final class ImageGenerator: Sendable {
 // MARK: - Previews
 
 
-#Preview(traits: .fixedHeader) {
+#Preview("Basic", traits: .fixedHeader) {
     @Previewable @State var images: [(text: String, image: Image?)] = [
         ("One",   nil),
         ("Two",   nil),
@@ -301,9 +315,6 @@ nonisolated final class ImageGenerator: Sendable {
 
     let imageSide: Double = 120
     let items = String.natoPhoneticAlphabet
-
-    Text("ContentSize: \(shortFraction: scrollContentSize)")
-        .monospaced()
 
     ScrollView(.horizontal) {
         LazyHStack(spacing: 16) {
@@ -348,7 +359,7 @@ nonisolated final class ImageGenerator: Sendable {
     } // ScrollView
     .debugOutline()
     .frame(height: 160)
-    .safeAreaPadding(.horizontal, 30)
+    .safeAreaPadding(.horizontal, 40)
     // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
     // which is far more that the visible items.
     .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
@@ -358,32 +369,39 @@ nonisolated final class ImageGenerator: Sendable {
 
     Divider()
 
-    ScrollView {
-        Grid(alignment: .leading, horizontalSpacing: 20) {
-            ForEach(items, id: \.self) { item in
+    List {
+        let columns: Int = 2
+        LazyVGrid(
+            columns: Array(
+                repeating: .init(.flexible()),
+                count: columns
+            ),
+            alignment: .leading
+        ) {
+
+            ForEach(items.columnMajorReordered(columns: columns), id: \.self) { item in
                 let generationStatus = imageGenerator.status[item]
                 let isVisible = visibleScrollTargets.contains(item)
-                GridRow {
-                    Text(item)
-                        .font(.body)
+                HStack(spacing: 4) {
+                    Text(String(item.first!))
+                        .frame(width: 20, alignment: .leading)
+                    Circle()
+                        .fill(isVisible ? .blue : .gray.opacity(0.5))
+                        .frame(square: 15)
+                    Circle()
+                        .fill(generationStatus?.statusColor ?? .gray)
+                        .frame(square: 15)
 
-                    HStack(spacing: 8) {
-                        Circle()
-                            .fill(isVisible ? .blue : .gray.opacity(0.5))
-                            .frame(width: 12, height: 12)
-
-                        Circle()
-                            .fill(generationStatus?.statusColor ?? .gray)
-                            .frame(width: 12, height: 12)
-
-                        Text(generationStatus?.statusText ?? "Idle")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                            .maxWidthFrame(alignment: .leading)
-                    }
-                } // GridRow
+                    Text(generationStatus?.compactStatusText ?? "Idle")
+                        .font(.caption)
+                        .lineLimit(1)
+                        .maxWidthFrame(alignment: .leading)
+                }
             } // ForEach
-        } // Grid
-        .padding()
+        } // LazyVGrid
+
+        Text("ContentSize: \(shortFraction: scrollContentSize)")
+            .monospaced()
+            .maxWidthFrame()
     } // ScrollView
 }
