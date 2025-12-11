@@ -10,8 +10,7 @@ import SwiftUI
 #Preview("Default", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: String.alphabet.map(\.localizedUppercase),
-        selectedValue: "M",
-        spacing: 20)
+        selectedValue: "M")
     @Previewable @State var sliderContentWidth: CGFloat = 0.0
 
     // Selected value display.
@@ -51,7 +50,7 @@ import SwiftUI
             Text("ContentWidth: \(shortFraction: sliderContentWidth)")
                 .monospaced()
                 .maxWidthFrame()
-            Text("expected: \(shortFraction: sliderPosition.spacing * sliderPosition.values.count.asDouble)")
+            Text("expected: \(shortFraction: sliderPosition.markLength * sliderPosition.values.count.asDouble)")
                 .font(.caption)
                 .monospaced()
         }
@@ -125,7 +124,7 @@ import SwiftUI
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: String.alphabet.map(\.localizedUppercase),
         selectedValue: "Y",
-        spacing: 100)
+        markLength: 100)
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 50))
     @Previewable @State var sliderContentWidth: CGFloat = 0.0
 
@@ -260,7 +259,7 @@ import SwiftUI
             Text("ContentWidth: \(shortFraction: sliderContentWidth)")
                 .monospaced()
                 .maxWidthFrame()
-            Text("expected: \(shortFraction: sliderPosition.spacing * sliderPosition.values.count.asDouble)")
+            Text("expected: \(shortFraction: sliderPosition.markLength * sliderPosition.values.count.asDouble)")
                 .font(.caption)
                 .monospaced()
         }
