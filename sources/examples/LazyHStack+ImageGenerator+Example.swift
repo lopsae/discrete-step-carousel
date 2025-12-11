@@ -51,7 +51,6 @@ private struct ImageStatusGrid: View {
     @Previewable @State var visibleScrollTargets: [String] = []
     @Previewable @State var scrollContentSize: CGFloat = 0.0
 
-    let imageSide: Double = 120
     let items = String.natoPhoneticAlphabet
 
     ScrollView(.horizontal) {
@@ -63,24 +62,24 @@ private struct ImageStatusGrid: View {
                         let isVisible = visibleScrollTargets.contains(item)
 
                         // Placeholder
-                        ZStack {
+                        ZStack(alignment: .top) {
                             Rectangle()
                                 .fill(.secondary)
                             if maybeImage == nil {
-                                ProgressView()
+                                ProgressView().padding(.top)
+                            } else {
+                                Image(systemName: "checkmark.circle").padding(.top)
                             }
                         }
 
                         if let image = maybeImage {
                             image
                                 .resizable()
-                                .aspectRatio(contentMode: .fill)
+                                .scaledToFill()
+                                .opacity(0.8)
                         }
                     }
-                    // Different frame options to see how ScrollView contentSize works with different sized items.
-                    // .frame(square: imageSide)
-                    // .frame(width: item.count.asDouble * 30, height: imageSide)
-                    .frame(width: item == "Alfa" ? 300 : imageSide, height: imageSide)
+                    .frame(size: item == "Alfa" ? imageGenerator.size.set(width: 300) : imageGenerator.size)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
 
                     Text(item)
@@ -103,7 +102,7 @@ private struct ImageStatusGrid: View {
     } // ScrollView
     .debugOutline()
     .frame(height: 160)
-    .safeAreaPadding(.horizontal, 120)
+    .safeAreaPadding(.horizontal, 40)
     // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
     // which is far more that the visible items.
     .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
@@ -123,7 +122,7 @@ private struct ImageStatusGrid: View {
         Text("ContentSize: \(shortFraction: scrollContentSize)")
             .monospaced()
             .maxWidthFrame()
-    } // ScrollView
+    } // List
 }
 
 
@@ -175,12 +174,9 @@ extension View {
 
 
 #Preview("Animated", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
-
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
     @Previewable @State var visibleScrollTargets: [String] = []
-    @Previewable @State var scrollContentSize: CGFloat = 0.0
 
-    let imageSide: Double = 120
     let items = String.natoPhoneticAlphabet
 
     ScrollView(.horizontal) {
@@ -194,10 +190,7 @@ extension View {
                         PlaceHolderView(image: maybeImage, isVisible: isVisible)
                         ConditionalImageView(image: maybeImage, isVisible: isVisible)
                     }
-                    // Different frame options to see how ScrollView contentSize works with different sized items.
-                    // .frame(square: imageSide)
-                    // .frame(width: item.count.asDouble * 30, height: imageSide)
-                    .frame(width: item == "Alfa" ? 300 : imageSide, height: imageSide)
+                    .frame(size: imageGenerator.size)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
 
                     Text(item)
@@ -209,8 +202,6 @@ extension View {
                         // Image already requested.
                         return
                     }
-
-                    // TODO: experiment with a task group and cancelations
                     await imageGenerator.generateImage(with: item)
                 }
             } // ForEach
@@ -226,7 +217,6 @@ extension View {
     .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
         visibleScrollTargets = identifiers
     }
-    .onScrollGeometryChange(of: \.contentSize.width, binding: $scrollContentSize)
 
     Divider()
 
@@ -236,9 +226,5 @@ extension View {
             items: items, columns: columns,
             status: imageGenerator.status,
             visibleItems: visibleScrollTargets)
-
-        Text("ContentSize: \(shortFraction: scrollContentSize)")
-            .monospaced()
-            .maxWidthFrame()
-    } // ScrollView
+    } // List
 }
