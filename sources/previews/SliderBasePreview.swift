@@ -7,7 +7,39 @@
 import SwiftUI
 
 
-#Preview("Default", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
+#Preview("Default", traits: .headerFooter, .fixedLayout(width: 400, height: 400)) {
+    @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
+        values: String.alphabet.map(\.localizedUppercase),
+        selectedValue: "D")
+
+    // Indicator arrow.
+    Image(systemName: "arrowtriangle.down.fill")
+        .font(.caption)
+
+    DiscreteStepSlider(position: $sliderPosition)
+    .frame(height: 44)
+
+    Text(sliderPosition.selectedValue)
+}
+
+
+#Preview("Style", traits: .headerFooter, .fixedLayout(width: 400, height: 400)) {
+    @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
+        values: String.alphabet.map(\.localizedUppercase),
+        selectedValue: "S")
+
+    // Indicator arrow.
+    Image(systemName: "arrowtriangle.down.fill")
+        .font(.caption)
+
+    DiscreteStepSlider(position: $sliderPosition, anchorStyle: .red, markStyle: .orange)
+    .frame(height: 44)
+
+    Text(sliderPosition.selectedValue)
+}
+
+
+#Preview("With Controls", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: String.alphabet.map(\.localizedUppercase),
         selectedValue: "M")

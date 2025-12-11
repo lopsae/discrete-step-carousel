@@ -165,9 +165,8 @@ where Values.Element: Equatable {
 
 
 struct DiscreteStepSliderDefaults {
-    // TODO: revert to black or gray after migration
-    static let anchorStyle: Color = .teal
-    static let markStyle: Color = .purple
+    static let anchorStyle: Color = .black
+    static let markStyle: Color = .gray
 }
 
 
@@ -212,6 +211,23 @@ extension DiscreteStepSlider {
             position: positionBinding,
             anchorContent: { DefaultMark(fill: DiscreteStepSliderDefaults.anchorStyle) },
             markContent: { _ in DefaultMark(fill: DiscreteStepSliderDefaults.markStyle) }
+        )
+    }
+
+
+    init<AnchorStyle: ShapeStyle, MarkStyle: ShapeStyle>(
+        position positionBinding: Binding<DiscreteStepSliderPosition<Values>>,
+        anchorStyle: AnchorStyle,
+        markStyle: MarkStyle
+    )
+    where
+        AnchorContent == DefaultMark<AnchorStyle>,
+        MarkContent == DefaultMark<MarkStyle>
+    {
+        self.init(
+            position: positionBinding,
+            anchorContent: { DefaultMark(fill: anchorStyle) },
+            markContent: { _ in DefaultMark(fill: markStyle) }
         )
     }
 
