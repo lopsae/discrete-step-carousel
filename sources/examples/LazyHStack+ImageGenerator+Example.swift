@@ -54,6 +54,45 @@ extension View {
 }
 
 
+private struct ImageStatusGrid: View {
+    let items: [String]
+    let columns: Int
+    let status: [String: ImageGeneratorStore.GenerationStatus]
+    let visibleItems: [String]
+
+    var body: some View {
+        LazyVGrid(
+            columns: Array(
+                repeating: .init(.flexible()),
+                count: columns
+            ),
+            alignment: .leading
+        ) {
+
+            ForEach(items.columnMajorReordered(columns: columns), id: \.self) { item in
+                let itemStatus = status[item]
+                let isVisible = visibleItems.contains(item)
+                HStack(spacing: 4) {
+                    Text(String(item.first!))
+                        .frame(width: 20, alignment: .leading)
+                    Circle()
+                        .fill(isVisible ? .blue : .gray.opacity(0.5))
+                        .frame(square: 15)
+                    Circle()
+                        .fill(itemStatus?.statusColor ?? .gray)
+                        .frame(square: 15)
+
+                    Text(itemStatus?.compactStatusText ?? "Idle")
+                        .font(.caption)
+                        .lineLimit(1)
+                        .maxWidthFrame(alignment: .leading)
+                }
+            } // ForEach
+        } // LazyVGrid
+    }
+}
+
+
 #Preview(traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
 
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
@@ -112,34 +151,10 @@ extension View {
 
     List {
         let columns: Int = 2
-        LazyVGrid(
-            columns: Array(
-                repeating: .init(.flexible()),
-                count: columns
-            ),
-            alignment: .leading
-        ) {
-
-            ForEach(items.columnMajorReordered(columns: columns), id: \.self) { item in
-                let generationStatus = imageGenerator.status[item]
-                let isVisible = visibleScrollTargets.contains(item)
-                HStack(spacing: 4) {
-                    Text(String(item.first!))
-                        .frame(width: 20, alignment: .leading)
-                    Circle()
-                        .fill(isVisible ? .blue : .gray.opacity(0.5))
-                        .frame(square: 15)
-                    Circle()
-                        .fill(generationStatus?.statusColor ?? .gray)
-                        .frame(square: 15)
-
-                    Text(generationStatus?.compactStatusText ?? "Idle")
-                        .font(.caption)
-                        .lineLimit(1)
-                        .maxWidthFrame(alignment: .leading)
-                }
-            } // ForEach
-        } // LazyVGrid
+        ImageStatusGrid(
+            items: items, columns: columns,
+            status: imageGenerator.status,
+            visibleItems: visibleScrollTargets)
 
         Text("ContentSize: \(shortFraction: scrollContentSize)")
             .monospaced()
