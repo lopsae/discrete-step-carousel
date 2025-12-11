@@ -9,21 +9,24 @@ import PreviewUtilities
 
 
 // TODO: support vertical slider
-struct DiscreteStepSlider<Values: Collection, MarkContent: View> : View
+struct DiscreteStepSlider<Values: Collection, AnchorContent: View, MarkContent: View> : View
 where Values.Element: Equatable {
 
     @Binding var position: DiscreteStepSliderPosition<Values>
 
-    private var initialAnchor: UnitPoint
-
+    private let anchorContent: () -> AnchorContent
     private let markContent: (Values.Element) -> MarkContent
+
+    private var initialAnchor: UnitPoint
 
 
     init(
         position positionBinding: Binding<DiscreteStepSliderPosition<Values>>,
+        @ViewBuilder anchorContent: @escaping () -> AnchorContent,
         @ViewBuilder markContent: @escaping (Values.Element) -> MarkContent
     ) {
         self._position = positionBinding
+        self.anchorContent = anchorContent
         self.markContent = markContent
 
         let positionValue = positionBinding.wrappedValue
@@ -72,11 +75,7 @@ where Values.Element: Equatable {
                 }
             } // GeometryReader
 
-            // TODO: make parameter
-            // Anchor mark.
-            Rectangle()
-                .fill(.primary)
-                .frame(width: 2.0)
+            anchorContent()
         } // ZStack
     }
 
@@ -167,8 +166,8 @@ where Values.Element: Equatable {
 
 struct DiscreteStepSliderDefaults {
     // TODO: revert to black or gray after migration
-    static let markStyle: Color = .purple
     static let anchorStyle: Color = .teal
+    static let markStyle: Color = .purple
 }
 
 
@@ -186,14 +185,32 @@ struct DefaultMark<Style: ShapeStyle>: View {
 
 extension DiscreteStepSlider {
 
+
+    init(
+        position positionBinding: Binding<DiscreteStepSliderPosition<Values>>,
+        @ViewBuilder markContent: @escaping (Values.Element) -> MarkContent
+    )
+    where
+        AnchorContent == EmptyView
+    {
+        self.init(
+            position: positionBinding,
+            anchorContent: { EmptyView() },
+            markContent: markContent
+        )
+    }
+
+
     init(
         position positionBinding: Binding<DiscreteStepSliderPosition<Values>>
     )
     where
+        AnchorContent == DefaultMark<Color>,
         MarkContent == DefaultMark<Color>
     {
         self.init(
             position: positionBinding,
+            anchorContent: { DefaultMark(fill: DiscreteStepSliderDefaults.anchorStyle) },
             markContent: { _ in DefaultMark(fill: DiscreteStepSliderDefaults.markStyle) }
         )
     }
