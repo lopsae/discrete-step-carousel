@@ -10,25 +10,28 @@ import SwiftUI
 // NEXT: move to own file, see todos
 /// A type for definining values and spacing for a `DiscreteStepSlider`, and for accessing or
 /// updating the selected value or index.
-struct DiscreteStepSliderPosition<Values: Collection>
+public struct DiscreteStepSliderPosition<Values: Collection>
 where Values.Element: Equatable {
 
-    /// Collection of possible values the slider can select. Each value is represented by a
-    /// mark or a custom view in order.
-    // TODO: values could be updated through position too
+    /// Collection of values the slider can select. Each value is represented by a slider mark.
     let values: Values
 
     /// Space available in the slider to select each value.
     let markLength: Double
 
-    // These properties only should be updated through the available functions, not directly.
-    // TODO: can these be set as internal(set)? or fileprivate(set)?
+    // TODO: setup an executable project and test this is not accessible.
+    /// Selected value, which is `values[selectedIndex]`.
     var selectedValue: Values.Element
+
+    /// Index of the selected value.
     var selectedIndex: Values.Index
-    var scrollPosition: ScrollPosition
 
 
-    /// Creates a new Position for a DiscreteSlider.
+    internal var scrollPosition: ScrollPosition
+
+
+    /// Creates a new Position for a DiscreteStepSlider.
+    ///
     /// - Parameters:
     ///   - values: All possible values the slider can select, in the order these will be
     ///     displayed.
@@ -77,6 +80,7 @@ where Values.Element: Equatable {
     /// is reached at the end of the animation.
     ///
     /// If `index` is not a valid index for `values`, the current selection remains unchanged.
+    ///
     /// - Parameter index: The index for the value in `values` to select.
     mutating func selectIndex(_ index: Values.Index) {
         guard values.indices.contains(index)
