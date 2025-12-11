@@ -23,12 +23,7 @@ import SwiftUI
     Image(systemName: "arrowtriangle.down.fill")
         .font(.caption)
 
-    DiscreteStepSlider(position: $sliderPosition) { _ in
-        // TODO: default marker, move into DiscreteStepSlider
-        Rectangle()
-            .fill(.orange.tertiary)
-            .frame(width: 2)
-    }
+    DiscreteStepSlider(position: $sliderPosition)
     .frame(height: 44)
     .onScrollGeometryChange(of: \.contentSize.width, binding: $sliderContentWidth)
     .onAppear {

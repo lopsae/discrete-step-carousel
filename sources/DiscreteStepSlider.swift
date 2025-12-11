@@ -16,10 +16,6 @@ where Values.Element: Equatable {
 
     private var initialAnchor: UnitPoint
 
-    // Spacing between the mark for each value.
-    private let markWidth: Double = 2
-    private let markHeight: Double = 40
-
     private let markContent: (Values.Element) -> MarkContent
 
 
@@ -43,14 +39,8 @@ where Values.Element: Equatable {
 
     var body: some View {
         ZStack {
-            // Center selection mark
-            Rectangle()
-                .fill(.primary)
-                .frame(width: markWidth)
-
             // TODO: is geometry reader needed outside of scrollView?
-
-            // Scrollable content
+            // Scrollable content.
             GeometryReader { geometry in
                 ScrollView(.horizontal, showsIndicators: false) {
                     // TODO: test if AnyLayout/HStackLayout/VStackLayout can provide vertican and horisontal slider funcionality
@@ -81,6 +71,12 @@ where Values.Element: Equatable {
                     position.selectedValue = position.values[newIndex]
                 }
             } // GeometryReader
+
+            // TODO: make parameter
+            // Anchor mark.
+            Rectangle()
+                .fill(.primary)
+                .frame(width: 2.0)
         } // ZStack
     }
 
@@ -165,6 +161,42 @@ where Values.Element: Equatable {
         selectedIndex = index
         let indexDistance = values.distance(from: values.startIndex, to: index)
         scrollPosition.scrollTo(x: indexDistance.asDouble * spacing)
+    }
+
+}
+
+
+struct DiscreteStepSliderDefaults {
+    // TODO: revert to black or gray after migration
+    static let markStyle: Color = .purple
+    static let anchorStyle: Color = .teal
+}
+
+
+struct DefaultMark<Style: ShapeStyle>: View {
+
+    let fill: Style
+
+    var body: some View {
+        Rectangle()
+            .fill(fill)
+            .frame(width: 2)
+    }
+}
+
+
+extension DiscreteStepSlider {
+
+    init(
+        position positionBinding: Binding<DiscreteStepSliderPosition<Values>>
+    )
+    where
+        MarkContent == DefaultMark<Color>
+    {
+        self.init(
+            position: positionBinding,
+            markContent: { _ in DefaultMark(fill: DiscreteStepSliderDefaults.markStyle) }
+        )
     }
 
 }
