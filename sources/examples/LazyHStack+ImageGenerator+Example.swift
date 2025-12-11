@@ -11,7 +11,7 @@ private struct ImageStatusGrid: View {
     let items: [String]
     let columns: Int
     let status: [String: ImageGeneratorStore.GenerationStatus]
-    let visibleItems: [String]
+    let visibleItems: Set<String>
 
     var body: some View {
         LazyVGrid(
@@ -48,7 +48,7 @@ private struct ImageStatusGrid: View {
 
 #Preview("Default", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
-    @Previewable @State var visibleScrollTargets: [String] = []
+    @Previewable @State var visibleScrollTargets: Set<String> = []
     @Previewable @State var scrollContentSize: CGFloat = 0.0
 
     let items = String.natoPhoneticAlphabet
@@ -59,7 +59,6 @@ private struct ImageStatusGrid: View {
                 VStack {
                     ZStack {
                         let maybeImage = imageGenerator.images[item]
-                        let isVisible = visibleScrollTargets.contains(item)
 
                         // Placeholder
                         ZStack(alignment: .top) {
@@ -106,7 +105,7 @@ private struct ImageStatusGrid: View {
     // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
     // which is far more that the visible items.
     .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
-        visibleScrollTargets = identifiers
+        visibleScrollTargets = Set(identifiers)
     }
     .onScrollGeometryChange(of: \.contentSize.width, binding: $scrollContentSize)
 
@@ -126,56 +125,21 @@ private struct ImageStatusGrid: View {
 }
 
 
-private struct PlaceHolderView: View {
-    let image: Image?
-    let isVisible: Bool
-    var body: some View {
-        ZStack {
-            Rectangle()
-                .fill(.secondary)
-            if image == nil {
-                ProgressView()
-                    .transition(.scale.animation(.linear(duration: 1.0)))
-                // conditionalTransition does not seem to work consistently here
-//                    .conditionalTransition(.scale.animation(.linear(duration: 1.0)), enabled: isVisible)
-                    .id("placeholderProgressView")
-            }
-        }
+func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
+    if condition {
+        withAnimation(animation, body)
+    } else {
+        body()
     }
-}
-
-
-private struct ConditionalImageView: View {
-    let image: Image?
-    let isVisible: Bool
-    var body: some View {
-        if let image {
-            image
-                .resizable()
-                .aspectRatio(contentMode: .fill)
-                .conditionalTransition(.scale.animation(.snappy(duration: 3.0).delay(1.5)), enabled: isVisible)
-                .id("conditionalImage")
-        }
-    }
-}
-
-
-extension View {
-
-    func conditionalTransition<T: Transition>(_ aTransition: T, enabled: Bool) -> some View {
-        self.transition(
-            enabled
-            ? AnyTransition(aTransition)
-            : .identity
-        )
-    }
-
 }
 
 
 #Preview("Animated", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
-    @Previewable @State var visibleScrollTargets: [String] = []
+    @Previewable @State var visibleScrollTargets: Set<String> = []
+    // Separate states to handle specific animations
+    @Previewable @State var isLoaded: Set<String> = []
+    @Previewable @State var displayImage: [String: Image] = [:]
 
     let items = String.natoPhoneticAlphabet
 
@@ -184,11 +148,26 @@ extension View {
             ForEach(items, id: \.self) { item in
                 VStack {
                     ZStack {
-                        let maybeImage = imageGenerator.images[item]
-                        let isVisible = visibleScrollTargets.contains(item)
+                        // Placeholder
+                        ZStack(alignment: .top) {
+                            Rectangle()
+                                .fill(.secondary)
+                            if isLoaded.contains(item) {
+                                Image(systemName: "checkmark.circle").padding(.top)
+                            } else {
+                                ProgressView().padding(.top)
+                            }
+                        }
+                        .transition(.blurReplace)
 
-                        PlaceHolderView(image: maybeImage, isVisible: isVisible)
-                        ConditionalImageView(image: maybeImage, isVisible: isVisible)
+                        // Image
+                        if let image = displayImage[item] {
+                            image
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .opacity(0.8)
+                                .transition(.scale)
+                        }
                     }
                     .frame(size: imageGenerator.size)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
@@ -197,6 +176,20 @@ extension View {
                         .font(.caption)
                         .lineLimit(1)
                 } // VStack
+                .onChange(of: imageGenerator.images[item]) { _, newValue in
+                    guard let image = newValue else { return }
+
+                    withAnimation(.linear(duration: 1.0), condition: visibleScrollTargets.contains(item)) {
+                        isLoaded.insert(item)
+                    }
+
+                    Task {
+                        try? await Task.sleep(for: .seconds(2))
+                        withAnimation(.snappy(duration: 3.0), condition: visibleScrollTargets.contains(item)) {
+                            displayImage[item] = image
+                        }
+                    }
+                }
                 .task {
                     guard imageGenerator.status[item] == nil else {
                         // Image already requested.
@@ -211,11 +204,11 @@ extension View {
     } // ScrollView
     .debugOutline()
     .frame(height: 160)
-    .safeAreaPadding(.horizontal, 120)
+    .safeAreaPadding(.horizontal, 140)
     // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
     // which is far more that the visible items.
     .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
-        visibleScrollTargets = identifiers
+        visibleScrollTargets = Set(identifiers)
     }
 
     Divider()
