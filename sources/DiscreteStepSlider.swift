@@ -35,7 +35,6 @@ where Values.Element: Equatable {
         let selectedIndexDistance = positionValue.values.distance(fromStartTo: positionValue.selectedIndex)
         let spacing  = positionValue.spacing
         let valuesCount = positionValue.values.count.asDouble
-        // FIXME: Double check initial selection is still working after using content margins
         self.initialAnchor = .init(
             x: (selectedIndexDistance.asDouble * spacing / ((valuesCount - 1) * spacing)),
             y: 0.5)

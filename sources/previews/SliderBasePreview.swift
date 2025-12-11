@@ -10,7 +10,7 @@ import SwiftUI
 #Preview("Default", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: String.alphabet.map(\.localizedUppercase),
-        selectedValue: "H",
+        selectedValue: "M",
         spacing: 20)
     @Previewable @State var sliderContentWidth: CGFloat = 0.0
 
@@ -129,7 +129,7 @@ import SwiftUI
 #Preview("With Images", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: String.alphabet.map(\.localizedUppercase),
-        selectedValue: "Z",
+        selectedValue: "Y",
         spacing: 100)
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 50))
     @Previewable @State var sliderContentWidth: CGFloat = 0.0
