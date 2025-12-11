@@ -29,10 +29,10 @@ where Values.Element: Equatable {
         let positionValue = positionBinding.wrappedValue
 
         let selectedIndexDistance = positionValue.values.distance(fromStartTo: positionValue.selectedIndex)
-        let spacing  = positionValue.spacing
+        let markLength  = positionValue.markLength
         let valuesCount = positionValue.values.count.asDouble
         self.initialAnchor = .init(
-            x: (selectedIndexDistance.asDouble * spacing / ((valuesCount - 1) * spacing)),
+            x: (selectedIndexDistance.asDouble * markLength / ((valuesCount - 1) * markLength)),
             y: 0.5)
     }
 
@@ -50,19 +50,19 @@ where Values.Element: Equatable {
                         // irregardless of the contents of `values`.
                         ForEach(Array(position.values.enumerated()), id: \.offset) { index, value in
                             markContent(value)
-                            .frame(width: position.spacing, alignment: .center)
+                            .frame(width: position.markLength, alignment: .center)
                         }
                     }
                 } // ScrollView
                 .scrollTargetBehavior(
-                    DiscreteStepScrollTargetBehavior(step: position.spacing)
+                    DiscreteStepScrollTargetBehavior(step: position.markLength)
                 )
                 .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                 .scrollPosition($position.scrollPosition)
-                .contentMargins(.horizontal, .all((geometry.size.width - position.spacing) / 2), for: .scrollContent)
+                .contentMargins(.horizontal, .all((geometry.size.width - position.markLength) / 2), for: .scrollContent)
                 .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                     let contentPosition = scrollGeometry.contentOffset.x + scrollGeometry.contentInsets.leading
-                    let indexDistance = (contentPosition / position.spacing).rounded().asInt
+                    let indexDistance = (contentPosition / position.markLength).rounded().asInt
                     let clampedIndexDistance = position.values.clampDistance(indexDistance)
                     return clampedIndexDistance ?? 0
                 } action: { oldValue, newIndexDistance in
@@ -93,9 +93,8 @@ where Values.Element: Equatable {
     // TODO: values could be updated through position too
     let values: Values
 
-    // TODO: rename to markWidth
-    /// Space available in the slider to select each values.
-    let spacing: Double
+    /// Space available in the slider to select each value.
+    let markLength: Double
 
     // These properties only should be updated through the available functions, not directly.
     // TODO: can these be set as internal(set)? or fileprivate(set)?
@@ -110,11 +109,11 @@ where Values.Element: Equatable {
     ///     displayed.
     ///   - selectedValue: Initial value to be selected. If this value cannot be found in
     ///     `values`, an index of `0` will be selected instead.
-    ///   - spacing: Space available in the slider to select each value.
-    init(values: Values, selectedValue: Values.Element, spacing: Double) {
+    ///   - markLength: Space available in the slider to select each value.
+    init(values: Values, selectedValue: Values.Element, markLength: Double = 22.0) {
         self.values = values
         self.selectedValue = selectedValue
-        self.spacing = spacing
+        self.markLength = markLength
 
         let selectedIndex = values.firstIndex(of: selectedValue) ?? values.startIndex
         self.selectedIndex = selectedIndex
@@ -160,7 +159,7 @@ where Values.Element: Equatable {
 
         selectedIndex = index
         let indexDistance = values.distance(from: values.startIndex, to: index)
-        scrollPosition.scrollTo(x: indexDistance.asDouble * spacing)
+        scrollPosition.scrollTo(x: indexDistance.asDouble * markLength)
     }
 
 }
