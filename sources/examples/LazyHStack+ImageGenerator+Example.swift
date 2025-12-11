@@ -7,6 +7,53 @@
 import SwiftUI
 
 
+private struct PlaceHolderView: View {
+    let image: Image?
+    let isVisible: Bool
+    var body: some View {
+        ZStack {
+            Rectangle()
+                .fill(.secondary)
+            if image == nil {
+                ProgressView()
+                    .transition(.scale.animation(.linear(duration: 1.0)))
+                // conditionalTransition does not seem to work consistently here
+//                    .conditionalTransition(.scale.animation(.linear(duration: 1.0)), enabled: isVisible)
+                    .id("placeholderProgressView")
+            }
+        }
+    }
+}
+
+
+private struct ConditionalImageView: View {
+    let image: Image?
+    let isVisible: Bool
+    var body: some View {
+        if let image {
+            image
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .conditionalTransition(.scale.animation(.snappy(duration: 3.0).delay(1.5)), enabled: isVisible)
+                .id("conditionalImage")
+        }
+    }
+}
+
+
+extension View {
+
+    func conditionalTransition<T: Transition>(_ aTransition: T, enabled: Bool) -> some View {
+        self.transition(
+            enabled
+            ? AnyTransition(aTransition)
+            : .identity
+        )
+    }
+
+}
+
+
 #Preview(traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
 
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
@@ -22,26 +69,15 @@ import SwiftUI
                 VStack {
                     ZStack {
                         let maybeImage = imageGenerator.images[item]
-                        Rectangle()
-                            .fill(.secondary)
-                            .overlay {
-                                if maybeImage == nil {
-                                    ProgressView()
-                                        .transition(.blurReplace.animation(.linear(duration: 1.0)))
-                                }
-                            }
+                        let isVisible = visibleScrollTargets.contains(item)
 
-                        if let image = maybeImage {
-                            image
-                                .resizable()
-                                .aspectRatio(contentMode: .fill)
-                                .transition(.opacity.animation(.linear(duration: 1.0).delay(1.0)))
-                        }
+                        PlaceHolderView(image: maybeImage, isVisible: isVisible)
+                        ConditionalImageView(image: maybeImage, isVisible: isVisible)
                     }
                     // Different frame options to see how ScrollView contentSize works with different sized items.
                     // .frame(square: imageSide)
                     // .frame(width: item.count.asDouble * 30, height: imageSide)
-                    .frame(width: item == "Alfa" ? 500 : imageSide, height: imageSide)
+                    .frame(width: item == "Alfa" ? 300 : imageSide, height: imageSide)
                     .clipShape(RoundedRectangle(cornerRadius: 8))
 
                     Text(item)
@@ -64,7 +100,7 @@ import SwiftUI
     } // ScrollView
     .debugOutline()
     .frame(height: 160)
-    .safeAreaPadding(.horizontal, 40)
+    .safeAreaPadding(.horizontal, 120)
     // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
     // which is far more that the visible items.
     .onScrollTargetVisibilityChange(idType: String.self, threshold: 0.01) { identifiers in
