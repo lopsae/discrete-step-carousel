@@ -19,7 +19,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "../preview-utilities"),
+        .package(path: "../../preview-utilities"),
     ],
     targets: [
         .target(
