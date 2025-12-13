@@ -14,17 +14,17 @@ public struct DiscreteStepSliderPosition<Values: Collection>
 where Values.Element: Equatable {
 
     /// Collection of values the slider can select. Each value is represented by a slider mark.
-    let values: Values
+    public let values: Values
 
     /// Space available in the slider to select each value.
-    let markLength: Double
+    public let markLength: Double
 
     // TODO: setup an executable project and test this is not accessible.
     /// Selected value, which is `values[selectedIndex]`.
-    var selectedValue: Values.Element
+    public var selectedValue: Values.Element
 
     /// Index of the selected value.
-    var selectedIndex: Values.Index
+    public var selectedIndex: Values.Index
 
 
     internal var scrollPosition: ScrollPosition
@@ -38,7 +38,7 @@ where Values.Element: Equatable {
     ///   - selectedValue: Initial value to be selected. If this value cannot be found in
     ///     `values`, an index of `0` will be selected instead.
     ///   - markLength: Space available in the slider to select each value.
-    init(values: Values, selectedValue: Values.Element, markLength: Double = 22.0) {
+    public init(values: Values, selectedValue: Values.Element, markLength: Double = 22.0) {
         self.values = values
         self.selectedValue = selectedValue
         self.markLength = markLength

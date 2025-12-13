@@ -9,7 +9,7 @@ import PreviewUtilities
 
 
 // TODO: support vertical slider
-struct DiscreteStepSlider<Values: Collection, AnchorContent: View, MarkContent: View> : View
+public struct DiscreteStepSlider<Values: Collection, AnchorContent: View, MarkContent: View> : View
 where Values.Element: Equatable {
 
     @Binding var position: DiscreteStepSliderPosition<Values>
@@ -20,7 +20,7 @@ where Values.Element: Equatable {
     private var initialAnchor: UnitPoint
 
 
-    init(
+    public init(
         position positionBinding: Binding<DiscreteStepSliderPosition<Values>>,
         @ViewBuilder anchorContent: @escaping () -> AnchorContent,
         @ViewBuilder markContent: @escaping (Values.Element) -> MarkContent
@@ -40,7 +40,7 @@ where Values.Element: Equatable {
     }
 
 
-    var body: some View {
+    public var body: some View {
         ZStack {
             // TODO: is geometry reader needed outside of scrollView?
             // Scrollable content.
@@ -91,11 +91,11 @@ struct DiscreteStepSliderDefaults {
 }
 
 
-struct DefaultMark<Style: ShapeStyle>: View {
+public struct DefaultMark<Style: ShapeStyle>: View {
 
     let fill: Style
 
-    var body: some View {
+    public var body: some View {
         Rectangle()
             .fill(fill)
             .frame(width: 2)
@@ -106,7 +106,7 @@ struct DefaultMark<Style: ShapeStyle>: View {
 extension DiscreteStepSlider {
 
 
-    init(
+    public init(
         position positionBinding: Binding<DiscreteStepSliderPosition<Values>>,
         @ViewBuilder markContent: @escaping (Values.Element) -> MarkContent
     )
@@ -121,7 +121,7 @@ extension DiscreteStepSlider {
     }
 
 
-    init(
+    public init(
         position positionBinding: Binding<DiscreteStepSliderPosition<Values>>
     )
     where
@@ -136,7 +136,7 @@ extension DiscreteStepSlider {
     }
 
 
-    init<AnchorStyle: ShapeStyle, MarkStyle: ShapeStyle>(
+    public init<AnchorStyle: ShapeStyle, MarkStyle: ShapeStyle>(
         position positionBinding: Binding<DiscreteStepSliderPosition<Values>>,
         anchorStyle: AnchorStyle,
         markStyle: MarkStyle
