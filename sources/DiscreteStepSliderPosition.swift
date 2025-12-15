@@ -14,17 +14,17 @@ public struct DiscreteStepSliderPosition<Values: Collection>
 where Values.Element: Equatable {
 
     /// Collection of values the slider can select. Each value is represented by a slider mark.
-    let values: Values
+    public let values: Values
 
     /// Space available in the slider to select each value.
-    let markLength: Double
+    public let markLength: Double
 
     // TODO: setup an executable project and test this is not accessible.
     /// Selected value, which is `values[selectedIndex]`.
-    var selectedValue: Values.Element
+    internal var selectedValue: Values.Element
 
     /// Index of the selected value.
-    var selectedIndex: Values.Index
+    public internal(set) var selectedIndex: Values.Index
 
 
     internal var scrollPosition: ScrollPosition
@@ -38,7 +38,7 @@ where Values.Element: Equatable {
     ///   - selectedValue: Initial value to be selected. If this value cannot be found in
     ///     `values`, an index of `0` will be selected instead.
     ///   - markLength: Space available in the slider to select each value.
-    init(values: Values, selectedValue: Values.Element, markLength: Double = 22.0) {
+    public init(values: Values, selectedValue: Values.Element, markLength: Double = 22.0) {
         self.values = values
         self.selectedValue = selectedValue
         self.markLength = markLength
@@ -62,7 +62,7 @@ where Values.Element: Equatable {
     /// If `value` cannot be found in `values`, the current selection remains unchanged.
     ///
     /// - Parameter value: The new value to select.
-    mutating func selectValue(_ value: Values.Element) {
+    public mutating func selectValue(_ value: Values.Element) {
         guard let index = values.firstIndex(of: value)
         else { return }
 
@@ -82,7 +82,7 @@ where Values.Element: Equatable {
     /// If `index` is not a valid index for `values`, the current selection remains unchanged.
     ///
     /// - Parameter index: The index for the value in `values` to select.
-    mutating func selectIndex(_ index: Values.Index) {
+    public mutating func selectIndex(_ index: Values.Index) {
         guard values.indices.contains(index)
         else { return }
 
