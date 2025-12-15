@@ -7,7 +7,7 @@
       "location" : "https://github.com/lopsae/discrete-step-slider",
       "state" : {
         "branch" : "develop",
-        "revision" : "c1b0db9ce3fb3a385df266d918e68fac2a78bc2a"
+        "revision" : "5938625360d9c7ff8f2638c8d52b90f7e7334ba4"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
         "branch" : "initial-tagged-release",
-        "revision" : "b2d6e8ec938090ae4bc8bf8126e2f5d741a97074"
+        "revision" : "b44af9821e2fb50927675d92aaeb295da8284f2e"
       }
     }
   ],

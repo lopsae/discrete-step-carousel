@@ -5,30 +5,25 @@
 
 import SwiftUI
 
-//import DiscreteStepSlider
+import DiscreteStepSlider
+
+// TODO: PreviewUtilities should not be accesible unless imported directly.
 //import PreviewUtilities
 
 
 struct ContentView: View {
-//    @State var sliderPosition: DiscreteStepSliderPosition = .init(
-//        values: String.alphabet.map(\.localizedUppercase),
-//        selectedValue: "D")
+    @State var sliderPosition: DiscreteStepSliderPosition = .init(
+        values: ["A", "B", "C", "D", "F", "G", "H", "J"],
+        selectedValue: "D")
 
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("DiscreteStepSlider Demo")
-        }
-        .padding()
+        Image(systemName: "arrowtriangle.down.fill")
+            .font(.caption)
 
-//        Image(systemName: "arrowtriangle.down.fill")
-//            .font(.caption)
-//
-//        DiscreteStepSlider(position: $sliderPosition)
-//        .frame(height: 44)
-//
+        DiscreteStepSlider(position: $sliderPosition)
+        .frame(height: 44)
+
+        // TODO: selected value should be readonly.
 //        Text(sliderPosition.selectedValue)
     }
 }
