@@ -11,9 +11,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		2D8E07192EEFC33800BAC573 /* DiscreteStepSliderDemo */ = {
+		2D8E07192EEFC33800BAC573 /* sources */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DiscreteStepSliderDemo;
+			path = sources;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		2D8E070E2EEFC33800BAC573 = {
 			isa = PBXGroup;
 			children = (
-				2D8E07192EEFC33800BAC573 /* DiscreteStepSliderDemo */,
+				2D8E07192EEFC33800BAC573 /* sources */,
 				2D8E07182EEFC33800BAC573 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,7 +61,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				2D8E07192EEFC33800BAC573 /* DiscreteStepSliderDemo */,
+				2D8E07192EEFC33800BAC573 /* sources */,
 			);
 			name = DiscreteStepSliderDemo;
 			packageProductDependencies = (
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 2D8E07122EEFC33800BAC573 /* Build configuration list for PBXProject "DiscreteStepSliderDemo" */;
+			buildConfigurationList = 2D8E07122EEFC33800BAC573 /* Build configuration list for PBXProject "DemoApp" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -332,7 +332,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2D8E07122EEFC33800BAC573 /* Build configuration list for PBXProject "DiscreteStepSliderDemo" */ = {
+		2D8E07122EEFC33800BAC573 /* Build configuration list for PBXProject "DemoApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2D8E07202EEFC33900BAC573 /* Debug */,
