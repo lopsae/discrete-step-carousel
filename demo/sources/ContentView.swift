@@ -17,14 +17,16 @@ struct ContentView: View {
         selectedValue: "D")
 
     var body: some View {
+        Text(sliderPosition.selectedValue)
         Image(systemName: "arrowtriangle.down.fill")
             .font(.caption)
 
         DiscreteStepSlider(position: $sliderPosition)
         .frame(height: 44)
 
-        // TODO: selected value should be readonly.
-//        Text(sliderPosition.selectedValue)
+        Text(sliderPosition.selectedIndex.description)
+            .font(.caption)
+
     }
 }
 
