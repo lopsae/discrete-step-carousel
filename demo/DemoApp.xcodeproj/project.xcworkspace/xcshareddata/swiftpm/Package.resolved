@@ -1,0 +1,24 @@
+{
+  "originHash" : "5775acd9151e9e5f970e3ca21f5f8c7049b2524ee4dd3242e0b8edd7b3e2b225",
+  "pins" : [
+    {
+      "identity" : "discrete-step-slider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lopsae/discrete-step-slider",
+      "state" : {
+        "branch" : "develop",
+        "revision" : "c1b0db9ce3fb3a385df266d918e68fac2a78bc2a"
+      }
+    },
+    {
+      "identity" : "preview-utilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lopsae/preview-utilities.git",
+      "state" : {
+        "branch" : "initial-tagged-release",
+        "revision" : "b2d6e8ec938090ae4bc8bf8126e2f5d741a97074"
+      }
+    }
+  ],
+  "version" : 3
+}
