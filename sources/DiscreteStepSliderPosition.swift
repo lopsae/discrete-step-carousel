@@ -19,9 +19,8 @@ where Values.Element: Equatable {
     /// Space available in the slider to select each value.
     public let markLength: Double
 
-    // TODO: setup an executable project and test this is not accessible.
     /// Selected value, which is `values[selectedIndex]`.
-    internal var selectedValue: Values.Element
+    public internal(set) var selectedValue: Values.Element
 
     /// Index of the selected value.
     public internal(set) var selectedIndex: Values.Index
