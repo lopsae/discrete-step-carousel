@@ -6,14 +6,12 @@
 import SwiftUI
 
 import DiscreteStepSlider
-
-// TODO: PreviewUtilities should not be accesible unless imported directly.
-//import PreviewUtilities
+import PreviewUtilities
 
 
 struct ContentView: View {
     @State var sliderPosition: DiscreteStepSliderPosition = .init(
-        values: ["A", "B", "C", "D", "F", "G", "H", "J"],
+        values: String.alphabet.map(\.localizedUppercase),
         selectedValue: "D")
 
     var body: some View {
@@ -26,7 +24,6 @@ struct ContentView: View {
 
         Text(sliderPosition.selectedIndex.description)
             .font(.caption)
-
     }
 }
 
