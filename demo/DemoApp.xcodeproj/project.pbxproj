@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D6F882C2EEFD9B800BC5867 /* DiscreteStepSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 2D6F882B2EEFD9B800BC5867 /* DiscreteStepSlider */; };
+		2D6F882F2EF09CF500BC5867 /* DiscreteStepSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 2D6F882E2EF09CF500BC5867 /* DiscreteStepSlider */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D6F882C2EEFD9B800BC5867 /* DiscreteStepSlider in Frameworks */,
+				2D6F882F2EF09CF500BC5867 /* DiscreteStepSlider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +70,7 @@
 			);
 			name = DiscreteStepSliderDemo;
 			packageProductDependencies = (
-				2D6F882B2EEFD9B800BC5867 /* DiscreteStepSlider */,
+				2D6F882E2EF09CF500BC5867 /* DiscreteStepSlider */,
 			);
 			productName = DiscreteStepSliderDemo;
 			productReference = 2D8E07172EEFC33800BAC573 /* DiscreteStepSliderDemo.app */;
@@ -101,7 +101,7 @@
 			mainGroup = 2D8E070E2EEFC33800BAC573;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2D6F882A2EEFD9B800BC5867 /* XCRemoteSwiftPackageReference "discrete-step-slider" */,
+				2D6F882D2EF09CF500BC5867 /* XCLocalSwiftPackageReference "../../discrete-step-slider" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2D8E07182EEFC33800BAC573 /* Products */;
@@ -361,21 +361,16 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		2D6F882A2EEFD9B800BC5867 /* XCRemoteSwiftPackageReference "discrete-step-slider" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/lopsae/discrete-step-slider";
-			requirement = {
-				branch = develop;
-				kind = branch;
-			};
+/* Begin XCLocalSwiftPackageReference section */
+		2D6F882D2EF09CF500BC5867 /* XCLocalSwiftPackageReference "../../discrete-step-slider" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../discrete-step-slider";
 		};
-/* End XCRemoteSwiftPackageReference section */
+/* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2D6F882B2EEFD9B800BC5867 /* DiscreteStepSlider */ = {
+		2D6F882E2EF09CF500BC5867 /* DiscreteStepSlider */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2D6F882A2EEFD9B800BC5867 /* XCRemoteSwiftPackageReference "discrete-step-slider" */;
 			productName = DiscreteStepSlider;
 		};
 /* End XCSwiftPackageProductDependency section */
