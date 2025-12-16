@@ -7,7 +7,6 @@
 import SwiftUI
 
 
-// NEXT: move to own file, see todos
 /// A type for definining values and spacing for a `DiscreteStepSlider`, and for accessing or
 /// updating the selected value or index.
 public struct DiscreteStepSliderPosition<Values: Collection>
