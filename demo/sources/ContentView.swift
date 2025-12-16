@@ -15,19 +15,27 @@ struct ContentView: View {
         selectedValue: "D")
 
     var body: some View {
-        Text(sliderPosition.selectedValue)
-        Image(systemName: "arrowtriangle.down.fill")
-            .font(.caption)
+        List {
+            VStack(spacing: 0) {
+                Text(sliderPosition.selectedValue)
+                Image(systemName: "arrowtriangle.down.fill")
+                    .font(.caption)
 
-        DiscreteStepSlider(position: $sliderPosition)
-        .frame(height: 44)
+                DiscreteStepSlider(position: $sliderPosition)
+                .frame(height: 44)
 
-        Text(sliderPosition.selectedIndex.description)
-            .font(.caption)
+                Text(sliderPosition.selectedIndex.description)
+                    .font(.caption)
+            }
+            .listRowInsets(.horizontal, 0.0)
+        }
     }
 }
 
 
 #Preview {
-    ContentView()
+    NavigationStack {
+        ContentView()
+            .navigationTitle("Preview")
+    }
 }
