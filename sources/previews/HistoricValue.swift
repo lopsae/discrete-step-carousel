@@ -142,7 +142,12 @@ extension HistoricValue {
     HistoricValue(label: "selected:", value: selection)
         .history(padding: 10, spacing: 40, edge: historyEdge)
 
+    Text("Change value:")
+        .font(.caption)
+        .padding(.top)
+
     HStack {
+
         Button("Previous", systemImage: "arrowshape.left") {
             selectedIndex = (selectedIndex + values.count - 1) % values.count
         }
@@ -157,6 +162,8 @@ extension HistoricValue {
     }
 
     VStack {
+        Text("History direction:")
+            .font(.caption)
         Button("Top", systemImage: "arrowshape.up.fill") {
             historyEdge = .top
         }
@@ -190,14 +197,23 @@ extension HistoricValue {
 #Preview("Formatted") {
 
     @Previewable @State var value: Double = 0.12345
+    @Previewable @State var useFormatter: Bool = true
     let step: Double = 0.12345
 
-    HistoricValue(label: "value:", value: value, format: .shortFraction)
-        .history(spacing: 35)
+    if useFormatter {
+        HistoricValue(label: "value:", value: value, format: .shortFraction)
+            .history(spacing: 35)
+    } else {
+        HistoricValue(label: "value:", describingValue: value)
+            .history(spacing: 15, edge: .top)
+    }
+
 
     Text("raw: \(value)")
         .font(.caption)
         .monospacedDigit()
+    Text("Using \(useFormatter ? "Short Fraction" : "Default (String Description)")")
+        .font(.caption)
 
     HStack {
         Button {
@@ -232,5 +248,8 @@ extension HistoricValue {
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
     } // HStack
+
+    Toggle("Use Formatter", isOn: $useFormatter)
+        .padding(.horizontal)
 
 }
