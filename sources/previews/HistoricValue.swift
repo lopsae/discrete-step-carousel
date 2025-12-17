@@ -5,8 +5,13 @@
 
 
 import SwiftUI
+import PreviewUtilities
 
 
+/// Displays a labeled value, along a history of previous values next to it.
+///
+/// Every time the displayed value changes the previous value is stored up to a given number of
+/// changes. All historic values are displayed next to the current value.
 struct HistoricValue<Value: Equatable, Formatter: FormatStyle>: View
 where
     Formatter.FormatInput == Value,
@@ -17,15 +22,16 @@ where
 
     let label: String
     let value: Value
-    let formatter: Formatter?
+    let formatter: Formatter
 
-    let historyToKeep: Int = 10
+    let historyLength: Int = 10
 
     private(set) var historyPadding: Double = 5.0
     private(set) var historySpacing: Double = 25.0
     private(set) var historyEdge: Edge = .trailing
 
 
+    /// Creates a view which displays a formatted value along its history of previous values.
     init(label: String, value: Value, format formatter: Formatter) {
         self.label = label
         self.value = value
@@ -33,15 +39,8 @@ where
     }
 
 
-    fileprivate init(label: String, value: Value, maybeFormat formatter: Formatter?) {
-        self.label = label
-        self.value = value
-        self.formatter = formatter
-    }
-
-
     var body: some View {
-        let valueString = formatter?.format(value) ?? String(describing: value)
+        let valueString = formatter.format(value) // ?? String(describing: value)
         Text(valueString)
             .monospacedDigit()
             // Historic values placed in an overlay so that these never modify the size of the
@@ -53,8 +52,8 @@ where
                 labelView
             }
             .onChange(of: value) { oldValue, newValue in
-                if history.count >= historyToKeep {
-                    history.removeLast(1 + history.count - historyToKeep)
+                if history.count >= historyLength {
+                    history.removeLast(1 + history.count - historyLength)
                 }
                 history.insert(oldValue, at: 0)
             }
@@ -77,7 +76,7 @@ where
     @ViewBuilder
     private var historicValues: some View {
         ForEach(history.enumerated(), id: \.offset) { index, historicValue in
-            let valueString = formatter?.format(historicValue) ?? String(describing: historicValue)
+            let valueString = formatter.format(historicValue) // ?? String(describing: historicValue)
             let offsetValue = ((index.asDouble + 1.0) * historySpacing) + historyPadding
             let offsetSize = switch historyEdge {
             case .top:      CGSize(width: .zero, height: -offsetValue)
@@ -89,7 +88,7 @@ where
                 .font(.caption)
                 .monospacedDigit()
                 .fixedSize()
-                .opacity(1.0 - (index.asDouble / historyToKeep.asDouble))
+                .opacity(1.0 - (index.asDouble / historyLength.asDouble))
                 .offset(offsetSize)
         }
     }
@@ -107,27 +106,34 @@ where
 
 }
 
-// TODO: add extension to allow for nil format
 
-extension HistoricValue where Formatter == NeverFormatStyle<Value> {
+extension HistoricValue {
 
-    init(label: String, value: Value) {
-        self.init(label: label, value: value, maybeFormat: nil)
+    /// Creates a view which displays a string value along its history of previous values.
+    init(label: String, value: Value)
+    where
+        Formatter == IdentityFormatStyle<Value>,
+        Value == String
+    {
+        self.init(label: label, value: value, format: .init())
+    }
+
+
+    /// Creates a view which displays the string description of a value along its history of
+    /// previous values.
+    init(label: String, describingValue value: Value)
+    where Formatter == StringDescriptionFormatStyle<Value>
+    {
+        self.init(label: label, value: value, format: .init())
     }
 
 }
 
 
-// Implementation of FormatStyle to provide HistoricValue initializers without format.
-struct NeverFormatStyle<Input>: FormatStyle {
-    func format(_ value: Input) -> String { .init() }
-}
+// MARK: - Previews.
 
 
-// MARK: - Previews
-
-
-#Preview {
+#Preview("String Value") {
 
     @Previewable @State var selectedIndex: Int = 0
     @Previewable @State var historyEdge: Edge = .top
@@ -225,6 +231,6 @@ struct NeverFormatStyle<Input>: FormatStyle {
         } // Button
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
-    }
+    } // HStack
 
 }
