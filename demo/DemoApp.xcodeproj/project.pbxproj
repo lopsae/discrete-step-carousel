@@ -105,7 +105,6 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				2D6F882D2EF09CF500BC5867 /* XCLocalSwiftPackageReference "../../discrete-step-slider" */,
-				2D1A9C282EF227CA00449C3A /* XCLocalSwiftPackageReference "../../preview-utilities" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2D8E07182EEFC33800BAC573 /* Products */;
@@ -370,10 +369,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		2D1A9C282EF227CA00449C3A /* XCLocalSwiftPackageReference "../../preview-utilities" */ = {
-			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../preview-utilities";
-		};
 		2D6F882D2EF09CF500BC5867 /* XCLocalSwiftPackageReference "../../discrete-step-slider" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../discrete-step-slider";
