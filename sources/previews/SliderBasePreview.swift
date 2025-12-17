@@ -181,8 +181,7 @@ import SwiftUI
             }
         }
         .frame(width: 80, height: 50)
-        // TODO: convenience function
-        .clipShape(RoundedRectangle(cornerRadius: 8))
+        .roundedRectangleClip(cornerRadius: 8)
         .task {
             guard imageGenerator.status[item] == nil else { return }
             await imageGenerator.generateImage(with: item)

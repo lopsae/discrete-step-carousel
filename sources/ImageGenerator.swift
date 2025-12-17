@@ -297,7 +297,7 @@ nonisolated final class ImageGenerator: Sendable {
                 }
             }
             .frame(size: imageGenerator.size)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .roundedRectangleClip(cornerRadius: 8)
             .task {
                 let image = await imageGenerator.generateImage(with: tuple.text).image
                 var mutableTuple = tuple
@@ -323,7 +323,7 @@ nonisolated final class ImageGenerator: Sendable {
                 }
             }
             .frame(size: imageGenerator.size)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .roundedRectangleClip(cornerRadius: 8)
             .task {
                 await imageGenerator.generateImage(with: item)
             }

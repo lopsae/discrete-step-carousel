@@ -51,7 +51,7 @@ private struct ImageStatusGrid: View {
     @Previewable @State var visibleScrollTargets: Set<String> = []
     @Previewable @State var scrollContentSize: CGFloat = 0.0
 
-    let items = String.natoPhoneticAlphabet
+    let items = String.natoPhoneticAlphabet.map(\.capitalized)
 
     ScrollView(.horizontal) {
         LazyHStack(spacing: 16) {
@@ -79,7 +79,7 @@ private struct ImageStatusGrid: View {
                         }
                     }
                     .frame(size: item == "Alfa" ? imageGenerator.size.set(width: 300) : imageGenerator.size)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .roundedRectangleClip(cornerRadius: 8)
 
                     Text(item)
                         .font(.caption)
@@ -170,7 +170,7 @@ func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
                         }
                     }
                     .frame(size: imageGenerator.size)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .roundedRectangleClip(cornerRadius: 8)
 
                     Text(item)
                         .font(.caption)
