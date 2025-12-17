@@ -70,7 +70,7 @@ import SwiftUI
     // Selected index display.
     HistoricValue(
         label: "index:",
-        value: sliderPosition.selectedIndex
+        describingValue: sliderPosition.selectedIndex
     )
     .history(spacing: 20)
     .padding(.bottom)
@@ -194,7 +194,7 @@ import SwiftUI
     // Selected index display.
     HistoricValue(
         label: "index:",
-        value: sliderPosition.selectedIndex
+        describingValue: sliderPosition.selectedIndex
     )
     .history(spacing: 20)
     .padding(.bottom)
