@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D1A9C2A2EF227CA00449C3A /* PreviewUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = 2D1A9C292EF227CA00449C3A /* PreviewUtilities */; };
 		2D6F882F2EF09CF500BC5867 /* DiscreteStepSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 2D6F882E2EF09CF500BC5867 /* DiscreteStepSlider */; };
 /* End PBXBuildFile section */
 
@@ -27,6 +28,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D1A9C2A2EF227CA00449C3A /* PreviewUtilities in Frameworks */,
 				2D6F882F2EF09CF500BC5867 /* DiscreteStepSlider in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -71,6 +73,7 @@
 			name = DemoApp;
 			packageProductDependencies = (
 				2D6F882E2EF09CF500BC5867 /* DiscreteStepSlider */,
+				2D1A9C292EF227CA00449C3A /* PreviewUtilities */,
 			);
 			productName = DiscreteStepSliderDemo;
 			productReference = 2D8E07172EEFC33800BAC573 /* DemoApp.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				2D6F882D2EF09CF500BC5867 /* XCLocalSwiftPackageReference "../../discrete-step-slider" */,
+				2D1A9C282EF227CA00449C3A /* XCLocalSwiftPackageReference "../../preview-utilities" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2D8E07182EEFC33800BAC573 /* Products */;
@@ -366,6 +370,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
+		2D1A9C282EF227CA00449C3A /* XCLocalSwiftPackageReference "../../preview-utilities" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../preview-utilities";
+		};
 		2D6F882D2EF09CF500BC5867 /* XCLocalSwiftPackageReference "../../discrete-step-slider" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../discrete-step-slider";
@@ -373,6 +381,10 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2D1A9C292EF227CA00449C3A /* PreviewUtilities */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PreviewUtilities;
+		};
 		2D6F882E2EF09CF500BC5867 /* DiscreteStepSlider */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DiscreteStepSlider;
