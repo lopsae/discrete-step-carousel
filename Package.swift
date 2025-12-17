@@ -19,7 +19,6 @@ let package = Package(
         ),
     ],
     dependencies: [
-//        .package(name: , path: "../preview-utilities")
         .package(path: "../preview-utilities")
 //        .package(url: "https://github.com/lopsae/preview-utilities.git", branch: "initial-tagged-release")
     ],
