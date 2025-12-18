@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "107E5EB6-6104-4986-8FC2-974E18AA335D",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "performanceAntipatternCheckerEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "DiscreteStepSliderTests",
+        "name" : "DiscreteStepSliderTests"
+      }
+    }
+  ],
+  "version" : 2
+}
