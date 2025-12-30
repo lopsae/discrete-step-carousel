@@ -78,7 +78,7 @@ private struct ImageStatusGrid: View {
                                 .opacity(0.8)
                         }
                     }
-                    .frame(size: item == "Alfa" ? imageGenerator.size.set(width: 300) : imageGenerator.size)
+                    .frame(size: item == "Alfa" ? imageGenerator.size.setting(width: 300) : imageGenerator.size)
                     .roundedRectangleClip(cornerRadius: 8)
 
                     Text(item)
