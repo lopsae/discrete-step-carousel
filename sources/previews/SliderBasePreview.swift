@@ -10,7 +10,7 @@ import SwiftUI
 
 #Preview("Default", traits: .headerFooter, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
-        values: String.alphabet.map(\.localizedUppercase),
+        values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "D")
 
     // Indicator arrow.
@@ -26,14 +26,14 @@ import SwiftUI
 
 #Preview("Style", traits: .headerFooter, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
-        values: String.alphabet.map(\.localizedUppercase),
+        values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "S")
 
     // Indicator arrow.
     Image(systemName: "arrowtriangle.down.fill")
         .font(.caption)
 
-    DiscreteStepSlider(position: $sliderPosition, anchorStyle: .red, markStyle: .orange)
+    DiscreteStepSlider(position: $sliderPosition, anchorStyle: .red, markStyle: .orange.tertiary)
     .frame(height: 44)
 
     Text(sliderPosition.selectedValue)
@@ -42,7 +42,7 @@ import SwiftUI
 
 #Preview("With Controls", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
-        values: String.alphabet.map(\.localizedUppercase),
+        values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "M")
     @Previewable @State var sliderContentWidth: CGFloat = 0.0
 
@@ -155,10 +155,10 @@ import SwiftUI
 
 #Preview("With Images", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
-        values: String.alphabet.map(\.localizedUppercase),
+        values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "Y",
         markLength: 100)
-    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 50))
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(squareOf: 50))
     @Previewable @State var sliderContentWidth: CGFloat = 0.0
 
     // Selected value display.
@@ -277,7 +277,7 @@ import SwiftUI
                         .frame(width: 15, alignment: .leading)
                     Circle()
                         .fill(generationStatus?.statusColor ?? .gray)
-                        .frame(square: 15)
+                        .frame(squareOf: 15)
 
                     Text(generationStatus?.statusText ?? "Idle")
                         .font(.caption)

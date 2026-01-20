@@ -31,10 +31,10 @@ private struct ImageStatusGrid: View {
                         .frame(width: 20, alignment: .leading)
                     Circle()
                         .fill(isVisible ? .blue : .gray.opacity(0.5))
-                        .frame(square: 15)
+                        .frame(squareOf: 15)
                     Circle()
                         .fill(itemStatus?.statusColor ?? .gray)
-                        .frame(square: 15)
+                        .frame(squareOf: 15)
 
                     Text(itemStatus?.compactStatusText ?? "Idle")
                         .font(.caption)
@@ -48,11 +48,11 @@ private struct ImageStatusGrid: View {
 
 
 #Preview("Default", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
-    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(squareOf: 120))
     @Previewable @State var visibleScrollTargets: Set<String> = []
     @Previewable @State var scrollContentSize: CGFloat = 0.0
 
-    let items = String.natoPhoneticAlphabet.map(\.capitalized)
+    let items = Strings.natoPhoneticAlphabet.map(\.capitalized)
 
     ScrollView(.horizontal) {
         LazyHStack(spacing: 16) {
@@ -100,7 +100,7 @@ private struct ImageStatusGrid: View {
         .scrollTargetLayout()
         .padding(.horizontal)
     } // ScrollView
-    .debugOutline()
+    .debugOverlay()
     .frame(height: 160)
     .safeAreaPadding(.horizontal, 40)
     // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
@@ -136,13 +136,13 @@ func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
 
 
 #Preview("Animated", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
-    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(square: 120))
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(squareOf: 120))
     @Previewable @State var visibleScrollTargets: Set<String> = []
     // Separate states to handle specific animations
     @Previewable @State var isLoaded: Set<String> = []
     @Previewable @State var displayImage: [String: Image] = [:]
 
-    let items = String.natoPhoneticAlphabet
+    let items = Strings.natoPhoneticAlphabet
 
     ScrollView(.horizontal) {
         LazyHStack(spacing: 16) {
@@ -203,7 +203,7 @@ func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
         .scrollTargetLayout()
         .padding(.horizontal)
     } // ScrollView
-    .debugOutline()
+    .debugOverlay()
     .frame(height: 160)
     .safeAreaPadding(.horizontal, 140)
     // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,

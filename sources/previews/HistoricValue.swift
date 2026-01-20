@@ -137,7 +137,7 @@ extension HistoricValue {
 
     @Previewable @State var selectedIndex: Int = 0
     @Previewable @State var historyEdge: Edge = .top
-    let values = String.natoPhoneticAlphabet
+    let values = Strings.natoPhoneticAlphabet
     let selection = values[selectedIndex]
     HistoricValue(label: "selected:", value: selection)
         .history(padding: 10, spacing: 40, edge: historyEdge)

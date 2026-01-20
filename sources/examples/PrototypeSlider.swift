@@ -154,7 +154,7 @@ struct PrototypeSlider: View {
 
     PrototypeSlider(position: $sliderPosition)
         .frame(height: 120)
-        .debugOutline(options: .size, .infoOutside)
+        .debugOverlay(.size, .outerInfo)
         .onAppear {
             print("✴️ Preview Appeared")
         }
