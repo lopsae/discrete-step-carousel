@@ -47,9 +47,22 @@ private struct ImageStatusGrid: View {
 }
 
 
-// TODO: preview needs update to handle task cancelation.
-#Preview("Default", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
-    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(squareOf: 120))
+// MARK: - PreviewContent
+
+
+@MainActor
+private struct PreviewContent {
+
+    static let layout: PreviewTrait<Preview.ViewTraits> = .iPhoneProSizeForcedLayout
+
+}
+
+
+// MARK: - Previews
+
+
+#Preview("Default", traits: .headerFooter(.fixed, .noPadding), PreviewContent.layout) {
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(width: 60, height: 120))
     @Previewable @State var visibleScrollTargets: Set<String> = []
     @Previewable @State var scrollContentSize: CGFloat = 0.0
 
@@ -88,12 +101,8 @@ private struct ImageStatusGrid: View {
                         .lineLimit(1)
                 } // VStack
                 .task {
-                    guard imageGenerator.status[item] == nil else {
-                        // Image already requested.
-                        return
-                    }
-
-                    // TODO: experiment with a task group and cancelations
+                    // Automatically cancels image generation if the task is cancelled.
+                    // Once the image is generated and stored, this is a No-Op.
                     await imageGenerator.generateImage(with: item)
                 }
             } // ForEach
@@ -111,19 +120,22 @@ private struct ImageStatusGrid: View {
     }
     .onScrollGeometryChange(of: \.contentSize.width, binding: $scrollContentSize)
 
-    Divider()
+    DashedDivider()
 
-    List {
+    ScrollView {
         let columns: Int = 2
         ImageStatusGrid(
             items: items, columns: columns,
             status: imageGenerator.status,
             visibleItems: visibleScrollTargets)
 
+        DashedDivider()
+
         Text("ContentSize: \(shortFraction: scrollContentSize)")
             .monospaced()
             .maxWidthFrame()
-    } // List
+    } // ScrollView
+    .padding(.horizontal)
 }
 
 
@@ -136,9 +148,8 @@ func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
 }
 
 
-// TODO: preview needs update to handle task cancelation.
-#Preview("Animated", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
-    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(squareOf: 120))
+#Preview("Animated", traits: .headerFooter(.fixed, .noPadding), PreviewContent.layout) {
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(width: 60, height: 120))
     @Previewable @State var visibleScrollTargets: Set<String> = []
     // Separate states to handle specific animations
     @Previewable @State var isLoaded: Set<String> = []
@@ -187,6 +198,8 @@ func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
                     }
 
                     Task {
+                        // Start of the animation is delayed to see if visibleScrollTargets updates
+                        // after the task already started.
                         try? await Task.sleep(for: .seconds(2))
                         withAnimation(.snappy(duration: 3.0), condition: visibleScrollTargets.contains(item)) {
                             displayImage[item] = image
@@ -194,10 +207,8 @@ func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
                     }
                 }
                 .task {
-                    guard imageGenerator.status[item] == nil else {
-                        // Image already requested.
-                        return
-                    }
+                    // Automatically cancels image generation if the task is cancelled.
+                    // Once the image is generated and stored, this is a No-Op.
                     await imageGenerator.generateImage(with: item)
                 }
             } // ForEach
@@ -214,13 +225,14 @@ func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
         visibleScrollTargets = Set(identifiers)
     }
 
-    Divider()
+    DashedDivider()
 
-    List {
+    ScrollView {
         let columns: Int = 2
         ImageStatusGrid(
             items: items, columns: columns,
             status: imageGenerator.status,
             visibleItems: visibleScrollTargets)
-    } // List
+    } // ScrollView
+    .padding(.horizontal)
 }
