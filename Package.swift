@@ -29,11 +29,7 @@ let package = Package(
             dependencies: [
                 .product(name: "PreviewUtilities", package: "preview-utilities")
             ],
-            path: "sources",
-            swiftSettings: [
-                .defaultIsolation(MainActor.self)
-            ]
-
+            path: "sources"
         ),
         .testTarget(
             name: "DiscreteStepCarouselTests",
@@ -45,7 +41,8 @@ let package = Package(
 
 // Target settings.
 for target in package.targets {
-    target.swiftSettings?.append(contentsOf: [
+    var settings = target.swiftSettings ?? []
+    settings.append(contentsOf: [
         // https://developer.apple.com/documentation/xcode/build-settings-reference#Approachable-Concurrency
         // https://developer.apple.com/documentation/xcode/build-settings-reference#Approachable-Concurrency
         // https://useyourloaf.com/blog/approachable-concurrency-in-swift-packages/
@@ -59,5 +56,5 @@ for target in package.targets {
         // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0470-isolated-conformances.md
         .enableUpcomingFeature("InferIsolatedConformances")
     ])
-    // TODO: targets are not property applied!
+    target.swiftSettings = settings
 }
