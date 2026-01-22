@@ -7,8 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2D1A9C2A2EF227CA00449C3A /* PreviewUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = 2D1A9C292EF227CA00449C3A /* PreviewUtilities */; };
-		2D6F882F2EF09CF500BC5867 /* DiscreteStepCarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 2D6F882E2EF09CF500BC5867 /* DiscreteStepCarousel */; };
+		2DF9A6F42F22CB7F00C27C56 /* DiscreteStepCarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 2DF9A6F32F22CB7F00C27C56 /* DiscreteStepCarousel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D1A9C2A2EF227CA00449C3A /* PreviewUtilities in Frameworks */,
-				2D6F882F2EF09CF500BC5867 /* DiscreteStepCarousel in Frameworks */,
+				2DF9A6F42F22CB7F00C27C56 /* DiscreteStepCarousel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,8 +70,7 @@
 			);
 			name = DemoApp;
 			packageProductDependencies = (
-				2D6F882E2EF09CF500BC5867 /* DiscreteStepCarousel */,
-				2D1A9C292EF227CA00449C3A /* PreviewUtilities */,
+				2DF9A6F32F22CB7F00C27C56 /* DiscreteStepCarousel */,
 			);
 			productName = DiscreteStepCarouselDemo;
 			productReference = 2D8E07172EEFC33800BAC573 /* DemoApp.app */;
@@ -104,7 +101,7 @@
 			mainGroup = 2D8E070E2EEFC33800BAC573;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2D6F882D2EF09CF500BC5867 /* XCLocalSwiftPackageReference "../../discrete-step-slider" */,
+				2DF9A6F22F22CB7F00C27C56 /* XCLocalSwiftPackageReference "../../discrete-step-carousel" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2D8E07182EEFC33800BAC573 /* Products */;
@@ -369,18 +366,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		2D6F882D2EF09CF500BC5867 /* XCLocalSwiftPackageReference "../../discrete-step-slider" */ = {
+		2DF9A6F22F22CB7F00C27C56 /* XCLocalSwiftPackageReference "../../discrete-step-carousel" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = "../../discrete-step-slider";
+			relativePath = "../../discrete-step-carousel";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2D1A9C292EF227CA00449C3A /* PreviewUtilities */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = PreviewUtilities;
-		};
-		2D6F882E2EF09CF500BC5867 /* DiscreteStepCarousel */ = {
+		2DF9A6F32F22CB7F00C27C56 /* DiscreteStepCarousel */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DiscreteStepCarousel;
 		};
