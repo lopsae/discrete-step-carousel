@@ -11,7 +11,7 @@ import SwiftUI
 private struct ImageStatusGrid: View {
     let items: [String]
     let columns: Int
-    let status: [String: ImageGeneratorStore.GenerationStatus]
+    let status: [String: ImageGeneratorStore<ConcurrentImageGenerator>.GenerationStatus]
     let visibleItems: Set<String>
 
     var body: some View {
@@ -47,6 +47,7 @@ private struct ImageStatusGrid: View {
 }
 
 
+// TODO: preview needs update to handle task cancelation.
 #Preview("Default", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(squareOf: 120))
     @Previewable @State var visibleScrollTargets: Set<String> = []
@@ -135,6 +136,7 @@ func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
 }
 
 
+// TODO: preview needs update to handle task cancelation.
 #Preview("Animated", traits: .zeroSpacing, .fixedLayout(width: 400, height: 800)) {
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(squareOf: 120))
     @Previewable @State var visibleScrollTargets: Set<String> = []

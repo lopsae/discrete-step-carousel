@@ -154,12 +154,15 @@ import SwiftUI
 
 
 #Preview("With Images", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
+    @Previewable @State var printOnce: PrintOnce = .previewStarted
     @Previewable @State var sliderPosition: DiscreteStepSliderPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "Y",
         markLength: 100)
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(squareOf: 50))
     @Previewable @State var sliderContentWidth: CGFloat = 0.0
+
+    printOnce.print()
 
     // Selected value display.
     HistoricValue(
@@ -184,7 +187,7 @@ import SwiftUI
         .frame(width: 80, height: 50)
         .roundedRectangleClip(cornerRadius: 8)
         .task {
-            guard imageGenerator.status[item] == nil else { return }
+            // GenerateImage automatically cancels image generation if the task is cancelled.
             await imageGenerator.generateImage(with: item)
         }
     }
@@ -278,9 +281,8 @@ import SwiftUI
                     Circle()
                         .fill(generationStatus?.statusColor ?? .gray)
                         .frame(squareOf: 15)
-
-                    Text(generationStatus?.statusText ?? "Idle")
-                        .font(.caption)
+                    Text(generationStatus?.minimalStatusText ?? "Idle")
+                        .font(.caption.monospaced())
                         .lineLimit(1)
                         .maxWidthFrame(alignment: .leading)
                 }
