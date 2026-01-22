@@ -11,7 +11,7 @@ import PreviewUtilities
 
 struct ContentView: View {
     @State var sliderPosition: DiscreteStepCarouselPosition = .init(
-        values: String.alphabet.map(\.localizedUppercase),
+        values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "D")
 
     var body: some View {
