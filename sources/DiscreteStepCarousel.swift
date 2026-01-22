@@ -41,8 +41,8 @@ where Values.Element: Equatable {
 
     public var body: some View {
         ZStack {
-            // TODO: is geometry reader needed outside of scrollView?
-            // Scrollable content.
+            // Geometry reader needs to envelop ScrollView. contentMargings uses the scroll view
+            // size to setup margins that allow marks to remain centered.
             GeometryReader { geometry in
                 ScrollView(.horizontal, showsIndicators: false) {
                     // TODO: test if AnyLayout/HStackLayout/VStackLayout can provide vertican and horisontal slider funcionality
@@ -57,14 +57,19 @@ where Values.Element: Equatable {
                     }
                 } // ScrollView
                 .scrollTargetBehavior(
+                    // TODO: this could be removed to disable snapping, but selection is still discrete.
                     DiscreteStepScrollTargetBehavior(step: position.markLength)
                 )
                 .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                 .scrollPosition($position.scrollPosition)
-                .contentMargins(.horizontal, .all((geometry.size.width - position.markLength) / 2), for: .scrollContent)
+                // TODO: what happens if content margins are setup externally for the carousel? do these still work?
+                .contentMargins(
+                    .horizontal,
+                    (geometry.size.width - position.markLength) / 2,
+                    for: .scrollContent)
                 .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                     let contentPosition = scrollGeometry.contentOffset.x + scrollGeometry.contentInsets.leading
-                    let indexDistance = (contentPosition / position.markLength).rounded().asInt
+                    let indexDistance = (contentPosition / position.markLength).arithmeticRoundedInt
                     let clampedIndexDistance = position.values.clampDistance(indexDistance)
                     return clampedIndexDistance ?? 0
                 } action: { oldValue, newIndexDistance in
