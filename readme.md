@@ -1,4 +1,4 @@
-Discrete Step Slider
-====================
+Discrete Step Carousel
+======================
 
-Prototype library for a discrete step slider control.
+Prototype library for a discrete step carousel control.

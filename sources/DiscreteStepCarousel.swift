@@ -1,5 +1,5 @@
 //
-//  DiscreteStepSlider
+//  DiscreteStepCarousel
 //  Created by Maic Lopez Saenz.
 //
 
@@ -8,10 +8,10 @@ import SwiftUI
 
 
 // TODO: support vertical slider
-public struct DiscreteStepSlider<Values: Collection, AnchorContent: View, MarkContent: View> : View
+public struct DiscreteStepCarousel<Values: Collection, AnchorContent: View, MarkContent: View> : View
 where Values.Element: Equatable {
 
-    @Binding var position: DiscreteStepSliderPosition<Values>
+    @Binding var position: DiscreteStepCarouselPosition<Values>
 
     private let anchorContent: () -> AnchorContent
     private let markContent: (Values.Element) -> MarkContent
@@ -20,7 +20,7 @@ where Values.Element: Equatable {
 
 
     public init(
-        position positionBinding: Binding<DiscreteStepSliderPosition<Values>>,
+        position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
         @ViewBuilder anchorContent: @escaping () -> AnchorContent,
         @ViewBuilder markContent: @escaping (Values.Element) -> MarkContent
     ) {
@@ -81,7 +81,7 @@ where Values.Element: Equatable {
 }
 
 
-struct DiscreteStepSliderDefaults {
+struct DiscreteStepCarouselDefaults {
     static let anchorStyle: Color = .black
     static let markStyle: Color = .gray
 }
@@ -99,10 +99,10 @@ public struct DefaultMark<Style: ShapeStyle>: View {
 }
 
 
-extension DiscreteStepSlider {
+extension DiscreteStepCarousel {
 
     public init(
-        position positionBinding: Binding<DiscreteStepSliderPosition<Values>>,
+        position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
         @ViewBuilder markContent: @escaping (Values.Element) -> MarkContent
     )
     where
@@ -117,7 +117,7 @@ extension DiscreteStepSlider {
 
 
     public init(
-        position positionBinding: Binding<DiscreteStepSliderPosition<Values>>
+        position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>
     )
     where
         AnchorContent == DefaultMark<Color>,
@@ -125,14 +125,14 @@ extension DiscreteStepSlider {
     {
         self.init(
             position: positionBinding,
-            anchorContent: { DefaultMark(fill: DiscreteStepSliderDefaults.anchorStyle) },
-            markContent: { _ in DefaultMark(fill: DiscreteStepSliderDefaults.markStyle) }
+            anchorContent: { DefaultMark(fill: DiscreteStepCarouselDefaults.anchorStyle) },
+            markContent: { _ in DefaultMark(fill: DiscreteStepCarouselDefaults.markStyle) }
         )
     }
 
 
     public init<AnchorStyle: ShapeStyle, MarkStyle: ShapeStyle>(
-        position positionBinding: Binding<DiscreteStepSliderPosition<Values>>,
+        position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
         anchorStyle: AnchorStyle,
         markStyle: MarkStyle
     )

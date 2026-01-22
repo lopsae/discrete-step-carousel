@@ -1,5 +1,5 @@
 //
-//  DiscreteStepSliderDemo
+//  DiscreteStepCarouselDemo
 //  Created by Maic Lopez Saenz.
 //
 
@@ -11,7 +11,7 @@ struct DemoApp: App {
         WindowGroup {
             NavigationStack {
                 ContentView()
-                    .navigationTitle("DiscreteStepSlider")
+                    .navigationTitle("DiscreteStepCarousel")
                     .navigationSubtitle("DemoApp")
             }
         }

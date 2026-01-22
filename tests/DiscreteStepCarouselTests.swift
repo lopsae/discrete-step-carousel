@@ -1,8 +1,8 @@
 import Testing
-@testable import DiscreteStepSlider
+@testable import DiscreteStepCarousel
 
 
-struct DiscreteStepSliderTests {
+struct DiscreteStepCarouselTests {
 
     @Test func example() async throws {
         let parts: [String] = [

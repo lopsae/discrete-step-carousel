@@ -1,5 +1,5 @@
 //
-//  DiscreteStepSlider
+//  DiscreteStepCarousel
 //  Created by Maic Lopez Saenz.
 //
 

@@ -7,15 +7,15 @@ import PackageDescription
 
 
 let package = Package(
-    name: "DiscreteStepSlider",
+    name: "DiscreteStepCarousel",
     platforms: [
         .iOS(.v26),
         .macOS(.v26)
     ],
     products: [
         .library(
-            name: "DiscreteStepSlider",
-            targets: ["DiscreteStepSlider"]
+            name: "DiscreteStepCarousel",
+            targets: ["DiscreteStepCarousel"]
         ),
     ],
     dependencies: [
@@ -25,7 +25,7 @@ let package = Package(
     ],
     targets: [
         .target(
-            name: "DiscreteStepSlider",
+            name: "DiscreteStepCarousel",
             dependencies: [
                 .product(name: "PreviewUtilities", package: "preview-utilities")
             ],
@@ -36,8 +36,8 @@ let package = Package(
 
         ),
         .testTarget(
-            name: "DiscreteStepSliderTests",
-            dependencies: ["DiscreteStepSlider"],
+            name: "DiscreteStepCarouselTests",
+            dependencies: ["DiscreteStepCarousel"],
             path: "tests",
         ),
     ]

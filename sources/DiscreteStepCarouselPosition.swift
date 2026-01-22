@@ -1,5 +1,5 @@
 //
-//  DiscreteStepSlider
+//  DiscreteStepCarousel
 //  Created by Maic Lopez Saenz.
 //
 
@@ -7,9 +7,9 @@
 import SwiftUI
 
 
-/// A type for definining values and spacing for a `DiscreteStepSlider`, and for accessing or
+/// A type for definining values and spacing for a `DiscreteStepCarousel`, and for accessing or
 /// updating the selected value or index.
-public struct DiscreteStepSliderPosition<Values: Collection>
+public struct DiscreteStepCarouselPosition<Values: Collection>
 where Values.Element: Equatable {
 
     /// Collection of values the slider can select. Each value is represented by a slider mark.
@@ -28,7 +28,7 @@ where Values.Element: Equatable {
     internal var scrollPosition: ScrollPosition
 
 
-    /// Creates a new Position for a DiscreteStepSlider.
+    /// Creates a new Position for a DiscreteStepCarousel.
     ///
     /// - Parameters:
     ///   - values: All possible values the slider can select, in the order these will be

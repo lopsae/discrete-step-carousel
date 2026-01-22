@@ -15,8 +15,8 @@
     {
       "target" : {
         "containerPath" : "container:",
-        "identifier" : "DiscreteStepSliderTests",
-        "name" : "DiscreteStepSliderTests"
+        "identifier" : "DiscreteStepCarouselTests",
+        "name" : "DiscreteStepCarouselTests"
       }
     }
   ],

@@ -1,16 +1,16 @@
 //
-//  DiscreteStepSliderDemo
+//  DiscreteStepCarouselDemo
 //  Created by Maic Lopez Saenz.
 //
 
 import SwiftUI
 
-import DiscreteStepSlider
+import DiscreteStepCarousel
 import PreviewUtilities
 
 
 struct ContentView: View {
-    @State var sliderPosition: DiscreteStepSliderPosition = .init(
+    @State var sliderPosition: DiscreteStepCarouselPosition = .init(
         values: String.alphabet.map(\.localizedUppercase),
         selectedValue: "D")
 
@@ -21,7 +21,7 @@ struct ContentView: View {
                 Image(systemName: "arrowtriangle.down.fill")
                     .font(.caption)
 
-                DiscreteStepSlider(position: $sliderPosition)
+                DiscreteStepCarousel(position: $sliderPosition)
                 .frame(height: 44)
 
                 Text(sliderPosition.selectedIndex.description)

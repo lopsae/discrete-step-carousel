@@ -15,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DiscreteStepSlider"
-               BuildableName = "DiscreteStepSlider"
-               BlueprintName = "DiscreteStepSlider"
+               BlueprintIdentifier = "DiscreteStepCarousel"
+               BuildableName = "DiscreteStepCarousel"
+               BlueprintName = "DiscreteStepCarousel"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,7 +30,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:tests/plans/DiscreteStepSlider.xctestplan"
+            reference = "container:tests/plans/DiscreteStepCarousel.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -39,9 +39,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "DiscreteStepSliderTests"
-               BuildableName = "DiscreteStepSliderTests"
-               BlueprintName = "DiscreteStepSliderTests"
+               BlueprintIdentifier = "DiscreteStepCarouselTests"
+               BuildableName = "DiscreteStepCarouselTests"
+               BlueprintName = "DiscreteStepCarouselTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -67,9 +67,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "DiscreteStepSlider"
-            BuildableName = "DiscreteStepSlider"
-            BlueprintName = "DiscreteStepSlider"
+            BlueprintIdentifier = "DiscreteStepCarousel"
+            BuildableName = "DiscreteStepCarousel"
+            BlueprintName = "DiscreteStepCarousel"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

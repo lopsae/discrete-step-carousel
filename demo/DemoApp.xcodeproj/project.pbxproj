@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2D1A9C2A2EF227CA00449C3A /* PreviewUtilities in Frameworks */ = {isa = PBXBuildFile; productRef = 2D1A9C292EF227CA00449C3A /* PreviewUtilities */; };
-		2D6F882F2EF09CF500BC5867 /* DiscreteStepSlider in Frameworks */ = {isa = PBXBuildFile; productRef = 2D6F882E2EF09CF500BC5867 /* DiscreteStepSlider */; };
+		2D6F882F2EF09CF500BC5867 /* DiscreteStepCarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 2D6F882E2EF09CF500BC5867 /* DiscreteStepCarousel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D1A9C2A2EF227CA00449C3A /* PreviewUtilities in Frameworks */,
-				2D6F882F2EF09CF500BC5867 /* DiscreteStepSlider in Frameworks */,
+				2D6F882F2EF09CF500BC5867 /* DiscreteStepCarousel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -72,10 +72,10 @@
 			);
 			name = DemoApp;
 			packageProductDependencies = (
-				2D6F882E2EF09CF500BC5867 /* DiscreteStepSlider */,
+				2D6F882E2EF09CF500BC5867 /* DiscreteStepCarousel */,
 				2D1A9C292EF227CA00449C3A /* PreviewUtilities */,
 			);
-			productName = DiscreteStepSliderDemo;
+			productName = DiscreteStepCarouselDemo;
 			productReference = 2D8E07172EEFC33800BAC573 /* DemoApp.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -267,7 +267,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "DemoApp DiscreteStepSlider";
+				INFOPLIST_KEY_CFBundleDisplayName = "DemoApp DiscreteStepCarousel";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -283,7 +283,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lopsae.discrete-step-slider.demo-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lopsae.discrete-step-carousel.demo-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -313,7 +313,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_CFBundleDisplayName = "DemoApp DiscreteStepSlider";
+				INFOPLIST_KEY_CFBundleDisplayName = "DemoApp DiscreteStepCarousel";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -329,7 +329,7 @@
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 26.0;
 				MARKETING_VERSION = 0.3;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lopsae.discrete-step-slider.demo-app";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.lopsae.discrete-step-carousel.demo-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
 				SDKROOT = auto;
@@ -380,9 +380,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = PreviewUtilities;
 		};
-		2D6F882E2EF09CF500BC5867 /* DiscreteStepSlider */ = {
+		2D6F882E2EF09CF500BC5867 /* DiscreteStepCarousel */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = DiscreteStepSlider;
+			productName = DiscreteStepCarousel;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
