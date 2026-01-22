@@ -59,4 +59,5 @@ for target in package.targets {
         // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0470-isolated-conformances.md
         .enableUpcomingFeature("InferIsolatedConformances")
     ])
+    // TODO: targets are not property applied!
 }
