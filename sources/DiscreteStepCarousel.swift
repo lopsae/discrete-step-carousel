@@ -62,7 +62,8 @@ where Values.Element: Equatable {
                 )
                 .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                 .scrollPosition($position.scrollPosition)
-                // TODO: what happens if content margins are setup externally for the carousel? do these still work?
+                // Content margins set externally do not seem to impact this.
+                // Assuming that the last one takes precedence, but this is untested.
                 .contentMargins(
                     .horizontal,
                     (geometry.size.width - position.markLength) / 2,

@@ -77,6 +77,8 @@ private struct PreviewContent {
         }
     }
     .frame(height: 100)
+    .debugOverlay()
+    .safeAreaPadding(.horizontal, 50)
 }
 
 
@@ -84,10 +86,13 @@ private struct PreviewContent {
 
 
 #Preview("Controls", traits: .zeroSpacing, PreviewContent.layout) {
+    @Previewable @State var printOnce: PrintOnce = .previewStarted
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "M")
     @Previewable @State var carouselContentWidth: CGFloat = 0.0
+
+    printOnce.print()
 
     // Selected value display.
     HistoricValue(
@@ -99,10 +104,6 @@ private struct PreviewContent {
     DiscreteStepCarousel(position: $carouselPosition)
     .frame(height: 44)
     .onScrollGeometryChange(of: \.contentSize.width, binding: $carouselContentWidth)
-    .onAppear {
-        // TODO: use printonce
-        print("✴️ Preview Appeared")
-    }
     .onChange(of: carouselPosition.selectedValue) { oldValue, newValue in
         print("selectedValue changed: \(carouselPosition.selectedValue)")
     }
