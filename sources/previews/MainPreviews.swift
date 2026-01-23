@@ -20,6 +20,10 @@ private struct PreviewContent {
 
 }
 
+
+// MARK: - Defaut & Images
+
+
 #Preview("Default", traits: .headerFooter, PreviewContent.layout) {
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
@@ -52,9 +56,7 @@ private struct PreviewContent {
     @Previewable @State var imageGenerator = ImageGeneratorStore(
         generator: ConcurrentImageGenerator(size: .square(of: 100), sleepRange: ImageGeneratorDefaults.zero))
 
-    // Indicator arrow.
-    Image(systemName: "arrowtriangle.down.fill")
-        .font(.caption)
+    PreviewContent.indicatorArrow
 
     DiscreteStepCarousel(position: $carouselPosition) { item in
         Group {
@@ -78,7 +80,10 @@ private struct PreviewContent {
 }
 
 
-#Preview("With Controls", traits: .zeroSpacing, PreviewContent.layout) {
+// MARK: - Controls
+
+
+#Preview("Controls", traits: .zeroSpacing, PreviewContent.layout) {
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "M")
@@ -89,9 +94,7 @@ private struct PreviewContent {
         label: "value:",
         value: carouselPosition.selectedValue)
 
-    // Indicator arrow.
-    Image(systemName: "arrowtriangle.down.fill")
-        .font(.caption)
+    PreviewContent.indicatorArrow
 
     DiscreteStepCarousel(position: $carouselPosition)
     .frame(height: 44)
@@ -192,6 +195,9 @@ private struct PreviewContent {
 }
 
 
+// MARK: - Controls & Images
+
+
 #Preview("Controls&Images", traits: .zeroSpacing, PreviewContent.layout) {
     @Previewable @State var printOnce: PrintOnce = .previewStarted
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
@@ -208,9 +214,7 @@ private struct PreviewContent {
         label: "value:",
         value: carouselPosition.selectedValue)
 
-    // Indicator arrow.
-    Image(systemName: "arrowtriangle.down.fill")
-        .font(.caption)
+    PreviewContent.indicatorArrow
 
     DiscreteStepCarousel(position: $carouselPosition) { item in
         Group {
