@@ -13,42 +13,35 @@ private struct PreviewContent {
 
     static let layout: PreviewTrait<Preview.ViewTraits> = .iPhoneProSizeForcedLayout
 
+    static var indicatorArrow: some View {
+        Image(systemName: "arrowtriangle.down.fill")
+            .font(.caption)
+    }
+
 }
 
 // TODO: rename sliderPositon to carousel
 #Preview("Default", traits: .headerFooter, PreviewContent.layout) {
-    @Previewable @State var sliderPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "D")
-
-    // Indicator arrow.
-    Image(systemName: "arrowtriangle.down.fill")
-        .font(.caption)
-
-    DiscreteStepCarousel(position: $sliderPosition)
-    .frame(height: 44)
-
-    // TODO: two sliders connected with a single position do not sync between each other. If this works, remove style preview.
-    DiscreteStepCarousel(position: $sliderPosition, anchorStyle: .red, markStyle: .orange.tertiary)
-    .frame(height: 44)
-
-    Text(sliderPosition.selectedValue)
-}
-
-
-#Preview("Style", traits: .headerFooter, PreviewContent.layout) {
-    @Previewable @State var sliderPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var styledPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "S")
 
-    // Indicator arrow.
-    Image(systemName: "arrowtriangle.down.fill")
-        .font(.caption)
+    PreviewContent.indicatorArrow
+    DiscreteStepCarousel(position: $carouselPosition)
+        .frame(height: 44)
+    Text(carouselPosition.selectedValue)
 
-    DiscreteStepCarousel(position: $sliderPosition, anchorStyle: .red, markStyle: .orange.tertiary)
-    .frame(height: 44)
+    DashedDivider()
+        .padding(.bottom)
 
-    Text(sliderPosition.selectedValue)
+    // TODO: know issue, a position object works only for a single carousel, connecting it to more that one does not sincronize them. Could check if scrollPosition also has the same limitation.
+    PreviewContent.indicatorArrow
+    DiscreteStepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+        .frame(height: 44)
+    Text(styledPosition.selectedValue)
 }
 
 
