@@ -12,10 +12,10 @@ import SwiftUI
 public struct DiscreteStepCarouselPosition<Values: Collection>
 where Values.Element: Equatable {
 
-    /// Collection of values the slider can select. Each value is represented by a slider mark.
+    /// Collection of values the carousel can select. Each value is represented by a mark.
     public let values: Values
 
-    /// Space available in the slider to select each value.
+    /// Space available for each mark in the carousel.
     public let markLength: Double
 
     /// Selected value, which is `values[selectedIndex]`.
@@ -31,11 +31,11 @@ where Values.Element: Equatable {
     /// Creates a new Position for a DiscreteStepCarousel.
     ///
     /// - Parameters:
-    ///   - values: All possible values the slider can select, in the order these will be
+    ///   - values: All possible values the carousel can select, in the order these will be
     ///     displayed.
     ///   - selectedValue: Initial value to be selected. If this value cannot be found in
     ///     `values`, an index of `0` will be selected instead.
-    ///   - markLength: Space available in the slider to select each value.
+    ///   - markLength: Space available for each mark.
     public init(values: Values, selectedValue: Values.Element, markLength: Double = 22.0) {
         self.values = values
         self.selectedValue = selectedValue
@@ -50,10 +50,10 @@ where Values.Element: Equatable {
     /// Creates a new Position for a DiscreteStepCarousel.
     ///
     /// - Parameters:
-    ///   - values: All possible values the slider can select, in the order these will be
+    ///   - values: All possible values the carousel can select, in the order these will be
     ///     displayed.
     ///   - selectedIndex: Index of the initial value to be selected.
-    ///   - markLength: Space available in the slider to select each value.
+    ///   - markLength: Space available for each mark.
     public init(values: Values, selectedIndex: Values.Index, markLength: Double = 22.0) {
         self.values = values
         self.selectedIndex = selectedIndex
@@ -64,7 +64,7 @@ where Values.Element: Equatable {
     }
 
 
-    /// Updates the slider selection to the given `value`.
+    /// Updates the carousel selection to the given `value`.
     ///
     /// This function can be called within `withAnimation` for an animated selection. When
     /// animated, `selectedValue` will be updated immediately once to the new `value`, and then
@@ -86,7 +86,7 @@ where Values.Element: Equatable {
     }
 
 
-    /// Updates the slider selection to the value at the given `index` in `values`.
+    /// Updates the carousel selection to the value at the given `index` in `values`.
     ///
     /// This function can be called within `withAnimation` for an animated selection. When
     /// animated, `selectedIndex` will be updated immediately once to the new `index`, and then

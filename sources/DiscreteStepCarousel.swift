@@ -7,7 +7,7 @@
 import SwiftUI
 
 
-// TODO: support vertical slider
+// TODO: support vertical carousel
 public struct DiscreteStepCarousel<Values: Collection, AnchorContent: View, MarkContent: View> : View
 where Values.Element: Equatable {
 
@@ -45,7 +45,7 @@ where Values.Element: Equatable {
             // size to setup margins that allow marks to remain centered.
             GeometryReader { geometry in
                 ScrollView(.horizontal, showsIndicators: false) {
-                    // TODO: test if AnyLayout/HStackLayout/VStackLayout can provide vertican and horisontal slider funcionality
+                    // TODO: test if AnyLayout/HStackLayout/VStackLayout can provide vertical and horizontal carousel funcionality.
                     LazyHStack(spacing: 0.0) {
                         // Marks for each value.
                         // Identified by offset to ensure each item has an unique identifier,

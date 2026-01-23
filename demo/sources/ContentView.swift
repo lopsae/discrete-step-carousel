@@ -9,23 +9,22 @@ import DiscreteStepCarousel
 import PreviewUtilities
 
 
-// TODO: rename sliderPosition
 struct ContentView: View {
-    @State var sliderPosition: DiscreteStepCarouselPosition = .init(
+    @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "D")
 
     var body: some View {
         List {
             VStack(spacing: 0) {
-                Text(sliderPosition.selectedValue)
+                Text(carouselPosition.selectedValue)
                 Image(systemName: "arrowtriangle.down.fill")
                     .font(.caption)
 
-                DiscreteStepCarousel(position: $sliderPosition)
+                DiscreteStepCarousel(position: $carouselPosition)
                 .frame(height: 44)
 
-                Text(sliderPosition.selectedIndex.description)
+                Text(carouselPosition.selectedIndex.description)
                     .font(.caption)
             }
             .listRowInsets(.horizontal, 0.0)

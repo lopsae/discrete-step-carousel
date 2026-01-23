@@ -20,7 +20,6 @@ private struct PreviewContent {
 
 }
 
-// TODO: rename sliderPositon to carousel
 #Preview("Default", traits: .headerFooter, PreviewContent.layout) {
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
@@ -80,37 +79,38 @@ private struct PreviewContent {
 
 
 #Preview("With Controls", traits: .zeroSpacing, PreviewContent.layout) {
-    @Previewable @State var sliderPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "M")
-    @Previewable @State var sliderContentWidth: CGFloat = 0.0
+    @Previewable @State var carouselContentWidth: CGFloat = 0.0
 
     // Selected value display.
     HistoricValue(
         label: "value:",
-        value: sliderPosition.selectedValue)
+        value: carouselPosition.selectedValue)
 
     // Indicator arrow.
     Image(systemName: "arrowtriangle.down.fill")
         .font(.caption)
 
-    DiscreteStepCarousel(position: $sliderPosition)
+    DiscreteStepCarousel(position: $carouselPosition)
     .frame(height: 44)
-    .onScrollGeometryChange(of: \.contentSize.width, binding: $sliderContentWidth)
+    .onScrollGeometryChange(of: \.contentSize.width, binding: $carouselContentWidth)
     .onAppear {
+        // TODO: use printonce
         print("✴️ Preview Appeared")
     }
-    .onChange(of: sliderPosition.selectedValue) { oldValue, newValue in
-        print("selectedValue changed: \(sliderPosition.selectedValue)")
+    .onChange(of: carouselPosition.selectedValue) { oldValue, newValue in
+        print("selectedValue changed: \(carouselPosition.selectedValue)")
     }
-    .onChange(of: sliderPosition.selectedIndex) { oldValue, newValue in
-        print("selectedIndex changed: \(sliderPosition.selectedIndex)")
+    .onChange(of: carouselPosition.selectedIndex) { oldValue, newValue in
+        print("selectedIndex changed: \(carouselPosition.selectedIndex)")
     }
 
     // Selected index display.
     HistoricValue(
         label: "index:",
-        describingValue: sliderPosition.selectedIndex
+        describingValue: carouselPosition.selectedIndex
     )
     .history(spacing: 20)
     .padding(.bottom)
@@ -119,22 +119,22 @@ private struct PreviewContent {
 
     List {
         VStack {
-            Text("ContentWidth: \(shortFraction: sliderContentWidth)")
+            Text("ContentWidth: \(shortFraction: carouselContentWidth)")
                 .monospaced()
                 .maxWidthFrame()
-            Text("expected: \(shortFraction: sliderPosition.markLength * sliderPosition.values.count.asDouble)")
+            Text("expected: \(shortFraction: carouselPosition.markLength * carouselPosition.values.count.asDouble)")
                 .font(.caption)
                 .monospaced()
         }
 
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 3, 9, sliderPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 3, 9, carouselPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
-                    let value = sliderPosition.values[index]
+                    let value = carouselPosition.values[index]
                     Button(value) {
                         print("➡️ Selecting by Value: \(value)")
-                        sliderPosition.selectValue(value)
+                        carouselPosition.selectValue(value)
                     }
                     .buttonStyle(.borderedProminent)
                     .monospaced()
@@ -147,7 +147,7 @@ private struct PreviewContent {
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
                         print("➡️ Selecting by Index: [\(index)]")
-                        sliderPosition.selectIndex(index)
+                        carouselPosition.selectIndex(index)
                     }
                     .buttonStyle(.borderedProminent)
                     .monospaced()
@@ -158,13 +158,13 @@ private struct PreviewContent {
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 11, 13, sliderPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 11, 13, carouselPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
-                    let value = sliderPosition.values[index]
+                    let value = carouselPosition.values[index]
                     Button(value) {
                         print("➡️ Animated selecting by Value: \(value)")
                         withAnimation {
-                            sliderPosition.selectValue(value)
+                            carouselPosition.selectValue(value)
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -179,7 +179,7 @@ private struct PreviewContent {
                     Button("[\(index)]") {
                         print("➡️ Animated selecting by Index: [\(index)]")
                         withAnimation {
-                            sliderPosition.selectIndex(index)
+                            carouselPosition.selectIndex(index)
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -192,27 +192,27 @@ private struct PreviewContent {
 }
 
 
-#Preview("With Images", traits: .zeroSpacing, PreviewContent.layout) {
+#Preview("Controls&Images", traits: .zeroSpacing, PreviewContent.layout) {
     @Previewable @State var printOnce: PrintOnce = .previewStarted
-    @Previewable @State var sliderPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "Y",
         markLength: 100)
     @Previewable @State var imageGenerator = ImageGeneratorStore(size: .square(of: 50))
-    @Previewable @State var sliderContentWidth: CGFloat = 0.0
+    @Previewable @State var carouselContentWidth: CGFloat = 0.0
 
     printOnce.print()
 
     // Selected value display.
     HistoricValue(
         label: "value:",
-        value: sliderPosition.selectedValue)
+        value: carouselPosition.selectedValue)
 
     // Indicator arrow.
     Image(systemName: "arrowtriangle.down.fill")
         .font(.caption)
 
-    DiscreteStepCarousel(position: $sliderPosition) { item in
+    DiscreteStepCarousel(position: $carouselPosition) { item in
         Group {
             if let image = imageGenerator.images[item] {
                 image
@@ -231,12 +231,12 @@ private struct PreviewContent {
         }
     }
     .frame(height: 60)
-    .onScrollGeometryChange(of: \.contentSize.width, binding: $sliderContentWidth)
+    .onScrollGeometryChange(of: \.contentSize.width, binding: $carouselContentWidth)
 
     // Selected index display.
     HistoricValue(
         label: "index:",
-        describingValue: sliderPosition.selectedIndex
+        describingValue: carouselPosition.selectedIndex
     )
     .history(spacing: 20)
     .padding(.bottom)
@@ -246,11 +246,11 @@ private struct PreviewContent {
     List {
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 3, 5, sliderPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 3, 5, carouselPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
-                    let value = sliderPosition.values[index]
+                    let value = carouselPosition.values[index]
                     Button(value) {
-                        sliderPosition.selectValue(value)
+                        carouselPosition.selectValue(value)
                     }
                     .buttonStyle(.borderedProminent)
                     .monospaced()
@@ -262,7 +262,7 @@ private struct PreviewContent {
                 let indices: [Int] = [1, 4, 6]
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
-                        sliderPosition.selectIndex(index)
+                        carouselPosition.selectIndex(index)
                     }
                     .buttonStyle(.borderedProminent)
                     .monospaced()
@@ -273,12 +273,12 @@ private struct PreviewContent {
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 11, 15, sliderPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 11, 15, carouselPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
-                    let value = sliderPosition.values[index]
+                    let value = carouselPosition.values[index]
                     Button(value) {
                         withAnimation {
-                            sliderPosition.selectValue(value)
+                            carouselPosition.selectValue(value)
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -292,7 +292,7 @@ private struct PreviewContent {
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
                         withAnimation {
-                            sliderPosition.selectIndex(index)
+                            carouselPosition.selectIndex(index)
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -312,7 +312,7 @@ private struct PreviewContent {
             spacing: 4.0
         ) {
 
-            ForEach(sliderPosition.values.columnMajorReordered(columns: columns), id: \.self) { item in
+            ForEach(carouselPosition.values.columnMajorReordered(columns: columns), id: \.self) { item in
                 let generationStatus = imageGenerator.status[item]
                 HStack {
                     Text(item)
@@ -329,10 +329,10 @@ private struct PreviewContent {
         } // LazyVGrid
 
         VStack {
-            Text("ContentWidth: \(shortFraction: sliderContentWidth)")
+            Text("ContentWidth: \(shortFraction: carouselContentWidth)")
                 .monospaced()
                 .maxWidthFrame()
-            Text("expected: \(shortFraction: sliderPosition.markLength * sliderPosition.values.count.asDouble)")
+            Text("expected: \(shortFraction: carouselPosition.markLength * carouselPosition.values.count.asDouble)")
                 .font(.caption)
                 .monospaced()
         }
