@@ -47,6 +47,23 @@ where Values.Element: Equatable {
     }
 
 
+    /// Creates a new Position for a DiscreteStepCarousel.
+    ///
+    /// - Parameters:
+    ///   - values: All possible values the slider can select, in the order these will be
+    ///     displayed.
+    ///   - selectedIndex: Index of the initial value to be selected.
+    ///   - markLength: Space available in the slider to select each value.
+    public init(values: Values, selectedIndex: Values.Index, markLength: Double = 22.0) {
+        self.values = values
+        self.selectedIndex = selectedIndex
+        self.selectedValue = values[selectedIndex]
+        self.markLength = markLength
+
+        self.scrollPosition = ScrollPosition()
+    }
+
+
     /// Updates the slider selection to the given `value`.
     ///
     /// This function can be called within `withAnimation` for an animated selection. When

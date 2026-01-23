@@ -1,5 +1,5 @@
 {
-  "originHash" : "2017975cfba49b88d415e74171f66bf682629f78f96210167dd9d5fec40f5835",
+  "originHash" : "984daf993956354f617895465e5a360c005dfb40261f5d0a0b8a96d59ce86489",
   "pins" : [
     {
       "identity" : "preview-utilities",
@@ -7,7 +7,7 @@
       "location" : "/Users/maic/dev/preview-utilities",
       "state" : {
         "branch" : "initial-tagged-release",
-        "revision" : "9f86fd39b6f35244afa6d6c0bec7f118d5d55f43"
+        "revision" : "e7fbf5a9723452745551a76f1e5f47e687cf6150"
       }
     }
   ],

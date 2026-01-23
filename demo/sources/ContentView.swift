@@ -9,6 +9,7 @@ import DiscreteStepCarousel
 import PreviewUtilities
 
 
+// TODO: rename sliderPosition
 struct ContentView: View {
     @State var sliderPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),

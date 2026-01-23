@@ -8,7 +8,15 @@ import PreviewUtilities
 import SwiftUI
 
 
-#Preview("Default", traits: .headerFooter, .fixedLayout(width: 400, height: 400)) {
+@MainActor
+private struct PreviewContent {
+
+    static let layout: PreviewTrait<Preview.ViewTraits> = .iPhoneProSizeForcedLayout
+
+}
+
+// TODO: rename sliderPositon to carousel
+#Preview("Default", traits: .headerFooter, PreviewContent.layout) {
     @Previewable @State var sliderPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "D")
@@ -20,11 +28,15 @@ import SwiftUI
     DiscreteStepCarousel(position: $sliderPosition)
     .frame(height: 44)
 
+    // TODO: two sliders connected with a single position do not sync between each other. If this works, remove style preview.
+    DiscreteStepCarousel(position: $sliderPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+    .frame(height: 44)
+
     Text(sliderPosition.selectedValue)
 }
 
 
-#Preview("Style", traits: .headerFooter, .fixedLayout(width: 400, height: 400)) {
+#Preview("Style", traits: .headerFooter, PreviewContent.layout) {
     @Previewable @State var sliderPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "S")
@@ -40,7 +52,41 @@ import SwiftUI
 }
 
 
-#Preview("With Controls", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
+#Preview("Images", traits: .fixedHeader, PreviewContent.layout) {
+    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+        values: Strings.natoPhoneticAlphabet.map(\.localizedUppercase),
+        selectedIndex: 4,
+        markLength: 120)
+    @Previewable @State var imageGenerator = ImageGeneratorStore(
+        generator: ConcurrentImageGenerator(size: .square(of: 100), sleepRange: ImageGeneratorDefaults.zero))
+
+    // Indicator arrow.
+    Image(systemName: "arrowtriangle.down.fill")
+        .font(.caption)
+
+    DiscreteStepCarousel(position: $carouselPosition) { item in
+        Group {
+            if let image = imageGenerator.images[item] {
+                image
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+            } else {
+                Rectangle()
+                    .fill(.secondary)
+            }
+        }
+        .frame(size: .square(of: 100))
+        .roundedRectangleClip(cornerRadius: 8)
+        .task {
+            // `generateImage` automatically cancels image generation if the task is cancelled.
+            await imageGenerator.generateImage(with: item)
+        }
+    }
+    .frame(height: 100)
+}
+
+
+#Preview("With Controls", traits: .zeroSpacing, PreviewContent.layout) {
     @Previewable @State var sliderPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "M")
@@ -153,13 +199,13 @@ import SwiftUI
 }
 
 
-#Preview("With Images", traits: .zeroSpacing, .fixedLayout(width: 400, height: 400)) {
+#Preview("With Images", traits: .zeroSpacing, PreviewContent.layout) {
     @Previewable @State var printOnce: PrintOnce = .previewStarted
     @Previewable @State var sliderPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "Y",
         markLength: 100)
-    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .init(squareOf: 50))
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .square(of: 50))
     @Previewable @State var sliderContentWidth: CGFloat = 0.0
 
     printOnce.print()
@@ -187,7 +233,7 @@ import SwiftUI
         .frame(width: 80, height: 50)
         .roundedRectangleClip(cornerRadius: 8)
         .task {
-            // GenerateImage automatically cancels image generation if the task is cancelled.
+            // `generateImage` automatically cancels image generation if the task is cancelled.
             await imageGenerator.generateImage(with: item)
         }
     }
