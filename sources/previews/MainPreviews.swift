@@ -58,7 +58,7 @@ private struct PreviewContent {
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition) { item in
+    DiscreteStepCarousel(position: $carouselPosition) { _, item in
         Group {
             if let image = imageGenerator.images[item] {
                 image
@@ -217,7 +217,7 @@ private struct PreviewContent {
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition) { item in
+    DiscreteStepCarousel(position: $carouselPosition) { _, item in
         Group {
             if let image = imageGenerator.images[item] {
                 image

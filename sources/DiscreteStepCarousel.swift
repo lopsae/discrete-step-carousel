@@ -14,7 +14,7 @@ where Values.Element: Equatable {
     @Binding var position: DiscreteStepCarouselPosition<Values>
 
     private let anchorContent: () -> AnchorContent
-    private let markContent: (Values.Element) -> MarkContent
+    private let markContent: (Int, Values.Element) -> MarkContent
 
     private var initialAnchor: UnitPoint
 
@@ -22,7 +22,7 @@ where Values.Element: Equatable {
     public init(
         position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
         @ViewBuilder anchorContent: @escaping () -> AnchorContent,
-        @ViewBuilder markContent: @escaping (Values.Element) -> MarkContent
+        @ViewBuilder markContent: @escaping (Int, Values.Element) -> MarkContent
     ) {
         self._position = positionBinding
         self.anchorContent = anchorContent
@@ -50,8 +50,8 @@ where Values.Element: Equatable {
                         // Marks for each value.
                         // Identified by offset to ensure each item has an unique identifier,
                         // irregardless of the contents of `values`.
-                        ForEach(Array(position.values.enumerated()), id: \.offset) { index, value in
-                            markContent(value)
+                        ForEach(Array(position.values.enumerated()), id: \.offset) { offset, value in
+                            markContent(offset, value)
                             .frame(width: position.markLength, alignment: .center)
                         }
                     }
@@ -87,10 +87,16 @@ where Values.Element: Equatable {
 }
 
 
+// MARK: - Defaults
+
+
 struct DiscreteStepCarouselDefaults {
     static let anchorStyle: Color = .black
     static let markStyle: Color = .gray
 }
+
+
+// MARK: - DefaultMark
 
 
 public struct DefaultMark<Style: ShapeStyle>: View {
@@ -105,11 +111,14 @@ public struct DefaultMark<Style: ShapeStyle>: View {
 }
 
 
+// MARK: - Convenience initializers
+
+
 extension DiscreteStepCarousel {
 
     public init(
         position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
-        @ViewBuilder markContent: @escaping (Values.Element) -> MarkContent
+        @ViewBuilder markContent: @escaping (Int, Values.Element) -> MarkContent
     )
     where
         AnchorContent == EmptyView
@@ -132,7 +141,7 @@ extension DiscreteStepCarousel {
         self.init(
             position: positionBinding,
             anchorContent: { DefaultMark(fill: DiscreteStepCarouselDefaults.anchorStyle) },
-            markContent: { _ in DefaultMark(fill: DiscreteStepCarouselDefaults.markStyle) }
+            markContent: { _, _ in DefaultMark(fill: DiscreteStepCarouselDefaults.markStyle) }
         )
     }
 
@@ -149,7 +158,7 @@ extension DiscreteStepCarousel {
         self.init(
             position: positionBinding,
             anchorContent: { DefaultMark(fill: anchorStyle) },
-            markContent: { _ in DefaultMark(fill: markStyle) }
+            markContent: { _, _ in DefaultMark(fill: markStyle) }
         )
     }
 

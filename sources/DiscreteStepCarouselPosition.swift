@@ -21,6 +21,7 @@ where Values.Element: Equatable {
     /// Selected value, which is `values[selectedIndex]`.
     public internal(set) var selectedValue: Values.Element
 
+    // TODO: should it be renamed offset? since this is NOT the index from values colection?
     /// Index of the selected value.
     public internal(set) var selectedIndex: Values.Index
 
@@ -64,6 +65,7 @@ where Values.Element: Equatable {
     }
 
 
+    // TODO: note that selecting by value will search sequentially through all values until the first is found. This could be inneficient for large collections.
     /// Updates the carousel selection to the given `value`.
     ///
     /// This function can be called within `withAnimation` for an animated selection. When
@@ -101,6 +103,7 @@ where Values.Element: Equatable {
         guard values.indices.contains(index)
         else { return }
 
+        // TODO: can this update to selected index be skipped? and let the value be updated solely by animation changes?
         selectedIndex = index
         let indexDistance = values.distance(from: values.startIndex, to: index)
         scrollPosition.scrollTo(x: indexDistance.asDouble * markLength)
