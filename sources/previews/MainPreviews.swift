@@ -93,10 +93,12 @@ private struct PreviewContent {
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "M")
-    @Previewable @State var carouselContentWidth: CGFloat = 0.0
+    @Previewable @State var updatesImmediately: Bool = false
 
+    @Previewable @State var carouselContentWidth: CGFloat = 0.0
     @Previewable @State var valueIsMarked: Bool = false
     @Previewable @State var indexIsMarked: Bool = false
+
 
     printOnce.print()
 
@@ -184,7 +186,7 @@ private struct PreviewContent {
                         valueIsMarked = true
                         indexIsMarked = true
                         withAnimation {
-                            carouselPosition.selectValue(value)
+                            carouselPosition.selectValue(value, immediate: updatesImmediately)
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -201,7 +203,7 @@ private struct PreviewContent {
                         valueIsMarked = true
                         indexIsMarked = true
                         withAnimation {
-                            carouselPosition.selectIndex(index)
+                            carouselPosition.selectIndex(index, immediate: updatesImmediately)
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -209,6 +211,8 @@ private struct PreviewContent {
                 }
             } // HStack
             .maxWidthFrame()
+
+            Toggle("Updates Immediately", isOn: $updatesImmediately)
         } // Section
     }
 }

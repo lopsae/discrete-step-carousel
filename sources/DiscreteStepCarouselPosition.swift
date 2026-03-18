@@ -66,45 +66,67 @@ where Values.Element: Equatable {
 
 
     // TODO: note that selecting by value will search sequentially through all values until the first is found. This could be inneficient for large collections.
+
     /// Updates the carousel selection to the given `value`.
-    ///
+    ///  
     /// This function can be called within `withAnimation` for an animated selection. When
-    /// animated, `selectedValue` will be updated immediately once to the new `value`, and then
-    /// updated again several times as the animation progresses until `value` is reached again.
-    /// `selectedIndex` will likewise be updated to the selected index, and then update
-    /// several times during the animation.
+    /// animated, both `selectedValue` and `selectedIndex` will be updated immediately once to the
+    /// new values if `immediate` is `true`, and then both properties will update again several
+    /// times as the animation progresses.
     ///
-    /// Use ``selectIndex(_:)`` to prevent the initial change in `selectedValue` from happening.
+    /// Use `immediate` to ensure both `selectedValue` and `selectedIndex` are updated during this
+    /// call. Otherwise, both properties are not updated until the view updates, and the internal
+    /// scroll position updates to new position. When not animated this difference is minimal. When
+    /// animating, setting `immediate` to false can help prevent a small flicker of both
+    /// `selectedValue` and `selectedIndex` to its final values that then gets overwriten by the
+    /// animation scrolling through the interim values.
     ///
     /// If `value` cannot be found in `values`, the current selection remains unchanged.
     ///
-    /// - Parameter value: The new value to select.
-    public mutating func selectValue(_ value: Values.Element) {
+    /// - Parameters:
+    ///   - value: The new value to select.
+    ///   - immediate: When `true`, both `selectedValue` and `selectedIndex` are updated immediately
+    ///       during this call; otherwise those properties update until the internall scroll
+    ///       position updates, or as animation progresses. Defults to `true`.
+    public mutating func selectValue(_ value: Values.Element, immediate: Bool = true) {
         guard let index = values.firstIndex(of: value)
         else { return }
 
-        selectedValue = value
-        selectIndex(index)
+        if immediate {
+            selectedValue = value
+        }
+        selectIndex(index, immediate: immediate)
     }
 
 
     /// Updates the carousel selection to the value at the given `index` in `values`.
     ///
     /// This function can be called within `withAnimation` for an animated selection. When
-    /// animated, `selectedIndex` will be updated immediately once to the new `index`, and then
-    /// updated again several times as the animation progresses until `index` is reached again.
-    /// `selectedValue` will update only as the animation happens, until the value at `index`
-    /// is reached at the end of the animation.
+    /// animated, `selectedIndex` will be updated immediately once to the new `index` if `immediate`
+    /// is `true`, and then `selectedIndex` will update again several times as the animation
+    /// progresses. `selectedValue` will update only as the animation happens.
+    ///
+    /// Use `immediate` to ensure `selectedIndex` is updated during this call. Otherwise,
+    /// `selectedIndex` is not updated until the view updates, and the internal scroll position
+    /// updates to new position. When not animated this difference is minimal. When animating,
+    /// setting `immediate` to false can help prevent a small flicker of `selectedIndex` to its
+    /// final value that then gets overwriten by the animation scrolling through the interim
+    /// indices.
     ///
     /// If `index` is not a valid index for `values`, the current selection remains unchanged.
     ///
-    /// - Parameter index: The index for the value in `values` to select.
-    public mutating func selectIndex(_ index: Values.Index) {
+    /// - Parameters:
+    ///   - index: The index for the value in `values` to select.
+    ///   - immediate: When `true`, `selectedIndex` is updated immediately during this call;
+    ///       otherwise the property updates until the internall scroll position updates, or as
+    ///       animation progresses. Defults to `true`.
+    public mutating func selectIndex(_ index: Values.Index, immediate: Bool = true) {
         guard values.indices.contains(index)
         else { return }
 
-        // TODO: can this update to selected index be skipped? and let the value be updated solely by animation changes?
-        selectedIndex = index
+        if immediate {
+            selectedIndex = index
+        }
         let indexDistance = values.distance(from: values.startIndex, to: index)
         scrollPosition.scrollTo(x: indexDistance.asDouble * markLength)
     }
