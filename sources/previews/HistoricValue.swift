@@ -198,20 +198,19 @@ extension HistoricValue {
         .padding(.top)
 
     HStack {
-
-        Button("Previous", systemImage: "arrowshape.left") {
+        Button("Previous", constrainedSystemImage: "arrowshape.left") {
             selectedIndex = (selectedIndex + values.count - 1) % values.count
         }
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
 
-        Button("Mark", systemImage: isMarked ? "circle.fill" : "circle") {
+        Button("Mark", constrainedSystemImage: isMarked ? "circle.fill" : "circle") {
             isMarked.toggle()
         }
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
 
-        Button("Next", systemImage: "arrowshape.right") {
+        Button("Next", constrainedSystemImage: "arrowshape.right") {
             selectedIndex = (selectedIndex + 1) % values.count
         }
         .labelStyle(.iconOnly)
@@ -220,7 +219,7 @@ extension HistoricValue {
 
     VStack {
         Text.caption("History direction:")
-        Button("Top", systemImage: "arrowshape.up.fill") {
+        Button("Top", constrainedSystemImage: "arrowshape.up.fill") {
             historyEdge = .top
         }
         .labelStyle(.iconOnly)
@@ -228,21 +227,21 @@ extension HistoricValue {
         .tint(historyEdge == .top ? .cyan : .indigo)
 
         HStack {
-            Button("Leading", systemImage: "arrowshape.left.fill") {
+            Button("Leading", constrainedSystemImage: "arrowshape.left.fill") {
                 historyEdge = .leading
             }
             .labelStyle(.iconOnly)
             .buttonStyle(.borderedProminent)
             .tint(historyEdge == .leading ? .cyan : .indigo)
 
-            Button("Bottom", systemImage: "arrowshape.down.fill") {
+            Button("Bottom", constrainedSystemImage: "arrowshape.down.fill") {
                 historyEdge = .bottom
             }
             .labelStyle(.iconOnly)
             .buttonStyle(.borderedProminent)
             .tint(historyEdge == .bottom ? .cyan : .indigo)
 
-            Button("Trailing", systemImage: "arrowshape.right.fill") {
+            Button("Trailing", constrainedSystemImage: "arrowshape.right.fill") {
                 historyEdge = .trailing
             }
             .labelStyle(.iconOnly)
@@ -276,41 +275,17 @@ extension HistoricValue {
         .font(.caption)
 
     HStack {
-        Button {
-            value -= step
-        } label: {
-            Label {
-                Text("Substract")
-            } icon: {
-                ZStack {
-                    // Invisible text to prevent button size to collapse to image size.
-                    Text("M").hidden()
-                    Image(systemName: "minus")
-                }
-            }
-        } // Button
+        Button("Substract", constrainedSystemImage: "minus") { value -= step }
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
 
-        Button("Mark", systemImage: isMarked ? "circle.fill" : "circle") {
+        Button("Mark", constrainedSystemImage: isMarked ? "circle.fill" : "circle") {
             isMarked.toggle()
         }
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
 
-        Button {
-            value += step
-        } label: {
-            Label {
-                Text("Add")
-            } icon: {
-                ZStack {
-                    // Invisible text to prevent button size to collapse to image size.
-                    Text("M").hidden()
-                    Image(systemName: "plus")
-                }
-            }
-        } // Button
+        Button("Add", constrainedSystemImage: "plus") { value += step }
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
     } // HStack
