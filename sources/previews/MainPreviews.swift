@@ -21,7 +21,7 @@ private struct PreviewContent {
 }
 
 
-// MARK: - Defaut & Images
+// MARK: - Defaut
 
 
 #Preview("Default", traits: .headerFooter, PreviewContent.layout) {
@@ -48,9 +48,12 @@ private struct PreviewContent {
 }
 
 
+// MARK: - Images
+
+
 #Preview("Images", traits: .fixedHeader, PreviewContent.layout) {
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
-        values: Strings.natoPhoneticAlphabet.map(\.localizedUppercase),
+        values: Strings.natoPhoneticAlphabet.map(\.capitalized),
         selectedIndex: 4,
         markLength: 120)
     @Previewable @State var imageGenerator = ImageGeneratorStore(
@@ -92,12 +95,18 @@ private struct PreviewContent {
         selectedValue: "M")
     @Previewable @State var carouselContentWidth: CGFloat = 0.0
 
+    @Previewable @State var valueIsMarked: Bool = false
+    @Previewable @State var indexIsMarked: Bool = false
+
     printOnce.print()
 
     // Selected value display.
     HistoricValue(
         label: "value:",
-        value: carouselPosition.selectedValue)
+        value: carouselPosition.selectedValue,
+        isMarked: $valueIsMarked
+    )
+    .configure(spacing: 20)
 
     PreviewContent.indicatorArrow
 
@@ -114,7 +123,8 @@ private struct PreviewContent {
     // Selected index display.
     HistoricValue(
         label: "index:",
-        describingValue: carouselPosition.selectedIndex
+        describingValue: carouselPosition.selectedIndex,
+        isMarked: $indexIsMarked
     )
     .configure(spacing: 20)
     .padding(.bottom)
@@ -133,11 +143,13 @@ private struct PreviewContent {
 
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 3, 9, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 9, carouselPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
                         print("➡️ Selecting by Value: \(value)")
+                        valueIsMarked = true
+                        indexIsMarked = true
                         carouselPosition.selectValue(value)
                     }
                     .buttonStyle(.borderedProminent)
@@ -151,6 +163,8 @@ private struct PreviewContent {
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
                         print("➡️ Selecting by Index: [\(index)]")
+                        valueIsMarked = true
+                        indexIsMarked = true
                         carouselPosition.selectIndex(index)
                     }
                     .buttonStyle(.borderedProminent)
@@ -162,11 +176,13 @@ private struct PreviewContent {
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 11, 13, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 11, 13, carouselPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
                         print("➡️ Animated selecting by Value: \(value)")
+                        valueIsMarked = true
+                        indexIsMarked = true
                         withAnimation {
                             carouselPosition.selectValue(value)
                         }
@@ -178,10 +194,12 @@ private struct PreviewContent {
             .maxWidthFrame()
 
             HStack {
-                let indices: [Int] = [10, 12, 14]
+                let indices: [Int] = [0, 2, 11]
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
                         print("➡️ Animated selecting by Index: [\(index)]")
+                        valueIsMarked = true
+                        indexIsMarked = true
                         withAnimation {
                             carouselPosition.selectIndex(index)
                         }
@@ -251,7 +269,7 @@ private struct PreviewContent {
     List {
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 3, 5, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 5, carouselPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
@@ -264,7 +282,7 @@ private struct PreviewContent {
             .maxWidthFrame()
 
             HStack {
-                let indices: [Int] = [1, 4, 6]
+                let indices: [Int] = [0, 2, 4, 6]
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
                         carouselPosition.selectIndex(index)
@@ -278,7 +296,7 @@ private struct PreviewContent {
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 11, 15, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 11, 15, carouselPosition.values.beforeEndIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
@@ -293,7 +311,7 @@ private struct PreviewContent {
             .maxWidthFrame()
 
             HStack {
-                let indices: [Int] = [10, 12, 14]
+                let indices: [Int] = [0, 2, 12, 14]
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
                         withAnimation {
