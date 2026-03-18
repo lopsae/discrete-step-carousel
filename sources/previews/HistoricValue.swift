@@ -54,8 +54,7 @@ where
         .monospacedDigit()
         .background {
             if isMarked {
-                Capsule()
-                .fill(.blue.secondary)
+                markedCapsule(.blue.secondary)
             }
         }
         // Historic values placed in an overlay so that these never modify the size of the
@@ -92,7 +91,7 @@ where
 
 
     /// View of all the stored historic values. Each valie is displayed towards `historyEdge`.
-    /// More recent valiues are displayed closer to the current value, older values are displayed
+    /// More recent values are displayed closer to the current value, older values are displayed
     /// farther away.
     @ViewBuilder
     private var historicValues: some View {
@@ -112,8 +111,7 @@ where
             .fixedSize()
             .background {
                 if historyItem.marked {
-                    Capsule()
-                    .fill(.blue.tertiary)
+                    markedCapsule(.blue.tertiary)
                 }
             }
             .opacity(1.0 - (index.asDouble / historyLength.asDouble))
@@ -131,6 +129,14 @@ where
             .alignmentGuide(.leading) { dimensions in
                 dimensions[.trailing]
             }
+    }
+
+
+    private func markedCapsule(_ style: some ShapeStyle) -> some View {
+        Capsule()
+        .fill(style)
+        .padding(.horizontal, -Defaults.padding/2)
+        .padding(.vertical, -Defaults.padding/4)
     }
 
 }
@@ -179,7 +185,6 @@ extension HistoricValue {
 
 
 #Preview("String Value") {
-
     @Previewable @State var selectedIndex: Int = 0
     @Previewable @State var isMarked: Bool = false
     @Previewable @State var historyEdge: Edge = .top
@@ -250,16 +255,16 @@ extension HistoricValue {
 
 
 #Preview("Formatted") {
-
     @Previewable @State var value: Double = 0.12345
+    @Previewable @State var isMarked: Bool = false
     @Previewable @State var useFormatter: Bool = true
     let step: Double = 0.12345
 
     if useFormatter {
-        HistoricValue(label: "value:", value: value, format: .shortFraction)
+        HistoricValue(label: "value:", value: value, isMarked: $isMarked, format: .shortFraction)
             .configure(spacing: 35)
     } else {
-        HistoricValue(label: "value:", describingValue: value)
+        HistoricValue(label: "value:", describingValue: value, isMarked: $isMarked)
             .configure(spacing: 15, edge: .top)
     }
 
@@ -284,6 +289,12 @@ extension HistoricValue {
                 }
             }
         } // Button
+        .labelStyle(.iconOnly)
+        .buttonStyle(.borderedProminent)
+
+        Button("Mark", systemImage: isMarked ? "circle.fill" : "circle") {
+            isMarked.toggle()
+        }
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
 
