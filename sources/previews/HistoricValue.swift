@@ -18,17 +18,24 @@ where
     Formatter.FormatOutput == String
 {
 
-    @State private var history: [Value] = []
+    @State private var history: [History] = []
 
+    /// String to display in a label next to the current value.
     let label: String
+    /// Current value.
     let value: Value
+    /// Formatter to transform `value` to a string to display.
     let formatter: Formatter
 
+    /// Number of changes of values to keep in history.
     let historyLength: Int = 10
+
 
     private(set) var historyPadding: Double = 5.0
     private(set) var historySpacing: Double = 25.0
+    /// Direction in which the historic values are displayed.
     private(set) var historyEdge: Edge = .trailing
+
 
 
     /// Creates a view which displays a formatted value along its history of previous values.
@@ -40,27 +47,29 @@ where
 
 
     var body: some View {
-        let valueString = formatter.format(value) // ?? String(describing: value)
+        let valueString = formatter.format(value)
         Text(valueString)
-            .monospacedDigit()
-            // Historic values placed in an overlay so that these never modify the size of the
-            // main text.
-            .overlay {
-                historicValues
+        .monospacedDigit()
+        // Historic values placed in an overlay so that these never modify the size of the
+        // main text.
+        .overlay {
+            historicValues
+        }
+        .overlay(alignment: .leading) {
+            labelView
+        }
+        .onChange(of: value) { oldValue, newValue in
+            if history.count >= historyLength {
+                history.removeLast(1 + history.count - historyLength)
             }
-            .overlay(alignment: .leading) {
-                labelView
-            }
-            .onChange(of: value) { oldValue, newValue in
-                if history.count >= historyLength {
-                    history.removeLast(1 + history.count - historyLength)
-                }
-                history.insert(oldValue, at: 0)
-            }
+            let historyItem = History(value: oldValue, marked: false)
+            history.insert(historyItem, at: 0)
+        }
     }
 
 
-    func history(
+    /// Configures the instance with the given parameters.
+    func configure(
         padding: Double? = nil,
         spacing: Double? = nil,
         edge: Edge? = nil
@@ -73,10 +82,13 @@ where
     }
 
 
+    /// View of all the stored historic values. Each valie is displayed towards `historyEdge`.
+    /// More recent valiues are displayed closer to the current value, older values are displayed
+    /// farther away.
     @ViewBuilder
     private var historicValues: some View {
-        ForEach(history.enumerated(), id: \.offset) { index, historicValue in
-            let valueString = formatter.format(historicValue) // ?? String(describing: historicValue)
+        ForEach(history.enumerated(), id: \.offset) { index, historyItem in
+            let valueString = formatter.format(historyItem.value)
             let offsetValue = ((index.asDouble + 1.0) * historySpacing) + historyPadding
             let offsetSize = switch historyEdge {
             case .top:      CGSize(width: .zero, height: -offsetValue)
@@ -84,16 +96,18 @@ where
             case .bottom:   CGSize(width: .zero, height: offsetValue)
             case .trailing: CGSize(width: offsetValue, height: .zero)
             }
+
             Text(valueString)
-                .font(.caption)
-                .monospacedDigit()
-                .fixedSize()
-                .opacity(1.0 - (index.asDouble / historyLength.asDouble))
-                .offset(offsetSize)
+            .font(.caption)
+            .monospacedDigit()
+            .fixedSize()
+            .opacity(1.0 - (index.asDouble / historyLength.asDouble))
+            .offset(offsetSize)
         }
     }
 
 
+    /// Floating label displayed next to the current value.
     private var labelView: some View {
         Text(label)
             .font(.caption)
@@ -102,6 +116,16 @@ where
             .alignmentGuide(.leading) { dimensions in
                 dimensions[.trailing]
             }
+    }
+
+}
+
+
+extension HistoricValue {
+
+    struct History {
+        let value: Value
+        let marked: Bool
     }
 
 }
@@ -140,7 +164,7 @@ extension HistoricValue {
     let values = Strings.natoPhoneticAlphabet
     let selection = values[selectedIndex]
     HistoricValue(label: "selected:", value: selection)
-        .history(padding: 10, spacing: 40, edge: historyEdge)
+        .configure(padding: 10, spacing: 40, edge: historyEdge)
 
     Text("Change value:")
         .font(.caption)
@@ -169,6 +193,7 @@ extension HistoricValue {
         }
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
+        .tint(historyEdge == .top ? .cyan : .indigo)
 
         HStack {
             Button("Leading", systemImage: "arrowshape.left.fill") {
@@ -176,18 +201,21 @@ extension HistoricValue {
             }
             .labelStyle(.iconOnly)
             .buttonStyle(.borderedProminent)
+            .tint(historyEdge == .leading ? .cyan : .indigo)
 
             Button("Bottom", systemImage: "arrowshape.down.fill") {
                 historyEdge = .bottom
             }
             .labelStyle(.iconOnly)
             .buttonStyle(.borderedProminent)
+            .tint(historyEdge == .bottom ? .cyan : .indigo)
 
             Button("Trailing", systemImage: "arrowshape.right.fill") {
                 historyEdge = .trailing
             }
             .labelStyle(.iconOnly)
             .buttonStyle(.borderedProminent)
+            .tint(historyEdge == .trailing ? .cyan : .indigo)
         }
     }
 
@@ -202,10 +230,10 @@ extension HistoricValue {
 
     if useFormatter {
         HistoricValue(label: "value:", value: value, format: .shortFraction)
-            .history(spacing: 35)
+            .configure(spacing: 35)
     } else {
         HistoricValue(label: "value:", describingValue: value)
-            .history(spacing: 15, edge: .top)
+            .configure(spacing: 15, edge: .top)
     }
 
 
@@ -217,22 +245,6 @@ extension HistoricValue {
 
     HStack {
         Button {
-            value += step
-        } label: {
-            Label {
-                Text("Add")
-            } icon: {
-                ZStack {
-                    // Invisible text to prevent button size to collapse to image size.
-                    Text("M").hidden()
-                    Image(systemName: "plus")
-                }
-            }
-        } // Button
-        .labelStyle(.iconOnly)
-        .buttonStyle(.borderedProminent)
-
-        Button {
             value -= step
         } label: {
             Label {
@@ -242,6 +254,22 @@ extension HistoricValue {
                     // Invisible text to prevent button size to collapse to image size.
                     Text("M").hidden()
                     Image(systemName: "minus")
+                }
+            }
+        } // Button
+        .labelStyle(.iconOnly)
+        .buttonStyle(.borderedProminent)
+
+        Button {
+            value += step
+        } label: {
+            Label {
+                Text("Add")
+            } icon: {
+                ZStack {
+                    // Invisible text to prevent button size to collapse to image size.
+                    Text("M").hidden()
+                    Image(systemName: "plus")
                 }
             }
         } // Button

@@ -116,7 +116,7 @@ private struct PreviewContent {
         label: "index:",
         describingValue: carouselPosition.selectedIndex
     )
-    .history(spacing: 20)
+    .configure(spacing: 20)
     .padding(.bottom)
 
     Divider()
@@ -243,7 +243,7 @@ private struct PreviewContent {
         label: "index:",
         describingValue: carouselPosition.selectedIndex
     )
-    .history(spacing: 20)
+    .configure(spacing: 20)
     .padding(.bottom)
 
     Divider()
