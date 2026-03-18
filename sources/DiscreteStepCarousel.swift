@@ -7,6 +7,11 @@
 import SwiftUI
 
 
+// NEXT: update HistoricValue to show a marked value.
+// NEXT: figure out out of setting selecton by index can skip the first immediate value being set.
+// NEXT: finish renaming to offset, instead of index.
+
+
 // TODO: support vertical carousel
 public struct DiscreteStepCarousel<Values: Collection, AnchorContent: View, MarkContent: View> : View
 where Values.Element: Equatable {
