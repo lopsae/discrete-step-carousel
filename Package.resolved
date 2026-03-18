@@ -1,13 +1,13 @@
 {
-  "originHash" : "984daf993956354f617895465e5a360c005dfb40261f5d0a0b8a96d59ce86489",
+  "originHash" : "45a39178a4ad5213953416fc96e07f8217f0cdb69ebbeb1a8c7cca9d5bd4d482",
   "pins" : [
     {
       "identity" : "preview-utilities",
-      "kind" : "localSourceControl",
-      "location" : "/Users/maic/dev/preview-utilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
         "branch" : "initial-tagged-release",
-        "revision" : "d9cc3091ea551a765981777d18f03fa2367d26b6"
+        "revision" : "e817ace8875eac3b6b2567d2c9b9a7cb9b89da19"
       }
     }
   ],
