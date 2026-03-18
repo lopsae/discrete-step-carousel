@@ -19,6 +19,7 @@ where
 {
 
     @State private var history: [History] = []
+    @Binding private var isMarked: Bool
 
     /// String to display in a label next to the current value.
     let label: String
@@ -39,9 +40,10 @@ where
 
 
     /// Creates a view which displays a formatted value along its history of previous values.
-    init(label: String, value: Value, format formatter: Formatter) {
+    init(label: String, value: Value, isMarked: Binding<Bool> = .constant(false), format formatter: Formatter) {
         self.label = label
         self.value = value
+        self._isMarked = isMarked
         self.formatter = formatter
     }
 
@@ -50,20 +52,27 @@ where
         let valueString = formatter.format(value)
         Text(valueString)
         .monospacedDigit()
+        .background {
+            if isMarked {
+                Capsule()
+                .fill(.blue.secondary)
+            }
+        }
         // Historic values placed in an overlay so that these never modify the size of the
         // main text.
         .overlay {
             historicValues
         }
-        .overlay(alignment: .leading) {
+        .overlay(alignment: .leadingLastTextBaseline) {
             labelView
         }
         .onChange(of: value) { oldValue, newValue in
             if history.count >= historyLength {
                 history.removeLast(1 + history.count - historyLength)
             }
-            let historyItem = History(value: oldValue, marked: false)
+            let historyItem = History(value: oldValue, marked: isMarked)
             history.insert(historyItem, at: 0)
+            isMarked = false
         }
     }
 
@@ -101,6 +110,12 @@ where
             .font(.caption)
             .monospacedDigit()
             .fixedSize()
+            .background {
+                if historyItem.marked {
+                    Capsule()
+                    .fill(.blue.tertiary)
+                }
+            }
             .opacity(1.0 - (index.asDouble / historyLength.asDouble))
             .offset(offsetSize)
         }
@@ -121,6 +136,9 @@ where
 }
 
 
+// MARK: - HistoryItem
+
+
 extension HistoricValue {
 
     struct History {
@@ -131,24 +149,27 @@ extension HistoricValue {
 }
 
 
+// MARK: - Convenience initializers
+
+
 extension HistoricValue {
 
     /// Creates a view which displays a string value along its history of previous values.
-    init(label: String, value: Value)
+    init(label: String, value: Value, isMarked: Binding<Bool> = .constant(false))
     where
         Formatter == IdentityFormatStyle<Value>,
         Value == String
     {
-        self.init(label: label, value: value, format: .init())
+        self.init(label: label, value: value, isMarked: isMarked, format: .init())
     }
 
 
     /// Creates a view which displays the string description of a value along its history of
     /// previous values.
-    init(label: String, describingValue value: Value)
+    init(label: String, describingValue value: Value, isMarked: Binding<Bool> = .constant(false))
     where Formatter == StringDescriptionFormatStyle<Value>
     {
-        self.init(label: label, value: value, format: .init())
+        self.init(label: label, value: value, isMarked: isMarked, format: .init())
     }
 
 }
@@ -160,20 +181,27 @@ extension HistoricValue {
 #Preview("String Value") {
 
     @Previewable @State var selectedIndex: Int = 0
+    @Previewable @State var isMarked: Bool = false
     @Previewable @State var historyEdge: Edge = .top
     let values = Strings.natoPhoneticAlphabet
     let selection = values[selectedIndex]
-    HistoricValue(label: "selected:", value: selection)
+
+    HistoricValue(label: "selected:", value: selection, isMarked: $isMarked)
         .configure(padding: 10, spacing: 40, edge: historyEdge)
 
-    Text("Change value:")
-        .font(.caption)
+    Text.caption("Change value:")
         .padding(.top)
 
     HStack {
 
         Button("Previous", systemImage: "arrowshape.left") {
             selectedIndex = (selectedIndex + values.count - 1) % values.count
+        }
+        .labelStyle(.iconOnly)
+        .buttonStyle(.borderedProminent)
+
+        Button("Mark", systemImage: isMarked ? "circle.fill" : "circle") {
+            isMarked.toggle()
         }
         .labelStyle(.iconOnly)
         .buttonStyle(.borderedProminent)
@@ -186,8 +214,7 @@ extension HistoricValue {
     }
 
     VStack {
-        Text("History direction:")
-            .font(.caption)
+        Text.caption("History direction:")
         Button("Top", systemImage: "arrowshape.up.fill") {
             historyEdge = .top
         }
