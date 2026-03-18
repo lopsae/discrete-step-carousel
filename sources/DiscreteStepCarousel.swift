@@ -7,9 +7,8 @@
 import SwiftUI
 
 
-// NEXT: update HistoricValue to show a marked value.
-// NEXT: figure out out of setting selecton by index can skip the first immediate value being set.
 // NEXT: finish renaming to offset, instead of index.
+// NEXT: add spacing parameter.
 
 
 // TODO: support vertical carousel
@@ -62,7 +61,6 @@ where Values.Element: Equatable {
                     }
                 } // ScrollView
                 .scrollTargetBehavior(
-                    // TODO: this could be removed to disable snapping, but selection is still discrete.
                     DiscreteStepScrollTargetBehavior(step: position.markLength)
                 )
                 .defaultScrollAnchor(initialAnchor, for: .initialOffset)
