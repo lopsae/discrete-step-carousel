@@ -18,6 +18,9 @@ where Values.Element: Equatable {
     /// Space available for each mark in the carousel.
     public let markLength: Double
 
+    /// Additional space between marks.
+    public let spacing: Double
+
     /// Selected value, which is `values[selectedIndex]`.
     public internal(set) var selectedValue: Values.Element
 
@@ -27,19 +30,27 @@ where Values.Element: Equatable {
 
     internal var scrollPosition: ScrollPosition
 
+    // TODO: note that selecting by value will search sequentially through all values until the first is found. This could be inneficient for large collections.
 
     /// Creates a new Position for a DiscreteStepCarousel.
-    ///
+    /// 
     /// - Parameters:
     ///   - values: All possible values the carousel can select, in the order these will be
     ///     displayed.
     ///   - selectedValue: Initial value to be selected. If this value cannot be found in
     ///     `values`, an index of `0` will be selected instead.
     ///   - markLength: Space available for each mark.
-    public init(values: Values, selectedValue: Values.Element, markLength: Double = 22.0) {
+    ///   - spacing: Additional space between marks.
+    public init(
+        values: Values,
+        selectedValue: Values.Element,
+        markLength: Double = 22.0,
+        spacing: Double = .zero
+    ) {
         self.values = values
         self.selectedValue = selectedValue
         self.markLength = markLength
+        self.spacing = spacing
 
         let selectedIndex = values.firstIndex(of: selectedValue) ?? values.startIndex
         self.selectedIndex = selectedIndex
@@ -48,20 +59,31 @@ where Values.Element: Equatable {
 
 
     /// Creates a new Position for a DiscreteStepCarousel.
-    ///
+    /// 
     /// - Parameters:
     ///   - values: All possible values the carousel can select, in the order these will be
     ///     displayed.
     ///   - selectedIndex: Index of the initial value to be selected.
     ///   - markLength: Space available for each mark.
-    public init(values: Values, selectedIndex: Values.Index, markLength: Double = 22.0) {
+    ///   - spacing: Additional space between marks.
+    public init(
+        values: Values,
+        selectedIndex: Values.Index,
+        markLength: Double = 22.0,
+        spacing: Double = .zero
+    ) {
         self.values = values
         self.selectedIndex = selectedIndex
         self.selectedValue = values[selectedIndex]
         self.markLength = markLength
+        self.spacing = spacing
 
         self.scrollPosition = ScrollPosition()
     }
+
+
+    /// The total length used by each mark: mark length + spacing.
+    public var totalMarkLength: Double { markLength + spacing }
 
 
     // TODO: note that selecting by value will search sequentially through all values until the first is found. This could be inneficient for large collections.

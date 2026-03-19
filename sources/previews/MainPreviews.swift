@@ -71,8 +71,9 @@ private struct PreviewContent {
 #Preview("Images", traits: .fixedHeader, PreviewContent.layout) {
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.natoPhoneticAlphabet.map(\.capitalized),
-        selectedIndex: 4,
-        markLength: 120)
+        selectedIndex: 10,
+        markLength: 100,
+        spacing: 20)
     @Previewable @State var imageGenerator = ImageGeneratorStore(
         generator: ConcurrentImageGenerator(size: .square(of: 100), sleepRange: ImageGeneratorDefaults.zero))
 
@@ -99,6 +100,8 @@ private struct PreviewContent {
     .frame(height: 100)
     .debugOverlay()
     .safeAreaPadding(.horizontal, 50)
+    Text(carouselPosition.selectedValue)
+    Text.caption("\(carouselPosition.selectedIndex)")
 }
 
 

@@ -7,7 +7,8 @@
 import SwiftUI
 
 
-// NEXT: add spacing parameter.
+// NEXT: updaate previews with spacing.
+// NEXT: make preview to show that the size read by geometry readed inside a mark matches the given length.
 
 
 // TODO: support vertical carousel
@@ -40,11 +41,11 @@ where
 
         let positionValue = positionBinding.wrappedValue
 
-        let selectedIndexDistance = positionValue.values.distance(fromStartTo: positionValue.selectedIndex)
-        let markLength  = positionValue.markLength
+        let selectedIndexDistance = positionValue.values.distance(fromStartTo: positionValue.selectedIndex).asDouble
+        let totalMarkLength  = positionValue.totalMarkLength
         let valuesCount = positionValue.values.count.asDouble
         self.initialAnchor = .init(
-            x: (selectedIndexDistance.asDouble * markLength / ((valuesCount - 1) * markLength)),
+            x: (selectedIndexDistance * totalMarkLength / ((valuesCount - 1) * totalMarkLength)),
             y: 0.5)
     }
 
@@ -64,11 +65,12 @@ where
                             let value = position.values[index]
                             markContent(index, value)
                             .frame(width: position.markLength, alignment: .center)
+                            .padding(.horizontal, position.spacing/2)
                         }
                     }
                 } // ScrollView
                 .scrollTargetBehavior(
-                    DiscreteStepScrollTargetBehavior(step: position.markLength)
+                    DiscreteStepScrollTargetBehavior(step: position.totalMarkLength)
                 )
                 .defaultScrollAnchor(initialAnchor, for: .initialOffset)
                 .scrollPosition($position.scrollPosition)
@@ -76,16 +78,16 @@ where
                 // Assuming that the last one takes precedence, but this is untested.
                 .contentMargins(
                     .horizontal,
-                    (geometry.size.width - position.markLength) / 2,
+                    (geometry.size.width - position.totalMarkLength) / 2,
                     for: .scrollContent)
                 .onScrollGeometryChange(for: Int.self) { scrollGeometry in
                     let contentPosition = scrollGeometry.contentOffset.x + scrollGeometry.contentInsets.leading
-                    let indexDistance = (contentPosition / position.markLength).arithmeticRoundedInt
+                    let indexDistance = (contentPosition / position.totalMarkLength).arithmeticRoundedInt
                     let clampedIndexDistance = position.values.clampDistance(indexDistance)
                     return clampedIndexDistance ?? 0
                 } action: { oldValue, newIndexDistance in
                     // Main calculation and set for both `selectedIndex` and `selectedValue`.
-                    // This updates the position values as the user drags the scroll view.
+                    // Updates the position values as the user drags the scroll view.
                     // When `position.selectIndex` or `position.selectValue` are used, this code
                     // ultimately sets the final value either after animations, or when the view
                     // state updates.
