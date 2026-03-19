@@ -13,7 +13,7 @@ import SwiftUI
 // TODO: support vertical carousel
 public struct DiscreteStepCarousel<Values, AnchorContent, MarkContent> : View
 where
-    Values: Collection,
+    Values: RandomAccessCollection,
     Values.Index: Hashable,
     Values.Element: Equatable,
     AnchorContent: View,
@@ -60,9 +60,8 @@ where
                         // Marks for each value, identified by their index.
                         // This identification is NOT used for any scroll position identification.
                         // Selection is done entirely by geometry changes.
-                        let indexedValues = position.values.indexed()
-                        // FIXME: this wrapping in array should not be needed.
-                        ForEach(Array(indexedValues), id: \.0) { index, value in
+                        ForEach(position.values.indices, id: \.self) { index in
+                            let value = position.values[index]
                             markContent(index, value)
                             .frame(width: position.markLength, alignment: .center)
                         }
