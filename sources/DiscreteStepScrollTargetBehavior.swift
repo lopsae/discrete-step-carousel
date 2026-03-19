@@ -5,10 +5,11 @@
 
 
 import SwiftUI
+import PreviewUtilities
 
 
-/// Defines a scroll behaviour where the horizontal target allways snaps to the closest multiple of
-/// a value.
+/// Defines a scroll behaviour where the horizontal target x position always snaps to the closest
+/// multiple of the step value.
 struct DiscreteStepScrollTargetBehavior: ScrollTargetBehavior {
     let step: Double
 
@@ -19,38 +20,37 @@ struct DiscreteStepScrollTargetBehavior: ScrollTargetBehavior {
 }
 
 
-// MARK: - Previews.
+// MARK: - PreviewContent
 
 
+@MainActor
 private struct PreviewContent {
 
-    static let gradient = LinearGradient(
-        colors: [.orange, .orange.opacity(0.5)],
-        startPoint: .leading,
-        endPoint: .trailing)
+    static let layout: PreviewTrait<Preview.ViewTraits> = .iPhoneProSizeLayout
 
 }
 
 
-#Preview("Default", traits: .fixedHeader) {
-    let step: Double = 42
+// MARK: - Previews.
 
-    VStack {
-        Text("Items with step width will align to leading.")
-        Text("Last item might not display fully.")
-    }
-    .padding(.bottom)
+
+#Preview("Default", traits: .fixedHeader, PreviewContent.layout) {
+    let step: Double = 100
+
+    PreviewCaption("""
+        By default items will align to the leading edge. Last item might not display fully.
+        """).padding(.bottom)
 
     Image(systemName: "arrowtriangle.down.fill")
+        .foregroundStyle(.secondary)
         .maxWidthFrame(alignment: .leading)
 
     GeometryReader { geometry in
         ScrollView(.horizontal) {
             HStack(spacing: 0) {
-                ForEach(0..<15) { index in
-                    Rectangle()
-                        .fill(PreviewContent.gradient)
-                        .frame(width: step)
+                ForEach(0..<7) { index in
+                    CaptionRectangle("Item \(index)", color: .orange)
+                    .frame(width: step)
                 }
             }
         } // ScrollView
@@ -62,32 +62,31 @@ private struct PreviewContent {
 }
 
 
-#Preview("Spacers", traits: .fixedHeader) {
+#Preview("Spacers", traits: .fixedHeader, PreviewContent.layout) {
     let step: Double = 50
 
-    Text("Using spacers to center the items.")
-        .padding(.bottom)
+    PreviewCaption("""
+        Spacers can be used to visually center the items.
+        """).padding(.bottom)
 
     Image(systemName: "arrowtriangle.down.fill")
+        .foregroundStyle(.secondary)
 
     GeometryReader { geometry in
         ScrollView(.horizontal) {
             HStack(spacing: 0) {
                 // Leading spacer to center first item.
-                Color.teal
-                    .frame(width: (geometry.size.width - step) / 2.0)
-                    .opacity(0.2)
+                CaptionRectangle("Spacer", color: .teal)
+                .frame(width: (geometry.size.width - step) / 2.0)
 
-                ForEach(0..<10) { index in
-                    Rectangle()
-                        .fill(PreviewContent.gradient)
-                        .frame(width: step)
+                ForEach(0..<6) { index in
+                    CaptionRectangle("Item \(index)", color: .orange)
+                    .frame(width: step)
                 }
 
                 // Trailing spacer to center last item.
-                Color.teal
-                    .frame(width: (geometry.size.width - step) / 2.0)
-                    .opacity(0.2)
+                CaptionRectangle("Spacer", color: .teal)
+                .frame(width: (geometry.size.width - step) / 2.0)
             }
         } // ScrollView
         .scrollTargetBehavior(
@@ -96,24 +95,20 @@ private struct PreviewContent {
 
     } // GeometryReader
     .frame(height: 100)
-}
 
-
-#Preview("Content Margins", traits: .fixedHeader) {
-    let step: Double = 50
-
-    Text("Using content margins to center the items.")
-        .padding(.bottom)
+    PreviewCaption("""
+        Content margins can be used to visually center the items too.
+        """).padding(.vertical)
 
     Image(systemName: "arrowtriangle.down.fill")
+        .foregroundStyle(.secondary)
 
     GeometryReader { geometry in
         ScrollView(.horizontal) {
             HStack(spacing: 0) {
-                ForEach(0..<10) { index in
-                    Rectangle()
-                        .fill(PreviewContent.gradient)
-                        .frame(width: step)
+                ForEach(0..<6) { index in
+                    CaptionRectangle("Item \(index)", color: .orange)
+                    .frame(width: step)
                 }
             }
         } // ScrollView
@@ -127,4 +122,3 @@ private struct PreviewContent {
     } // GeometryReader
     .frame(height: 100)
 }
-
