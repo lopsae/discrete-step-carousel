@@ -7,18 +7,24 @@
 import SwiftUI
 
 
-// NEXT: finish renaming to offset, instead of index.
 // NEXT: add spacing parameter.
 
 
 // TODO: support vertical carousel
-public struct DiscreteStepCarousel<Values: Collection, AnchorContent: View, MarkContent: View> : View
-where Values.Element: Equatable {
+public struct DiscreteStepCarousel<Values, AnchorContent, MarkContent> : View
+where
+    Values: Collection,
+    Values.Index: Hashable,
+    Values.Element: Equatable,
+    AnchorContent: View,
+    MarkContent: View
+{
 
     @Binding var position: DiscreteStepCarouselPosition<Values>
 
     private let anchorContent: () -> AnchorContent
-    private let markContent: (Int, Values.Element) -> MarkContent
+
+    private let markContent: (Values.Index, Values.Element) -> MarkContent
 
     private var initialAnchor: UnitPoint
 
@@ -26,7 +32,7 @@ where Values.Element: Equatable {
     public init(
         position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
         @ViewBuilder anchorContent: @escaping () -> AnchorContent,
-        @ViewBuilder markContent: @escaping (Int, Values.Element) -> MarkContent
+        @ViewBuilder markContent: @escaping (Values.Index, Values.Element) -> MarkContent
     ) {
         self._position = positionBinding
         self.anchorContent = anchorContent
@@ -45,17 +51,19 @@ where Values.Element: Equatable {
 
     public var body: some View {
         ZStack {
-            // Geometry reader needs to envelop ScrollView. contentMargings uses the scroll view
+            // Geometry reader needs to envelop ScrollView, contentMargins uses the scroll view
             // size to setup margins that allow marks to remain centered.
             GeometryReader { geometry in
                 ScrollView(.horizontal, showsIndicators: false) {
                     // TODO: test if AnyLayout/HStackLayout/VStackLayout can provide vertical and horizontal carousel funcionality.
-                    LazyHStack(spacing: 0.0) {
-                        // Marks for each value.
-                        // Identified by offset to ensure each item has an unique identifier,
-                        // irregardless of the contents of `values`.
-                        ForEach(Array(position.values.enumerated()), id: \.offset) { offset, value in
-                            markContent(offset, value)
+                    LazyHStack(spacing: .zero) {
+                        // Marks for each value, identified by their index.
+                        // This identification is NOT used for any scroll position identification.
+                        // Selection is done entirely by geometry changes.
+                        let indexedValues = position.values.indexed()
+                        // FIXME: this wrapping in array should not be needed.
+                        ForEach(Array(indexedValues), id: \.0) { index, value in
+                            markContent(index, value)
                             .frame(width: position.markLength, alignment: .center)
                         }
                     }
@@ -77,6 +85,11 @@ where Values.Element: Equatable {
                     let clampedIndexDistance = position.values.clampDistance(indexDistance)
                     return clampedIndexDistance ?? 0
                 } action: { oldValue, newIndexDistance in
+                    // Main calculation and set for both `selectedIndex` and `selectedValue`.
+                    // This updates the position values as the user drags the scroll view.
+                    // When `position.selectIndex` or `position.selectValue` are used, this code
+                    // ultimately sets the final value either after animations, or when the view
+                    // state updates.
                     let newIndex = position.values.index(offsetBy: newIndexDistance)
                     position.selectedIndex = newIndex
                     position.selectedValue = position.values[newIndex]
@@ -121,7 +134,7 @@ extension DiscreteStepCarousel {
 
     public init(
         position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
-        @ViewBuilder markContent: @escaping (Int, Values.Element) -> MarkContent
+        @ViewBuilder markContent: @escaping (Values.Index, Values.Element) -> MarkContent
     )
     where
         AnchorContent == EmptyView

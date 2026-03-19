@@ -85,6 +85,9 @@ private struct PreviewContent {
 }
 
 
+// TODO: preview with a collection with offset indexes.
+
+
 // MARK: - Controls
 
 

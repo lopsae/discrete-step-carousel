@@ -21,7 +21,6 @@ where Values.Element: Equatable {
     /// Selected value, which is `values[selectedIndex]`.
     public internal(set) var selectedValue: Values.Element
 
-    // TODO: should it be renamed offset? since this is NOT the index from values colection?
     /// Index of the selected value.
     public internal(set) var selectedIndex: Values.Index
 
