@@ -98,7 +98,7 @@ private struct PreviewContent {
         }
     }
     .frame(height: 100)
-    .debugOverlay()
+    .debugOverlay(.caption("Enclosed in\nSafeArea"), .infoAlignment(.outerBottomTrailing))
     .safeAreaPadding(.horizontal, 50)
     Text(carouselPosition.selectedValue)
     Text.caption("\(carouselPosition.selectedIndex)")
@@ -242,35 +242,29 @@ private struct PreviewContent {
 
 
 #Preview("Controls&Images", traits: .zeroSpacing, PreviewContent.layout) {
-    @Previewable @State var printOnce: PrintOnce = .previewStarted
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
-        selectedValue: "Y",
-        markLength: 100)
-    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .square(of: 50))
+        selectedValue: "X",
+        markLength: 80,
+        spacing: 25)
+    @Previewable @State var imageGenerator = ImageGeneratorStore(size: .square(of: 40))
+
     @Previewable @State var carouselContentWidth: CGFloat = 0.0
-
-    printOnce.print()
-
-    // Selected value display.
-    HistoricValue(
-        label: "value:",
-        value: carouselPosition.selectedValue)
+    @Previewable @State var valueIsMarked: Bool = false
+    @Previewable @State var indexIsMarked: Bool = false
 
     PreviewContent.indicatorArrow
 
     DiscreteStepCarousel(position: $carouselPosition) { _, item in
-        Group {
+        ConstrainedFill {
             if let image = imageGenerator.images[item] {
                 image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
             } else {
-                Rectangle()
-                    .fill(.secondary)
+                Rectangle().fill(.secondary)
             }
         }
-        .frame(width: 80, height: 50)
         .roundedRectangleClip(cornerRadius: 8)
         .task {
             // `generateImage` automatically cancels image generation if the task is cancelled.
@@ -280,10 +274,17 @@ private struct PreviewContent {
     .frame(height: 60)
     .onScrollGeometryChange(of: \.contentSize.width, binding: $carouselContentWidth)
 
-    // Selected index display.
+    HistoricValue(
+        label: "value:",
+        value: carouselPosition.selectedValue,
+        isMarked: $valueIsMarked
+    )
+    .configure(spacing: 20)
+
     HistoricValue(
         label: "index:",
-        describingValue: carouselPosition.selectedIndex
+        describingValue: carouselPosition.selectedIndex,
+        isMarked: $indexIsMarked
     )
     .configure(spacing: 20)
     .padding(.bottom)
@@ -297,6 +298,8 @@ private struct PreviewContent {
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
+                        valueIsMarked = true
+                        indexIsMarked = true
                         carouselPosition.selectValue(value)
                     }
                     .buttonStyle(.borderedProminent)
@@ -309,6 +312,8 @@ private struct PreviewContent {
                 let indices: [Int] = [0, 2, 4, 6]
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
+                        valueIsMarked = true
+                        indexIsMarked = true
                         carouselPosition.selectIndex(index)
                     }
                     .buttonStyle(.borderedProminent)
@@ -324,8 +329,10 @@ private struct PreviewContent {
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
+                        valueIsMarked = true
+                        indexIsMarked = true
                         withAnimation {
-                            carouselPosition.selectValue(value)
+                            carouselPosition.selectValue(value, immediate: false)
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -338,8 +345,10 @@ private struct PreviewContent {
                 let indices: [Int] = [0, 2, 12, 14]
                 ForEach(indices, id: \.self) { index in
                     Button("[\(index)]") {
+                        valueIsMarked = true
+                        indexIsMarked = true
                         withAnimation {
-                            carouselPosition.selectIndex(index)
+                            carouselPosition.selectIndex(index, immediate: false)
                         }
                     }
                     .buttonStyle(.borderedProminent)
@@ -379,7 +388,7 @@ private struct PreviewContent {
             Text("ContentWidth: \(shortFraction: carouselContentWidth)")
                 .monospaced()
                 .maxWidthFrame()
-            Text("expected: \(shortFraction: carouselPosition.markLength * carouselPosition.values.count.asDouble)")
+            Text("expected: \(shortFraction: carouselPosition.totalMarkLength * carouselPosition.values.count.asDouble)")
                 .font(.caption)
                 .monospaced()
         }
