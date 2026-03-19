@@ -7,10 +7,6 @@
 import SwiftUI
 
 
-// NEXT: updaate previews with spacing.
-// NEXT: make preview to show that the size read by geometry readed inside a mark matches the given length.
-
-
 // TODO: support vertical carousel
 public struct DiscreteStepCarousel<Values, AnchorContent, MarkContent> : View
 where

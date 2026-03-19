@@ -83,15 +83,14 @@ private struct PreviewContent {
         Group {
             if let image = imageGenerator.images[item] {
                 image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                .resizable()
+                .aspectRatio(contentMode: .fill)
             } else {
-                Rectangle()
-                    .fill(.secondary)
+                Rectangle().fill(.secondary)
             }
         }
         .frame(size: .square(of: 100))
-        .roundedRectangleClip(cornerRadius: 8)
+        .roundedRectangleClip(cornerRadius: Defaults.padding/2)
         .task {
             // `generateImage` automatically cancels image generation if the task is cancelled.
             await imageGenerator.generateImage(with: item)
@@ -100,6 +99,41 @@ private struct PreviewContent {
     .frame(height: 100)
     .debugOverlay(.caption("Enclosed in\nSafeArea"), .infoAlignment(.outerBottomTrailing))
     .safeAreaPadding(.horizontal, 50)
+    Text(carouselPosition.selectedValue)
+    Text.caption("\(carouselPosition.selectedIndex)")
+}
+
+
+// MARK: - Mark Size
+
+
+#Preview("MarkSize", traits: .fixedHeader, PreviewContent.layout) {
+    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+        values: Strings.natoPhoneticAlphabet.map(\.capitalized),
+        selectedValue: "Sierra",
+        markLength: 80,
+        spacing: 20)
+    @Previewable @State var fixedHeight: Double = 100
+
+    PreviewCaption("""
+        The size of the mark is determined by `markLength` in the carousel position, and by the 
+        heigth of the carousel itself.
+        """)
+
+    Slider.captioned("Fixed Height", value: $fixedHeight, in: 0...200, valueFormat: .shortFraction)
+
+    PreviewContent.indicatorArrow
+
+    DiscreteStepCarousel(position: $carouselPosition) { _, item in
+        GeometryReader { geometry in
+            let width = geometry.size.width
+            let height = geometry.size.height
+            CaptionRectangle(
+                "\(item)\n`w: \(shortFraction: width)`\n`h: \(shortFraction: height)`", color: .orange,
+                traits: .alignment(.topLeading))
+        }
+    }
+    .frame(height: fixedHeight)
     Text(carouselPosition.selectedValue)
     Text.caption("\(carouselPosition.selectedIndex)")
 }
@@ -265,7 +299,7 @@ private struct PreviewContent {
                 Rectangle().fill(.secondary)
             }
         }
-        .roundedRectangleClip(cornerRadius: 8)
+        .roundedRectangleClip(cornerRadius: Defaults.padding/2)
         .task {
             // `generateImage` automatically cancels image generation if the task is cancelled.
             await imageGenerator.generateImage(with: item)
