@@ -24,27 +24,44 @@ private struct PreviewContent {
 // MARK: - Defaut
 
 
-#Preview("Default", traits: .headerFooter, PreviewContent.layout) {
+#Preview("Default", traits: .fixedHeader, PreviewContent.layout) {
+    // TODO: Know issue: a position object works only for a single carousel, connecting it to more
+    // that one does not sincronize them. Check if scrollPosition has also the same limitation.
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "D")
     @Previewable @State var styledPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "S")
+    @Previewable @State var offsetPosition: DiscreteStepCarouselPosition = .init(
+        values: Strings.alphabet.map(\.localizedUppercase)[10...20],
+        selectedValue: "M")
 
+    PreviewCaption("Carousels with default and stylized default markers.")
+        .padding(.bottom)
     PreviewContent.indicatorArrow
     DiscreteStepCarousel(position: $carouselPosition)
         .frame(height: 44)
     Text(carouselPosition.selectedValue)
+        .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
 
     DashedDivider()
         .padding(.bottom)
 
-    // TODO: know issue, a position object works only for a single carousel, connecting it to more that one does not sincronize them. Could check if scrollPosition also has the same limitation.
     PreviewContent.indicatorArrow
     DiscreteStepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
         .frame(height: 44)
     Text(styledPosition.selectedValue)
+        .floatingCaption("\(styledPosition.selectedIndex)", .alignment(.outerTrailingTop))
+
+    PreviewCaption("Carousel with a collection with offset indices.")
+        .padding(.bottom)
+
+    PreviewContent.indicatorArrow
+    DiscreteStepCarousel(position: $offsetPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+        .frame(height: 44)
+    Text(offsetPosition.selectedValue)
+        .floatingCaption("\(offsetPosition.selectedIndex)", .alignment(.outerTrailingTop))
 }
 
 
@@ -83,9 +100,6 @@ private struct PreviewContent {
     .debugOverlay()
     .safeAreaPadding(.horizontal, 50)
 }
-
-
-// TODO: preview with a collection with offset indexes.
 
 
 // MARK: - Controls
