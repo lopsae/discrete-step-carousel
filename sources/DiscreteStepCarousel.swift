@@ -89,7 +89,7 @@ where
                     // When `position.selectIndex` or `position.selectValue` are used, this code
                     // ultimately sets the final value either after animations, or when the view
                     // state updates.
-                    let newIndex = position.values.index(offsetBy: newIndexDistance)
+                    let newIndex = position.values.index(startOffsetBy: newIndexDistance)
                     position.selectedIndex = newIndex
                     position.selectedValue = position.values[newIndex]
                 }
