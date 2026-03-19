@@ -149,7 +149,7 @@ where Values.Element: Equatable {
             selectedIndex = index
         }
         let indexDistance = values.distance(from: values.startIndex, to: index)
-        scrollPosition.scrollTo(x: indexDistance.asDouble * markLength)
+        scrollPosition.scrollTo(x: indexDistance.asDouble * totalMarkLength)
     }
 
 }
