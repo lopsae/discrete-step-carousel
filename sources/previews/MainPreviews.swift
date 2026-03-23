@@ -75,7 +75,7 @@ private struct PreviewContent {
         markLength: 100,
         spacing: 20)
     @Previewable @State var imageGenerator = ImageGeneratorStore(
-        generator: ConcurrentImageGenerator(size: .square(of: 100), sleepRange: ImageGeneratorDefaults.zero))
+        generator: ConcurrentImageGenerator(size: .square(of: 100)))
 
     PreviewContent.indicatorArrow
 

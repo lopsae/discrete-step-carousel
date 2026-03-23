@@ -34,16 +34,12 @@ private struct PreviewContent {
 // MARK: - Previews.
 
 
-#Preview("Default", traits: .fixedHeader, PreviewContent.layout) {
+#Preview("Default", traits: .paddingSpacing, .fixedHeader, PreviewContent.layout) {
     let step: Double = 100
 
     PreviewCaption("""
         By default items will align to the leading edge. Last item might not display fully.
-        """).padding(.bottom)
-
-    Image(systemName: "arrowtriangle.down.fill")
-        .foregroundStyle(.secondary)
-        .maxWidthFrame(alignment: .leading)
+        """)
 
     GeometryReader { geometry in
         ScrollView(.horizontal) {
@@ -59,6 +55,11 @@ private struct PreviewContent {
         )
     } // GeometryReader
     .frame(height: 100)
+    .stackAbove {
+        Image(systemName: "arrowtriangle.down.fill")
+        .foregroundStyle(.secondary)
+        .maxWidthFrame(alignment: .leading)
+    }
 }
 
 
@@ -125,57 +126,4 @@ private struct PreviewContent {
         Image(systemName: "arrowtriangle.down.fill")
             .foregroundStyle(.secondary)
     }
-}
-
-
-// TODO: experimental modifiers, consider moving to PreviewUtilities.
-
-
-/// Experimental modifier, consider moving to PreviewUtilities if useful.
-/// Wraps the preview content in a `VStack` with spacing equal to the default padding.
-struct PaddingSpacingPreviewModifier: PreviewModifier {
-
-    func body(content: Content, context _: ()) -> some View {
-        VStack(spacing: Defaults.padding) {
-            content
-        }
-    }
-
-}
-
-
-extension PreviewTrait where T == Preview.ViewTraits {
-
-    fileprivate static var paddingSpacing: PreviewTrait {
-        .modifier(PaddingSpacingPreviewModifier())
-    }
-
-}
-
-
-struct StackAbove<AboveContent: View>: ViewModifier {
-    let spacing: CGFloat?
-    let aboveContent: () -> AboveContent
-//    init(spacing: Double) {
-//        self.spacing = spacing
-//    }
-    func body(content: Content) -> some View {
-        VStack(spacing: spacing) {
-            aboveContent()
-            content
-        }
-    }
-}
-
-
-extension View {
-
-    func stackAbove<Content: View>(
-        spacing: CGFloat? = nil,
-        @ViewBuilder content: @escaping () -> Content
-    ) -> some View {
-        let stackModifier = StackAbove(spacing: spacing, aboveContent: content)
-        return modifier(stackModifier)
-    }
-
 }
