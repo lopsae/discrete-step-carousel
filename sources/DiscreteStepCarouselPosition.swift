@@ -30,8 +30,6 @@ where Values.Element: Equatable {
 
     internal var scrollPosition: ScrollPosition
 
-    // TODO: note that selecting by value will search sequentially through all values until the first is found. This could be inneficient for large collections.
-
     /// Creates a new Position for a DiscreteStepCarousel.
     /// 
     /// - Parameters:
@@ -41,6 +39,10 @@ where Values.Element: Equatable {
     ///     `values`, an index of `0` will be selected instead.
     ///   - markLength: Space available for each mark.
     ///   - spacing: Additional space between marks.
+    ///
+    ///  - Note: Using this initializer will search sequentially through `values` until a matching
+    ///  `selectedValue` is found. For a constant time approach use the
+    ///    ``init(values:selectedIndex:markLength:spacing:)`` initializer.
     public init(
         values: Values,
         selectedValue: Values.Element,
@@ -86,21 +88,19 @@ where Values.Element: Equatable {
     public var totalMarkLength: Double { markLength + spacing }
 
 
-    // TODO: note that selecting by value will search sequentially through all values until the first is found. This could be inneficient for large collections.
-
     /// Updates the carousel selection to the given `value`.
     ///  
     /// This function can be called within `withAnimation` for an animated selection. When
     /// animated, both `selectedValue` and `selectedIndex` will be updated immediately once to the
     /// new values if `immediate` is `true`, and then both properties will update again several
-    /// times as the animation progresses.
+    /// times as the animation advances.
     ///
     /// Use `immediate` to ensure both `selectedValue` and `selectedIndex` are updated during this
     /// call. Otherwise, both properties are not updated until the view updates, and the internal
-    /// scroll position updates to new position. When not animated this difference is minimal. When
+    /// scroll position updates to a new position. When not animated this difference is minimal. When
     /// animating, setting `immediate` to false can help prevent a small flicker of both
     /// `selectedValue` and `selectedIndex` to its final values that then gets overwriten by the
-    /// animation scrolling through the interim values.
+    /// animation advancing through the interim values.
     ///
     /// If `value` cannot be found in `values`, the current selection remains unchanged.
     ///
@@ -109,6 +109,9 @@ where Values.Element: Equatable {
     ///   - immediate: When `true`, both `selectedValue` and `selectedIndex` are updated immediately
     ///       during this call; otherwise those properties update until the internall scroll
     ///       position updates, or as animation progresses. Defults to `true`.
+    ///
+    /// - Note: Using this function will search sequentially through `values` until a matching
+    ///  `value` is found. For a constant time approach use ``selectIndex(_:immediate:)``.
     public mutating func selectValue(_ value: Values.Element, immediate: Bool = true) {
         guard let index = values.firstIndex(of: value)
         else { return }
@@ -125,13 +128,13 @@ where Values.Element: Equatable {
     /// This function can be called within `withAnimation` for an animated selection. When
     /// animated, `selectedIndex` will be updated immediately once to the new `index` if `immediate`
     /// is `true`, and then `selectedIndex` will update again several times as the animation
-    /// progresses. `selectedValue` will update only as the animation happens.
+    /// progresses. `selectedValue` will update only as the animation advances.
     ///
     /// Use `immediate` to ensure `selectedIndex` is updated during this call. Otherwise,
     /// `selectedIndex` is not updated until the view updates, and the internal scroll position
-    /// updates to new position. When not animated this difference is minimal. When animating,
+    /// updates to a newposition. When not animated this difference is minimal. When animating,
     /// setting `immediate` to false can help prevent a small flicker of `selectedIndex` to its
-    /// final value that then gets overwriten by the animation scrolling through the interim
+    /// final value that then gets overwriten by the animation advancing through the interim
     /// indices.
     ///
     /// If `index` is not a valid index for `values`, the current selection remains unchanged.
