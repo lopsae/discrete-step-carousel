@@ -158,11 +158,21 @@ private struct PreviewContent {
 
     // Selected value display.
     HistoricValue(
-        label: "value:",
         value: carouselPosition.selectedValue,
         isMarked: $valueIsMarked
     )
     .configure(spacing: 20)
+    // TODO: could be DRYed into a floatingTextBaselineCaption modifier,
+    // or baseline alignment could be suported by FloatingAlingment?
+    .overlay(alignment: .leadingLastTextBaseline) {
+        Text("value:")
+        .font(.caption)
+        .padding(.horizontal, 5)
+        .fixedSize()
+        .alignmentGuide(.leading) { dimensions in
+            dimensions[.trailing]
+        }
+    }
 
     PreviewContent.indicatorArrow
 
@@ -178,11 +188,19 @@ private struct PreviewContent {
 
     // Selected index display.
     HistoricValue(
-        label: "index:",
         describingValue: carouselPosition.selectedIndex,
         isMarked: $indexIsMarked
     )
     .configure(spacing: 20)
+    .overlay(alignment: .leadingLastTextBaseline) {
+        Text("index:")
+        .font(.caption)
+        .padding(.horizontal, 5)
+        .fixedSize()
+        .alignmentGuide(.leading) { dimensions in
+            dimensions[.trailing]
+        }
+    }
     .padding(.bottom)
 
     Divider()
@@ -309,18 +327,34 @@ private struct PreviewContent {
     .onScrollGeometryChange(of: \.contentSize.width, binding: $carouselContentWidth)
 
     HistoricValue(
-        label: "value:",
         value: carouselPosition.selectedValue,
         isMarked: $valueIsMarked
     )
     .configure(spacing: 20)
+    .overlay(alignment: .leadingLastTextBaseline) {
+        Text("value:")
+        .font(.caption)
+        .padding(.horizontal, 5)
+        .fixedSize()
+        .alignmentGuide(.leading) { dimensions in
+            dimensions[.trailing]
+        }
+    }
 
     HistoricValue(
-        label: "index:",
         describingValue: carouselPosition.selectedIndex,
         isMarked: $indexIsMarked
     )
     .configure(spacing: 20)
+    .overlay(alignment: .leadingLastTextBaseline) {
+        Text("index:")
+        .font(.caption)
+        .padding(.horizontal, 5)
+        .fixedSize()
+        .alignmentGuide(.leading) { dimensions in
+            dimensions[.trailing]
+        }
+    }
     .padding(.bottom)
 
     Divider()

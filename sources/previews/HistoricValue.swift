@@ -8,10 +8,10 @@ import SwiftUI
 import PreviewUtilities
 
 
-/// Displays a labeled value, along a history of previous values next to it.
+/// Displays a value, along a history of previous values offset from the view.
 ///
-/// Every time the displayed value changes the previous value is stored up to a given number of
-/// changes. All historic values are displayed next to the current value.
+/// Every time the displayed value changes the previous value is stored. All stored values are
+/// displayed offset of the current value, towards an specified edgde.
 struct HistoricValue<Value: Equatable, Formatter: FormatStyle>: View
 where
     Formatter.FormatInput == Value,
@@ -21,8 +21,6 @@ where
     @State private var history: [History] = []
     @Binding private var isMarked: Bool
 
-    /// String to display in a label next to the current value.
-    let label: String
     /// Current value.
     let value: Value
     /// Formatter to transform `value` to a string to display.
@@ -40,8 +38,7 @@ where
 
 
     /// Creates a view which displays a formatted value along its history of previous values.
-    init(label: String, value: Value, isMarked: Binding<Bool> = .constant(false), format formatter: Formatter) {
-        self.label = label
+    init(value: Value, isMarked: Binding<Bool> = .constant(false), format formatter: Formatter) {
         self.value = value
         self._isMarked = isMarked
         self.formatter = formatter
@@ -61,9 +58,6 @@ where
         // main text.
         .overlay {
             historicValues
-        }
-        .overlay(alignment: .leadingLastTextBaseline) {
-            labelView
         }
         .onChange(of: value) { oldValue, newValue in
             if history.count >= historyLength {
@@ -120,18 +114,6 @@ where
     }
 
 
-    /// Floating label displayed next to the current value.
-    private var labelView: some View {
-        Text(label)
-            .font(.caption)
-            .padding(.horizontal, 5)
-            .fixedSize()
-            .alignmentGuide(.leading) { dimensions in
-                dimensions[.trailing]
-            }
-    }
-
-
     private func markedCapsule(_ style: some ShapeStyle) -> some View {
         Capsule()
         .fill(style)
@@ -161,21 +143,21 @@ extension HistoricValue {
 extension HistoricValue {
 
     /// Creates a view which displays a string value along its history of previous values.
-    init(label: String, value: Value, isMarked: Binding<Bool> = .constant(false))
+    init(value: Value, isMarked: Binding<Bool> = .constant(false))
     where
         Formatter == IdentityFormatStyle<Value>,
         Value == String
     {
-        self.init(label: label, value: value, isMarked: isMarked, format: .init())
+        self.init(value: value, isMarked: isMarked, format: .init())
     }
 
 
     /// Creates a view which displays the string description of a value along its history of
     /// previous values.
-    init(label: String, describingValue value: Value, isMarked: Binding<Bool> = .constant(false))
+    init(describingValue value: Value, isMarked: Binding<Bool> = .constant(false))
     where Formatter == StringDescriptionFormatStyle<Value>
     {
-        self.init(label: label, value: value, isMarked: isMarked, format: .init())
+        self.init(value: value, isMarked: isMarked, format: .init())
     }
 
 }
@@ -191,7 +173,7 @@ extension HistoricValue {
     let values = Strings.natoPhoneticAlphabet
     let selection = values[selectedIndex]
 
-    HistoricValue(label: "selected:", value: selection, isMarked: $isMarked)
+    HistoricValue(value: selection, isMarked: $isMarked)
         .configure(padding: 10, spacing: 40, edge: historyEdge)
 
     Text.caption("Change value:")
@@ -260,10 +242,10 @@ extension HistoricValue {
     let step: Double = 0.12345
 
     if useFormatter {
-        HistoricValue(label: "value:", value: value, isMarked: $isMarked, format: .shortFraction)
+        HistoricValue(value: value, isMarked: $isMarked, format: .shortFraction)
             .configure(spacing: 35)
     } else {
-        HistoricValue(label: "value:", describingValue: value, isMarked: $isMarked)
+        HistoricValue(describingValue: value, isMarked: $isMarked)
             .configure(spacing: 15, edge: .top)
     }
 
