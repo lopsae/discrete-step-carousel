@@ -161,7 +161,7 @@ private struct PreviewContent {
         value: carouselPosition.selectedValue,
         isMarked: $valueIsMarked
     )
-    .configure(spacing: 20)
+    .configure(spacing: 20, edge: .trailing)
     // TODO: could be DRYed into a floatingTextBaselineCaption modifier,
     // or baseline alignment could be suported by FloatingAlingment?
     .overlay(alignment: .leadingLastTextBaseline) {
@@ -191,7 +191,7 @@ private struct PreviewContent {
         describingValue: carouselPosition.selectedIndex,
         isMarked: $indexIsMarked
     )
-    .configure(spacing: 20)
+    .configure(spacing: 20, edge: .trailing)
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("index:")
         .font(.caption)
@@ -330,7 +330,7 @@ private struct PreviewContent {
         value: carouselPosition.selectedValue,
         isMarked: $valueIsMarked
     )
-    .configure(spacing: 20)
+    .configure(spacing: 20, edge: .trailing)
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("value:")
         .font(.caption)
@@ -345,7 +345,7 @@ private struct PreviewContent {
         describingValue: carouselPosition.selectedIndex,
         isMarked: $indexIsMarked
     )
-    .configure(spacing: 20)
+    .configure(spacing: 20, edge: .trailing)
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("index:")
         .font(.caption)
