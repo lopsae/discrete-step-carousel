@@ -34,9 +34,10 @@ where Values.Element: Equatable {
     /// 
     /// - Parameters:
     ///   - values: All possible values the carousel can select, in the order these will be
-    ///     displayed.
+    ///     displayed. This collection must contain at least one element.
     ///   - selectedValue: Initial value to be selected. If this value cannot be found in
-    ///     `values`, an index of `0` will be selected instead.
+    ///     `values`, or when the parameter is omitted, the first element in `values` is used as the
+    ///     initial selection.
     ///   - markLength: Space available for each mark.
     ///   - spacing: Additional space between marks.
     ///
@@ -49,6 +50,8 @@ where Values.Element: Equatable {
         markLength: Double = 22.0,
         spacing: Double = .zero
     ) {
+        precondition(!values.isEmpty, "values must contain at least one element")
+
         self.values = values
         self.selectedValue = selectedValue
         self.markLength = markLength
@@ -64,16 +67,20 @@ where Values.Element: Equatable {
     /// 
     /// - Parameters:
     ///   - values: All possible values the carousel can select, in the order these will be
-    ///     displayed.
-    ///   - selectedIndex: Index of the initial value to be selected.
+    ///     displayed. This collection must contain at least one element.
+    ///   - selectedIndex: Index of the initial value to be selected, when omitted, the first index
+    ///     in `values` is used as the initial selection.
     ///   - markLength: Space available for each mark.
     ///   - spacing: Additional space between marks.
     public init(
         values: Values,
-        selectedIndex: Values.Index,
+        selectedIndex: Values.Index? = nil,
         markLength: Double = 22.0,
         spacing: Double = .zero
     ) {
+        precondition(!values.isEmpty, "values must contain at least one element")
+        let selectedIndex = selectedIndex ?? values.startIndex
+
         self.values = values
         self.selectedIndex = selectedIndex
         self.selectedValue = values[selectedIndex]

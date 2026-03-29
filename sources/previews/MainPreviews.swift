@@ -28,14 +28,13 @@ private struct PreviewContent {
     // TODO: Know issue: a position object works only for a single carousel, connecting it to more
     // that one does not sincronize them. Check if scrollPosition has also the same limitation.
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
-        values: Strings.alphabet.map(\.localizedUppercase),
-        selectedValue: "D")
+        values: Strings.alphabet.map(\.localizedUppercase))
     @Previewable @State var styledPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "S")
     @Previewable @State var offsetPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase)[10...20],
-        selectedValue: "M")
+        selectedValue: "O")
 
     PreviewCaption("Carousels with default and stylized default markers.")
         .padding(.bottom)
