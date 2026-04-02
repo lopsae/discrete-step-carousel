@@ -9,8 +9,11 @@ import SwiftUI
 
 /// A type for definining values and spacing for a `DiscreteStepCarousel`, and for accessing or
 /// updating the selected value or index.
-public struct DiscreteStepCarouselPosition<Values: RandomAccessCollection>
-where Values.Element: Equatable {
+public struct DiscreteStepCarouselPosition<Values>
+where
+    Values: RandomAccessCollection,
+    Values.Element: Equatable
+{
 
     /// Collection of values the carousel can select. Each value is represented by a mark.
     public let values: Values
@@ -163,3 +166,6 @@ where Values.Element: Equatable {
     }
 
 }
+
+
+extension DiscreteStepCarouselPosition: Equatable where Values: Equatable {}
