@@ -1,33 +1,58 @@
 // swift-tools-version: 6.2
-// The swift-tools-version declares the minimum version of Swift required to build this package.
+
+// https://theswiftdev.com/the-swift-package-manifest-file/
 
 
 import PackageDescription
 
 
 let package = Package(
-    name: "DiscreteStepSlider",
+    name: "DiscreteStepCarousel",
     platforms: [
-        .iOS("26.0")
+        .iOS(.v26),
+        .macOS(.v26)
     ],
     products: [
-        // Products define the executables and libraries a package produces, making them visible to other packages.
         .library(
-            name: "DiscreteStepSlider",
-            targets: ["DiscreteStepSlider"]
+            name: "DiscreteStepCarousel",
+            targets: ["DiscreteStepCarousel"]
         ),
     ],
+    dependencies: [
+        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.3.0"..<"1.0.0")
+    ],
     targets: [
-        // Targets are the basic building blocks of a package, defining a module or a test suite.
-        // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "DiscreteStepSlider",
+            name: "DiscreteStepCarousel",
+            dependencies: [
+                .product(name: "PreviewUtilities", package: "preview-utilities")
+            ],
             path: "sources"
         ),
         .testTarget(
-            name: "DiscreteStepSliderTests",
-            dependencies: ["DiscreteStepSlider"],
+            name: "DiscreteStepCarouselTests",
+            dependencies: ["DiscreteStepCarousel"],
             path: "tests",
         ),
     ]
 )
+
+// Target settings.
+for target in package.targets {
+    var settings = target.swiftSettings ?? []
+    settings.append(contentsOf: [
+        // https://developer.apple.com/documentation/xcode/build-settings-reference#Approachable-Concurrency
+        // https://developer.apple.com/documentation/xcode/build-settings-reference#Approachable-Concurrency
+        // https://useyourloaf.com/blog/approachable-concurrency-in-swift-packages/
+        // https://www.avanderlee.com/concurrency/approachable-concurrency-in-swift-6-2-a-clear-guide/
+
+        .defaultIsolation(MainActor.self),
+
+        // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0461-async-function-isolation.md
+        .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
+
+        // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0470-isolated-conformances.md
+        .enableUpcomingFeature("InferIsolatedConformances")
+    ])
+    target.swiftSettings = settings
+}
