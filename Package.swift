@@ -19,9 +19,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-//        .package(path: "../preview-utilities")
-//        .package(url: "../preview-utilities", branch: "initial-tagged-release")
-        .package(url: "https://github.com/lopsae/preview-utilities.git", branch: "initial-tagged-release")
+        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.3.0"..<"1.0.0")
     ],
     targets: [
         .target(

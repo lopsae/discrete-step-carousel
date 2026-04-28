@@ -1,13 +1,13 @@
 {
-  "originHash" : "45a39178a4ad5213953416fc96e07f8217f0cdb69ebbeb1a8c7cca9d5bd4d482",
+  "originHash" : "76ce6a1c1ade07b0a240f8963f92e4684586998e678594daeba7396ec81bfa7a",
   "pins" : [
     {
       "identity" : "preview-utilities",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
-        "branch" : "initial-tagged-release",
-        "revision" : "49f999030cb941f75d27e810b7f72a4b2a846550"
+        "revision" : "55fd35a8cb3f1005b61f2d8adcdc2a05b7b15b5a",
+        "version" : "0.3.0"
       }
     }
   ],
