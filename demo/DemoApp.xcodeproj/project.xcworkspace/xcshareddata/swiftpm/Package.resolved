@@ -1,0 +1,15 @@
+{
+  "originHash" : "cf639ac4fb8dc6397d05ff5c24e98b5b811ebbc09d67926472ec5ece35f0f3e5",
+  "pins" : [
+    {
+      "identity" : "preview-utilities",
+      "kind" : "localSourceControl",
+      "location" : "/Users/maic/dev/preview-utilities",
+      "state" : {
+        "branch" : "initial-tagged-release",
+        "revision" : "e7fbf5a9723452745551a76f1e5f47e687cf6150"
+      }
+    }
+  ],
+  "version" : 3
+}
