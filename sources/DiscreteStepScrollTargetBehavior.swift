@@ -8,7 +8,7 @@ import SwiftUI
 import PreviewUtilities
 
 
-/// Defines a scroll behaviour where the horizontal target x position always snaps to the closest
+/// Defines a scroll behavior where the horizontal target x position always snaps to the closest
 /// multiple of the step value.
 struct DiscreteStepScrollTargetBehavior: ScrollTargetBehavior {
     let step: Double

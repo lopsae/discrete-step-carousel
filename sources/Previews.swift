@@ -21,12 +21,12 @@ private struct PreviewContent {
 }
 
 
-// MARK: - Defaut
+// MARK: - Default
 
 
 #Preview("Default", traits: .fixedHeader, PreviewContent.layout) {
     // TODO: Know issue: a position object works only for a single carousel, connecting it to more
-    // that one does not sincronize them. Check if scrollPosition has also the same limitation.
+    // that one does not synchronize them. Check if scrollPosition has also the same limitation.
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase))
     @Previewable @State var styledPosition: DiscreteStepCarouselPosition = .init(
@@ -116,7 +116,7 @@ private struct PreviewContent {
 
     PreviewCaption("""
         The size of the mark is determined by `markLength` in the carousel position, and by the 
-        heigth of the carousel itself.
+        height of the carousel itself.
         """)
 
     Slider.captioned("Fixed Height", value: $fixedHeight, in: 0...200, valueFormat: .shortFraction)
@@ -162,7 +162,7 @@ private struct PreviewContent {
     )
     .configure(spacing: 20, edge: .trailing)
     // TODO: could be DRYed into a floatingTextBaselineCaption modifier,
-    // or baseline alignment could be suported by FloatingAlingment?
+    // or baseline alignment could be supported by FloatingAlignment?
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("value:")
         .font(.caption)

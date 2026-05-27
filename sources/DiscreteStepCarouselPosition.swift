@@ -7,7 +7,7 @@
 import SwiftUI
 
 
-/// A type for definining values and spacing for a `DiscreteStepCarousel`, and for accessing or
+/// A type for specifying values and spacing for a `DiscreteStepCarousel`, and for accessing or
 /// updating the selected value or index.
 public struct DiscreteStepCarouselPosition<Values>
 where
@@ -109,7 +109,7 @@ where
     /// call. Otherwise, both properties are not updated until the view updates, and the internal
     /// scroll position updates to a new position. When not animated this difference is minimal. When
     /// animating, setting `immediate` to false can help prevent a small flicker of both
-    /// `selectedValue` and `selectedIndex` to its final values that then gets overwriten by the
+    /// `selectedValue` and `selectedIndex` to its final values that then gets overwritten by the
     /// animation advancing through the interim values.
     ///
     /// If `value` cannot be found in `values`, the current selection remains unchanged.
@@ -117,8 +117,8 @@ where
     /// - Parameters:
     ///   - value: The new value to select.
     ///   - immediate: When `true`, both `selectedValue` and `selectedIndex` are updated immediately
-    ///       during this call; otherwise those properties update until the internall scroll
-    ///       position updates, or as animation progresses. Defults to `true`.
+    ///       during this call; otherwise those properties update until the internal scroll
+    ///       position updates, or as animation progresses. Defaults to `true`.
     ///
     /// - Note: Using this function will search sequentially through `values` until a matching
     ///  `value` is found. For a constant time approach use ``selectIndex(_:immediate:)``.
@@ -142,9 +142,9 @@ where
     ///
     /// Use `immediate` to ensure `selectedIndex` is updated during this call. Otherwise,
     /// `selectedIndex` is not updated until the view updates, and the internal scroll position
-    /// updates to a newposition. When not animated this difference is minimal. When animating,
+    /// updates to a new position. When not animated this difference is minimal. When animating,
     /// setting `immediate` to false can help prevent a small flicker of `selectedIndex` to its
-    /// final value that then gets overwriten by the animation advancing through the interim
+    /// final value that then gets overwritten by the animation advancing through the interim
     /// indices.
     ///
     /// If `index` is not a valid index for `values`, the current selection remains unchanged.
@@ -152,8 +152,8 @@ where
     /// - Parameters:
     ///   - index: The index for the value in `values` to select.
     ///   - immediate: When `true`, `selectedIndex` is updated immediately during this call;
-    ///       otherwise the property updates until the internall scroll position updates, or as
-    ///       animation progresses. Defults to `true`.
+    ///       otherwise the property updates until the internal scroll position updates, or as
+    ///       animation progresses. Defaults to `true`.
     public mutating func selectIndex(_ index: Values.Index, immediate: Bool = true) {
         guard values.indices.contains(index)
         else { return }

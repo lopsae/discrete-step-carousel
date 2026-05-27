@@ -8,8 +8,10 @@ import SwiftUI
 import PreviewUtilities
 
 
+/// Early prototype of the slider/carousel control.
+///
+/// Kept as a simplified example of the inner workings of the carousel.
 struct PrototypeSlider: View {
-
 
     struct Position {
         let values: [Double]
@@ -154,7 +156,6 @@ struct PrototypeSlider: View {
 
     PrototypeSlider(position: $sliderPosition)
         .frame(height: 120)
-        .debugOverlay(.size, .outerInfo)
         .onAppear {
             print("✴️ Preview Appeared")
         }
