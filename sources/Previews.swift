@@ -25,8 +25,6 @@ private struct PreviewContent {
 
 
 #Preview("Default", traits: .fixedHeader, PreviewContent.layout) {
-    // TODO: Know issue: a position object works only for a single carousel, connecting it to more
-    // that one does not synchronize them. Check if scrollPosition has also the same limitation.
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase))
     @Previewable @State var styledPosition: DiscreteStepCarouselPosition = .init(
