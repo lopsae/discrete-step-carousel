@@ -216,7 +216,7 @@ private struct PreviewContent {
 
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 2, 9, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 9, carouselPosition.values.finalIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
@@ -249,7 +249,7 @@ private struct PreviewContent {
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 2, 11, 13, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 11, 13, carouselPosition.values.finalIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
@@ -361,7 +361,7 @@ private struct PreviewContent {
     List {
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 2, 5, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 5, carouselPosition.values.finalIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
@@ -392,7 +392,7 @@ private struct PreviewContent {
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 2, 11, 15, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 11, 15, carouselPosition.values.finalIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
