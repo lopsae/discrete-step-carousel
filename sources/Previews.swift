@@ -159,16 +159,11 @@ private struct PreviewContent {
         isMarked: $valueIsMarked
     )
     .configure(spacing: 20, edge: .trailing)
-    // TODO: could be DRYed into a floatingTextBaselineCaption modifier,
-    // or baseline alignment could be supported by FloatingAlignment?
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("value:")
         .font(.caption)
-        .padding(.horizontal, 5)
         .fixedSize()
-        .alignmentGuide(.leading) { dimensions in
-            dimensions[.trailing]
-        }
+        .alignmentGuide(.leading, moveTo: .trailing, offsetBy: 5)
     }
 
     PreviewContent.indicatorArrow
@@ -192,11 +187,8 @@ private struct PreviewContent {
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("index:")
         .font(.caption)
-        .padding(.horizontal, 5)
         .fixedSize()
-        .alignmentGuide(.leading) { dimensions in
-            dimensions[.trailing]
-        }
+        .alignmentGuide(.leading, moveTo: .trailing, offsetBy: 4)
     }
     .padding(.bottom)
 
@@ -331,11 +323,8 @@ private struct PreviewContent {
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("value:")
         .font(.caption)
-        .padding(.horizontal, 5)
         .fixedSize()
-        .alignmentGuide(.leading) { dimensions in
-            dimensions[.trailing]
-        }
+        .alignmentGuide(.leading, moveTo: .trailing, offsetBy: 5)
     }
 
     HistoricValue(
@@ -346,11 +335,8 @@ private struct PreviewContent {
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("index:")
         .font(.caption)
-        .padding(.horizontal, 5)
         .fixedSize()
-        .alignmentGuide(.leading) { dimensions in
-            dimensions[.trailing]
-        }
+        .alignmentGuide(.leading, moveTo: .trailing, offsetBy: 5)
     }
     .padding(.bottom)
 
