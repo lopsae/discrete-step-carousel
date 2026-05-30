@@ -7,7 +7,36 @@
 import SwiftUI
 
 
-// FUTURE: support vertical carousel
+/// A control for selecting a value from a collection, with each value represented by a view in a
+/// scrollable surface.
+///
+/// The discrete step carousel maps a collection of identified values to a scrollable sequence of
+/// views. The user can scroll between these views to select one value at a time.
+///
+/// ### Carousel Position
+///
+/// ``DiscreteStepCarouselPosition`` is the structure that provides the data and layout information
+/// for a step carousel. It is also used to read and update the currently selected index or element.
+///
+/// Calling ``DiscreteStepCarouselPosition/selectValue(_:immediate:)`` or ``DiscreteStepCarouselPosition/selectIndex(_:immediate:)``
+/// in a animation block will animate the carousel to the selected position.
+///
+///
+/// ### Marks and Sizing
+///
+/// Each of the views that represent a carousel value is referred as a mark. The anchor is a view
+/// that floats over all marks and signals the selected mark.
+///
+/// Use the ``init(position:)`` or ``init(position:anchorStyle:markStyle:)`` initializers to use the
+/// default marks.
+///
+/// Use the ``init(position:anchorContent:markContent:)`` or ``init(position:markContent:)`` to
+/// provide a closure to build the view for each mark.
+///
+/// The carousel control will expand to occupy all available space. Use a frame or other layout
+/// modifiers to constrain its size to the appropriate dimensions. The size available for each mark
+/// is determined by the ``DiscreteStepCarouselPosition/markLength`` property, which each mark view
+/// centered in the available space.
 public struct DiscreteStepCarousel<Values, AnchorContent, MarkContent> : View
 where
     Values: RandomAccessCollection,
@@ -46,6 +75,7 @@ where
     }
 
 
+    @_documentation(visibility: internal)
     public var body: some View {
         ZStack {
             // Geometry reader needs to envelop ScrollView, contentMargins uses the scroll view
@@ -102,7 +132,7 @@ where
 
 // MARK: - Defaults
 
-
+// TODO: update to primary and secondary/tertiary
 struct DiscreteStepCarouselDefaults {
     static let anchorStyle: Color = .black
     static let markStyle: Color = .gray

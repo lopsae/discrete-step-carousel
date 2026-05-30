@@ -7,6 +7,10 @@
 import SwiftUI
 
 
+/// Default mark for a `DiscreteStepCarousel`.
+///
+/// View used as the default mark and anchor in a ``DiscreteStepCarousel`` when no custom views
+/// are provided.
 public struct DefaultMark<Style: ShapeStyle>: View {
 
     let fill: Style

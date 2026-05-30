@@ -7,8 +7,12 @@
 import SwiftUI
 
 
-/// A type for specifying values and spacing for a `DiscreteStepCarousel`, and for accessing or
+/// A structure for specifying values and layout for a `DiscreteStepCarousel`, and for reading or
 /// updating the selected value or index.
+///
+/// A ``DiscreteStepCarousel`` requires a binding to an instance of this type to provide the data
+/// and layout information for the carousel. The selected value or index can also be read or
+/// updated using this structure.
 public struct DiscreteStepCarouselPosition<Values>
 where
     Values: RandomAccessCollection,
