@@ -12,9 +12,9 @@ public struct DefaultMark<Style: ShapeStyle>: View {
     let fill: Style
 
     public var body: some View {
-        Rectangle()
+        Capsule()
             .fill(fill)
-            .frame(width: 2)
+            .frame(width: 3)
     }
 }
 

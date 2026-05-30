@@ -104,7 +104,7 @@ private struct PreviewContent {
 // MARK: - Mark Size
 
 
-#Preview("MarkSize", traits: .fixedHeader, PreviewContent.layout) {
+#Preview("MarkHeight", traits: .fixedHeader, PreviewContent.layout) {
     @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
         values: Strings.natoPhoneticAlphabet.map(\.capitalized),
         selectedValue: "Sierra",
