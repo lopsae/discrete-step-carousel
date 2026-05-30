@@ -15,12 +15,11 @@ import SwiftUI
 ///
 /// ### Carousel Position
 ///
-/// ``DiscreteStepCarouselPosition`` is the structure that provides the data and layout information
+/// ``StepCarouselPosition`` is the structure that provides the data and layout information
 /// for a step carousel. It is also used to read and update the currently selected index or element.
 ///
-/// Calling ``DiscreteStepCarouselPosition/selectValue(_:immediate:)`` or ``DiscreteStepCarouselPosition/selectIndex(_:immediate:)``
+/// Calling ``StepCarouselPosition/selectValue(_:immediate:)`` or ``StepCarouselPosition/selectIndex(_:immediate:)``
 /// in a animation block will animate the carousel to the selected position.
-///
 ///
 /// ### Marks and Sizing
 ///
@@ -35,7 +34,7 @@ import SwiftUI
 ///
 /// The carousel control will expand to occupy all available space. Use a frame or other layout
 /// modifiers to constrain its size to the appropriate dimensions. The size available for each mark
-/// is determined by the ``DiscreteStepCarouselPosition/markLength`` property, which each mark view
+/// is determined by the ``StepCarouselPosition/markLength`` property, which each mark view
 /// centered in the available space.
 public struct DiscreteStepCarousel<Values, AnchorContent, MarkContent> : View
 where
@@ -46,7 +45,7 @@ where
     MarkContent: View
 {
 
-    @Binding var position: DiscreteStepCarouselPosition<Values>
+    @Binding var position: StepCarouselPosition<Values>
 
     private let anchorContent: () -> AnchorContent
 
@@ -56,7 +55,7 @@ where
 
 
     public init(
-        position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
+        position positionBinding: Binding<StepCarouselPosition<Values>>,
         @ViewBuilder anchorContent: @escaping () -> AnchorContent,
         @ViewBuilder markContent: @escaping (Values.Index, Values.Element) -> MarkContent
     ) {
@@ -145,7 +144,7 @@ struct DiscreteStepCarouselDefaults {
 extension DiscreteStepCarousel {
 
     public init(
-        position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
+        position positionBinding: Binding<StepCarouselPosition<Values>>,
         @ViewBuilder markContent: @escaping (Values.Index, Values.Element) -> MarkContent
     )
     where
@@ -160,7 +159,7 @@ extension DiscreteStepCarousel {
 
 
     public init(
-        position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>
+        position positionBinding: Binding<StepCarouselPosition<Values>>
     )
     where
         AnchorContent == DefaultMark<Color>,
@@ -175,7 +174,7 @@ extension DiscreteStepCarousel {
 
 
     public init<AnchorStyle: ShapeStyle, MarkStyle: ShapeStyle>(
-        position positionBinding: Binding<DiscreteStepCarouselPosition<Values>>,
+        position positionBinding: Binding<StepCarouselPosition<Values>>,
         anchorStyle: AnchorStyle,
         markStyle: MarkStyle
     )

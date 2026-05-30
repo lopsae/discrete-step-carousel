@@ -13,7 +13,7 @@ import SwiftUI
 /// A ``DiscreteStepCarousel`` requires a binding to an instance of this type to provide the data
 /// and layout information for the carousel. The selected value or index can also be read or
 /// updated using this structure.
-public struct DiscreteStepCarouselPosition<Values>
+public struct StepCarouselPosition<Values>
 where
     Values: RandomAccessCollection,
     Values.Element: Equatable
@@ -172,4 +172,4 @@ where
 }
 
 
-extension DiscreteStepCarouselPosition: Equatable where Values: Equatable {}
+extension StepCarouselPosition: Equatable where Values: Equatable {}

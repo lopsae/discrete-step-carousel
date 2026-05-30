@@ -25,12 +25,12 @@ private struct PreviewContent {
 
 
 #Preview("Default", traits: .fixedHeader, PreviewContent.layout) {
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase))
-    @Previewable @State var styledPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var styledPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "S")
-    @Previewable @State var offsetPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var offsetPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase)[10...20],
         selectedValue: "O")
 
@@ -66,7 +66,7 @@ private struct PreviewContent {
 
 
 #Preview("Images", traits: .fixedHeader, PreviewContent.layout) {
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.natoPhoneticAlphabet.map(\.capitalized),
         selectedIndex: 10,
         markLength: 100,
@@ -105,7 +105,7 @@ private struct PreviewContent {
 
 
 #Preview("MarkHeight", traits: .fixedHeader, PreviewContent.layout) {
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.natoPhoneticAlphabet.map(\.capitalized),
         selectedValue: "Sierra",
         markLength: 80,
@@ -141,7 +141,7 @@ private struct PreviewContent {
 
 #Preview("Controls", traits: .zeroSpacing, PreviewContent.layout) {
     @Previewable @State var printOnce: PrintOnce = .previewStarted
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "M")
     @Previewable @State var updatesImmediately: Bool = false
@@ -283,7 +283,7 @@ private struct PreviewContent {
 
 
 #Preview("Controls&Images", traits: .zeroSpacing, PreviewContent.layout) {
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "X",
         markLength: 80,
