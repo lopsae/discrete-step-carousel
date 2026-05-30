@@ -10,7 +10,8 @@ Documentation release
 
 Future Features
 ---------------
- + Support for vertical carousel.
- + Migrate state of the carousel to a ratio of the scrolled content. To make this property animatable.
-   Currently the main state of the carousel is the selected index, which cannot be animated since it
-   is an integer value with no possibility of intermediate values.
++ Support for vertical carousel.
++ Migrate state of the carousel to a ratio of the scrolled content. To make this property animatable.
+  Currently the main state of the carousel is the selected index, which cannot be animated since it
+  is an integer value with no possibility of intermediate values.
++ Make possible to change markLength, and the current selection of the carousel to persist. 
