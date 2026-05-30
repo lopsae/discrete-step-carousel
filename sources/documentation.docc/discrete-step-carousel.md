@@ -12,7 +12,7 @@ view represents a value. The user can scroll between these views to select one v
 
 ### Carousel Control
 
-+ ``DiscreteStepCarousel``
++ ``StepCarousel``
 + ``StepCarouselPosition``
 
 

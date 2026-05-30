@@ -36,7 +36,7 @@ import SwiftUI
 /// modifiers to constrain its size to the appropriate dimensions. The size available for each mark
 /// is determined by the ``StepCarouselPosition/markLength`` property, which each mark view
 /// centered in the available space.
-public struct DiscreteStepCarousel<Values, AnchorContent, MarkContent> : View
+public struct StepCarousel<Values, AnchorContent, MarkContent> : View
 where
     Values: RandomAccessCollection,
     Values.Index: Hashable,
@@ -141,7 +141,7 @@ struct DiscreteStepCarouselDefaults {
 // MARK: - Convenience initializers
 
 
-extension DiscreteStepCarousel {
+extension StepCarousel {
 
     public init(
         position positionBinding: Binding<StepCarouselPosition<Values>>,

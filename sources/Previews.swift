@@ -37,7 +37,7 @@ private struct PreviewContent {
     PreviewCaption("Carousels with default and stylized default markers.")
         .padding(.bottom)
     PreviewContent.indicatorArrow
-    DiscreteStepCarousel(position: $carouselPosition)
+    StepCarousel(position: $carouselPosition)
         .frame(height: 44)
     Text(carouselPosition.selectedValue)
         .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
@@ -46,7 +46,7 @@ private struct PreviewContent {
         .padding(.bottom)
 
     PreviewContent.indicatorArrow
-    DiscreteStepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+    StepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
         .frame(height: 44)
     Text(styledPosition.selectedValue)
         .floatingCaption("\(styledPosition.selectedIndex)", .alignment(.outerTrailingTop))
@@ -55,7 +55,7 @@ private struct PreviewContent {
         .padding(.bottom)
 
     PreviewContent.indicatorArrow
-    DiscreteStepCarousel(position: $offsetPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+    StepCarousel(position: $offsetPosition, anchorStyle: .red, markStyle: .orange.tertiary)
         .frame(height: 44)
     Text(offsetPosition.selectedValue)
         .floatingCaption("\(offsetPosition.selectedIndex)", .alignment(.outerTrailingTop))
@@ -76,7 +76,7 @@ private struct PreviewContent {
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition) { _, item in
+    StepCarousel(position: $carouselPosition) { _, item in
         Group {
             if let image = imageGenerator.images[item] {
                 image
@@ -121,7 +121,7 @@ private struct PreviewContent {
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition) { _, item in
+    StepCarousel(position: $carouselPosition) { _, item in
         GeometryReader { geometry in
             let width = geometry.size.width
             let height = geometry.size.height
@@ -168,7 +168,7 @@ private struct PreviewContent {
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition)
+    StepCarousel(position: $carouselPosition)
     .frame(height: 44)
     .onScrollGeometryChange(of: \.contentSize.width, binding: $carouselContentWidth)
     .onChange(of: carouselPosition.selectedValue) { oldValue, newValue in
@@ -296,7 +296,7 @@ private struct PreviewContent {
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition) { _, item in
+    StepCarousel(position: $carouselPosition) { _, item in
         ConstrainedFill {
             if let image = imageGenerator.images[item] {
                 image

@@ -7,10 +7,10 @@
 import SwiftUI
 
 
-/// A structure for specifying values and layout for a `DiscreteStepCarousel`, and for reading or
+/// A structure for specifying values and layout for a `StepCarousel`, and for reading or
 /// updating the selected value or index.
 ///
-/// A ``DiscreteStepCarousel`` requires a binding to an instance of this type to provide the data
+/// A ``StepCarousel`` requires a binding to an instance of this type to provide the data
 /// and layout information for the carousel. The selected value or index can also be read or
 /// updated using this structure.
 public struct StepCarouselPosition<Values>
@@ -37,7 +37,7 @@ where
 
     internal var scrollPosition: ScrollPosition
 
-    /// Creates a new Position for a DiscreteStepCarousel.
+    /// Creates a new Position for a StepCarousel.
     /// 
     /// - Parameters:
     ///   - values: All possible values the carousel can select, in the order these will be
@@ -70,7 +70,7 @@ where
     }
 
 
-    /// Creates a new Position for a DiscreteStepCarousel.
+    /// Creates a new Position for a StepCarousel.
     /// 
     /// - Parameters:
     ///   - values: All possible values the carousel can select, in the order these will be
