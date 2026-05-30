@@ -17,3 +17,35 @@ public struct DefaultMark<Style: ShapeStyle>: View {
             .frame(width: 2)
     }
 }
+
+
+// MARK: - PreviewContent
+
+
+@MainActor
+private struct PreviewContent {
+
+    static let layout: PreviewTrait<Preview.ViewTraits> = .iPhoneProSizeLayout
+
+}
+
+
+// MARK: - Previews
+
+
+#Preview("Default", traits: .headerFooter, PreviewContent.layout) {
+    Spacer()
+
+    HStack(spacing: 40) {
+        DefaultMark(fill: .primary)
+            .frame(height: 44)
+        DefaultMark(fill: .secondary)
+            .frame(height: 44)
+        DefaultMark(fill: .red)
+            .frame(height: 44)
+        DefaultMark(fill: .orange)
+            .frame(height: 44)
+    }
+
+    Spacer()
+}
