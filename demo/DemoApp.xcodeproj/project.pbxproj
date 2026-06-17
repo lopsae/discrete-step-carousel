@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2DF9A8902F240D2400C27C56 /* DiscreteStepCarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 2DF9A88F2F240D2400C27C56 /* DiscreteStepCarousel */; };
+		2D19D9D92FE36B6800820B8D /* DiscreteStepCarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 2D19D9D82FE36B6800820B8D /* DiscreteStepCarousel */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,7 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DF9A8902F240D2400C27C56 /* DiscreteStepCarousel in Frameworks */,
+				2D19D9D92FE36B6800820B8D /* DiscreteStepCarousel in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,7 +70,7 @@
 			);
 			name = DemoApp;
 			packageProductDependencies = (
-				2DF9A88F2F240D2400C27C56 /* DiscreteStepCarousel */,
+				2D19D9D82FE36B6800820B8D /* DiscreteStepCarousel */,
 			);
 			productName = DiscreteStepCarouselDemo;
 			productReference = 2D8E07172EEFC33800BAC573 /* DemoApp.app */;
@@ -101,7 +101,7 @@
 			mainGroup = 2D8E070E2EEFC33800BAC573;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				2DF9A88E2F240D2400C27C56 /* XCLocalSwiftPackageReference "../../discrete-step-carousel" */,
+				2D19D9D72FE36B6800820B8D /* XCLocalSwiftPackageReference "../../discrete-step-carousel" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 2D8E07182EEFC33800BAC573 /* Products */;
@@ -366,14 +366,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		2DF9A88E2F240D2400C27C56 /* XCLocalSwiftPackageReference "../../discrete-step-carousel" */ = {
+		2D19D9D72FE36B6800820B8D /* XCLocalSwiftPackageReference "../../discrete-step-carousel" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = "../../discrete-step-carousel";
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2DF9A88F2F240D2400C27C56 /* DiscreteStepCarousel */ = {
+		2D19D9D82FE36B6800820B8D /* DiscreteStepCarousel */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = DiscreteStepCarousel;
 		};

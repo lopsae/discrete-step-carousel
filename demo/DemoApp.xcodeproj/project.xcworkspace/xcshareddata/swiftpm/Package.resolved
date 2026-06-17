@@ -3,11 +3,11 @@
   "pins" : [
     {
       "identity" : "preview-utilities",
-      "kind" : "localSourceControl",
-      "location" : "/Users/maic/dev/preview-utilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
-        "branch" : "initial-tagged-release",
-        "revision" : "e7fbf5a9723452745551a76f1e5f47e687cf6150"
+        "branch" : "feature/documentation-second-batch",
+        "revision" : "4c20d7efd5f99d089d485e45f50609d7f85e8d2d"
       }
     }
   ],

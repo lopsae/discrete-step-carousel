@@ -10,7 +10,7 @@ import PreviewUtilities
 
 
 struct ContentView: View {
-    @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "D")
 
@@ -21,7 +21,7 @@ struct ContentView: View {
                 Image(systemName: "arrowtriangle.down.fill")
                     .font(.caption)
 
-                DiscreteStepCarousel(position: $carouselPosition)
+                StepCarousel(position: $carouselPosition)
                 .frame(height: 44)
 
                 Text(carouselPosition.selectedIndex.description)
