@@ -1,6 +1,15 @@
 {
-  "originHash" : "db5bd99c0aeba4c2784b656a6085cba41d9a5b9d355a0ce2f76dfabfa02dce82",
+  "originHash" : "9cb63a0b352666f93bdbc754eab333b4ddb0e8a2f51bd1778c6d1cad4040a56a",
   "pins" : [
+    {
+      "identity" : "preview-utilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lopsae/preview-utilities.git",
+      "state" : {
+        "branch" : "feature/documentation-second-batch",
+        "revision" : "4c20d7efd5f99d089d485e45f50609d7f85e8d2d"
+      }
+    },
     {
       "identity" : "swift-docc-plugin",
       "kind" : "remoteSourceControl",

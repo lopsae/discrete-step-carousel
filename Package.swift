@@ -17,8 +17,9 @@ let package = Package(
         ),
     ],
     dependencies: [
-//        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.3.0"..<"1.0.0")
-        .package(path: "../preview-utilities"),
+//        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.3.0"..<"1.0.0"),
+        .package(url: "https://github.com/lopsae/preview-utilities.git", branch: "feature/documentation-second-batch"),
+//        .package(path: "../preview-utilities"),
         .package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.1.0")
     ],
     targets: [
