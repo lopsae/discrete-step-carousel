@@ -1,0 +1,375 @@
+{
+  "abstract": [
+    {
+      "text": "Default mark for a ",
+      "type": "text"
+    },
+    {
+      "code": "StepCarousel",
+      "type": "codeVoice"
+    },
+    {
+      "text": ".",
+      "type": "text"
+    }
+  ],
+  "hierarchy": {
+    "paths": [
+      [
+        "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel"
+      ]
+    ]
+  },
+  "identifier": {
+    "interfaceLanguage": "swift",
+    "url": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/DefaultMark"
+  },
+  "kind": "symbol",
+  "metadata": {
+    "externalID": "s:20DiscreteStepCarousel11DefaultMarkV",
+    "fragments": [
+      {
+        "kind": "keyword",
+        "text": "struct"
+      },
+      {
+        "kind": "text",
+        "text": " "
+      },
+      {
+        "kind": "identifier",
+        "text": "DefaultMark"
+      }
+    ],
+    "modules": [
+      {
+        "name": "DiscreteStepCarousel"
+      }
+    ],
+    "navigatorTitle": [
+      {
+        "kind": "identifier",
+        "text": "DefaultMark"
+      }
+    ],
+    "role": "symbol",
+    "roleHeading": "Structure",
+    "symbolKind": "struct",
+    "title": "DefaultMark"
+  },
+  "primaryContentSections": [
+    {
+      "declarations": [
+        {
+          "languages": [
+            "swift"
+          ],
+          "platforms": [
+            "macOS"
+          ],
+          "tokens": [
+            {
+              "kind": "attribute",
+              "text": "@"
+            },
+            {
+              "kind": "attribute",
+              "preciseIdentifier": "s:ScM",
+              "text": "MainActor"
+            },
+            {
+              "kind": "text",
+              "text": " "
+            },
+            {
+              "kind": "keyword",
+              "text": "struct"
+            },
+            {
+              "kind": "text",
+              "text": " "
+            },
+            {
+              "kind": "identifier",
+              "text": "DefaultMark"
+            },
+            {
+              "kind": "text",
+              "text": "<"
+            },
+            {
+              "kind": "genericParameter",
+              "text": "Style"
+            },
+            {
+              "kind": "text",
+              "text": "> "
+            },
+            {
+              "kind": "keyword",
+              "text": "where"
+            },
+            {
+              "kind": "text",
+              "text": " "
+            },
+            {
+              "kind": "typeIdentifier",
+              "text": "Style"
+            },
+            {
+              "kind": "text",
+              "text": " : "
+            },
+            {
+              "kind": "typeIdentifier",
+              "preciseIdentifier": "s:7SwiftUI10ShapeStyleP",
+              "text": "ShapeStyle"
+            }
+          ]
+        }
+      ],
+      "kind": "declarations"
+    },
+    {
+      "content": [
+        {
+          "anchor": "overview",
+          "level": 2,
+          "text": "Overview",
+          "type": "heading"
+        },
+        {
+          "inlineContent": [
+            {
+              "text": "View used as the default mark and anchor in a ",
+              "type": "text"
+            },
+            {
+              "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel",
+              "isActive": true,
+              "type": "reference"
+            },
+            {
+              "text": " when no custom views",
+              "type": "text"
+            },
+            {
+              "text": " ",
+              "type": "text"
+            },
+            {
+              "text": "are provided.",
+              "type": "text"
+            }
+          ],
+          "type": "paragraph"
+        }
+      ],
+      "kind": "content"
+    }
+  ],
+  "references": {
+    "doc://DiscreteStepCarousel/7SwiftUI4ViewP": {
+      "identifier": "doc://DiscreteStepCarousel/7SwiftUI4ViewP",
+      "title": "SwiftUICore.View",
+      "type": "unresolvable"
+    },
+    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
+      "abstract": [
+        {
+          "text": "A control for selecting a value from a collection, with each value represented by a view in a",
+          "type": "text"
+        },
+        {
+          "text": " ",
+          "type": "text"
+        },
+        {
+          "text": "scrollable surface.",
+          "type": "text"
+        }
+      ],
+      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel",
+      "kind": "symbol",
+      "role": "collection",
+      "title": "DiscreteStepCarousel",
+      "type": "topic",
+      "url": "/documentation/discretestepcarousel"
+    },
+    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/DefaultMark": {
+      "abstract": [
+        {
+          "text": "Default mark for a ",
+          "type": "text"
+        },
+        {
+          "code": "StepCarousel",
+          "type": "codeVoice"
+        },
+        {
+          "text": ".",
+          "type": "text"
+        }
+      ],
+      "fragments": [
+        {
+          "kind": "keyword",
+          "text": "struct"
+        },
+        {
+          "kind": "text",
+          "text": " "
+        },
+        {
+          "kind": "identifier",
+          "text": "DefaultMark"
+        }
+      ],
+      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/DefaultMark",
+      "kind": "symbol",
+      "navigatorTitle": [
+        {
+          "kind": "identifier",
+          "text": "DefaultMark"
+        }
+      ],
+      "role": "symbol",
+      "title": "DefaultMark",
+      "type": "topic",
+      "url": "/documentation/discretestepcarousel/defaultmark"
+    },
+    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/DefaultMark/body": {
+      "abstract": [],
+      "fragments": [
+        {
+          "kind": "keyword",
+          "text": "var"
+        },
+        {
+          "kind": "text",
+          "text": " "
+        },
+        {
+          "kind": "identifier",
+          "text": "body"
+        },
+        {
+          "kind": "text",
+          "text": ": "
+        },
+        {
+          "kind": "keyword",
+          "text": "some"
+        },
+        {
+          "kind": "text",
+          "text": " "
+        },
+        {
+          "kind": "typeIdentifier",
+          "preciseIdentifier": "s:7SwiftUI4ViewP",
+          "text": "View"
+        }
+      ],
+      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/DefaultMark/body",
+      "kind": "symbol",
+      "role": "symbol",
+      "title": "body",
+      "type": "topic",
+      "url": "/documentation/discretestepcarousel/defaultmark/body"
+    },
+    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel": {
+      "abstract": [
+        {
+          "text": "A control for selecting a value from a collection, with each value represented by a view in a",
+          "type": "text"
+        },
+        {
+          "text": " ",
+          "type": "text"
+        },
+        {
+          "text": "scrollable surface.",
+          "type": "text"
+        }
+      ],
+      "fragments": [
+        {
+          "kind": "keyword",
+          "text": "struct"
+        },
+        {
+          "kind": "text",
+          "text": " "
+        },
+        {
+          "kind": "identifier",
+          "text": "StepCarousel"
+        }
+      ],
+      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel",
+      "kind": "symbol",
+      "navigatorTitle": [
+        {
+          "kind": "identifier",
+          "text": "StepCarousel"
+        }
+      ],
+      "role": "symbol",
+      "title": "StepCarousel",
+      "type": "topic",
+      "url": "/documentation/discretestepcarousel/stepcarousel"
+    },
+    "doc://DiscreteStepCarousel/s16SendableMetatypeP": {
+      "identifier": "doc://DiscreteStepCarousel/s16SendableMetatypeP",
+      "title": "Swift.SendableMetatype",
+      "type": "unresolvable"
+    },
+    "doc://DiscreteStepCarousel/s8SendableP": {
+      "identifier": "doc://DiscreteStepCarousel/s8SendableP",
+      "title": "Swift.Sendable",
+      "type": "unresolvable"
+    }
+  },
+  "relationshipsSections": [
+    {
+      "identifiers": [
+        "doc://DiscreteStepCarousel/s8SendableP",
+        "doc://DiscreteStepCarousel/s16SendableMetatypeP",
+        "doc://DiscreteStepCarousel/7SwiftUI4ViewP"
+      ],
+      "kind": "relationships",
+      "title": "Conforms To",
+      "type": "conformsTo"
+    }
+  ],
+  "schemaVersion": {
+    "major": 0,
+    "minor": 3,
+    "patch": 0
+  },
+  "sections": [],
+  "topicSections": [
+    {
+      "anchor": "Instance-Properties",
+      "generated": true,
+      "identifiers": [
+        "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/DefaultMark/body"
+      ],
+      "title": "Instance Properties"
+    }
+  ],
+  "variants": [
+    {
+      "paths": [
+        "/documentation/discretestepcarousel/defaultmark"
+      ],
+      "traits": [
+        {
+          "interfaceLanguage": "swift"
+        }
+      ]
+    }
+  ]
+}

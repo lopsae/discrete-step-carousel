@@ -1,0 +1,579 @@
+{
+  "hierarchy": {
+    "paths": [
+      [
+        "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel",
+        "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel"
+      ]
+    ]
+  },
+  "identifier": {
+    "interfaceLanguage": "swift",
+    "url": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:anchorContent:markContent:)"
+  },
+  "kind": "symbol",
+  "metadata": {
+    "externalID": "s:20DiscreteStepCarousel0bC0V8position13anchorContent04markF0ACyxq_q0_G7SwiftUI7BindingVyAA0bC8PositionVyxGG_q_ycq0_5IndexQz_7ElementQztctcfc",
+    "fragments": [
+      {
+        "kind": "identifier",
+        "text": "init"
+      },
+      {
+        "kind": "text",
+        "text": "("
+      },
+      {
+        "kind": "externalParam",
+        "text": "position"
+      },
+      {
+        "kind": "text",
+        "text": ": "
+      },
+      {
+        "kind": "typeIdentifier",
+        "preciseIdentifier": "s:7SwiftUI7BindingV",
+        "text": "Binding"
+      },
+      {
+        "kind": "text",
+        "text": "<"
+      },
+      {
+        "kind": "typeIdentifier",
+        "preciseIdentifier": "s:20DiscreteStepCarousel0bC8PositionV",
+        "text": "StepCarouselPosition"
+      },
+      {
+        "kind": "text",
+        "text": "<"
+      },
+      {
+        "kind": "typeIdentifier",
+        "text": "Values"
+      },
+      {
+        "kind": "text",
+        "text": ">>, "
+      },
+      {
+        "kind": "externalParam",
+        "text": "anchorContent"
+      },
+      {
+        "kind": "text",
+        "text": ": () -> "
+      },
+      {
+        "kind": "typeIdentifier",
+        "text": "AnchorContent"
+      },
+      {
+        "kind": "text",
+        "text": ", "
+      },
+      {
+        "kind": "externalParam",
+        "text": "markContent"
+      },
+      {
+        "kind": "text",
+        "text": ": ("
+      },
+      {
+        "kind": "typeIdentifier",
+        "text": "Values"
+      },
+      {
+        "kind": "text",
+        "text": "."
+      },
+      {
+        "kind": "typeIdentifier",
+        "preciseIdentifier": "s:Sl5IndexQa",
+        "text": "Index"
+      },
+      {
+        "kind": "text",
+        "text": ", "
+      },
+      {
+        "kind": "typeIdentifier",
+        "text": "Values"
+      },
+      {
+        "kind": "text",
+        "text": "."
+      },
+      {
+        "kind": "typeIdentifier",
+        "preciseIdentifier": "s:ST7ElementQa",
+        "text": "Element"
+      },
+      {
+        "kind": "text",
+        "text": ") -> "
+      },
+      {
+        "kind": "typeIdentifier",
+        "text": "MarkContent"
+      },
+      {
+        "kind": "text",
+        "text": ")"
+      }
+    ],
+    "modules": [
+      {
+        "name": "DiscreteStepCarousel"
+      }
+    ],
+    "role": "symbol",
+    "roleHeading": "Initializer",
+    "symbolKind": "init",
+    "title": "init(position:anchorContent:markContent:)"
+  },
+  "primaryContentSections": [
+    {
+      "declarations": [
+        {
+          "languages": [
+            "swift"
+          ],
+          "platforms": [
+            "macOS"
+          ],
+          "tokens": [
+            {
+              "kind": "attribute",
+              "text": "@"
+            },
+            {
+              "kind": "attribute",
+              "preciseIdentifier": "s:ScM",
+              "text": "MainActor"
+            },
+            {
+              "kind": "text",
+              "text": " "
+            },
+            {
+              "kind": "keyword",
+              "text": "init"
+            },
+            {
+              "kind": "text",
+              "text": "("
+            },
+            {
+              "kind": "externalParam",
+              "text": "position"
+            },
+            {
+              "kind": "text",
+              "text": " "
+            },
+            {
+              "kind": "internalParam",
+              "text": "positionBinding"
+            },
+            {
+              "kind": "text",
+              "text": ": "
+            },
+            {
+              "kind": "typeIdentifier",
+              "preciseIdentifier": "s:7SwiftUI7BindingV",
+              "text": "Binding"
+            },
+            {
+              "kind": "text",
+              "text": "<"
+            },
+            {
+              "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition",
+              "kind": "typeIdentifier",
+              "preciseIdentifier": "s:20DiscreteStepCarousel0bC8PositionV",
+              "text": "StepCarouselPosition"
+            },
+            {
+              "kind": "text",
+              "text": "<"
+            },
+            {
+              "kind": "typeIdentifier",
+              "text": "Values"
+            },
+            {
+              "kind": "text",
+              "text": ">>, "
+            },
+            {
+              "kind": "attribute",
+              "text": "@"
+            },
+            {
+              "kind": "attribute",
+              "preciseIdentifier": "s:7SwiftUI11ViewBuilderV",
+              "text": "ViewBuilder"
+            },
+            {
+              "kind": "text",
+              "text": " "
+            },
+            {
+              "kind": "externalParam",
+              "text": "anchorContent"
+            },
+            {
+              "kind": "text",
+              "text": ": "
+            },
+            {
+              "kind": "attribute",
+              "text": "@escaping "
+            },
+            {
+              "kind": "text",
+              "text": "() -> "
+            },
+            {
+              "kind": "typeIdentifier",
+              "text": "AnchorContent"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "attribute",
+              "text": "@"
+            },
+            {
+              "kind": "attribute",
+              "preciseIdentifier": "s:7SwiftUI11ViewBuilderV",
+              "text": "ViewBuilder"
+            },
+            {
+              "kind": "text",
+              "text": " "
+            },
+            {
+              "kind": "externalParam",
+              "text": "markContent"
+            },
+            {
+              "kind": "text",
+              "text": ": "
+            },
+            {
+              "kind": "attribute",
+              "text": "@escaping "
+            },
+            {
+              "kind": "text",
+              "text": "("
+            },
+            {
+              "kind": "typeIdentifier",
+              "text": "Values"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            },
+            {
+              "kind": "typeIdentifier",
+              "preciseIdentifier": "s:Sl5IndexQa",
+              "text": "Index"
+            },
+            {
+              "kind": "text",
+              "text": ", "
+            },
+            {
+              "kind": "typeIdentifier",
+              "text": "Values"
+            },
+            {
+              "kind": "text",
+              "text": "."
+            },
+            {
+              "kind": "typeIdentifier",
+              "preciseIdentifier": "s:ST7ElementQa",
+              "text": "Element"
+            },
+            {
+              "kind": "text",
+              "text": ") -> "
+            },
+            {
+              "kind": "typeIdentifier",
+              "text": "MarkContent"
+            },
+            {
+              "kind": "text",
+              "text": ")"
+            }
+          ]
+        }
+      ],
+      "kind": "declarations"
+    }
+  ],
+  "references": {
+    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
+      "abstract": [
+        {
+          "text": "A control for selecting a value from a collection, with each value represented by a view in a",
+          "type": "text"
+        },
+        {
+          "text": " ",
+          "type": "text"
+        },
+        {
+          "text": "scrollable surface.",
+          "type": "text"
+        }
+      ],
+      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel",
+      "kind": "symbol",
+      "role": "collection",
+      "title": "DiscreteStepCarousel",
+      "type": "topic",
+      "url": "/documentation/discretestepcarousel"
+    },
+    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel": {
+      "abstract": [
+        {
+          "text": "A control for selecting a value from a collection, with each value represented by a view in a",
+          "type": "text"
+        },
+        {
+          "text": " ",
+          "type": "text"
+        },
+        {
+          "text": "scrollable surface.",
+          "type": "text"
+        }
+      ],
+      "fragments": [
+        {
+          "kind": "keyword",
+          "text": "struct"
+        },
+        {
+          "kind": "text",
+          "text": " "
+        },
+        {
+          "kind": "identifier",
+          "text": "StepCarousel"
+        }
+      ],
+      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel",
+      "kind": "symbol",
+      "navigatorTitle": [
+        {
+          "kind": "identifier",
+          "text": "StepCarousel"
+        }
+      ],
+      "role": "symbol",
+      "title": "StepCarousel",
+      "type": "topic",
+      "url": "/documentation/discretestepcarousel/stepcarousel"
+    },
+    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:anchorContent:markContent:)": {
+      "abstract": [],
+      "fragments": [
+        {
+          "kind": "identifier",
+          "text": "init"
+        },
+        {
+          "kind": "text",
+          "text": "("
+        },
+        {
+          "kind": "externalParam",
+          "text": "position"
+        },
+        {
+          "kind": "text",
+          "text": ": "
+        },
+        {
+          "kind": "typeIdentifier",
+          "preciseIdentifier": "s:7SwiftUI7BindingV",
+          "text": "Binding"
+        },
+        {
+          "kind": "text",
+          "text": "<"
+        },
+        {
+          "kind": "typeIdentifier",
+          "preciseIdentifier": "s:20DiscreteStepCarousel0bC8PositionV",
+          "text": "StepCarouselPosition"
+        },
+        {
+          "kind": "text",
+          "text": "<"
+        },
+        {
+          "kind": "typeIdentifier",
+          "text": "Values"
+        },
+        {
+          "kind": "text",
+          "text": ">>, "
+        },
+        {
+          "kind": "externalParam",
+          "text": "anchorContent"
+        },
+        {
+          "kind": "text",
+          "text": ": () -> "
+        },
+        {
+          "kind": "typeIdentifier",
+          "text": "AnchorContent"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "externalParam",
+          "text": "markContent"
+        },
+        {
+          "kind": "text",
+          "text": ": ("
+        },
+        {
+          "kind": "typeIdentifier",
+          "text": "Values"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        },
+        {
+          "kind": "typeIdentifier",
+          "preciseIdentifier": "s:Sl5IndexQa",
+          "text": "Index"
+        },
+        {
+          "kind": "text",
+          "text": ", "
+        },
+        {
+          "kind": "typeIdentifier",
+          "text": "Values"
+        },
+        {
+          "kind": "text",
+          "text": "."
+        },
+        {
+          "kind": "typeIdentifier",
+          "preciseIdentifier": "s:ST7ElementQa",
+          "text": "Element"
+        },
+        {
+          "kind": "text",
+          "text": ") -> "
+        },
+        {
+          "kind": "typeIdentifier",
+          "text": "MarkContent"
+        },
+        {
+          "kind": "text",
+          "text": ")"
+        }
+      ],
+      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:anchorContent:markContent:)",
+      "kind": "symbol",
+      "role": "symbol",
+      "title": "init(position:anchorContent:markContent:)",
+      "type": "topic",
+      "url": "/documentation/discretestepcarousel/stepcarousel/init(position:anchorcontent:markcontent:)"
+    },
+    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
+      "abstract": [
+        {
+          "text": "A structure for specifying values and layout for a ",
+          "type": "text"
+        },
+        {
+          "code": "StepCarousel",
+          "type": "codeVoice"
+        },
+        {
+          "text": ", and for reading or",
+          "type": "text"
+        },
+        {
+          "text": " ",
+          "type": "text"
+        },
+        {
+          "text": "updating the selected value or index.",
+          "type": "text"
+        }
+      ],
+      "fragments": [
+        {
+          "kind": "keyword",
+          "text": "struct"
+        },
+        {
+          "kind": "text",
+          "text": " "
+        },
+        {
+          "kind": "identifier",
+          "text": "StepCarouselPosition"
+        }
+      ],
+      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition",
+      "kind": "symbol",
+      "navigatorTitle": [
+        {
+          "kind": "identifier",
+          "text": "StepCarouselPosition"
+        }
+      ],
+      "role": "symbol",
+      "title": "StepCarouselPosition",
+      "type": "topic",
+      "url": "/documentation/discretestepcarousel/stepcarouselposition"
+    }
+  },
+  "schemaVersion": {
+    "major": 0,
+    "minor": 3,
+    "patch": 0
+  },
+  "sections": [],
+  "variants": [
+    {
+      "paths": [
+        "/documentation/discretestepcarousel/stepcarousel/init(position:anchorcontent:markcontent:)"
+      ],
+      "traits": [
+        {
+          "interfaceLanguage": "swift"
+        }
+      ]
+    }
+  ]
+}
