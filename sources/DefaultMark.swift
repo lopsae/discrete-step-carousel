@@ -16,7 +16,7 @@ public struct DefaultMark<Style: ShapeStyle>: View {
     let style: Style
 
     public var body: some View {
-        let lineWidth: CGFloat = 3
+        let lineWidth: CGFloat = 2.5
         let strokeStyle = StrokeStyle(lineWidth: lineWidth, lineCap: .round)
         MarkShape(lineWidth: lineWidth)
         .stroke(style, style: strokeStyle)

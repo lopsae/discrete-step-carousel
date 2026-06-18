@@ -145,9 +145,18 @@ where
 // MARK: - Defaults
 
 
-struct DiscreteStepCarouselDefaults {
-    static let anchorStyle: HierarchicalShapeStyle = .secondary
-    static let markStyle: HierarchicalShapeStyle = .quaternary
+/// Container of defaults for `StepCarousel`
+public enum StepCarouselDefaults {
+
+    /// Default anchor style used along `DefaultMark`.
+    public static let anchorStyle: HierarchicalShapeStyle = .secondary
+
+    /// Default mark style used along `DefaultMark`.
+    public static let markStyle: HierarchicalShapeStyle = .quaternary
+
+    /// Recommended height for marks using `DefaultMark`.
+    public static let markHeight: CGFloat = 32
+
 }
 
 
@@ -187,8 +196,8 @@ extension StepCarousel {
     {
         self.init(
             position: position,
-            anchorContent: { DefaultMark(style: DiscreteStepCarouselDefaults.anchorStyle) },
-            markContent: { _, _ in DefaultMark(style: DiscreteStepCarouselDefaults.markStyle) }
+            anchorContent: { DefaultMark(style: StepCarouselDefaults.anchorStyle) },
+            markContent: { _, _ in DefaultMark(style: StepCarouselDefaults.markStyle) }
         )
     }
 

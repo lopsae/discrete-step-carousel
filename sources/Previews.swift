@@ -36,13 +36,13 @@ private struct PreviewContent {
 
     // Text is about 20 points tall.
     // Carousel in stock UI is measured to about 32 points.
-    let stackHeight: CGFloat = 20 + 32
+    let stackHeight: CGFloat = 20 + StepCarouselDefaults.markHeight
 
     PreviewCaption("Carousels with default and stylized default markers.")
 
     VStack(spacing: 2) {
         Text(carouselPosition.selectedValue)
-            .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
+            .floatingCaption("\(carouselPosition.selectedIndex)", . alignment(.outerTrailingTop))
 
         StepCarousel(position: $carouselPosition)
     }
