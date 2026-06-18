@@ -75,12 +75,17 @@ where
         precondition(!values.isEmpty, "values must contain at least one element")
 
         self.values = values
-        self.selectedValue = selectedValue
         self.markLength = markLength
         self.spacing = spacing
 
-        let selectedIndex = values.firstIndex(of: selectedValue) ?? values.startIndex
-        self.selectedIndex = selectedIndex
+        if let selectedIndex = values.firstIndex(of: selectedValue) {
+            self.selectedIndex = selectedIndex
+            self.selectedValue = selectedValue
+        } else {
+            self.selectedIndex = values.startIndex
+            self.selectedValue = values[values.startIndex]
+        }
+
         self.scrollPosition = ScrollPosition()
     }
 
