@@ -34,31 +34,38 @@ private struct PreviewContent {
         values: Strings.alphabet.map(\.localizedUppercase)[10...20],
         selectedValue: "O")
 
+    // Text is about 20 points tall.
+    // Carousel in stock UI is measured to about 32 points.
+    let stackHeight: CGFloat = 20 + 32
+
     PreviewCaption("Carousels with default and stylized default markers.")
-        .padding(.bottom)
-    PreviewContent.indicatorArrow
-    StepCarousel(position: $carouselPosition)
-        .frame(height: 44)
-    Text(carouselPosition.selectedValue)
-        .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
+
+    VStack(spacing: 2) {
+        Text(carouselPosition.selectedValue)
+            .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
+
+        StepCarousel(position: $carouselPosition)
+    }
+    .frame(height: stackHeight)
 
     DashedDivider()
-        .padding(.bottom)
 
-    PreviewContent.indicatorArrow
-    StepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
-        .frame(height: 44)
-    Text(styledPosition.selectedValue)
-        .floatingCaption("\(styledPosition.selectedIndex)", .alignment(.outerTrailingTop))
+    VStack(spacing: 2) {
+        Text(styledPosition.selectedValue)
+            .floatingCaption("\(styledPosition.selectedIndex)", .alignment(.outerTrailingTop))
+        StepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+    }
+    .frame(height: stackHeight)
+    .padding(.bottom)
 
     PreviewCaption("Carousel with a collection with offset indices.")
-        .padding(.bottom)
 
-    PreviewContent.indicatorArrow
-    StepCarousel(position: $offsetPosition, anchorStyle: .red, markStyle: .orange.tertiary)
-        .frame(height: 44)
-    Text(offsetPosition.selectedValue)
-        .floatingCaption("\(offsetPosition.selectedIndex)", .alignment(.outerTrailingTop))
+    VStack(spacing: 2) {
+        Text(offsetPosition.selectedValue)
+            .floatingCaption("\(offsetPosition.selectedIndex)", .alignment(.outerTrailingTop))
+        StepCarousel(position: $offsetPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+    }
+    .frame(height: stackHeight)
 }
 
 

@@ -144,10 +144,10 @@ where
 
 // MARK: - Defaults
 
-// FIXME: update to primary and secondary/tertiary
+
 struct DiscreteStepCarouselDefaults {
-    static let anchorStyle: Color = .black
-    static let markStyle: Color = .gray
+    static let anchorStyle: HierarchicalShapeStyle = .secondary
+    static let markStyle: HierarchicalShapeStyle = .quaternary
 }
 
 
@@ -182,8 +182,8 @@ extension StepCarousel {
         position: Binding<StepCarouselPosition<Values>>
     )
     where
-        AnchorContent == DefaultMark<Color>,
-        MarkContent == DefaultMark<Color>
+        AnchorContent == DefaultMark<HierarchicalShapeStyle>,
+        MarkContent == DefaultMark<HierarchicalShapeStyle>
     {
         self.init(
             position: position,
