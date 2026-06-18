@@ -13,13 +13,27 @@ import SwiftUI
 /// are provided.
 public struct DefaultMark<Style: ShapeStyle>: View {
 
-    let fill: Style
+    let style: Style
 
     public var body: some View {
-        // FIXME: use just a stroke instead.
-        Capsule()
-            .fill(fill)
-            .frame(width: 3)
+        let lineWidth: CGFloat = 3
+        let strokeStyle = StrokeStyle(lineWidth: lineWidth, lineCap: .round)
+        MarkShape(lineWidth: lineWidth)
+        .stroke(style, style: strokeStyle)
+    }
+}
+
+
+struct MarkShape: Shape {
+
+    let lineWidth: CGFloat
+
+    func path(in rect: CGRect) -> Path {
+        let center = rect.center
+        var path = Path()
+        path.move(to: [center.x, rect.minY + lineWidth/2])
+        path.addLine(to: [center.x, rect.maxY - lineWidth/2])
+        return path
     }
 }
 
@@ -42,14 +56,20 @@ private struct PreviewContent {
     Spacer()
 
     HStack(spacing: 40) {
-        DefaultMark(fill: .primary)
-            .frame(height: 44)
-        DefaultMark(fill: .secondary)
-            .frame(height: 44)
-        DefaultMark(fill: .red)
-            .frame(height: 44)
-        DefaultMark(fill: .orange)
-            .frame(height: 44)
+
+        DefaultMark(style: .primary)
+            .frame(squareOf: 44)
+            .border(.red.tertiary, width: 3)
+        DefaultMark(style: .secondary)
+            .frame(squareOf: 44)
+        DefaultMark(style: .primary)
+            .frame(squareOf: 44)
+            .scaleEffect(5)
+            .debugOverlay(.hairline)
+        DefaultMark(style: .red)
+            .frame(squareOf: 44)
+        DefaultMark(style: .orange)
+            .frame(squareOf: 44)
     }
 
     Spacer()

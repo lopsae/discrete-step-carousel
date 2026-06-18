@@ -187,8 +187,8 @@ extension StepCarousel {
     {
         self.init(
             position: position,
-            anchorContent: { DefaultMark(fill: DiscreteStepCarouselDefaults.anchorStyle) },
-            markContent: { _, _ in DefaultMark(fill: DiscreteStepCarouselDefaults.markStyle) }
+            anchorContent: { DefaultMark(style: DiscreteStepCarouselDefaults.anchorStyle) },
+            markContent: { _, _ in DefaultMark(style: DiscreteStepCarouselDefaults.markStyle) }
         )
     }
 
@@ -209,8 +209,8 @@ extension StepCarousel {
     {
         self.init(
             position: position,
-            anchorContent: { DefaultMark(fill: anchorStyle) },
-            markContent: { _, _ in DefaultMark(fill: markStyle) }
+            anchorContent: { DefaultMark(style: anchorStyle) },
+            markContent: { _, _ in DefaultMark(style: markStyle) }
         )
     }
 
