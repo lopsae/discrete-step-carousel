@@ -157,7 +157,13 @@ public enum StepCarouselDefaults {
     /// Recommended height for marks using `DefaultMark`.
     ///
     /// Carousel seen in standard library UI is measured to about 32 points.
-    public static let markHeight: CGFloat = 32
+    public static let markHeight: Double = 32
+
+
+    /// Default mark length.
+    ///
+    /// Half the recommended length of tappable UI elements (`44`).
+    public static let markLength: Double = 22
 
 }
 

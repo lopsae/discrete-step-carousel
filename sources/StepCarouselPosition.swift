@@ -69,7 +69,7 @@ where
     public init(
         values: Values,
         selectedValue: Values.Element,
-        markLength: Double = 22.0,
+        markLength: Double = StepCarouselDefaults.markLength,
         spacing: Double = .zero
     ) {
         precondition(!values.isEmpty, "values must contain at least one element")
@@ -125,6 +125,9 @@ where
 
     /// Updates the carousel selection to the given value.
     ///
+    /// By default, both ``selectedValue`` and ``selectedIndex`` are updated during the call to this
+    /// function.
+    ///
     /// If `value` cannot be found in `values`, the current selection remains unchanged.
     ///
     /// - Note:
@@ -143,7 +146,7 @@ where
     ///
     /// When `immediate` is `true`, both `selectedValue` and `selectedIndex` will be updated
     /// immediately once to the new values, and updated again as the animation advances. This
-    /// initial update can create a brief flickering of the selected state.
+    /// initial update can create a brief flickering of the new selected state.
     ///
     /// - Parameters:
     ///   - value: The new value to select.
@@ -163,21 +166,24 @@ where
 
     /// Updates the carousel selection to the given index.
     ///
+    /// By default this function only updates ``selectedIndex`` immediately. ``selectedValue`` is
+    /// updated at a later time when the internal scroll view position updates, either through an
+    /// immediate change or through animation.
+    ///
     /// If `index` is not a valid index for `values`, the current selection remains unchanged.
     ///
     /// ## Animation
     ///
     /// This function can be called within `withAnimation` for an animated selection. Use `immediate`
-    /// to determine if ``selectedValue`` and ``selectedIndex`` should be updated during this call,
-    /// or until the animation advances.
+    /// to determine if ``selectedIndex`` should be updated during this call, or until the animation
+    /// advances.
     ///
-    /// When `immediate` is `false`, both `selectedValue` and `selectedIndex` are updated only as
-    /// the internal scroll view animates to the new position. This is the recommended setting for
-    /// animated updates.
+    /// When `immediate` is `false`, `selectedIndex` is updated only as the internal scroll
+    /// view animates to the new position. This is the recommended setting for animated updates.
     ///
-    /// When `immediate` is `true`, both `selectedValue` and `selectedIndex` will be updated
-    /// immediately once to the new values, and updated again as the animation advances. This
-    /// initial update can create a brief flickering of the selected state.
+    /// When `immediate` is `true`, `selectedIndex` is be updated immediately once to the new
+    /// values, and updated again as the animation advances. This initial update can create a brief
+    /// flickering of the new selected state.
     ///
     /// - Parameters:
     ///   - index: The index in ``values`` to select.

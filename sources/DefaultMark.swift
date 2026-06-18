@@ -1,6 +1,6 @@
 //
 //  DiscreteStepCarousel
-//  Created by Maic Lopez Saenz on 2026-05-29.
+//  Created by Maic Lopez Saenz.
 //
 
 
