@@ -1,724 +1,738 @@
 {
-  "hierarchy": {
-    "paths": [
+  "abstract" : [
+    {
+      "text" : "Creates a carousel with custom marks.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
       [
-        "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel",
-        "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel"
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel"
       ]
     ]
   },
-  "identifier": {
-    "interfaceLanguage": "swift",
-    "url": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:markContent:)"
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel\/init(position:markContent:)"
   },
-  "kind": "symbol",
-  "metadata": {
-    "conformance": {
-      "availabilityPrefix": [
+  "kind" : "symbol",
+  "metadata" : {
+    "conformance" : {
+      "availabilityPrefix" : [
         {
-          "text": "Available when",
-          "type": "text"
+          "text" : "Available when",
+          "type" : "text"
         }
       ],
-      "conformancePrefix": [
+      "conformancePrefix" : [
         {
-          "text": "Conforms when",
-          "type": "text"
+          "text" : "Conforms when",
+          "type" : "text"
         }
       ],
-      "constraints": [
+      "constraints" : [
         {
-          "code": "Values",
-          "type": "codeVoice"
+          "code" : "Values",
+          "type" : "codeVoice"
         },
         {
-          "text": " conforms to ",
-          "type": "text"
+          "text" : " conforms to ",
+          "type" : "text"
         },
         {
-          "code": "RandomAccessCollection",
-          "type": "codeVoice"
+          "code" : "RandomAccessCollection",
+          "type" : "codeVoice"
         },
         {
-          "text": ", ",
-          "type": "text"
+          "text" : ", ",
+          "type" : "text"
         },
         {
-          "code": "AnchorContent",
-          "type": "codeVoice"
+          "code" : "AnchorContent",
+          "type" : "codeVoice"
         },
         {
-          "text": " conforms to ",
-          "type": "text"
+          "text" : " conforms to ",
+          "type" : "text"
         },
         {
-          "code": "View",
-          "type": "codeVoice"
+          "code" : "View",
+          "type" : "codeVoice"
         },
         {
-          "text": ", ",
-          "type": "text"
+          "text" : ", ",
+          "type" : "text"
         },
         {
-          "code": "MarkContent",
-          "type": "codeVoice"
+          "code" : "MarkContent",
+          "type" : "codeVoice"
         },
         {
-          "text": " conforms to ",
-          "type": "text"
+          "text" : " conforms to ",
+          "type" : "text"
         },
         {
-          "code": "View",
-          "type": "codeVoice"
+          "code" : "View",
+          "type" : "codeVoice"
         },
         {
-          "text": ", ",
-          "type": "text"
+          "text" : ", ",
+          "type" : "text"
         },
         {
-          "code": "Values.Element",
-          "type": "codeVoice"
+          "code" : "Values.Element",
+          "type" : "codeVoice"
         },
         {
-          "text": " conforms to ",
-          "type": "text"
+          "text" : " conforms to ",
+          "type" : "text"
         },
         {
-          "code": "Equatable",
-          "type": "codeVoice"
+          "code" : "Equatable",
+          "type" : "codeVoice"
         },
         {
-          "text": ", and ",
-          "type": "text"
+          "text" : ", and ",
+          "type" : "text"
         },
         {
-          "code": "Values.Index",
-          "type": "codeVoice"
+          "code" : "Values.Index",
+          "type" : "codeVoice"
         },
         {
-          "text": " conforms to ",
-          "type": "text"
+          "text" : " conforms to ",
+          "type" : "text"
         },
         {
-          "code": "Hashable",
-          "type": "codeVoice"
+          "code" : "Hashable",
+          "type" : "codeVoice"
         },
         {
-          "text": ".",
-          "type": "text"
+          "text" : ".",
+          "type" : "text"
         }
       ]
     },
-    "extendedModule": "DiscreteStepCarousel",
-    "externalID": "s:20DiscreteStepCarousel0bC0V8position11markContentACyx7SwiftUI9EmptyViewVq0_GAF7BindingVyAA0bC8PositionVyxGG_q0_5IndexQz_7ElementQztctcAHRs_rlufc",
-    "fragments": [
+    "extendedModule" : "DiscreteStepCarousel",
+    "externalID" : "s:20DiscreteStepCarousel0bC0V8position11markContentACyx7SwiftUI9EmptyViewVq0_GAF7BindingVyAA0bC8PositionVyxGG_q0_5IndexQz_7ElementQztctcAHRs_rlufc",
+    "fragments" : [
       {
-        "kind": "identifier",
-        "text": "init"
+        "kind" : "identifier",
+        "text" : "init"
       },
       {
-        "kind": "text",
-        "text": "("
+        "kind" : "text",
+        "text" : "("
       },
       {
-        "kind": "externalParam",
-        "text": "position"
+        "kind" : "externalParam",
+        "text" : "position"
       },
       {
-        "kind": "text",
-        "text": ": "
+        "kind" : "text",
+        "text" : ": "
       },
       {
-        "kind": "typeIdentifier",
-        "preciseIdentifier": "s:7SwiftUI7BindingV",
-        "text": "Binding"
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:7SwiftUI7BindingV",
+        "text" : "Binding"
       },
       {
-        "kind": "text",
-        "text": "<"
+        "kind" : "text",
+        "text" : "<"
       },
       {
-        "kind": "typeIdentifier",
-        "preciseIdentifier": "s:20DiscreteStepCarousel0bC8PositionV",
-        "text": "StepCarouselPosition"
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV",
+        "text" : "StepCarouselPosition"
       },
       {
-        "kind": "text",
-        "text": "<"
+        "kind" : "text",
+        "text" : "<"
       },
       {
-        "kind": "typeIdentifier",
-        "text": "Values"
+        "kind" : "typeIdentifier",
+        "text" : "Values"
       },
       {
-        "kind": "text",
-        "text": ">>, "
+        "kind" : "text",
+        "text" : ">>, "
       },
       {
-        "kind": "externalParam",
-        "text": "markContent"
+        "kind" : "externalParam",
+        "text" : "markContent"
       },
       {
-        "kind": "text",
-        "text": ": ("
+        "kind" : "text",
+        "text" : ": ("
       },
       {
-        "kind": "typeIdentifier",
-        "text": "Values"
+        "kind" : "typeIdentifier",
+        "text" : "Values"
       },
       {
-        "kind": "text",
-        "text": "."
+        "kind" : "text",
+        "text" : "."
       },
       {
-        "kind": "typeIdentifier",
-        "preciseIdentifier": "s:Sl5IndexQa",
-        "text": "Index"
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Sl5IndexQa",
+        "text" : "Index"
       },
       {
-        "kind": "text",
-        "text": ", "
+        "kind" : "text",
+        "text" : ", "
       },
       {
-        "kind": "typeIdentifier",
-        "text": "Values"
+        "kind" : "typeIdentifier",
+        "text" : "Values"
       },
       {
-        "kind": "text",
-        "text": "."
+        "kind" : "text",
+        "text" : "."
       },
       {
-        "kind": "typeIdentifier",
-        "preciseIdentifier": "s:ST7ElementQa",
-        "text": "Element"
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:ST7ElementQa",
+        "text" : "Element"
       },
       {
-        "kind": "text",
-        "text": ") -> "
+        "kind" : "text",
+        "text" : ") -> "
       },
       {
-        "kind": "typeIdentifier",
-        "text": "MarkContent"
+        "kind" : "typeIdentifier",
+        "text" : "MarkContent"
       },
       {
-        "kind": "text",
-        "text": ")"
+        "kind" : "text",
+        "text" : ")"
       }
     ],
-    "modules": [
+    "modules" : [
       {
-        "name": "DiscreteStepCarousel"
+        "name" : "DiscreteStepCarousel"
       }
     ],
-    "role": "symbol",
-    "roleHeading": "Initializer",
-    "symbolKind": "init",
-    "title": "init(position:markContent:)"
+    "role" : "symbol",
+    "roleHeading" : "Initializer",
+    "symbolKind" : "init",
+    "title" : "init(position:markContent:)"
   },
-  "primaryContentSections": [
+  "primaryContentSections" : [
     {
-      "declarations": [
+      "declarations" : [
         {
-          "languages": [
+          "languages" : [
             "swift"
           ],
-          "platforms": [
+          "platforms" : [
             "macOS"
           ],
-          "tokens": [
+          "tokens" : [
             {
-              "kind": "attribute",
-              "text": "@"
+              "kind" : "attribute",
+              "text" : "@"
             },
             {
-              "kind": "attribute",
-              "preciseIdentifier": "s:ScM",
-              "text": "MainActor"
+              "kind" : "attribute",
+              "preciseIdentifier" : "s:ScM",
+              "text" : "MainActor"
             },
             {
-              "kind": "text",
-              "text": " "
+              "kind" : "text",
+              "text" : " "
             },
             {
-              "kind": "keyword",
-              "text": "init"
+              "kind" : "keyword",
+              "text" : "init"
             },
             {
-              "kind": "text",
-              "text": "("
+              "kind" : "text",
+              "text" : "("
             },
             {
-              "kind": "externalParam",
-              "text": "position"
+              "kind" : "externalParam",
+              "text" : "position"
             },
             {
-              "kind": "text",
-              "text": " "
+              "kind" : "text",
+              "text" : " "
             },
             {
-              "kind": "internalParam",
-              "text": "positionBinding"
+              "kind" : "internalParam",
+              "text" : "positionBinding"
             },
             {
-              "kind": "text",
-              "text": ": "
+              "kind" : "text",
+              "text" : ": "
             },
             {
-              "kind": "typeIdentifier",
-              "preciseIdentifier": "s:7SwiftUI7BindingV",
-              "text": "Binding"
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:7SwiftUI7BindingV",
+              "text" : "Binding"
             },
             {
-              "kind": "text",
-              "text": "<"
+              "kind" : "text",
+              "text" : "<"
             },
             {
-              "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition",
-              "kind": "typeIdentifier",
-              "preciseIdentifier": "s:20DiscreteStepCarousel0bC8PositionV",
-              "text": "StepCarouselPosition"
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV",
+              "text" : "StepCarouselPosition"
             },
             {
-              "kind": "text",
-              "text": "<"
+              "kind" : "text",
+              "text" : "<"
             },
             {
-              "kind": "typeIdentifier",
-              "text": "Values"
+              "kind" : "typeIdentifier",
+              "text" : "Values"
             },
             {
-              "kind": "text",
-              "text": ">>, "
+              "kind" : "text",
+              "text" : ">>, "
             },
             {
-              "kind": "attribute",
-              "text": "@"
+              "kind" : "attribute",
+              "text" : "@"
             },
             {
-              "kind": "attribute",
-              "preciseIdentifier": "s:7SwiftUI11ViewBuilderV",
-              "text": "ViewBuilder"
+              "kind" : "attribute",
+              "preciseIdentifier" : "s:7SwiftUI11ViewBuilderV",
+              "text" : "ViewBuilder"
             },
             {
-              "kind": "text",
-              "text": " "
+              "kind" : "text",
+              "text" : " "
             },
             {
-              "kind": "externalParam",
-              "text": "markContent"
+              "kind" : "externalParam",
+              "text" : "markContent"
             },
             {
-              "kind": "text",
-              "text": ": "
+              "kind" : "text",
+              "text" : ": "
             },
             {
-              "kind": "attribute",
-              "text": "@escaping "
+              "kind" : "attribute",
+              "text" : "@escaping "
             },
             {
-              "kind": "text",
-              "text": "("
+              "kind" : "text",
+              "text" : "("
             },
             {
-              "kind": "typeIdentifier",
-              "text": "Values"
+              "kind" : "typeIdentifier",
+              "text" : "Values"
             },
             {
-              "kind": "text",
-              "text": "."
+              "kind" : "text",
+              "text" : "."
             },
             {
-              "kind": "typeIdentifier",
-              "preciseIdentifier": "s:Sl5IndexQa",
-              "text": "Index"
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Sl5IndexQa",
+              "text" : "Index"
             },
             {
-              "kind": "text",
-              "text": ", "
+              "kind" : "text",
+              "text" : ", "
             },
             {
-              "kind": "typeIdentifier",
-              "text": "Values"
+              "kind" : "typeIdentifier",
+              "text" : "Values"
             },
             {
-              "kind": "text",
-              "text": "."
+              "kind" : "text",
+              "text" : "."
             },
             {
-              "kind": "typeIdentifier",
-              "preciseIdentifier": "s:ST7ElementQa",
-              "text": "Element"
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:ST7ElementQa",
+              "text" : "Element"
             },
             {
-              "kind": "text",
-              "text": ") -> "
+              "kind" : "text",
+              "text" : ") -> "
             },
             {
-              "kind": "typeIdentifier",
-              "text": "MarkContent"
+              "kind" : "typeIdentifier",
+              "text" : "MarkContent"
             },
             {
-              "kind": "text",
-              "text": ") "
+              "kind" : "text",
+              "text" : ") "
             },
             {
-              "kind": "keyword",
-              "text": "where"
+              "kind" : "keyword",
+              "text" : "where"
             },
             {
-              "kind": "text",
-              "text": " "
+              "kind" : "text",
+              "text" : " "
             },
             {
-              "kind": "typeIdentifier",
-              "text": "AnchorContent"
+              "kind" : "typeIdentifier",
+              "text" : "AnchorContent"
             },
             {
-              "kind": "text",
-              "text": " == "
+              "kind" : "text",
+              "text" : " == "
             },
             {
-              "kind": "typeIdentifier",
-              "preciseIdentifier": "s:7SwiftUI9EmptyViewV",
-              "text": "EmptyView"
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:7SwiftUI9EmptyViewV",
+              "text" : "EmptyView"
             }
           ]
         }
       ],
-      "kind": "declarations"
+      "kind" : "declarations"
     }
   ],
-  "references": {
-    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
-      "abstract": [
-        {
-          "text": "A control for selecting a value from a collection, with each value represented by a view in a",
-          "type": "text"
-        },
-        {
-          "text": " ",
-          "type": "text"
-        },
-        {
-          "text": "scrollable surface.",
-          "type": "text"
-        }
-      ],
-      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel",
-      "kind": "symbol",
-      "role": "collection",
-      "title": "DiscreteStepCarousel",
-      "type": "topic",
-      "url": "/documentation/discretestepcarousel"
-    },
-    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel": {
-      "abstract": [
-        {
-          "text": "A control for selecting a value from a collection, with each value represented by a view in a",
-          "type": "text"
-        },
-        {
-          "text": " ",
-          "type": "text"
-        },
-        {
-          "text": "scrollable surface.",
-          "type": "text"
-        }
-      ],
-      "fragments": [
-        {
-          "kind": "keyword",
-          "text": "struct"
-        },
-        {
-          "kind": "text",
-          "text": " "
-        },
-        {
-          "kind": "identifier",
-          "text": "StepCarousel"
-        }
-      ],
-      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel",
-      "kind": "symbol",
-      "navigatorTitle": [
-        {
-          "kind": "identifier",
-          "text": "StepCarousel"
-        }
-      ],
-      "role": "symbol",
-      "title": "StepCarousel",
-      "type": "topic",
-      "url": "/documentation/discretestepcarousel/stepcarousel"
-    },
-    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:markContent:)": {
-      "abstract": [],
-      "conformance": {
-        "availabilityPrefix": [
-          {
-            "text": "Available when",
-            "type": "text"
-          }
-        ],
-        "conformancePrefix": [
-          {
-            "text": "Conforms when",
-            "type": "text"
-          }
-        ],
-        "constraints": [
-          {
-            "code": "Values",
-            "type": "codeVoice"
-          },
-          {
-            "text": " conforms to ",
-            "type": "text"
-          },
-          {
-            "code": "RandomAccessCollection",
-            "type": "codeVoice"
-          },
-          {
-            "text": ", ",
-            "type": "text"
-          },
-          {
-            "code": "AnchorContent",
-            "type": "codeVoice"
-          },
-          {
-            "text": " conforms to ",
-            "type": "text"
-          },
-          {
-            "code": "View",
-            "type": "codeVoice"
-          },
-          {
-            "text": ", ",
-            "type": "text"
-          },
-          {
-            "code": "MarkContent",
-            "type": "codeVoice"
-          },
-          {
-            "text": " conforms to ",
-            "type": "text"
-          },
-          {
-            "code": "View",
-            "type": "codeVoice"
-          },
-          {
-            "text": ", ",
-            "type": "text"
-          },
-          {
-            "code": "Values.Element",
-            "type": "codeVoice"
-          },
-          {
-            "text": " conforms to ",
-            "type": "text"
-          },
-          {
-            "code": "Equatable",
-            "type": "codeVoice"
-          },
-          {
-            "text": ", and ",
-            "type": "text"
-          },
-          {
-            "code": "Values.Index",
-            "type": "codeVoice"
-          },
-          {
-            "text": " conforms to ",
-            "type": "text"
-          },
-          {
-            "code": "Hashable",
-            "type": "codeVoice"
-          },
-          {
-            "text": ".",
-            "type": "text"
-          }
-        ]
-      },
-      "fragments": [
-        {
-          "kind": "identifier",
-          "text": "init"
-        },
-        {
-          "kind": "text",
-          "text": "("
-        },
-        {
-          "kind": "externalParam",
-          "text": "position"
-        },
-        {
-          "kind": "text",
-          "text": ": "
-        },
-        {
-          "kind": "typeIdentifier",
-          "preciseIdentifier": "s:7SwiftUI7BindingV",
-          "text": "Binding"
-        },
-        {
-          "kind": "text",
-          "text": "<"
-        },
-        {
-          "kind": "typeIdentifier",
-          "preciseIdentifier": "s:20DiscreteStepCarousel0bC8PositionV",
-          "text": "StepCarouselPosition"
-        },
-        {
-          "kind": "text",
-          "text": "<"
-        },
-        {
-          "kind": "typeIdentifier",
-          "text": "Values"
-        },
-        {
-          "kind": "text",
-          "text": ">>, "
-        },
-        {
-          "kind": "externalParam",
-          "text": "markContent"
-        },
-        {
-          "kind": "text",
-          "text": ": ("
-        },
-        {
-          "kind": "typeIdentifier",
-          "text": "Values"
-        },
-        {
-          "kind": "text",
-          "text": "."
-        },
-        {
-          "kind": "typeIdentifier",
-          "preciseIdentifier": "s:Sl5IndexQa",
-          "text": "Index"
-        },
-        {
-          "kind": "text",
-          "text": ", "
-        },
-        {
-          "kind": "typeIdentifier",
-          "text": "Values"
-        },
-        {
-          "kind": "text",
-          "text": "."
-        },
-        {
-          "kind": "typeIdentifier",
-          "preciseIdentifier": "s:ST7ElementQa",
-          "text": "Element"
-        },
-        {
-          "kind": "text",
-          "text": ") -> "
-        },
-        {
-          "kind": "typeIdentifier",
-          "text": "MarkContent"
-        },
-        {
-          "kind": "text",
-          "text": ")"
-        }
-      ],
-      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:markContent:)",
-      "kind": "symbol",
-      "role": "symbol",
-      "title": "init(position:markContent:)",
-      "type": "topic",
-      "url": "/documentation/discretestepcarousel/stepcarousel/init(position:markcontent:)"
-    },
-    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
-      "abstract": [
-        {
-          "text": "A structure for specifying values and layout for a ",
-          "type": "text"
-        },
-        {
-          "code": "StepCarousel",
-          "type": "codeVoice"
-        },
-        {
-          "text": ", and for reading or",
-          "type": "text"
-        },
-        {
-          "text": " ",
-          "type": "text"
-        },
-        {
-          "text": "updating the selected value or index.",
-          "type": "text"
-        }
-      ],
-      "fragments": [
-        {
-          "kind": "keyword",
-          "text": "struct"
-        },
-        {
-          "kind": "text",
-          "text": " "
-        },
-        {
-          "kind": "identifier",
-          "text": "StepCarouselPosition"
-        }
-      ],
-      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition",
-      "kind": "symbol",
-      "navigatorTitle": [
-        {
-          "kind": "identifier",
-          "text": "StepCarouselPosition"
-        }
-      ],
-      "role": "symbol",
-      "title": "StepCarouselPosition",
-      "type": "topic",
-      "url": "/documentation/discretestepcarousel/stepcarouselposition"
-    }
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
   },
-  "schemaVersion": {
-    "major": 0,
-    "minor": 3,
-    "patch": 0
-  },
-  "sections": [],
-  "variants": [
+  "sections" : [
+
+  ],
+  "variants" : [
     {
-      "paths": [
-        "/documentation/discretestepcarousel/stepcarousel/init(position:markcontent:)"
+      "paths" : [
+        "\/documentation\/discretestepcarousel\/stepcarousel\/init(position:markcontent:)"
       ],
-      "traits": [
+      "traits" : [
         {
-          "interfaceLanguage": "swift"
+          "interfaceLanguage" : "swift"
         }
       ]
     }
   ]
+, 
+"references": {
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "DiscreteStepCarousel",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel": {
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarousel"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarousel"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarousel",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:markContent:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a carousel with custom marks.",
+      "type" : "text"
+    }
+  ],
+  "conformance" : {
+    "availabilityPrefix" : [
+      {
+        "text" : "Available when",
+        "type" : "text"
+      }
+    ],
+    "conformancePrefix" : [
+      {
+        "text" : "Conforms when",
+        "type" : "text"
+      }
+    ],
+    "constraints" : [
+      {
+        "code" : "Values",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "RandomAccessCollection",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", ",
+        "type" : "text"
+      },
+      {
+        "code" : "AnchorContent",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "View",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", ",
+        "type" : "text"
+      },
+      {
+        "code" : "MarkContent",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "View",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", ",
+        "type" : "text"
+      },
+      {
+        "code" : "Values.Element",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Equatable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ", and ",
+        "type" : "text"
+      },
+      {
+        "code" : "Values.Index",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : " conforms to ",
+        "type" : "text"
+      },
+      {
+        "code" : "Hashable",
+        "type" : "codeVoice"
+      },
+      {
+        "text" : ".",
+        "type" : "text"
+      }
+    ]
+  },
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "position"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI7BindingV",
+      "text" : "Binding"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV",
+      "text" : "StepCarouselPosition"
+    },
+    {
+      "kind" : "text",
+      "text" : "<"
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : ">>, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "markContent"
+    },
+    {
+      "kind" : "text",
+      "text" : ": ("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sl5IndexQa",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ") -> "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "MarkContent"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel\/init(position:markContent:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(position:markContent:)",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarousel\/init(position:markcontent:)"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
+  "abstract" : [
+    {
+      "text" : "A structure for specifying values and layout for a ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", and for reading or",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "updating the selected value or index.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselPosition"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselPosition"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarouselPosition",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition"
+}
+}
 }

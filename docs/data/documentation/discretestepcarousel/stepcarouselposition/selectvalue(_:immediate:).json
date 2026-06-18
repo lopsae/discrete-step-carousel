@@ -1,773 +1,776 @@
 {
-  "abstract": [
+  "abstract" : [
     {
-      "text": "Updates the carousel selection to the given ",
-      "type": "text"
+      "text" : "Updates the carousel selection to the given ",
+      "type" : "text"
     },
     {
-      "code": "value",
-      "type": "codeVoice"
+      "code" : "value",
+      "type" : "codeVoice"
     },
     {
-      "text": ".",
-      "type": "text"
+      "text" : ".",
+      "type" : "text"
     }
   ],
-  "hierarchy": {
-    "paths": [
+  "hierarchy" : {
+    "paths" : [
       [
-        "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel",
-        "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition"
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition"
       ]
     ]
   },
-  "identifier": {
-    "interfaceLanguage": "swift",
-    "url": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectValue(_:immediate:)"
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectValue(_:immediate:)"
   },
-  "kind": "symbol",
-  "metadata": {
-    "externalID": "s:20DiscreteStepCarousel0bC8PositionV11selectValue_9immediatey7ElementQz_SbtF",
-    "fragments": [
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:20DiscreteStepCarousel0bC8PositionV11selectValue_9immediatey7ElementQz_SbtF",
+    "fragments" : [
       {
-        "kind": "keyword",
-        "text": "func"
+        "kind" : "keyword",
+        "text" : "func"
       },
       {
-        "kind": "text",
-        "text": " "
+        "kind" : "text",
+        "text" : " "
       },
       {
-        "kind": "identifier",
-        "text": "selectValue"
+        "kind" : "identifier",
+        "text" : "selectValue"
       },
       {
-        "kind": "text",
-        "text": "("
+        "kind" : "text",
+        "text" : "("
       },
       {
-        "kind": "typeIdentifier",
-        "text": "Values"
+        "kind" : "typeIdentifier",
+        "text" : "Values"
       },
       {
-        "kind": "text",
-        "text": "."
+        "kind" : "text",
+        "text" : "."
       },
       {
-        "kind": "typeIdentifier",
-        "preciseIdentifier": "s:ST7ElementQa",
-        "text": "Element"
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:ST7ElementQa",
+        "text" : "Element"
       },
       {
-        "kind": "text",
-        "text": ", "
+        "kind" : "text",
+        "text" : ", "
       },
       {
-        "kind": "externalParam",
-        "text": "immediate"
+        "kind" : "externalParam",
+        "text" : "immediate"
       },
       {
-        "kind": "text",
-        "text": ": "
+        "kind" : "text",
+        "text" : ": "
       },
       {
-        "kind": "typeIdentifier",
-        "preciseIdentifier": "s:Sb",
-        "text": "Bool"
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:Sb",
+        "text" : "Bool"
       },
       {
-        "kind": "text",
-        "text": ")"
+        "kind" : "text",
+        "text" : ")"
       }
     ],
-    "modules": [
+    "modules" : [
       {
-        "name": "DiscreteStepCarousel"
+        "name" : "DiscreteStepCarousel"
       }
     ],
-    "role": "symbol",
-    "roleHeading": "Instance Method",
-    "symbolKind": "method",
-    "title": "selectValue(_:immediate:)"
+    "role" : "symbol",
+    "roleHeading" : "Instance Method",
+    "symbolKind" : "method",
+    "title" : "selectValue(_:immediate:)"
   },
-  "primaryContentSections": [
+  "primaryContentSections" : [
     {
-      "declarations": [
+      "declarations" : [
         {
-          "languages": [
+          "languages" : [
             "swift"
           ],
-          "platforms": [
+          "platforms" : [
             "macOS"
           ],
-          "tokens": [
+          "tokens" : [
             {
-              "kind": "attribute",
-              "text": "@"
+              "kind" : "attribute",
+              "text" : "@"
             },
             {
-              "kind": "attribute",
-              "preciseIdentifier": "s:ScM",
-              "text": "MainActor"
+              "kind" : "attribute",
+              "preciseIdentifier" : "s:ScM",
+              "text" : "MainActor"
             },
             {
-              "kind": "text",
-              "text": " "
+              "kind" : "text",
+              "text" : " "
             },
             {
-              "kind": "keyword",
-              "text": "mutating"
+              "kind" : "keyword",
+              "text" : "mutating"
             },
             {
-              "kind": "text",
-              "text": " "
+              "kind" : "text",
+              "text" : " "
             },
             {
-              "kind": "keyword",
-              "text": "func"
+              "kind" : "keyword",
+              "text" : "func"
             },
             {
-              "kind": "text",
-              "text": " "
+              "kind" : "text",
+              "text" : " "
             },
             {
-              "kind": "identifier",
-              "text": "selectValue"
+              "kind" : "identifier",
+              "text" : "selectValue"
             },
             {
-              "kind": "text",
-              "text": "("
+              "kind" : "text",
+              "text" : "("
             },
             {
-              "kind": "externalParam",
-              "text": "_"
+              "kind" : "externalParam",
+              "text" : "_"
             },
             {
-              "kind": "text",
-              "text": " "
+              "kind" : "text",
+              "text" : " "
             },
             {
-              "kind": "internalParam",
-              "text": "value"
+              "kind" : "internalParam",
+              "text" : "value"
             },
             {
-              "kind": "text",
-              "text": ": "
+              "kind" : "text",
+              "text" : ": "
             },
             {
-              "kind": "typeIdentifier",
-              "text": "Values"
+              "kind" : "typeIdentifier",
+              "text" : "Values"
             },
             {
-              "kind": "text",
-              "text": "."
+              "kind" : "text",
+              "text" : "."
             },
             {
-              "kind": "typeIdentifier",
-              "preciseIdentifier": "s:ST7ElementQa",
-              "text": "Element"
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:ST7ElementQa",
+              "text" : "Element"
             },
             {
-              "kind": "text",
-              "text": ", "
+              "kind" : "text",
+              "text" : ", "
             },
             {
-              "kind": "externalParam",
-              "text": "immediate"
+              "kind" : "externalParam",
+              "text" : "immediate"
             },
             {
-              "kind": "text",
-              "text": ": "
+              "kind" : "text",
+              "text" : ": "
             },
             {
-              "kind": "typeIdentifier",
-              "preciseIdentifier": "s:Sb",
-              "text": "Bool"
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Sb",
+              "text" : "Bool"
             },
             {
-              "kind": "text",
-              "text": " = true)"
+              "kind" : "text",
+              "text" : " = true)"
             }
           ]
         }
       ],
-      "kind": "declarations"
+      "kind" : "declarations"
     },
     {
-      "kind": "parameters",
-      "parameters": [
+      "kind" : "parameters",
+      "parameters" : [
         {
-          "content": [
+          "content" : [
             {
-              "inlineContent": [
+              "inlineContent" : [
                 {
-                  "text": "The new value to select.",
-                  "type": "text"
+                  "text" : "The new value to select.",
+                  "type" : "text"
                 }
               ],
-              "type": "paragraph"
+              "type" : "paragraph"
             }
           ],
-          "name": "value"
+          "name" : "value"
         },
         {
-          "content": [
+          "content" : [
             {
-              "inlineContent": [
+              "inlineContent" : [
                 {
-                  "text": "When ",
-                  "type": "text"
+                  "text" : "When ",
+                  "type" : "text"
                 },
                 {
-                  "code": "true",
-                  "type": "codeVoice"
+                  "code" : "true",
+                  "type" : "codeVoice"
                 },
                 {
-                  "text": ", both ",
-                  "type": "text"
+                  "text" : ", both ",
+                  "type" : "text"
                 },
                 {
-                  "code": "selectedValue",
-                  "type": "codeVoice"
+                  "code" : "selectedValue",
+                  "type" : "codeVoice"
                 },
                 {
-                  "text": " and ",
-                  "type": "text"
+                  "text" : " and ",
+                  "type" : "text"
                 },
                 {
-                  "code": "selectedIndex",
-                  "type": "codeVoice"
+                  "code" : "selectedIndex",
+                  "type" : "codeVoice"
                 },
                 {
-                  "text": " are updated immediately",
-                  "type": "text"
+                  "text" : " are updated immediately",
+                  "type" : "text"
                 },
                 {
-                  "text": " ",
-                  "type": "text"
+                  "text" : " ",
+                  "type" : "text"
                 },
                 {
-                  "text": "during this call; otherwise those properties update until the internal scroll",
-                  "type": "text"
+                  "text" : "during this call; otherwise those properties update until the internal scroll",
+                  "type" : "text"
                 },
                 {
-                  "text": " ",
-                  "type": "text"
+                  "text" : " ",
+                  "type" : "text"
                 },
                 {
-                  "text": "position updates, or as animation progresses. Defaults to ",
-                  "type": "text"
+                  "text" : "position updates, or as animation progresses. Defaults to ",
+                  "type" : "text"
                 },
                 {
-                  "code": "true",
-                  "type": "codeVoice"
+                  "code" : "true",
+                  "type" : "codeVoice"
                 },
                 {
-                  "text": ".",
-                  "type": "text"
+                  "text" : ".",
+                  "type" : "text"
                 }
               ],
-              "type": "paragraph"
+              "type" : "paragraph"
             }
           ],
-          "name": "immediate"
+          "name" : "immediate"
         }
       ]
     },
     {
-      "content": [
+      "content" : [
         {
-          "anchor": "discussion",
-          "level": 2,
-          "text": "Discussion",
-          "type": "heading"
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
         },
         {
-          "inlineContent": [
+          "inlineContent" : [
             {
-              "text": "This function can be called within ",
-              "type": "text"
+              "text" : "This function can be called within ",
+              "type" : "text"
             },
             {
-              "code": "withAnimation",
-              "type": "codeVoice"
+              "code" : "withAnimation",
+              "type" : "codeVoice"
             },
             {
-              "text": " for an animated selection. When",
-              "type": "text"
+              "text" : " for an animated selection. When",
+              "type" : "text"
             },
             {
-              "text": " ",
-              "type": "text"
+              "text" : " ",
+              "type" : "text"
             },
             {
-              "text": "animated, both ",
-              "type": "text"
+              "text" : "animated, both ",
+              "type" : "text"
             },
             {
-              "code": "selectedValue",
-              "type": "codeVoice"
+              "code" : "selectedValue",
+              "type" : "codeVoice"
             },
             {
-              "text": " and ",
-              "type": "text"
+              "text" : " and ",
+              "type" : "text"
             },
             {
-              "code": "selectedIndex",
-              "type": "codeVoice"
+              "code" : "selectedIndex",
+              "type" : "codeVoice"
             },
             {
-              "text": " will be updated immediately once to the",
-              "type": "text"
+              "text" : " will be updated immediately once to the",
+              "type" : "text"
             },
             {
-              "text": " ",
-              "type": "text"
+              "text" : " ",
+              "type" : "text"
             },
             {
-              "text": "new values if ",
-              "type": "text"
+              "text" : "new values if ",
+              "type" : "text"
             },
             {
-              "code": "immediate",
-              "type": "codeVoice"
+              "code" : "immediate",
+              "type" : "codeVoice"
             },
             {
-              "text": " is ",
-              "type": "text"
+              "text" : " is ",
+              "type" : "text"
             },
             {
-              "code": "true",
-              "type": "codeVoice"
+              "code" : "true",
+              "type" : "codeVoice"
             },
             {
-              "text": ", and then both properties will update again several",
-              "type": "text"
+              "text" : ", and then both properties will update again several",
+              "type" : "text"
             },
             {
-              "text": " ",
-              "type": "text"
+              "text" : " ",
+              "type" : "text"
             },
             {
-              "text": "times as the animation advances.",
-              "type": "text"
+              "text" : "times as the animation advances.",
+              "type" : "text"
             }
           ],
-          "type": "paragraph"
+          "type" : "paragraph"
         },
         {
-          "inlineContent": [
+          "inlineContent" : [
             {
-              "text": "Use ",
-              "type": "text"
+              "text" : "Use ",
+              "type" : "text"
             },
             {
-              "code": "immediate",
-              "type": "codeVoice"
+              "code" : "immediate",
+              "type" : "codeVoice"
             },
             {
-              "text": " to ensure both ",
-              "type": "text"
+              "text" : " to ensure both ",
+              "type" : "text"
             },
             {
-              "code": "selectedValue",
-              "type": "codeVoice"
+              "code" : "selectedValue",
+              "type" : "codeVoice"
             },
             {
-              "text": " and ",
-              "type": "text"
+              "text" : " and ",
+              "type" : "text"
             },
             {
-              "code": "selectedIndex",
-              "type": "codeVoice"
+              "code" : "selectedIndex",
+              "type" : "codeVoice"
             },
             {
-              "text": " are updated during this",
-              "type": "text"
+              "text" : " are updated during this",
+              "type" : "text"
             },
             {
-              "text": " ",
-              "type": "text"
+              "text" : " ",
+              "type" : "text"
             },
             {
-              "text": "call. Otherwise, both properties are not updated until the view updates, and the internal",
-              "type": "text"
+              "text" : "call. Otherwise, both properties are not updated until the view updates, and the internal",
+              "type" : "text"
             },
             {
-              "text": " ",
-              "type": "text"
+              "text" : " ",
+              "type" : "text"
             },
             {
-              "text": "scroll position updates to a new position. When not animated this difference is minimal. When",
-              "type": "text"
+              "text" : "scroll position updates to a new position. When not animated this difference is minimal. When",
+              "type" : "text"
             },
             {
-              "text": " ",
-              "type": "text"
+              "text" : " ",
+              "type" : "text"
             },
             {
-              "text": "animating, setting ",
-              "type": "text"
+              "text" : "animating, setting ",
+              "type" : "text"
             },
             {
-              "code": "immediate",
-              "type": "codeVoice"
+              "code" : "immediate",
+              "type" : "codeVoice"
             },
             {
-              "text": " to false can help prevent a small flicker of both",
-              "type": "text"
+              "text" : " to false can help prevent a small flicker of both",
+              "type" : "text"
             },
             {
-              "text": " ",
-              "type": "text"
+              "text" : " ",
+              "type" : "text"
             },
             {
-              "code": "selectedValue",
-              "type": "codeVoice"
+              "code" : "selectedValue",
+              "type" : "codeVoice"
             },
             {
-              "text": " and ",
-              "type": "text"
+              "text" : " and ",
+              "type" : "text"
             },
             {
-              "code": "selectedIndex",
-              "type": "codeVoice"
+              "code" : "selectedIndex",
+              "type" : "codeVoice"
             },
             {
-              "text": " to its final values that then gets overwritten by the",
-              "type": "text"
+              "text" : " to its final values that then gets overwritten by the",
+              "type" : "text"
             },
             {
-              "text": " ",
-              "type": "text"
+              "text" : " ",
+              "type" : "text"
             },
             {
-              "text": "animation advancing through the interim values.",
-              "type": "text"
+              "text" : "animation advancing through the interim values.",
+              "type" : "text"
             }
           ],
-          "type": "paragraph"
+          "type" : "paragraph"
         },
         {
-          "inlineContent": [
+          "inlineContent" : [
             {
-              "text": "If ",
-              "type": "text"
+              "text" : "If ",
+              "type" : "text"
             },
             {
-              "code": "value",
-              "type": "codeVoice"
+              "code" : "value",
+              "type" : "codeVoice"
             },
             {
-              "text": " cannot be found in ",
-              "type": "text"
+              "text" : " cannot be found in ",
+              "type" : "text"
             },
             {
-              "code": "values",
-              "type": "codeVoice"
+              "code" : "values",
+              "type" : "codeVoice"
             },
             {
-              "text": ", the current selection remains unchanged.",
-              "type": "text"
+              "text" : ", the current selection remains unchanged.",
+              "type" : "text"
             }
           ],
-          "type": "paragraph"
+          "type" : "paragraph"
         },
         {
-          "content": [
+          "content" : [
             {
-              "inlineContent": [
+              "inlineContent" : [
                 {
-                  "text": "Using this function will search sequentially through ",
-                  "type": "text"
+                  "text" : "Using this function will search sequentially through ",
+                  "type" : "text"
                 },
                 {
-                  "code": "values",
-                  "type": "codeVoice"
+                  "code" : "values",
+                  "type" : "codeVoice"
                 },
                 {
-                  "text": " until a matching",
-                  "type": "text"
+                  "text" : " until a matching",
+                  "type" : "text"
                 },
                 {
-                  "text": " ",
-                  "type": "text"
+                  "text" : " ",
+                  "type" : "text"
                 },
                 {
-                  "code": "value",
-                  "type": "codeVoice"
+                  "code" : "value",
+                  "type" : "codeVoice"
                 },
                 {
-                  "text": " is found. For a constant time approach use ",
-                  "type": "text"
+                  "text" : " is found. For a constant time approach use ",
+                  "type" : "text"
                 },
                 {
-                  "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectIndex(_:immediate:)",
-                  "isActive": true,
-                  "type": "reference"
+                  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectIndex(_:immediate:)",
+                  "isActive" : true,
+                  "type" : "reference"
                 },
                 {
-                  "text": ".",
-                  "type": "text"
+                  "text" : ".",
+                  "type" : "text"
                 }
               ],
-              "type": "paragraph"
+              "type" : "paragraph"
             }
           ],
-          "name": "Note",
-          "style": "note",
-          "type": "aside"
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
         }
       ],
-      "kind": "content"
+      "kind" : "content"
     }
   ],
-  "references": {
-    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
-      "abstract": [
-        {
-          "text": "A control for selecting a value from a collection, with each value represented by a view in a",
-          "type": "text"
-        },
-        {
-          "text": " ",
-          "type": "text"
-        },
-        {
-          "text": "scrollable surface.",
-          "type": "text"
-        }
-      ],
-      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel",
-      "kind": "symbol",
-      "role": "collection",
-      "title": "DiscreteStepCarousel",
-      "type": "topic",
-      "url": "/documentation/discretestepcarousel"
-    },
-    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
-      "abstract": [
-        {
-          "text": "A structure for specifying values and layout for a ",
-          "type": "text"
-        },
-        {
-          "code": "StepCarousel",
-          "type": "codeVoice"
-        },
-        {
-          "text": ", and for reading or",
-          "type": "text"
-        },
-        {
-          "text": " ",
-          "type": "text"
-        },
-        {
-          "text": "updating the selected value or index.",
-          "type": "text"
-        }
-      ],
-      "fragments": [
-        {
-          "kind": "keyword",
-          "text": "struct"
-        },
-        {
-          "kind": "text",
-          "text": " "
-        },
-        {
-          "kind": "identifier",
-          "text": "StepCarouselPosition"
-        }
-      ],
-      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition",
-      "kind": "symbol",
-      "navigatorTitle": [
-        {
-          "kind": "identifier",
-          "text": "StepCarouselPosition"
-        }
-      ],
-      "role": "symbol",
-      "title": "StepCarouselPosition",
-      "type": "topic",
-      "url": "/documentation/discretestepcarousel/stepcarouselposition"
-    },
-    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectIndex(_:immediate:)": {
-      "abstract": [
-        {
-          "text": "Updates the carousel selection to the value at the given ",
-          "type": "text"
-        },
-        {
-          "code": "index",
-          "type": "codeVoice"
-        },
-        {
-          "text": " in ",
-          "type": "text"
-        },
-        {
-          "code": "values",
-          "type": "codeVoice"
-        },
-        {
-          "text": ".",
-          "type": "text"
-        }
-      ],
-      "fragments": [
-        {
-          "kind": "keyword",
-          "text": "func"
-        },
-        {
-          "kind": "text",
-          "text": " "
-        },
-        {
-          "kind": "identifier",
-          "text": "selectIndex"
-        },
-        {
-          "kind": "text",
-          "text": "("
-        },
-        {
-          "kind": "typeIdentifier",
-          "text": "Values"
-        },
-        {
-          "kind": "text",
-          "text": "."
-        },
-        {
-          "kind": "typeIdentifier",
-          "preciseIdentifier": "s:Sl5IndexQa",
-          "text": "Index"
-        },
-        {
-          "kind": "text",
-          "text": ", "
-        },
-        {
-          "kind": "externalParam",
-          "text": "immediate"
-        },
-        {
-          "kind": "text",
-          "text": ": "
-        },
-        {
-          "kind": "typeIdentifier",
-          "preciseIdentifier": "s:Sb",
-          "text": "Bool"
-        },
-        {
-          "kind": "text",
-          "text": ")"
-        }
-      ],
-      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectIndex(_:immediate:)",
-      "kind": "symbol",
-      "role": "symbol",
-      "title": "selectIndex(_:immediate:)",
-      "type": "topic",
-      "url": "/documentation/discretestepcarousel/stepcarouselposition/selectindex(_:immediate:)"
-    },
-    "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectValue(_:immediate:)": {
-      "abstract": [
-        {
-          "text": "Updates the carousel selection to the given ",
-          "type": "text"
-        },
-        {
-          "code": "value",
-          "type": "codeVoice"
-        },
-        {
-          "text": ".",
-          "type": "text"
-        }
-      ],
-      "fragments": [
-        {
-          "kind": "keyword",
-          "text": "func"
-        },
-        {
-          "kind": "text",
-          "text": " "
-        },
-        {
-          "kind": "identifier",
-          "text": "selectValue"
-        },
-        {
-          "kind": "text",
-          "text": "("
-        },
-        {
-          "kind": "typeIdentifier",
-          "text": "Values"
-        },
-        {
-          "kind": "text",
-          "text": "."
-        },
-        {
-          "kind": "typeIdentifier",
-          "preciseIdentifier": "s:ST7ElementQa",
-          "text": "Element"
-        },
-        {
-          "kind": "text",
-          "text": ", "
-        },
-        {
-          "kind": "externalParam",
-          "text": "immediate"
-        },
-        {
-          "kind": "text",
-          "text": ": "
-        },
-        {
-          "kind": "typeIdentifier",
-          "preciseIdentifier": "s:Sb",
-          "text": "Bool"
-        },
-        {
-          "kind": "text",
-          "text": ")"
-        }
-      ],
-      "identifier": "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectValue(_:immediate:)",
-      "kind": "symbol",
-      "role": "symbol",
-      "title": "selectValue(_:immediate:)",
-      "type": "topic",
-      "url": "/documentation/discretestepcarousel/stepcarouselposition/selectvalue(_:immediate:)"
-    }
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
   },
-  "schemaVersion": {
-    "major": 0,
-    "minor": 3,
-    "patch": 0
-  },
-  "sections": [],
-  "variants": [
+  "sections" : [
+
+  ],
+  "variants" : [
     {
-      "paths": [
-        "/documentation/discretestepcarousel/stepcarouselposition/selectvalue(_:immediate:)"
+      "paths" : [
+        "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectvalue(_:immediate:)"
       ],
-      "traits": [
+      "traits" : [
         {
-          "interfaceLanguage": "swift"
+          "interfaceLanguage" : "swift"
         }
       ]
     }
   ]
+, 
+"references": {
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "DiscreteStepCarousel",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
+  "abstract" : [
+    {
+      "text" : "A structure for specifying values and layout for a ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", and for reading or",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "updating the selected value or index.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselPosition"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselPosition"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarouselPosition",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectIndex(_:immediate:)": {
+  "abstract" : [
+    {
+      "text" : "Updates the carousel selection to the value at the given ",
+      "type" : "text"
+    },
+    {
+      "code" : "index",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : " in ",
+      "type" : "text"
+    },
+    {
+      "code" : "values",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "selectIndex"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sl5IndexQa",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "immediate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectIndex(_:immediate:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "selectIndex(_:immediate:)",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectindex(_:immediate:)"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectValue(_:immediate:)": {
+  "abstract" : [
+    {
+      "text" : "Updates the carousel selection to the given ",
+      "type" : "text"
+    },
+    {
+      "code" : "value",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "selectValue"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "immediate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectValue(_:immediate:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "selectValue(_:immediate:)",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectvalue(_:immediate:)"
+}
+}
 }

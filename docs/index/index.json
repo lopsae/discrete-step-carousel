@@ -1,145 +1,145 @@
 {
-  "includedArchiveIdentifiers": [
+  "includedArchiveIdentifiers" : [
     "DiscreteStepCarousel"
   ],
-  "interfaceLanguages": {
-    "swift": [
+  "interfaceLanguages" : {
+    "swift" : [
       {
-        "children": [
+        "children" : [
           {
-            "title": "Carousel Control",
-            "type": "groupMarker"
+            "title" : "Carousel Control",
+            "type" : "groupMarker"
           },
           {
-            "children": [
+            "children" : [
               {
-                "title": "Initializers",
-                "type": "groupMarker"
+                "title" : "Initializers",
+                "type" : "groupMarker"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarousel/init(position:)",
-                "title": "init(position: Binding<StepCarouselPosition<Values>>)",
-                "type": "init"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarousel\/init(position:)",
+                "title" : "init(position: Binding<StepCarouselPosition<Values>>)",
+                "type" : "init"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarousel/init(position:anchorcontent:markcontent:)",
-                "title": "init(position: Binding<StepCarouselPosition<Values>>, anchorContent: () -> AnchorContent, markContent: (Values.Index, Values.Element) -> MarkContent)",
-                "type": "init"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarousel\/init(position:anchorcontent:markcontent:)",
+                "title" : "init(position: Binding<StepCarouselPosition<Values>>, anchorContent: () -> AnchorContent, markContent: (Values.Index, Values.Element) -> MarkContent)",
+                "type" : "init"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarousel/init(position:anchorstyle:markstyle:)",
-                "title": "init<AnchorStyle, MarkStyle>(position: Binding<StepCarouselPosition<Values>>, anchorStyle: AnchorStyle, markStyle: MarkStyle)",
-                "type": "init"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarousel\/init(position:anchorstyle:markstyle:)",
+                "title" : "init<AnchorStyle, MarkStyle>(position: Binding<StepCarouselPosition<Values>>, anchorStyle: AnchorStyle, markStyle: MarkStyle)",
+                "type" : "init"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarousel/init(position:markcontent:)",
-                "title": "init(position: Binding<StepCarouselPosition<Values>>, markContent: (Values.Index, Values.Element) -> MarkContent)",
-                "type": "init"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarousel\/init(position:markcontent:)",
+                "title" : "init(position: Binding<StepCarouselPosition<Values>>, markContent: (Values.Index, Values.Element) -> MarkContent)",
+                "type" : "init"
               }
             ],
-            "path": "/documentation/discretestepcarousel/stepcarousel",
-            "title": "StepCarousel",
-            "type": "struct"
+            "path" : "\/documentation\/discretestepcarousel\/stepcarousel",
+            "title" : "StepCarousel",
+            "type" : "struct"
           },
           {
-            "children": [
+            "children" : [
               {
-                "title": "Initializers",
-                "type": "groupMarker"
+                "title" : "Initializers",
+                "type" : "groupMarker"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/init(values:selectedindex:marklength:spacing:)",
-                "title": "init(values: Values, selectedIndex: Values.Index?, markLength: Double, spacing: Double)",
-                "type": "init"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/init(values:selectedindex:marklength:spacing:)",
+                "title" : "init(values: Values, selectedIndex: Values.Index?, markLength: Double, spacing: Double)",
+                "type" : "init"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/init(values:selectedvalue:marklength:spacing:)",
-                "title": "init(values: Values, selectedValue: Values.Element, markLength: Double, spacing: Double)",
-                "type": "init"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/init(values:selectedvalue:marklength:spacing:)",
+                "title" : "init(values: Values, selectedValue: Values.Element, markLength: Double, spacing: Double)",
+                "type" : "init"
               },
               {
-                "title": "Instance Properties",
-                "type": "groupMarker"
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/marklength",
-                "title": "let markLength: Double",
-                "type": "property"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/marklength",
+                "title" : "let markLength: Double",
+                "type" : "property"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/selectedindex",
-                "title": "var selectedIndex: Values.Index",
-                "type": "property"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectedindex",
+                "title" : "var selectedIndex: Values.Index",
+                "type" : "property"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/selectedvalue",
-                "title": "var selectedValue: Values.Element",
-                "type": "property"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectedvalue",
+                "title" : "var selectedValue: Values.Element",
+                "type" : "property"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/spacing",
-                "title": "let spacing: Double",
-                "type": "property"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/spacing",
+                "title" : "let spacing: Double",
+                "type" : "property"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/totalmarklength",
-                "title": "var totalMarkLength: Double",
-                "type": "property"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/totalmarklength",
+                "title" : "var totalMarkLength: Double",
+                "type" : "property"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/values",
-                "title": "let values: Values",
-                "type": "property"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/values",
+                "title" : "let values: Values",
+                "type" : "property"
               },
               {
-                "title": "Instance Methods",
-                "type": "groupMarker"
+                "title" : "Instance Methods",
+                "type" : "groupMarker"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/selectindex(_:immediate:)",
-                "title": "func selectIndex(Values.Index, immediate: Bool)",
-                "type": "method"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectindex(_:immediate:)",
+                "title" : "func selectIndex(Values.Index, immediate: Bool)",
+                "type" : "method"
               },
               {
-                "path": "/documentation/discretestepcarousel/stepcarouselposition/selectvalue(_:immediate:)",
-                "title": "func selectValue(Values.Element, immediate: Bool)",
-                "type": "method"
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectvalue(_:immediate:)",
+                "title" : "func selectValue(Values.Element, immediate: Bool)",
+                "type" : "method"
               }
             ],
-            "path": "/documentation/discretestepcarousel/stepcarouselposition",
-            "title": "StepCarouselPosition",
-            "type": "struct"
+            "path" : "\/documentation\/discretestepcarousel\/stepcarouselposition",
+            "title" : "StepCarouselPosition",
+            "type" : "struct"
           },
           {
-            "title": "Marks",
-            "type": "groupMarker"
+            "title" : "Marks",
+            "type" : "groupMarker"
           },
           {
-            "children": [
+            "children" : [
               {
-                "title": "Instance Properties",
-                "type": "groupMarker"
+                "title" : "Instance Properties",
+                "type" : "groupMarker"
               },
               {
-                "path": "/documentation/discretestepcarousel/defaultmark/body",
-                "title": "var body: some View",
-                "type": "property"
+                "path" : "\/documentation\/discretestepcarousel\/defaultmark\/body",
+                "title" : "var body: some View",
+                "type" : "property"
               }
             ],
-            "path": "/documentation/discretestepcarousel/defaultmark",
-            "title": "DefaultMark",
-            "type": "struct"
+            "path" : "\/documentation\/discretestepcarousel\/defaultmark",
+            "title" : "DefaultMark",
+            "type" : "struct"
           }
         ],
-        "path": "/documentation/discretestepcarousel",
-        "title": "DiscreteStepCarousel",
-        "type": "module"
+        "path" : "\/documentation\/discretestepcarousel",
+        "title" : "DiscreteStepCarousel",
+        "type" : "module"
       }
     ]
   },
-  "schemaVersion": {
-    "major": 0,
-    "minor": 1,
-    "patch": 2
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 1,
+    "patch" : 2
   }
 }

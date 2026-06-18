@@ -1,9 +1,9 @@
 {
-  "bundleDisplayName": "DiscreteStepCarousel",
-  "bundleID": "DiscreteStepCarousel",
-  "schemaVersion": {
-    "major": 0,
-    "minor": 1,
-    "patch": 0
+  "bundleDisplayName" : "DiscreteStepCarousel",
+  "bundleID" : "DiscreteStepCarousel",
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 1,
+    "patch" : 0
   }
 }
