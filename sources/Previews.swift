@@ -101,6 +101,30 @@ private struct PreviewContent {
 }
 
 
+// MARK: - Effects
+
+
+#Preview("Effects", traits: .fixedHeader, PreviewContent.layout) {
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
+        values: Strings.alphabet.map(\.localizedUppercase))
+
+    PreviewCaption("Carousels with animated mark based on selection.")
+        .padding(.bottom)
+    PreviewContent.indicatorArrow
+    StepCarousel(position: $carouselPosition) { index, element in
+        let height: CGFloat = carouselPosition.selectedIndex == index ? 32 : 16
+        Capsule()
+            .fill(.primary)
+            .frame(width: 2.5, height: height)
+            .animation(carouselPosition.selectedIndex == index ? nil : .smooth, value: height)
+            .frame(height: 32, alignment: .bottom)
+    }
+    .frame(height: 32)
+    Text(carouselPosition.selectedValue)
+        .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
+}
+
+
 // MARK: - Mark Size
 
 
