@@ -16,6 +16,7 @@ public struct DefaultMark<Style: ShapeStyle>: View {
     let fill: Style
 
     public var body: some View {
+        // FIXME: use just a stroke instead.
         Capsule()
             .fill(fill)
             .frame(width: 3)

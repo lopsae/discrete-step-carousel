@@ -104,6 +104,8 @@ private struct PreviewContent {
 // MARK: - Effects
 
 
+// FIXME: add preview with 3d scroll
+// FIXME: add label on top and make whole control 44 points tall.
 #Preview("Effects", traits: .fixedHeader, PreviewContent.layout) {
     @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase))
