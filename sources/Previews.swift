@@ -34,18 +34,14 @@ private struct PreviewContent {
         values: Strings.alphabet.map(\.localizedUppercase)[10...20],
         selectedValue: "O")
 
-    // Text is about 20 points tall.
-    let stackHeight: CGFloat = 20 + StepCarouselDefaults.markHeight
-
     PreviewCaption("Carousels with default and stylized default markers.")
 
     VStack(spacing: 2) {
         Text(carouselPosition.selectedValue)
             .floatingCaption("\(carouselPosition.selectedIndex)", . alignment(.outerTrailingTop))
-
         StepCarousel(position: $carouselPosition)
+            .frame(height: StepCarouselDefaults.markHeight)
     }
-    .frame(height: stackHeight)
 
     DashedDivider()
 
@@ -53,8 +49,8 @@ private struct PreviewContent {
         Text(styledPosition.selectedValue)
             .floatingCaption("\(styledPosition.selectedIndex)", .alignment(.outerTrailingTop))
         StepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+            .frame(height: StepCarouselDefaults.markHeight)
     }
-    .frame(height: stackHeight)
     .padding(.bottom)
 
     PreviewCaption("Carousel with a collection with offset indices.")
@@ -63,8 +59,8 @@ private struct PreviewContent {
         Text(offsetPosition.selectedValue)
             .floatingCaption("\(offsetPosition.selectedIndex)", .alignment(.outerTrailingTop))
         StepCarousel(position: $offsetPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+            .frame(height: StepCarouselDefaults.markHeight)
     }
-    .frame(height: stackHeight)
 }
 
 
@@ -103,7 +99,7 @@ private struct PreviewContent {
     .debugOverlay(.caption("Enclosed in\nSafeArea"), .infoAlignment(.outerBottomTrailing))
     .safeAreaPadding(.horizontal, 50)
     Text(carouselPosition.selectedValue)
-    Text.caption("\(carouselPosition.selectedIndex)")
+    Text.caption(verbatim: carouselPosition.selectedIndex.description)
 }
 
 
@@ -112,24 +108,31 @@ private struct PreviewContent {
 
 // FIXME: add preview with 3d scroll
 // FIXME: add label on top and make whole control 44 points tall.
-#Preview("Effects", traits: .fixedHeader, PreviewContent.layout) {
+#Preview("AnimatedMark", traits: .fixedHeader, PreviewContent.layout) {
     @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase))
 
     PreviewCaption("Carousels with animated mark based on selection.")
         .padding(.bottom)
-    PreviewContent.indicatorArrow
-    StepCarousel(position: $carouselPosition) { index, element in
-        let height: CGFloat = carouselPosition.selectedIndex == index ? 32 : 16
-        Capsule()
-            .fill(.primary)
-            .frame(width: 2.5, height: height)
-            .animation(carouselPosition.selectedIndex == index ? nil : .smooth, value: height)
-            .frame(height: 32, alignment: .bottom)
+
+    VStack(spacing: 2) {
+        Text(carouselPosition.selectedValue)
+            .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
+        StepCarousel(position: $carouselPosition) { index, element in
+            let isSelected = carouselPosition.selectedIndex == index
+            let height: CGFloat = isSelected
+                ? StepCarouselDefaults.markHeight
+                : StepCarouselDefaults.markHeight / 2
+            let style: HierarchicalShapeStyle = isSelected
+                ? .primary
+                : .tertiary
+            DefaultMark(style: style)
+            .frame(height: height)
+            .animation(isSelected ? nil : .smooth, value: height)
+            .frame(height: StepCarouselDefaults.markHeight, alignment: .bottom)
+        }
+        .frame(height: StepCarouselDefaults.markHeight)
     }
-    .frame(height: 32)
-    Text(carouselPosition.selectedValue)
-        .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
 }
 
 
@@ -150,6 +153,7 @@ private struct PreviewContent {
         """)
 
     Slider.captioned("Fixed Height", value: $fixedHeight, in: 0...200, valueFormat: .shortFraction)
+        .padding(.bottom)
 
     PreviewContent.indicatorArrow
 
