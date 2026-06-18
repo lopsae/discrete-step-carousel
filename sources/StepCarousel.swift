@@ -10,32 +10,39 @@ import SwiftUI
 /// A control for selecting a value from a collection, with each value represented by a view in a
 /// scrollable surface.
 ///
-/// The carousel maps a collection of identified values to a scrollable sequence of views. The user
-/// can scroll these views to select one value at a time.
+/// The carousel maps a collection of values to a scrollable sequence of views. The user
+/// can scroll these views to select one value at a time, when the user stops scrolling the
+/// scrollable surface snaps back to the currently selected view.
+///
+/// Each of the views that represent a carousel value is referred as a _mark_. A secondary _anchor_
+/// view that is overlaid centered on the selected position can also be provided.
+///
+/// The collection of values is not required to contain unique values. Each mark is identified by
+/// its index, not the value it represents. The view for each mark is created lazily, as each view
+/// needed, Both the index and value are provided to the closure that creates the mark.
 ///
 /// ### Carousel Position
 ///
-/// ``StepCarouselPosition`` is the structure that provides the data and layout information
-/// for a step carousel. It is also used to read and update the currently selected index or element.
-///
-/// Calling ``StepCarouselPosition/selectValue(_:immediate:)`` or ``StepCarouselPosition/selectIndex(_:immediate:)``
-/// in a animation block will animate the carousel to the selected position.
+/// ``StepCarouselPosition`` stores the state of the selected index, the collection of selectable
+/// values, and the layout information for a step carousel. The selected index or value can be read
+/// and set through the position instance, calling ``StepCarouselPosition/selectValue(_:immediate:)``
+/// or ``StepCarouselPosition/selectIndex(_:immediate:)`` in a animation block will animate the
+/// carousel to the selected position.
 ///
 /// ### Marks and Sizing
 ///
-/// Each of the views that represent a carousel value is referred as a mark. The anchor is a view
-/// that floats over all marks and signals the selected mark.
+/// The carousel control will expand to occupy all available space. Use a frame or other layout
+/// modifiers to constrain its size to the appropriate dimensions. The space available for each mark
+/// is determined by the ``StepCarouselPosition/markLength`` property and the height of the carousel
+/// control itself. Each mark is centered in its available space.
 ///
 /// Use the ``init(position:)`` or ``init(position:anchorStyle:markStyle:)`` initializers to use the
 /// default marks.
 ///
 /// Use the ``init(position:anchorContent:markContent:)`` or ``init(position:markContent:)`` to
-/// provide a closure to build the view for each mark.
+/// provide a closure that builds the view for each mark.
 ///
-/// The carousel control will expand to occupy all available space. Use a frame or other layout
-/// modifiers to constrain its size to the appropriate dimensions. The size available for each mark
-/// is determined by the ``StepCarouselPosition/markLength`` property and the height of the carousel
-/// control itself. Each mark is centered in its available space.
+@MainActor
 public struct StepCarousel<Values, AnchorContent, MarkContent> : View
 where
     Values: RandomAccessCollection,
@@ -55,16 +62,20 @@ where
 
 
     /// Creates a carousel with custom marks and anchor.
+    /// - Parameters:
+    ///   - position: The binding to the position structure that contains the carousel state.
+    ///   - anchorContent: The view overlaid over the selected position.
+    ///   - markContent: The view builder that creates the mark for each selectable value.
     public init(
-        position positionBinding: Binding<StepCarouselPosition<Values>>,
+        position: Binding<StepCarouselPosition<Values>>,
         @ViewBuilder anchorContent: @escaping () -> AnchorContent,
         @ViewBuilder markContent: @escaping (Values.Index, Values.Element) -> MarkContent
     ) {
-        self._position = positionBinding
+        self._position = position
         self.anchorContent = anchorContent
         self.markContent = markContent
 
-        let positionValue = positionBinding.wrappedValue
+        let positionValue = position.wrappedValue
 
         let selectedIndexDistance = positionValue.values.distance(fromStartTo: positionValue.selectedIndex).asDouble
         let totalMarkLength  = positionValue.totalMarkLength
@@ -80,6 +91,7 @@ where
         ZStack {
             // Geometry reader needs to envelop ScrollView, contentMargins uses the scroll view
             // size to setup margins that allow marks to remain centered.
+            // FIXME: could this be done instead reading onScrollGeometry change?
             GeometryReader { geometry in
                 ScrollView(.horizontal, showsIndicators: false) {
                     // FUTURE: test if AnyLayout/HStackLayout/VStackLayout can provide vertical and horizontal carousel functionality.
@@ -132,7 +144,7 @@ where
 
 // MARK: - Defaults
 
-// TODO: update to primary and secondary/tertiary
+// FIXME: update to primary and secondary/tertiary
 struct DiscreteStepCarouselDefaults {
     static let anchorStyle: Color = .black
     static let markStyle: Color = .gray
@@ -144,41 +156,50 @@ struct DiscreteStepCarouselDefaults {
 
 extension StepCarousel {
 
-    /// Creates a carousel with custom marks.
+    /// Creates a carousel with custom marks and no anchor.
+    /// - Parameters:
+    ///   - position: The binding to the position structure that contains the carousel state.
+    ///   - markContent: The view builder that creates the mark for each selectable value.
     public init(
-        position positionBinding: Binding<StepCarouselPosition<Values>>,
+        position: Binding<StepCarouselPosition<Values>>,
         @ViewBuilder markContent: @escaping (Values.Index, Values.Element) -> MarkContent
     )
     where
         AnchorContent == EmptyView
     {
         self.init(
-            position: positionBinding,
+            position: position,
             anchorContent: { EmptyView() },
             markContent: markContent
         )
     }
 
 
-    /// Creates a carousel with the default anchor and marks.
+    /// Creates a carousel with the default marks and anchor.
+    /// - Parameters:
+    ///   - position: The binding to the position structure that contains the carousel state.
     public init(
-        position positionBinding: Binding<StepCarouselPosition<Values>>
+        position: Binding<StepCarouselPosition<Values>>
     )
     where
         AnchorContent == DefaultMark<Color>,
         MarkContent == DefaultMark<Color>
     {
         self.init(
-            position: positionBinding,
+            position: position,
             anchorContent: { DefaultMark(fill: DiscreteStepCarouselDefaults.anchorStyle) },
             markContent: { _, _ in DefaultMark(fill: DiscreteStepCarouselDefaults.markStyle) }
         )
     }
 
 
-    // Creates a carousel with the default anchor and marks using the given shape styles.
+    /// Creates a carousel with the default marks and anchor using the given shape styles.
+    /// - Parameters:
+    ///   - position: The binding to the position structure that contains the carousel state.
+    ///   - anchorStyle: The style to apply to the default anchor.
+    ///   - markStyle: The style to apply to the default marks.
     public init<AnchorStyle: ShapeStyle, MarkStyle: ShapeStyle>(
-        position positionBinding: Binding<StepCarouselPosition<Values>>,
+        position: Binding<StepCarouselPosition<Values>>,
         anchorStyle: AnchorStyle,
         markStyle: MarkStyle
     )
@@ -187,7 +208,7 @@ extension StepCarousel {
         MarkContent == DefaultMark<MarkStyle>
     {
         self.init(
-            position: positionBinding,
+            position: position,
             anchorContent: { DefaultMark(fill: anchorStyle) },
             markContent: { _, _ in DefaultMark(fill: markStyle) }
         )

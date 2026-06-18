@@ -7,22 +7,33 @@
 import SwiftUI
 
 
-/// A structure for specifying values and layout for a `StepCarousel`, and for reading or
-/// updating the selected value or index.
+/// A structure for reading and updating the selected index of a `StepCarousel`, and for specifying
+/// the values and layout properties.
 ///
-/// A ``StepCarousel`` requires a binding to an instance of this type to provide the data
-/// and layout information for the carousel. The selected value or index can also be read or
-/// updated using this structure.
+/// A ``StepCarousel`` uses a binding to an instance of this type store the state of the selected
+/// index. The instance also contains the collection of selectable values and layout properties.
 public struct StepCarouselPosition<Values>
 where
     Values: RandomAccessCollection,
     Values.Element: Equatable
 {
 
-    /// Collection of values the carousel can select. Each value is represented by a mark.
+    /// Collection of values the carousel can select.
+    ///
+    /// Each value is represented by a mark view in the carousel.
+    ///
+    /// The values in this collection are not required be unique. Each mark is identified by its
+    /// index, not the value it represents.
+    ///
+    /// - Note:
+    /// The collection **must** contain at least one value. An empty collection will trigger
+    /// a precondition failure when initialized.
     public let values: Values
 
     /// Space available for each mark in the carousel.
+    ///
+    /// The space available for each mark is determined by this property and the height of the
+    /// carousel control.
     public let markLength: Double
 
     /// Additional space between marks.
@@ -34,23 +45,27 @@ where
     /// Index of the selected value.
     public internal(set) var selectedIndex: Values.Index
 
-
     internal var scrollPosition: ScrollPosition
 
-    /// Creates a new Position for a StepCarousel.
-    /// 
+
+    /// Creates a position for a carousel control, selecting an initial value.
+    ///
     /// - Parameters:
-    ///   - values: All possible values the carousel can select, in the order these will be
+    ///   - values: The possible values the carousel can select, in the order these will be
     ///     displayed. This collection must contain at least one element.
-    ///   - selectedValue: Initial value to be selected. If this value cannot be found in
+    ///   - selectedValue: The initial value to be selected. If this value cannot be found in
     ///     `values`, or when the parameter is omitted, the first element in `values` is used as the
     ///     initial selection.
-    ///   - markLength: Space available for each mark.
-    ///   - spacing: Additional space between marks.
+    ///   - markLength: The space available for each mark.
+    ///   - spacing: Additional spacing between marks.
     ///
-    ///  - Note: Using this initializer will search sequentially through `values` until a matching
-    ///  `selectedValue` is found. For a constant time approach use the
-    ///    ``init(values:selectedIndex:markLength:spacing:)`` initializer.
+    /// - Note:
+    /// The `values` collection **must** contain at least one value. An empty collection will
+    /// trigger a precondition failure.
+    ///
+    /// - Note: Using this initializer will search sequentially through `values` until a matching
+    /// `selectedValue` is found. For a constant time approach use the ``init(values:selectedIndex:markLength:spacing:)``
+    /// initializer.
     public init(
         values: Values,
         selectedValue: Values.Element,
@@ -70,15 +85,19 @@ where
     }
 
 
-    /// Creates a new Position for a StepCarousel.
-    /// 
+    /// Creates a position for a carousel control, selecting an initial index.
+    ///
     /// - Parameters:
-    ///   - values: All possible values the carousel can select, in the order these will be
+    ///   - values: The possible values the carousel can select, in the order these will be
     ///     displayed. This collection must contain at least one element.
     ///   - selectedIndex: Index of the initial value to be selected, when omitted, the first index
     ///     in `values` is used as the initial selection.
-    ///   - markLength: Space available for each mark.
-    ///   - spacing: Additional space between marks.
+    ///   - markLength: The space available for each mark.
+    ///   - spacing: Additional spacing between marks.
+    ///
+    /// - Note:
+    /// The `values` collection **must** contain at least one value. An empty collection will
+    /// trigger a precondition failure.
     public init(
         values: Values,
         selectedIndex: Values.Index? = nil,
@@ -98,34 +117,39 @@ where
     }
 
 
-    /// The total length used by each mark: mark length + spacing.
+    /// The total length used by each mark.
+    ///
+    /// The length available for each mark is the mark length plus spacing.
     public var totalMarkLength: Double { markLength + spacing }
 
 
-    /// Updates the carousel selection to the given `value`.
-    ///  
-    /// This function can be called within `withAnimation` for an animated selection. When
-    /// animated, both `selectedValue` and `selectedIndex` will be updated immediately once to the
-    /// new values if `immediate` is `true`, and then both properties will update again several
-    /// times as the animation advances.
-    ///
-    /// Use `immediate` to ensure both `selectedValue` and `selectedIndex` are updated during this
-    /// call. Otherwise, both properties are not updated until the view updates, and the internal
-    /// scroll position updates to a new position. When not animated this difference is minimal. When
-    /// animating, setting `immediate` to false can help prevent a small flicker of both
-    /// `selectedValue` and `selectedIndex` to its final values that then gets overwritten by the
-    /// animation advancing through the interim values.
+    /// Updates the carousel selection to the given value.
     ///
     /// If `value` cannot be found in `values`, the current selection remains unchanged.
+    ///
+    /// - Note:
+    /// Using this function will search sequentially through `values` until a matching `value` is
+    /// found. For a constant time approach use ``selectIndex(_:immediate:)``.
+    ///
+    /// ## Animation
+    ///
+    /// This function can be called within `withAnimation` for an animated selection. Use `immediate`
+    /// to determine if ``selectedValue`` and ``selectedIndex`` should be updated during this call,
+    /// or until the animation advances.
+    ///
+    /// When `immediate` is `false`, both `selectedValue` and `selectedIndex` are updated only as
+    /// the internal scroll view animates to the new position. This is the recommended setting for
+    /// animated updates.
+    ///
+    /// When `immediate` is `true`, both `selectedValue` and `selectedIndex` will be updated
+    /// immediately once to the new values, and updated again as the animation advances. This
+    /// initial update can create a brief flickering of the selected state.
     ///
     /// - Parameters:
     ///   - value: The new value to select.
     ///   - immediate: When `true`, both `selectedValue` and `selectedIndex` are updated immediately
-    ///       during this call; otherwise those properties update until the internal scroll
-    ///       position updates, or as animation progresses. Defaults to `true`.
-    ///
-    /// - Note: Using this function will search sequentially through `values` until a matching
-    ///  `value` is found. For a constant time approach use ``selectIndex(_:immediate:)``.
+    ///     during this call; otherwise those properties update until the internal scroll
+    ///     position updates, or as animation progresses. Defaults to `true`.
     public mutating func selectValue(_ value: Values.Element, immediate: Bool = true) {
         guard let index = values.firstIndex(of: value)
         else { return }
@@ -137,27 +161,29 @@ where
     }
 
 
-    /// Updates the carousel selection to the value at the given `index` in `values`.
-    ///
-    /// This function can be called within `withAnimation` for an animated selection. When
-    /// animated, `selectedIndex` will be updated immediately once to the new `index` if `immediate`
-    /// is `true`, and then `selectedIndex` will update again several times as the animation
-    /// progresses. `selectedValue` will update only as the animation advances.
-    ///
-    /// Use `immediate` to ensure `selectedIndex` is updated during this call. Otherwise,
-    /// `selectedIndex` is not updated until the view updates, and the internal scroll position
-    /// updates to a new position. When not animated this difference is minimal. When animating,
-    /// setting `immediate` to false can help prevent a small flicker of `selectedIndex` to its
-    /// final value that then gets overwritten by the animation advancing through the interim
-    /// indices.
+    /// Updates the carousel selection to the given index.
     ///
     /// If `index` is not a valid index for `values`, the current selection remains unchanged.
     ///
+    /// ## Animation
+    ///
+    /// This function can be called within `withAnimation` for an animated selection. Use `immediate`
+    /// to determine if ``selectedValue`` and ``selectedIndex`` should be updated during this call,
+    /// or until the animation advances.
+    ///
+    /// When `immediate` is `false`, both `selectedValue` and `selectedIndex` are updated only as
+    /// the internal scroll view animates to the new position. This is the recommended setting for
+    /// animated updates.
+    ///
+    /// When `immediate` is `true`, both `selectedValue` and `selectedIndex` will be updated
+    /// immediately once to the new values, and updated again as the animation advances. This
+    /// initial update can create a brief flickering of the selected state.
+    ///
     /// - Parameters:
-    ///   - index: The index for the value in `values` to select.
+    ///   - index: The index in ``values`` to select.
     ///   - immediate: When `true`, `selectedIndex` is updated immediately during this call;
-    ///       otherwise the property updates until the internal scroll position updates, or as
-    ///       animation progresses. Defaults to `true`.
+    ///     otherwise the property updates until the internal scroll position updates, or as
+    ///     animation progresses. Defaults to `true`.
     public mutating func selectIndex(_ index: Values.Index, immediate: Bool = true) {
         guard values.indices.contains(index)
         else { return }
