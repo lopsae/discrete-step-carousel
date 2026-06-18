@@ -6,6 +6,8 @@ Documentation release
 + Documentation catalog and main documentation batch.
 + use rounded marks.
 + Add examples with scroll view effects, and animation effects.
++ Add tests for carousel position with zero elements, 1 element, x elements
++ Add tests using collections with offset indices.
 
 
 Future Features
