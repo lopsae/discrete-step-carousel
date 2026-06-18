@@ -11,6 +11,16 @@ import Testing
 
 struct StepCarouselPositionTests {
 
+    // MARK: Initialization
+
+    @Test func initialization_defaultsToFirst() {
+        let position = StepCarouselPosition(values: ["zero", "one", "two"])
+
+        #expect(position.selectedIndex == 0)
+        #expect(position.selectedValue == "zero")
+        #expect(position.values == ["zero", "one", "two"])
+    }
+
 
     // MARK: Initialization with selectedValue
 
@@ -61,15 +71,6 @@ struct StepCarouselPositionTests {
         #expect(position.selectedIndex == 3)
         #expect(position.selectedValue == "three")
         #expect(position.values == ["zero", "one", "two", "three", "four"])
-    }
-
-
-    @Test func noInitialSelectedIndex_defaultsToFirst() {
-        let position = StepCarouselPosition(values: ["zero", "one", "two"])
-
-        #expect(position.selectedIndex == 0)
-        #expect(position.selectedValue == "zero")
-        #expect(position.values == ["zero", "one", "two"])
     }
 
 
@@ -135,29 +136,6 @@ struct StepCarouselPositionTests {
     }
 
 
-    // FIXME: Invalid selectIndex
-
-
-    @Test func selectIndex_invalidIndex_noChange() {
-        var position = StepCarouselPosition(values: ["zero", "one", "two"])
-
-        position.selectIndex(5)
-
-        #expect(position.selectedIndex == 0)
-        #expect(position.selectedValue == "zero")
-    }
-
-
-    @Test func selectIndex_negativeIndex_noChange() {
-        var position = StepCarouselPosition(values: ["zero", "one", "two"])
-
-        position.selectIndex(-1)
-
-        #expect(position.selectedIndex == 0)
-        #expect(position.selectedValue == "zero")
-    }
-
-
     @Test func selectIndex_toFirstIndex() {
         var position = StepCarouselPosition(
             values: ["zero", "one", "two"],
@@ -182,6 +160,28 @@ struct StepCarouselPositionTests {
 
         #expect(position.selectedIndex == 2)
         #expect(position.scrollPosition.x == 40)
+    }
+
+
+    // MARK: Invalid selectIndex
+
+    @Test func selectIndex_invalidIndex_noChange() {
+        var position = StepCarouselPosition(values: ["zero", "one", "two"])
+
+        position.selectIndex(5)
+
+        #expect(position.selectedIndex == 0)
+        #expect(position.selectedValue == "zero")
+    }
+
+
+    @Test func selectIndex_negativeIndex_noChange() {
+        var position = StepCarouselPosition(values: ["zero", "one", "two"])
+
+        position.selectIndex(-1)
+
+        #expect(position.selectedIndex == 0)
+        #expect(position.selectedValue == "zero")
     }
 
 
@@ -217,16 +217,6 @@ struct StepCarouselPositionTests {
     }
 
 
-    @Test func selectValue_notFound_noChange() {
-        var position = StepCarouselPosition(values: ["zero", "one", "two"])
-
-        position.selectValue("none")
-
-        #expect(position.selectedIndex == 0)
-        #expect(position.selectedValue == "zero")
-    }
-
-
     @Test func selectValue_duplicate_selectsFirstOccurrence() {
         var position = StepCarouselPosition(
             values: ["zero", "repeat", "two", "repeat", "four"],
@@ -240,7 +230,19 @@ struct StepCarouselPositionTests {
     }
 
 
-    // MARK: Sequential selections update scrollPosition
+    // MARK: invalid selectValue
+
+    @Test func selectValue_notFound_noChange() {
+        var position = StepCarouselPosition(values: ["zero", "one", "two"])
+
+        position.selectValue("none")
+
+        #expect(position.selectedIndex == 0)
+        #expect(position.selectedValue == "zero")
+    }
+
+
+    // MARK: Sequential selections
 
     @Test func multipleSelectIndex_updatesScrollPositionEachTime() {
         var position = StepCarouselPosition(
@@ -276,6 +278,73 @@ struct StepCarouselPositionTests {
     }
 
 
-    // FIXME: add tests with collections with offset indexes
+    // MARK: With Subsequence
+
+
+    @Test func withSubsequence_initialization_defaultsToFirst() {
+        let array = ["zero", "one", "two", "three", "four"]
+        let subsequence = array[1...3]
+        let position = StepCarouselPosition(values: subsequence)
+
+        #expect(position.selectedIndex == 1)
+        #expect(position.selectedValue == "one")
+        #expect(position.values == ["one", "two", "three"])
+    }
+
+
+    @Test func withSubsequence_initialSelectedValue() {
+        let array = ["zero", "one", "two", "three", "four"]
+        let subsequence = array[1...3]
+        let position = StepCarouselPosition(
+            values: subsequence,
+            selectedValue: "two"
+        )
+
+        #expect(position.selectedIndex == 2)
+        #expect(position.selectedValue == "two")
+        #expect(position.values == ["one", "two", "three"])
+    }
+
+
+    @Test func withSubsequence_initialSelectedValueNotFound_defaultsToFirst() {
+        let array = ["zero", "one", "two", "three", "four"]
+        let subsequence = array[1...3]
+        let position = StepCarouselPosition(
+            values: subsequence,
+            selectedValue: "none"
+        )
+
+        #expect(position.selectedIndex == 1)
+        #expect(position.selectedValue == "one")
+        #expect(position.values == ["one", "two", "three"])
+    }
+
+
+    @Test func withSubsequence_initialSelectedValueDuplicate_selectsFirstOccurrence() {
+        let array = ["zero", "one", "repeat", "repeat", "four"]
+        let subsequence = array[1...3]
+        let position = StepCarouselPosition(
+            values: subsequence,
+            selectedValue: "repeat"
+        )
+
+        #expect(position.selectedIndex == 2)
+        #expect(position.selectedValue == "repeat")
+        #expect(position.values == ["one", "repeat", "repeat"])
+    }
+
+
+    @Test func withSubsequence_initialSelectedIndex() {
+        let array = ["zero", "one", "two", "three", "four"]
+        let subsequence = array[1...3]
+        let position = StepCarouselPosition(
+            values: subsequence,
+            selectedIndex: 3
+        )
+
+        #expect(position.selectedIndex == 3)
+        #expect(position.selectedValue == "three")
+        #expect(position.values == ["one", "two", "three"])
+    }
 
 }
