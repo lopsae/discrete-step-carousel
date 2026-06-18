@@ -10,8 +10,8 @@ import SwiftUI
 /// A control for selecting a value from a collection, with each value represented by a view in a
 /// scrollable surface.
 ///
-/// The discrete step carousel maps a collection of identified values to a scrollable sequence of
-/// views. The user can scroll between these views to select one value at a time.
+/// The carousel maps a collection of identified values to a scrollable sequence of views. The user
+/// can scroll these views to select one value at a time.
 ///
 /// ### Carousel Position
 ///
@@ -34,8 +34,8 @@ import SwiftUI
 ///
 /// The carousel control will expand to occupy all available space. Use a frame or other layout
 /// modifiers to constrain its size to the appropriate dimensions. The size available for each mark
-/// is determined by the ``StepCarouselPosition/markLength`` property, which each mark view
-/// centered in the available space.
+/// is determined by the ``StepCarouselPosition/markLength`` property and the height of the carousel
+/// control itself. Each mark is centered in its available space.
 public struct StepCarousel<Values, AnchorContent, MarkContent> : View
 where
     Values: RandomAccessCollection,
@@ -54,6 +54,7 @@ where
     private var initialAnchor: UnitPoint
 
 
+    /// Creates a carousel with custom marks and anchor.
     public init(
         position positionBinding: Binding<StepCarouselPosition<Values>>,
         @ViewBuilder anchorContent: @escaping () -> AnchorContent,
@@ -143,6 +144,7 @@ struct DiscreteStepCarouselDefaults {
 
 extension StepCarousel {
 
+    /// Creates a carousel with custom marks.
     public init(
         position positionBinding: Binding<StepCarouselPosition<Values>>,
         @ViewBuilder markContent: @escaping (Values.Index, Values.Element) -> MarkContent
@@ -158,6 +160,7 @@ extension StepCarousel {
     }
 
 
+    /// Creates a carousel with the default anchor and marks.
     public init(
         position positionBinding: Binding<StepCarouselPosition<Values>>
     )
@@ -173,6 +176,7 @@ extension StepCarousel {
     }
 
 
+    // Creates a carousel with the default anchor and marks using the given shape styles.
     public init<AnchorStyle: ShapeStyle, MarkStyle: ShapeStyle>(
         position positionBinding: Binding<StepCarouselPosition<Values>>,
         anchorStyle: AnchorStyle,
