@@ -88,13 +88,13 @@ struct StepCarouselPositionTests {
     @Test func customMarkLengthAndSpacing() {
         let position = StepCarouselPosition(
             values: ["zero", "one", "two"],
-            markLength: 30,
-            spacing: 5
+            markLength: 20,
+            spacing: 4
         )
 
-        #expect(position.markLength == 30)
-        #expect(position.spacing == 5)
-        #expect(position.totalMarkLength == 35)
+        #expect(position.markLength == 20)
+        #expect(position.spacing == 4)
+        #expect(position.totalMarkLength == 24)
     }
 
 
@@ -103,14 +103,14 @@ struct StepCarouselPositionTests {
     @Test func selectIndex_updatesImmediately() {
         var position = StepCarouselPosition(
             values: ["zero", "one", "two", "three", "four"],
-            markLength: 20.0,
-            spacing: 0.0
+            markLength: 20,
+            spacing: 4
         )
 
         position.selectIndex(3)
 
         #expect(position.selectedIndex == 3)
-        #expect(position.scrollPosition.x == 60.0)
+        #expect(position.scrollPosition.x == 72)
 
         // selectedValue does NOT get updated.
         #expect(position.selectedValue == "zero")
@@ -120,13 +120,13 @@ struct StepCarouselPositionTests {
     @Test func selectIndexNotImmediate_doesNotUpdate() {
         var position = StepCarouselPosition(
             values: ["zero", "one", "two", "three", "four"],
-            markLength: 20.0,
-            spacing: 0.0
+            markLength: 20,
+            spacing: 4
         )
 
         position.selectIndex(3, immediate: false)
 
-        #expect(position.scrollPosition.x == 60)
+        #expect(position.scrollPosition.x == 72)
 
         // Not updated.
         #expect(position.selectedIndex == 0)
@@ -135,84 +135,68 @@ struct StepCarouselPositionTests {
     }
 
 
-    // FIXME: init with invalid index
+    // FIXME: Invalid selectIndex
 
 
     @Test func selectIndex_invalidIndex_noChange() {
-        var position = StepCarouselPosition(
-            values: [10, 20, 30]
-        )
+        var position = StepCarouselPosition(values: ["zero", "one", "two"])
 
         position.selectIndex(5)
 
         #expect(position.selectedIndex == 0)
-        #expect(position.selectedValue == 10)
+        #expect(position.selectedValue == "zero")
     }
 
 
     @Test func selectIndex_negativeIndex_noChange() {
-        var position = StepCarouselPosition(
-            values: [10, 20, 30]
-        )
+        var position = StepCarouselPosition(values: ["zero", "one", "two"])
 
         position.selectIndex(-1)
 
         #expect(position.selectedIndex == 0)
+        #expect(position.selectedValue == "zero")
     }
 
 
     @Test func selectIndex_toFirstIndex() {
         var position = StepCarouselPosition(
-            values: [10, 20, 30],
+            values: ["zero", "one", "two"],
             selectedIndex: 2,
-            markLength: 20.0
+            markLength: 20
         )
 
         position.selectIndex(0)
 
         #expect(position.selectedIndex == 0)
-        #expect(position.scrollPosition.x == 0.0)
+        #expect(position.scrollPosition.x == 0)
     }
 
 
     @Test func selectIndex_toLastIndex() {
         var position = StepCarouselPosition(
-            values: [10, 20, 30, 40],
-            markLength: 10.0,
-            spacing: 5.0
+            values: ["zero", "one", "two"],
+            markLength: 20
         )
 
-        position.selectIndex(3)
+        position.selectIndex(2)
 
-        #expect(position.selectedIndex == 3)
-        #expect(position.scrollPosition.x == 45.0)
+        #expect(position.selectedIndex == 2)
+        #expect(position.scrollPosition.x == 40)
     }
 
 
-    // MARK: - selectValue
-
+    // MARK: selectValue
 
     @Test func selectValue_updatesSelectedValueAndIndex() {
         var position = StepCarouselPosition(
-            values: ["zero", "one", "two", "three", "four"]
+            values: ["zero", "one", "two", "three", "four"],
+            markLength: 20
         )
 
         position.selectValue("two")
 
         #expect(position.selectedIndex == 2)
         #expect(position.selectedValue == "two")
-    }
-
-
-    @Test func selectValue_updatesScrollPosition() {
-        var position = StepCarouselPosition(
-            values: ["zero", "one", "two", "three", "four"],
-            markLength: 20.0,
-            spacing: 0.0
-        )
-
-        position.selectValue("two")
-
         #expect(position.scrollPosition.x == 40.0)
     }
 
@@ -220,13 +204,12 @@ struct StepCarouselPositionTests {
     @Test func selectValue_notImmediate_doesNotUpdateSelectedValueOrIndex() {
         var position = StepCarouselPosition(
             values: ["zero", "one", "two", "three", "four"],
-            markLength: 20,
-            spacing: 4
+            markLength: 20
         )
 
         position.selectValue("two", immediate: false)
 
-        #expect(position.scrollPosition.x == 48)
+        #expect(position.scrollPosition.x == 40)
 
         // Not updated.
         #expect(position.selectedIndex == 0)
@@ -235,14 +218,12 @@ struct StepCarouselPositionTests {
 
 
     @Test func selectValue_notFound_noChange() {
-        var position = StepCarouselPosition(
-            values: [10, 20, 30]
-        )
+        var position = StepCarouselPosition(values: ["zero", "one", "two"])
 
-        position.selectValue(99)
+        position.selectValue("none")
 
-        #expect(position.selectedValue == 10)
         #expect(position.selectedIndex == 0)
+        #expect(position.selectedValue == "zero")
     }
 
 
@@ -264,36 +245,37 @@ struct StepCarouselPositionTests {
     @Test func multipleSelectIndex_updatesScrollPositionEachTime() {
         var position = StepCarouselPosition(
             values: ["zero", "one", "two", "three", "four"],
-            markLength: 10.0,
-            spacing: 0.0
+            markLength: 10,
         )
 
         position.selectIndex(2)
-        #expect(position.scrollPosition.x == 20.0)
+        #expect(position.scrollPosition.x == 20)
 
         position.selectIndex(4)
-        #expect(position.scrollPosition.x == 40.0)
+        #expect(position.scrollPosition.x == 40)
 
         position.selectIndex(0)
-        #expect(position.scrollPosition.x == 0.0)
+        #expect(position.scrollPosition.x == 0)
     }
 
 
     @Test func multipleSelectValue_updatesScrollPositionEachTime() {
         var position = StepCarouselPosition(
-            values: ["a", "b", "c", "d"],
-            markLength: 15.0,
-            spacing: 5.0
+            values: ["zero", "one", "two", "three", "four"],
+            markLength: 10.0,
         )
 
-        position.selectValue("c")
-        #expect(position.scrollPosition.x == 40.0)
+        position.selectValue("two")
+        #expect(position.scrollPosition.x == 20)
 
-        position.selectValue("a")
-        #expect(position.scrollPosition.x == 0.0)
+        position.selectValue("four")
+        #expect(position.scrollPosition.x == 40)
 
-        position.selectValue("d")
-        #expect(position.scrollPosition.x == 60.0)
+        position.selectValue("zero")
+        #expect(position.scrollPosition.x == 0)
     }
+
+
+    // FIXME: add tests with collections with offset indexes
 
 }
