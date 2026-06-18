@@ -35,7 +35,6 @@ private struct PreviewContent {
         selectedValue: "O")
 
     // Text is about 20 points tall.
-    // Carousel in stock UI is measured to about 32 points.
     let stackHeight: CGFloat = 20 + StepCarouselDefaults.markHeight
 
     PreviewCaption("Carousels with default and stylized default markers.")

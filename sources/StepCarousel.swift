@@ -155,6 +155,8 @@ public enum StepCarouselDefaults {
     public static let markStyle: HierarchicalShapeStyle = .quaternary
 
     /// Recommended height for marks using `DefaultMark`.
+    ///
+    /// Carousel seen in standard library UI is measured to about 32 points.
     public static let markHeight: CGFloat = 32
 
 }
