@@ -23,7 +23,7 @@ struct BaseExamples: View {
                 .listRowInsets(.horizontal, .zero)
             }
 
-            Section("Carousel with `Image` Marks") {
+            Section("Carousel with Custom Marks") {
                 ImageMarksExample()
                 .listRowInsets(.horizontal, .zero)
             }
@@ -58,7 +58,7 @@ struct StyledMarksExample: View {
 
     @State var  carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
-        selectedValue: "Z"
+        selectedValue: "M"
     )
 
     var body: some View {
@@ -85,7 +85,8 @@ struct ImageMarksExample: View {
         values: [
             "moon", "flame", "bolt", "drop", "cloud",
             "lizard", "ladybug", "leaf", "carrot"],
-        markLength: 44
+        markLength: 44,
+        spacing: 8
     )
 
     var body: some View {
@@ -95,6 +96,8 @@ struct ImageMarksExample: View {
             StepCarousel(position: $carouselPosition) { index, element in
                 Image(systemName: element)
                 .font(.title)
+                .maxSizeFrame()
+                .background(.gray.quinary, in: RoundedRectangle(cornerRadius: 4))
                 .onTapGesture {
                     withAnimation {
                         carouselPosition.selectIndex(index, immediate: false)

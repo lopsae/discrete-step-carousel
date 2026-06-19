@@ -13,10 +13,12 @@ struct Navigator: View {
             List {
                 NavigationLink("Base Examples") {
                     BaseExamples()
+                    .navigationTitle("Base Examples")
                 }
 
                 NavigationLink("Advanced Examples") {
                     AdvancedExamples()
+                    .navigationTitle("Advanced Examples")
                 }
             }
             .navigationTitle("DiscreteStepCarousel")
