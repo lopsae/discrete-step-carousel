@@ -90,6 +90,14 @@
         "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/DefaultMark"
       ],
       "title" : "Marks"
+    },
+    {
+      "anchor" : "Enumerations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults"
+      ],
+      "title" : "Enumerations"
     }
   ],
   "variants" : [
@@ -212,10 +220,48 @@
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel\/stepcarousel"
 },
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults": {
+  "abstract" : [
+    {
+      "text" : "Container of defaults for ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselDefaults"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselDefaults"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarouselDefaults",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults"
+},
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
   "abstract" : [
     {
-      "text" : "A structure for specifying values and layout for a ",
+      "text" : "A structure for reading and updating the selected index of a ",
       "type" : "text"
     },
     {
@@ -223,7 +269,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ", and for reading or",
+      "text" : ", and for specifying",
       "type" : "text"
     },
     {
@@ -231,7 +277,7 @@
       "type" : "text"
     },
     {
-      "text" : "updating the selected value or index.",
+      "text" : "the values and layout properties.",
       "type" : "text"
     }
   ],

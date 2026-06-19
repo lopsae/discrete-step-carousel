@@ -1,7 +1,15 @@
 {
   "abstract" : [
     {
-      "text" : "Space available for each mark in the carousel.",
+      "text" : "Default mark style used along ",
+      "type" : "text"
+    },
+    {
+      "code" : "DefaultMark",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
@@ -9,18 +17,26 @@
     "paths" : [
       [
         "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
-        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition"
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults"
       ]
     ]
   },
   "identifier" : {
     "interfaceLanguage" : "swift",
-    "url" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/markLength"
+    "url" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markStyle"
   },
   "kind" : "symbol",
   "metadata" : {
-    "externalID" : "s:20DiscreteStepCarousel0bC8PositionV10markLengthSdvp",
+    "externalID" : "s:20DiscreteStepCarousel0bC8DefaultsO9markStyle7SwiftUI017HierarchicalShapeF0VvpZ",
     "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
       {
         "kind" : "keyword",
         "text" : "let"
@@ -31,7 +47,7 @@
       },
       {
         "kind" : "identifier",
-        "text" : "markLength"
+        "text" : "markStyle"
       },
       {
         "kind" : "text",
@@ -39,8 +55,8 @@
       },
       {
         "kind" : "typeIdentifier",
-        "preciseIdentifier" : "s:Sd",
-        "text" : "Double"
+        "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+        "text" : "HierarchicalShapeStyle"
       }
     ],
     "modules" : [
@@ -49,9 +65,9 @@
       }
     ],
     "role" : "symbol",
-    "roleHeading" : "Instance Property",
+    "roleHeading" : "Type Property",
     "symbolKind" : "property",
-    "title" : "markLength"
+    "title" : "markStyle"
   },
   "primaryContentSections" : [
     {
@@ -79,6 +95,14 @@
             },
             {
               "kind" : "keyword",
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
               "text" : "let"
             },
             {
@@ -87,7 +111,7 @@
             },
             {
               "kind" : "identifier",
-              "text" : "markLength"
+              "text" : "markStyle"
             },
             {
               "kind" : "text",
@@ -95,41 +119,13 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:Sd",
-              "text" : "Double"
+              "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+              "text" : "HierarchicalShapeStyle"
             }
           ]
         }
       ],
       "kind" : "declarations"
-    },
-    {
-      "content" : [
-        {
-          "anchor" : "discussion",
-          "level" : 2,
-          "text" : "Discussion",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The space available for each mark is determined by this property and the height of the",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "carousel control.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        }
-      ],
-      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -143,7 +139,7 @@
   "variants" : [
     {
       "paths" : [
-        "\/documentation\/discretestepcarousel\/stepcarouselposition\/marklength"
+        "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/markstyle"
       ],
       "traits" : [
         {
@@ -176,33 +172,21 @@
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel"
 },
-"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults": {
   "abstract" : [
     {
-      "text" : "A structure for reading and updating the selected index of a ",
+      "text" : "Container of defaults for ",
       "type" : "text"
     },
     {
       "code" : "StepCarousel",
       "type" : "codeVoice"
-    },
-    {
-      "text" : ", and for specifying",
-      "type" : "text"
-    },
-    {
-      "text" : " ",
-      "type" : "text"
-    },
-    {
-      "text" : "the values and layout properties.",
-      "type" : "text"
     }
   ],
   "fragments" : [
     {
       "kind" : "keyword",
-      "text" : "struct"
+      "text" : "enum"
     },
     {
       "kind" : "text",
@@ -210,30 +194,46 @@
     },
     {
       "kind" : "identifier",
-      "text" : "StepCarouselPosition"
+      "text" : "StepCarouselDefaults"
     }
   ],
-  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults",
   "kind" : "symbol",
   "navigatorTitle" : [
     {
       "kind" : "identifier",
-      "text" : "StepCarouselPosition"
+      "text" : "StepCarouselDefaults"
     }
   ],
   "role" : "symbol",
-  "title" : "StepCarouselPosition",
+  "title" : "StepCarouselDefaults",
   "type" : "topic",
-  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition"
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults"
 },
-"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/markLength": {
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults/markStyle": {
   "abstract" : [
     {
-      "text" : "Space available for each mark in the carousel.",
+      "text" : "Default mark style used along ",
+      "type" : "text"
+    },
+    {
+      "code" : "DefaultMark",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
       "type" : "text"
     }
   ],
   "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
     {
       "kind" : "keyword",
       "text" : "let"
@@ -244,7 +244,7 @@
     },
     {
       "kind" : "identifier",
-      "text" : "markLength"
+      "text" : "markStyle"
     },
     {
       "kind" : "text",
@@ -252,16 +252,16 @@
     },
     {
       "kind" : "typeIdentifier",
-      "preciseIdentifier" : "s:Sd",
-      "text" : "Double"
+      "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+      "text" : "HierarchicalShapeStyle"
     }
   ],
-  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/markLength",
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markStyle",
   "kind" : "symbol",
   "role" : "symbol",
-  "title" : "markLength",
+  "title" : "markStyle",
   "type" : "topic",
-  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/marklength"
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/markstyle"
 }
 }
 }

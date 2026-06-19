@@ -191,6 +191,14 @@
   ],
   "topicSections" : [
     {
+      "anchor" : "Initializers",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/DefaultMark\/init(style:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
       "anchor" : "Instance-Properties",
       "generated" : true,
       "identifiers" : [
@@ -323,6 +331,46 @@
   "title" : "body",
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel\/defaultmark\/body"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/DefaultMark/init(style:)": {
+  "abstract" : [
+    {
+      "text" : "Create a default mark with the given style.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "style"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Style"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/DefaultMark\/init(style:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(style:)",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/defaultmark\/init(style:)"
 },
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel": {
   "abstract" : [

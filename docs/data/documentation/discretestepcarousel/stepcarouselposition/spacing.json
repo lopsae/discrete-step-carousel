@@ -151,7 +151,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
   "abstract" : [
     {
-      "text" : "A structure for specifying values and layout for a ",
+      "text" : "A structure for reading and updating the selected index of a ",
       "type" : "text"
     },
     {
@@ -159,7 +159,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ", and for reading or",
+      "text" : ", and for specifying",
       "type" : "text"
     },
     {
@@ -167,7 +167,7 @@
       "type" : "text"
     },
     {
-      "text" : "updating the selected value or index.",
+      "text" : "the values and layout properties.",
       "type" : "text"
     }
   ],

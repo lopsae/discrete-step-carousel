@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Creates a new Position for a StepCarousel.",
+      "text" : "Creates a position for a carousel control, selecting an initial value.",
       "type" : "text"
     }
   ],
@@ -203,7 +203,7 @@
             },
             {
               "kind" : "text",
-              "text" : " = 22.0, "
+              "text" : " = StepCarouselDefaults.markLength, "
             },
             {
               "kind" : "externalParam",
@@ -235,7 +235,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "All possible values the carousel can select, in the order these will be",
+                  "text" : "The possible values the carousel can select, in the order these will be",
                   "type" : "text"
                 },
                 {
@@ -257,7 +257,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Initial value to be selected. If this value cannot be found in",
+                  "text" : "The initial value to be selected. If this value cannot be found in",
                   "type" : "text"
                 },
                 {
@@ -299,7 +299,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Space available for each mark.",
+                  "text" : "The space available for each mark.",
                   "type" : "text"
                 }
               ],
@@ -313,7 +313,7 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "Additional space between marks.",
+                  "text" : "Additional spacing between marks.",
                   "type" : "text"
                 }
               ],
@@ -331,6 +331,59 @@
           "level" : 2,
           "text" : "Discussion",
           "type" : "heading"
+        },
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "The ",
+                  "type" : "text"
+                },
+                {
+                  "code" : "values",
+                  "type" : "codeVoice"
+                },
+                {
+                  "text" : " collection ",
+                  "type" : "text"
+                },
+                {
+                  "inlineContent" : [
+                    {
+                      "text" : "must",
+                      "type" : "text"
+                    }
+                  ],
+                  "type" : "strong"
+                },
+                {
+                  "text" : " contain at least one value. An empty collection will",
+                  "type" : "text"
+                },
+                {
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "trigger a precondition failure.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "Note",
+          "style" : "note",
+          "type" : "aside"
         },
         {
           "content" : [
@@ -357,11 +410,7 @@
                   "type" : "codeVoice"
                 },
                 {
-                  "text" : " is found. For a constant time approach use the",
-                  "type" : "text"
-                },
-                {
-                  "text" : " ",
+                  "text" : " is found. For a constant time approach use the ",
                   "type" : "text"
                 },
                 {
@@ -370,7 +419,11 @@
                   "type" : "reference"
                 },
                 {
-                  "text" : " initializer.",
+                  "text" : " ",
+                  "type" : "text"
+                },
+                {
+                  "text" : "initializer.",
                   "type" : "text"
                 }
               ],
@@ -432,7 +485,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
   "abstract" : [
     {
-      "text" : "A structure for specifying values and layout for a ",
+      "text" : "A structure for reading and updating the selected index of a ",
       "type" : "text"
     },
     {
@@ -440,7 +493,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ", and for reading or",
+      "text" : ", and for specifying",
       "type" : "text"
     },
     {
@@ -448,7 +501,7 @@
       "type" : "text"
     },
     {
-      "text" : "updating the selected value or index.",
+      "text" : "the values and layout properties.",
       "type" : "text"
     }
   ],
@@ -482,7 +535,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/init(values:selectedIndex:markLength:spacing:)": {
   "abstract" : [
     {
-      "text" : "Creates a new Position for a StepCarousel.",
+      "text" : "Creates a position for a carousel control, selecting an initial index.",
       "type" : "text"
     }
   ],
@@ -581,7 +634,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/init(values:selectedValue:markLength:spacing:)": {
   "abstract" : [
     {
-      "text" : "Creates a new Position for a StepCarousel.",
+      "text" : "Creates a position for a carousel control, selecting an initial value.",
       "type" : "text"
     }
   ],

@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "The total length used by each mark: mark length + spacing.",
+      "text" : "The total length used by each mark.",
       "type" : "text"
     }
   ],
@@ -114,6 +114,26 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "discussion",
+          "level" : 2,
+          "text" : "Discussion",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The length available for each mark is the mark length plus spacing.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
     }
   ],
   "schemaVersion" : {
@@ -163,7 +183,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
   "abstract" : [
     {
-      "text" : "A structure for specifying values and layout for a ",
+      "text" : "A structure for reading and updating the selected index of a ",
       "type" : "text"
     },
     {
@@ -171,7 +191,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ", and for reading or",
+      "text" : ", and for specifying",
       "type" : "text"
     },
     {
@@ -179,7 +199,7 @@
       "type" : "text"
     },
     {
-      "text" : "updating the selected value or index.",
+      "text" : "the values and layout properties.",
       "type" : "text"
     }
   ],
@@ -213,7 +233,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/totalMarkLength": {
   "abstract" : [
     {
-      "text" : "The total length used by each mark: mark length + spacing.",
+      "text" : "The total length used by each mark.",
       "type" : "text"
     }
   ],

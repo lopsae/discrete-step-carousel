@@ -117,6 +117,15 @@
           {
             "children" : [
               {
+                "title" : "Initializers",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/discretestepcarousel\/defaultmark\/init(style:)",
+                "title" : "init(style: Style)",
+                "type" : "init"
+              },
+              {
                 "title" : "Instance Properties",
                 "type" : "groupMarker"
               },
@@ -129,6 +138,41 @@
             "path" : "\/documentation\/discretestepcarousel\/defaultmark",
             "title" : "DefaultMark",
             "type" : "struct"
+          },
+          {
+            "title" : "Enumerations",
+            "type" : "groupMarker"
+          },
+          {
+            "children" : [
+              {
+                "title" : "Type Properties",
+                "type" : "groupMarker"
+              },
+              {
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/anchorstyle",
+                "title" : "static let anchorStyle: HierarchicalShapeStyle",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/markheight",
+                "title" : "static let markHeight: Double",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/marklength",
+                "title" : "static let markLength: Double",
+                "type" : "property"
+              },
+              {
+                "path" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/markstyle",
+                "title" : "static let markStyle: HierarchicalShapeStyle",
+                "type" : "property"
+              }
+            ],
+            "path" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults",
+            "title" : "StepCarouselDefaults",
+            "type" : "enum"
           }
         ],
         "path" : "\/documentation\/discretestepcarousel",

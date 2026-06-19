@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "A structure for specifying values and layout for a ",
+      "text" : "A structure for reading and updating the selected index of a ",
       "type" : "text"
     },
     {
@@ -9,7 +9,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ", and for reading or",
+      "text" : ", and for specifying",
       "type" : "text"
     },
     {
@@ -17,7 +17,7 @@
       "type" : "text"
     },
     {
-      "text" : "updating the selected value or index.",
+      "text" : "the values and layout properties.",
       "type" : "text"
     }
   ],
@@ -172,7 +172,7 @@
               "type" : "reference"
             },
             {
-              "text" : " requires a binding to an instance of this type to provide the data",
+              "text" : " uses a binding to an instance of this type store the state of the selected",
               "type" : "text"
             },
             {
@@ -180,15 +180,7 @@
               "type" : "text"
             },
             {
-              "text" : "and layout information for the carousel. The selected value or index can also be read or",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "updated using this structure.",
+              "text" : "index. The instance also contains the collection of selectable values and layout properties.",
               "type" : "text"
             }
           ],
@@ -349,7 +341,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
   "abstract" : [
     {
-      "text" : "A structure for specifying values and layout for a ",
+      "text" : "A structure for reading and updating the selected index of a ",
       "type" : "text"
     },
     {
@@ -357,7 +349,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ", and for reading or",
+      "text" : ", and for specifying",
       "type" : "text"
     },
     {
@@ -365,7 +357,7 @@
       "type" : "text"
     },
     {
-      "text" : "updating the selected value or index.",
+      "text" : "the values and layout properties.",
       "type" : "text"
     }
   ],
@@ -399,7 +391,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/init(values:selectedIndex:markLength:spacing:)": {
   "abstract" : [
     {
-      "text" : "Creates a new Position for a StepCarousel.",
+      "text" : "Creates a position for a carousel control, selecting an initial index.",
       "type" : "text"
     }
   ],
@@ -498,7 +490,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/init(values:selectedValue:markLength:spacing:)": {
   "abstract" : [
     {
-      "text" : "Creates a new Position for a StepCarousel.",
+      "text" : "Creates a position for a carousel control, selecting an initial value.",
       "type" : "text"
     }
   ],
@@ -634,23 +626,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectIndex(_:immediate:)": {
   "abstract" : [
     {
-      "text" : "Updates the carousel selection to the value at the given ",
-      "type" : "text"
-    },
-    {
-      "code" : "index",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " in ",
-      "type" : "text"
-    },
-    {
-      "code" : "values",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "Updates the carousel selection to the given index.",
       "type" : "text"
     }
   ],
@@ -716,15 +692,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectValue(_:immediate:)": {
   "abstract" : [
     {
-      "text" : "Updates the carousel selection to the given ",
-      "type" : "text"
-    },
-    {
-      "code" : "value",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "Updates the carousel selection to the given value.",
       "type" : "text"
     }
   ],
@@ -925,7 +893,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/totalMarkLength": {
   "abstract" : [
     {
-      "text" : "The total length used by each mark: mark length + spacing.",
+      "text" : "The total length used by each mark.",
       "type" : "text"
     }
   ],
@@ -962,7 +930,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/values": {
   "abstract" : [
     {
-      "text" : "Collection of values the carousel can select. Each value is represented by a mark.",
+      "text" : "Collection of values the carousel can select.",
       "type" : "text"
     }
   ],

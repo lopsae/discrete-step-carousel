@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Creates a carousel with the default anchor and marks.",
+      "text" : "Creates a carousel with the default marks and anchor.",
       "type" : "text"
     }
   ],
@@ -116,7 +116,7 @@
       ]
     },
     "extendedModule" : "DiscreteStepCarousel",
-    "externalID" : "s:20DiscreteStepCarousel0bC0V8positionACyxAA11DefaultMarkVy7SwiftUI5ColorVGAJGAG7BindingVyAA0bC8PositionVyxGG_tcAJRs_AJRs0_rlufc",
+    "externalID" : "s:20DiscreteStepCarousel0bC0V8positionACyxAA11DefaultMarkVy7SwiftUI22HierarchicalShapeStyleVGAJGAG7BindingVyAA0bC8PositionVyxGG_tcAJRs_AJRs0_rlufc",
     "fragments" : [
       {
         "kind" : "identifier",
@@ -209,14 +209,6 @@
             },
             {
               "kind" : "text",
-              "text" : " "
-            },
-            {
-              "kind" : "internalParam",
-              "text" : "positionBinding"
-            },
-            {
-              "kind" : "text",
               "text" : ": "
             },
             {
@@ -274,8 +266,8 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:7SwiftUI5ColorV",
-              "text" : "Color"
+              "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+              "text" : "HierarchicalShapeStyle"
             },
             {
               "kind" : "text",
@@ -301,8 +293,8 @@
             },
             {
               "kind" : "typeIdentifier",
-              "preciseIdentifier" : "s:7SwiftUI5ColorV",
-              "text" : "Color"
+              "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+              "text" : "HierarchicalShapeStyle"
             },
             {
               "kind" : "text",
@@ -312,6 +304,25 @@
         }
       ],
       "kind" : "declarations"
+    },
+    {
+      "kind" : "parameters",
+      "parameters" : [
+        {
+          "content" : [
+            {
+              "inlineContent" : [
+                {
+                  "text" : "The binding to the position structure that contains the carousel state.",
+                  "type" : "text"
+                }
+              ],
+              "type" : "paragraph"
+            }
+          ],
+          "name" : "position"
+        }
+      ]
     }
   ],
   "schemaVersion" : {
@@ -445,7 +456,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:)": {
   "abstract" : [
     {
-      "text" : "Creates a carousel with the default anchor and marks.",
+      "text" : "Creates a carousel with the default marks and anchor.",
       "type" : "text"
     }
   ],
@@ -599,7 +610,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
   "abstract" : [
     {
-      "text" : "A structure for specifying values and layout for a ",
+      "text" : "A structure for reading and updating the selected index of a ",
       "type" : "text"
     },
     {
@@ -607,7 +618,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ", and for reading or",
+      "text" : ", and for specifying",
       "type" : "text"
     },
     {
@@ -615,7 +626,7 @@
       "type" : "text"
     },
     {
-      "text" : "updating the selected value or index.",
+      "text" : "the values and layout properties.",
       "type" : "text"
     }
   ],

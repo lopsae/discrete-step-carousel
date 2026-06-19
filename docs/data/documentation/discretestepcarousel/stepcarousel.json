@@ -244,7 +244,7 @@
         {
           "inlineContent" : [
             {
-              "text" : "The carousel maps a collection of identified values to a scrollable sequence of views. The user",
+              "text" : "The carousel maps a collection of values to a scrollable sequence of views. The user",
               "type" : "text"
             },
             {
@@ -252,7 +252,79 @@
               "type" : "text"
             },
             {
-              "text" : "can scroll these views to select one value at a time.",
+              "text" : "can scroll these views to select one value at a time, when the user stops scrolling the",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "scrollable surface snaps back to the currently selected view.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "Each of the views that represent a carousel value is referred as a ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "mark",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : ". A secondary ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "anchor",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "view that is overlaid centered on the selected position can also be provided.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The collection of values is not required to contain unique values. Each mark is identified by",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "its index, not the value it represents. The view for each mark is created lazily, as each view",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "needed, Both the index and value are provided to the closure that creates the mark.",
               "type" : "text"
             }
           ],
@@ -272,7 +344,7 @@
               "type" : "reference"
             },
             {
-              "text" : " is the structure that provides the data and layout information",
+              "text" : " stores the state of the selected index, the collection of selectable",
               "type" : "text"
             },
             {
@@ -280,16 +352,15 @@
               "type" : "text"
             },
             {
-              "text" : "for a step carousel. It is also used to read and update the currently selected index or element.",
+              "text" : "values, and the layout information for a step carousel. The selected index or value can be read",
               "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "inlineContent" : [
+            },
             {
-              "text" : "Calling ",
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "and set through the position instance, calling ",
               "type" : "text"
             },
             {
@@ -298,7 +369,11 @@
               "type" : "reference"
             },
             {
-              "text" : " or ",
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "or ",
               "type" : "text"
             },
             {
@@ -307,11 +382,15 @@
               "type" : "reference"
             },
             {
+              "text" : " in a animation block will animate the",
+              "type" : "text"
+            },
+            {
               "text" : " ",
               "type" : "text"
             },
             {
-              "text" : "in a animation block will animate the carousel to the selected position.",
+              "text" : "carousel to the selected position.",
               "type" : "text"
             }
           ],
@@ -326,7 +405,7 @@
         {
           "inlineContent" : [
             {
-              "text" : "Each of the views that represent a carousel value is referred as a mark. The anchor is a view",
+              "text" : "The carousel control will expand to occupy all available space. Use a frame or other layout",
               "type" : "text"
             },
             {
@@ -334,7 +413,32 @@
               "type" : "text"
             },
             {
-              "text" : "that floats over all marks and signals the selected mark.",
+              "text" : "modifiers to constrain its size to the appropriate dimensions. The space available for each mark",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "is determined by the ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/markLength",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " property and the height of the carousel",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "control itself. Each mark is centered in its available space.",
               "type" : "text"
             }
           ],
@@ -404,49 +508,7 @@
               "type" : "text"
             },
             {
-              "text" : "provide a closure to build the view for each mark.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The carousel control will expand to occupy all available space. Use a frame or other layout",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "modifiers to constrain its size to the appropriate dimensions. The size available for each mark",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "is determined by the ",
-              "type" : "text"
-            },
-            {
-              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/markLength",
-              "isActive" : true,
-              "type" : "reference"
-            },
-            {
-              "text" : " property and the height of the carousel",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "control itself. Each mark is centered in its available space.",
+              "text" : "provide a closure that builds the view for each mark.",
               "type" : "text"
             }
           ],
@@ -585,7 +647,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:)": {
   "abstract" : [
     {
-      "text" : "Creates a carousel with the default anchor and marks.",
+      "text" : "Creates a carousel with the default marks and anchor.",
       "type" : "text"
     }
   ],
@@ -862,7 +924,10 @@
 },
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:anchorStyle:markStyle:)": {
   "abstract" : [
-
+    {
+      "text" : "Creates a carousel with the default marks and anchor using the given shape styles.",
+      "type" : "text"
+    }
   ],
   "conformance" : {
     "availabilityPrefix" : [
@@ -1062,7 +1127,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel/init(position:markContent:)": {
   "abstract" : [
     {
-      "text" : "Creates a carousel with custom marks.",
+      "text" : "Creates a carousel with custom marks and no anchor.",
       "type" : "text"
     }
   ],
@@ -1266,7 +1331,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
   "abstract" : [
     {
-      "text" : "A structure for specifying values and layout for a ",
+      "text" : "A structure for reading and updating the selected index of a ",
       "type" : "text"
     },
     {
@@ -1274,7 +1339,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ", and for reading or",
+      "text" : ", and for specifying",
       "type" : "text"
     },
     {
@@ -1282,7 +1347,7 @@
       "type" : "text"
     },
     {
-      "text" : "updating the selected value or index.",
+      "text" : "the values and layout properties.",
       "type" : "text"
     }
   ],
@@ -1353,23 +1418,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectIndex(_:immediate:)": {
   "abstract" : [
     {
-      "text" : "Updates the carousel selection to the value at the given ",
-      "type" : "text"
-    },
-    {
-      "code" : "index",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " in ",
-      "type" : "text"
-    },
-    {
-      "code" : "values",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "Updates the carousel selection to the given index.",
       "type" : "text"
     }
   ],
@@ -1435,15 +1484,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectValue(_:immediate:)": {
   "abstract" : [
     {
-      "text" : "Updates the carousel selection to the given ",
-      "type" : "text"
-    },
-    {
-      "code" : "value",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "Updates the carousel selection to the given value.",
       "type" : "text"
     }
   ],

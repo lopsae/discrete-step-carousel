@@ -1,23 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Updates the carousel selection to the value at the given ",
-      "type" : "text"
-    },
-    {
-      "code" : "index",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " in ",
-      "type" : "text"
-    },
-    {
-      "code" : "values",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "Updates the carousel selection to the given index.",
       "type" : "text"
     }
   ],
@@ -209,12 +193,13 @@
             {
               "inlineContent" : [
                 {
-                  "text" : "The index for the value in ",
+                  "text" : "The index in ",
                   "type" : "text"
                 },
                 {
-                  "code" : "values",
-                  "type" : "codeVoice"
+                  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/values",
+                  "isActive" : true,
+                  "type" : "reference"
                 },
                 {
                   "text" : " to select.",
@@ -293,67 +278,25 @@
         {
           "inlineContent" : [
             {
-              "text" : "This function can be called within ",
+              "text" : "By default this function only updates ",
               "type" : "text"
             },
             {
-              "code" : "withAnimation",
-              "type" : "codeVoice"
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectedIndex",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
-              "text" : " for an animated selection. When",
+              "text" : " immediately. ",
               "type" : "text"
             },
             {
-              "text" : " ",
-              "type" : "text"
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectedValue",
+              "isActive" : true,
+              "type" : "reference"
             },
             {
-              "text" : "animated, ",
-              "type" : "text"
-            },
-            {
-              "code" : "selectedIndex",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " will be updated immediately once to the new ",
-              "type" : "text"
-            },
-            {
-              "code" : "index",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " if ",
-              "type" : "text"
-            },
-            {
-              "code" : "immediate",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "is ",
-              "type" : "text"
-            },
-            {
-              "code" : "true",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : ", and then ",
-              "type" : "text"
-            },
-            {
-              "code" : "selectedIndex",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " will update again several times as the animation",
+              "text" : " is",
               "type" : "text"
             },
             {
@@ -361,40 +304,7 @@
               "type" : "text"
             },
             {
-              "text" : "progresses. ",
-              "type" : "text"
-            },
-            {
-              "code" : "selectedValue",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " will update only as the animation advances.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "Use ",
-              "type" : "text"
-            },
-            {
-              "code" : "immediate",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " to ensure ",
-              "type" : "text"
-            },
-            {
-              "code" : "selectedIndex",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " is updated during this call. Otherwise,",
+              "text" : "updated at a later time when the internal scroll view position updates, either through an",
               "type" : "text"
             },
             {
@@ -402,59 +312,7 @@
               "type" : "text"
             },
             {
-              "code" : "selectedIndex",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " is not updated until the view updates, and the internal scroll position",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "updates to a new position. When not animated this difference is minimal. When animating,",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "setting ",
-              "type" : "text"
-            },
-            {
-              "code" : "immediate",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " to false can help prevent a small flicker of ",
-              "type" : "text"
-            },
-            {
-              "code" : "selectedIndex",
-              "type" : "codeVoice"
-            },
-            {
-              "text" : " to its",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "final value that then gets overwritten by the animation advancing through the interim",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "indices.",
+              "text" : "immediate change or through animation.",
               "type" : "text"
             }
           ],
@@ -480,6 +338,148 @@
             },
             {
               "text" : ", the current selection remains unchanged.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Animation",
+          "level" : 2,
+          "text" : "Animation",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "This function can be called within ",
+              "type" : "text"
+            },
+            {
+              "code" : "withAnimation",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " for an animated selection. Use ",
+              "type" : "text"
+            },
+            {
+              "code" : "immediate",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "to determine if ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectedIndex",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " should be updated during this call, or until the animation",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "advances.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When ",
+              "type" : "text"
+            },
+            {
+              "code" : "immediate",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is ",
+              "type" : "text"
+            },
+            {
+              "code" : "false",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "selectedIndex",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is updated only as the internal scroll",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "view animates to the new position. This is the recommended setting for animated updates.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "When ",
+              "type" : "text"
+            },
+            {
+              "code" : "immediate",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is ",
+              "type" : "text"
+            },
+            {
+              "code" : "true",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", ",
+              "type" : "text"
+            },
+            {
+              "code" : "selectedIndex",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " is be updated immediately once to the new",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "values, and updated again as the animation advances. This initial update can create a brief",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "flickering of the new selected state.",
               "type" : "text"
             }
           ],
@@ -536,7 +536,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
   "abstract" : [
     {
-      "text" : "A structure for specifying values and layout for a ",
+      "text" : "A structure for reading and updating the selected index of a ",
       "type" : "text"
     },
     {
@@ -544,7 +544,7 @@
       "type" : "codeVoice"
     },
     {
-      "text" : ", and for reading or",
+      "text" : ", and for specifying",
       "type" : "text"
     },
     {
@@ -552,7 +552,7 @@
       "type" : "text"
     },
     {
-      "text" : "updating the selected value or index.",
+      "text" : "the values and layout properties.",
       "type" : "text"
     }
   ],
@@ -586,23 +586,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectIndex(_:immediate:)": {
   "abstract" : [
     {
-      "text" : "Updates the carousel selection to the value at the given ",
-      "type" : "text"
-    },
-    {
-      "code" : "index",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : " in ",
-      "type" : "text"
-    },
-    {
-      "code" : "values",
-      "type" : "codeVoice"
-    },
-    {
-      "text" : ".",
+      "text" : "Updates the carousel selection to the given index.",
       "type" : "text"
     }
   ],
@@ -664,6 +648,140 @@
   "title" : "selectIndex(_:immediate:)",
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectindex(_:immediate:)"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectedIndex": {
+  "abstract" : [
+    {
+      "text" : "Index of the selected value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "selectedIndex"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sl5IndexQa",
+      "text" : "Index"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectedIndex",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "selectedIndex",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectedindex"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectedValue": {
+  "abstract" : [
+    {
+      "text" : "Selected value, which is ",
+      "type" : "text"
+    },
+    {
+      "code" : "values[selectedIndex]",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "selectedValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectedValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "selectedValue",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectedvalue"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/values": {
+  "abstract" : [
+    {
+      "text" : "Collection of values the carousel can select.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "values"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/values",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "values",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/values"
 }
 }
 }
