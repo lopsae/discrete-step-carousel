@@ -15,12 +15,17 @@ struct BaseExamples: View {
         List {
             Section("Carousel with Default Marks") {
                 DefaultMarksExample()
-                .listRowInsets(.horizontal, 0.0)
+                .listRowInsets(.horizontal, .zero)
             }
 
             Section("Carousel with Styled Marks") {
                 StyledMarksExample()
-                .listRowInsets(.horizontal, 0.0)
+                .listRowInsets(.horizontal, .zero)
+            }
+
+            Section("Carousel with `Image` Marks") {
+                ImageMarksExample()
+                .listRowInsets(.horizontal, .zero)
             }
 
         }
@@ -66,6 +71,37 @@ struct StyledMarksExample: View {
                 markStyle: .orange.tertiary
             )
             .frame(height: StepCarouselDefaults.markHeight)
+
+            Text(carouselPosition.selectedIndex.description)
+                .font(.caption)
+        }
+    }
+}
+
+
+struct ImageMarksExample: View {
+
+    @State var  carouselPosition: StepCarouselPosition = .init(
+        values: [
+            "moon", "flame", "bolt", "drop", "cloud",
+            "lizard", "ladybug", "leaf", "carrot"],
+        markLength: 44
+    )
+
+    var body: some View {
+        VStack(spacing: 2) {
+            Text(carouselPosition.selectedValue)
+
+            StepCarousel(position: $carouselPosition) { index, element in
+                Image(systemName: element)
+                .font(.title)
+                .onTapGesture {
+                    withAnimation {
+                        carouselPosition.selectIndex(index, immediate: false)
+                    }
+                }
+            }
+            .frame(height: 44)
 
             Text(carouselPosition.selectedIndex.description)
                 .font(.caption)
