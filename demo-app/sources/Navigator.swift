@@ -16,7 +16,7 @@ struct Navigator: View {
                 }
 
                 NavigationLink("Advanced Examples") {
-                    BaseExamples()
+                    AdvancedExamples()
                 }
             }
             .navigationTitle("DiscreteStepCarousel")

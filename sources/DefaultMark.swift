@@ -15,6 +15,12 @@ public struct DefaultMark<Style: ShapeStyle>: View {
 
     let style: Style
 
+    /// Create a default mark with the given style.
+    /// - Parameter style: The style to apply to the mark shape.
+    public init(style: Style) {
+        self.style = style
+    }
+
     public var body: some View {
         let lineWidth: CGFloat = 2.5
         let strokeStyle = StrokeStyle(lineWidth: lineWidth, lineCap: .round)
