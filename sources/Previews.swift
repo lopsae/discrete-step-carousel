@@ -106,20 +106,21 @@ private struct PreviewContent {
 // MARK: - Effects
 
 
-// FIXME: add preview with 3d scroll
-// FIXME: add label on top and make whole control 44 points tall.
-#Preview("AnimatedMark", traits: .fixedHeader, PreviewContent.layout) {
-    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
+#Preview("Effects", traits: .paddingSpacing, .fixedHeader, PreviewContent.layout) {
+    @Previewable @State var animatedPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase))
+    @Previewable @State var transitionPosition: StepCarouselPosition = .init(
+        values: ["👨🏻‍💼", "👩🏼‍💻", "🧑🏽‍🔬", "👨🏾‍🎤", "👩🏿‍⚖️"],
+        markLength: 44
+    )
 
-    PreviewCaption("Carousels with animated mark based on selection.")
-        .padding(.bottom)
+    PreviewCaption("Carousel with animated mark based on selection.")
 
     VStack(spacing: 2) {
-        Text(carouselPosition.selectedValue)
-            .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
-        StepCarousel(position: $carouselPosition) { index, element in
-            let isSelected = carouselPosition.selectedIndex == index
+        Text(animatedPosition.selectedValue)
+            .floatingCaption("\(animatedPosition.selectedIndex)", .alignment(.outerTrailingTop))
+        StepCarousel(position: $animatedPosition) { index, element in
+            let isSelected = animatedPosition.selectedIndex == index
             let height: CGFloat = isSelected
                 ? StepCarouselDefaults.markHeight
                 : StepCarouselDefaults.markHeight / 2
@@ -132,6 +133,38 @@ private struct PreviewContent {
             .frame(height: StepCarouselDefaults.markHeight, alignment: .bottom)
         }
         .frame(height: StepCarouselDefaults.markHeight)
+    }
+
+    DashedDivider()
+
+    PreviewCaption("""
+        Carousel with `scrollTransition`. Currently the space that is considered _visible_ for the
+        transition phase is reduced since the internal scroll view uses `contentMargins`.
+        """)
+
+    VStack(spacing: 2) {
+        Text(verbatim: transitionPosition.selectedValue)
+            .floatingCaption("\(transitionPosition.selectedIndex)", .alignment(.outerTrailingTop))
+        StepCarousel(position: $transitionPosition) {
+            Text(verbatim: "🎩")
+            .font(.title)
+            .maxHeightFrame(alignment: .top)
+        } markContent: { index, element in
+            Text(verbatim: element)
+            .font(.largeTitle)
+            .maxHeightFrame(alignment: .bottom)
+            .onTapGesture {
+                withAnimation {
+                    transitionPosition.selectIndex(index, immediate: false)
+                }
+            }
+            .scrollTransition(.interactive, axis: .horizontal) { content, phase in
+                content
+                .scaleEffect(1.0 + 0.7 * (1.0 - abs(phase.value)), anchor: .bottom)
+                .offset(x: phase.value * 20.0)
+            }
+        }
+        .frame(height: 80)
     }
 }
 
