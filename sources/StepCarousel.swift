@@ -114,6 +114,9 @@ where
                 .scrollPosition($position.scrollPosition)
                 // Content margins set externally do not seem to impact this.
                 // Assuming that the last one takes precedence, but this is untested.
+                // FIXME: Revert to to using spacer views to center the selectable marks. Using
+                // content margin affects how scrollTransition modifier works shortening the space
+                // considered visible.
                 .contentMargins(
                     .horizontal,
                     (geometry.size.width - position.totalMarkLength) / 2,
