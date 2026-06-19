@@ -9,8 +9,7 @@ import DiscreteStepCarousel
 import PreviewUtilities
 
 
-struct ContentView: View {
-
+struct BaseExamples: View {
 
     var body: some View {
         List {
@@ -26,6 +25,7 @@ struct ContentView: View {
 
         }
     }
+
 }
 
 
@@ -76,7 +76,7 @@ struct StyledMarksExample: View {
 
 #Preview {
     NavigationStack {
-        ContentView()
+        BaseExamples()
             .navigationTitle("Preview")
     }
 }
