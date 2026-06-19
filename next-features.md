@@ -4,6 +4,8 @@ Next Features
 Documentation release
 ---------------------
 + Update app with default examples, images, and animated examples.
++ Add license.
++ Update readme to links to documentation.
 
 
 Future Features
