@@ -10,24 +10,65 @@ import PreviewUtilities
 
 
 struct ContentView: View {
-    @State var carouselPosition: StepCarouselPosition = .init(
-        values: Strings.alphabet.map(\.localizedUppercase),
-        selectedValue: "D")
+
 
     var body: some View {
         List {
-            VStack(spacing: 0) {
-                Text(carouselPosition.selectedValue)
-                Image(systemName: "arrowtriangle.down.fill")
-                    .font(.caption)
-
-                StepCarousel(position: $carouselPosition)
-                .frame(height: 44)
-
-                Text(carouselPosition.selectedIndex.description)
-                    .font(.caption)
+            Section("Carousel with Default Marks") {
+                DefaultMarksExample()
+                .listRowInsets(.horizontal, 0.0)
             }
-            .listRowInsets(.horizontal, 0.0)
+
+            Section("Carousel with Styled Marks") {
+                StyledMarksExample()
+                .listRowInsets(.horizontal, 0.0)
+            }
+
+        }
+    }
+}
+
+
+struct DefaultMarksExample: View {
+
+    @State var  carouselPosition: StepCarouselPosition = .init(
+        values: Strings.alphabet.map(\.localizedUppercase)
+    )
+
+    var body: some View {
+        VStack(spacing: 2) {
+            Text(carouselPosition.selectedValue)
+
+            StepCarousel(position: $carouselPosition)
+                .frame(height: StepCarouselDefaults.markHeight)
+
+            Text(carouselPosition.selectedIndex.description)
+                .font(.caption)
+        }
+    }
+}
+
+
+struct StyledMarksExample: View {
+
+    @State var  carouselPosition: StepCarouselPosition = .init(
+        values: Strings.alphabet.map(\.localizedUppercase),
+        selectedValue: "Z"
+    )
+
+    var body: some View {
+        VStack(spacing: 2) {
+            Text(carouselPosition.selectedValue)
+
+            StepCarousel(
+                position: $carouselPosition,
+                anchorStyle: .red.secondary,
+                markStyle: .orange.tertiary
+            )
+            .frame(height: StepCarouselDefaults.markHeight)
+
+            Text(carouselPosition.selectedIndex.description)
+                .font(.caption)
         }
     }
 }
