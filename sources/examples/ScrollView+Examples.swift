@@ -51,3 +51,24 @@ import SwiftUI
     Text("Scroll Position X: \(scrollPosition.x?.description ?? "nil")")
     Text("Position set by user: \(scrollPosition.isPositionedByUser.description)")
 }
+
+
+#Preview("ContentMargins+ScrollTransition", traits: .headerFooter) {
+    @Previewable @State var scrollPosition: ScrollPosition = .init()
+
+    PreviewCaption("""
+        Using `contentMargins` causes the phase in `scrollTransition` con consider the space under
+        the content margins as _out-of-view_, making the transition occur in a smaller space.
+        """)
+
+    ScrollView(.horizontal) {
+        HStack(0...9, id: \.self) { index in
+            CaptionRectangle("Item \(index)", color: .indigo, size: .square(of: 100))
+                .scrollTransition { content, phase in
+                    content.opacity(1 - abs(phase.value))
+                }
+        }
+    }
+    .contentMargins(.horizontal, .all(100), for: .scrollContent)
+}
+
