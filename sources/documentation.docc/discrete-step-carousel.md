@@ -5,8 +5,9 @@ scrollable surface.
 
 ## Overview
 
-The discrete step carousel maps a collection of values to a scrollable sequence of views where each
-view represents a value. The user can scroll between these views to select one value at a time.
+The ``StepCarousel`` control displays a scrollable sequence of views where each view represents a
+value in a collection. The user can scroll through these views to select one value at a time.
+
 
 ## Topics
 

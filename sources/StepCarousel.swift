@@ -10,9 +10,9 @@ import SwiftUI
 /// A control for selecting a value from a collection, with each value represented by a view in a
 /// scrollable surface.
 ///
-/// The carousel maps a collection of values to a scrollable sequence of views. The user
-/// can scroll these views to select one value at a time, when the user stops scrolling the
-/// scrollable surface snaps back to the currently selected view.
+/// The carousel displays a scrollable sequence of views where each view represents a value in a
+/// collection. The user can scroll through these views to select one value at a time, when the user
+/// stops scrolling the scrollable surface snaps back to the currently selected view.
 ///
 /// Each of the views that represent a carousel value is referred as a _mark_. A secondary _anchor_
 /// view that is overlaid centered on the selected position can also be provided.
