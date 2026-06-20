@@ -49,7 +49,16 @@
         {
           "inlineContent" : [
             {
-              "text" : "The discrete step carousel maps a collection of values to a scrollable sequence of views where each",
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " control displays a scrollable sequence of views where each view represents a",
               "type" : "text"
             },
             {
@@ -57,7 +66,7 @@
               "type" : "text"
             },
             {
-              "text" : "view represents a value. The user can scroll between these views to select one value at a time.",
+              "text" : "value in a collection. The user can scroll through these views to select one value at a time.",
               "type" : "text"
             }
           ],
