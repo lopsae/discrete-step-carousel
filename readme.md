@@ -8,7 +8,7 @@ at a time.
 The views that represent each selectable value, referred through the documentation as _marks_, can
 be customized to a lazily created view identified by its index in the collection.
 
-See the [package documentation][documentation] for more details.
+See the [Package Documentation][documentation] for more details.
 
 
 [documentation]: https://lopsae.github.io/discrete-step-carousel/documentation/discretestepcarousel/
