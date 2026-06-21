@@ -12,3 +12,15 @@ See the [Package Documentation][documentation] for more details.
 
 
 [documentation]: https://lopsae.github.io/discrete-step-carousel/documentation/discretestepcarousel/
+
+
+
+### License
+
+Preview Utilities is licensed under the [MIT License](LICENSE).
+
+
+
+-----
+
+Written with ♥ in San Francisco, California.
