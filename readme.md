@@ -10,6 +10,9 @@ be customized to a lazily created view identified by its index in the collection
 
 See the [Package Documentation][documentation] for more details.
 
+For code examples see [`Previews.swift`](/sources/Previews.swift) for previews in the package 
+source, or the [Demo App folder](/demo-app) for a example app.
+
 
 [documentation]: https://lopsae.github.io/discrete-step-carousel/documentation/discretestepcarousel/
 
