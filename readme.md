@@ -20,7 +20,7 @@ source, or the [Demo App folder](/demo-app) for a example app.
 
 ### License
 
-Preview Utilities is licensed under the [MIT License](LICENSE).
+Discrete Step Carousel is licensed under the [MIT License](LICENSE).
 
 
 
