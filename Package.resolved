@@ -1,13 +1,31 @@
 {
-  "originHash" : "76ce6a1c1ade07b0a240f8963f92e4684586998e678594daeba7396ec81bfa7a",
+  "originHash" : "ef98aa8485991af86d81cfc96aae7938d7b4e129e195d31b1bb876e88d1f6b4a",
   "pins" : [
     {
       "identity" : "preview-utilities",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
-        "revision" : "55fd35a8cb3f1005b61f2d8adcdc2a05b7b15b5a",
-        "version" : "0.3.0"
+        "revision" : "d78fc953ee786020040d38e368c2fbab9d05856e",
+        "version" : "0.4.0"
+      }
+    },
+    {
+      "identity" : "swift-docc-plugin",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-docc-plugin",
+      "state" : {
+        "revision" : "647c708be89f834fa6a6d4945442793a77ddf5b6",
+        "version" : "1.5.0"
+      }
+    },
+    {
+      "identity" : "swift-docc-symbolkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/swiftlang/swift-docc-symbolkit",
+      "state" : {
+        "revision" : "b45d1f2ed151d057b54504d653e0da5552844e34",
+        "version" : "1.0.0"
       }
     }
   ],

@@ -1,0 +1,15 @@
+{
+  "originHash" : "cf639ac4fb8dc6397d05ff5c24e98b5b811ebbc09d67926472ec5ece35f0f3e5",
+  "pins" : [
+    {
+      "identity" : "preview-utilities",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lopsae/preview-utilities.git",
+      "state" : {
+        "branch" : "feature/documentation-second-batch",
+        "revision" : "4c20d7efd5f99d089d485e45f50609d7f85e8d2d"
+      }
+    }
+  ],
+  "version" : 3
+}

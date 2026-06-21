@@ -21,46 +21,46 @@ private struct PreviewContent {
 }
 
 
-// MARK: - Defaut
+// MARK: - Default
 
 
 #Preview("Default", traits: .fixedHeader, PreviewContent.layout) {
-    // TODO: Know issue: a position object works only for a single carousel, connecting it to more
-    // that one does not sincronize them. Check if scrollPosition has also the same limitation.
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase))
-    @Previewable @State var styledPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var styledPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "S")
-    @Previewable @State var offsetPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var offsetPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase)[10...20],
         selectedValue: "O")
 
     PreviewCaption("Carousels with default and stylized default markers.")
-        .padding(.bottom)
-    PreviewContent.indicatorArrow
-    DiscreteStepCarousel(position: $carouselPosition)
-        .frame(height: 44)
-    Text(carouselPosition.selectedValue)
-        .floatingCaption("\(carouselPosition.selectedIndex)", .alignment(.outerTrailingTop))
+
+    VStack(spacing: 2) {
+        Text(carouselPosition.selectedValue)
+            .floatingCaption("\(carouselPosition.selectedIndex)", . alignment(.outerTrailingTop))
+        StepCarousel(position: $carouselPosition)
+            .frame(height: StepCarouselDefaults.markHeight)
+    }
 
     DashedDivider()
-        .padding(.bottom)
 
-    PreviewContent.indicatorArrow
-    DiscreteStepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
-        .frame(height: 44)
-    Text(styledPosition.selectedValue)
-        .floatingCaption("\(styledPosition.selectedIndex)", .alignment(.outerTrailingTop))
+    VStack(spacing: 2) {
+        Text(styledPosition.selectedValue)
+            .floatingCaption("\(styledPosition.selectedIndex)", .alignment(.outerTrailingTop))
+        StepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+            .frame(height: StepCarouselDefaults.markHeight)
+    }
+    .padding(.bottom)
 
     PreviewCaption("Carousel with a collection with offset indices.")
-        .padding(.bottom)
 
-    PreviewContent.indicatorArrow
-    DiscreteStepCarousel(position: $offsetPosition, anchorStyle: .red, markStyle: .orange.tertiary)
-        .frame(height: 44)
-    Text(offsetPosition.selectedValue)
-        .floatingCaption("\(offsetPosition.selectedIndex)", .alignment(.outerTrailingTop))
+    VStack(spacing: 2) {
+        Text(offsetPosition.selectedValue)
+            .floatingCaption("\(offsetPosition.selectedIndex)", .alignment(.outerTrailingTop))
+        StepCarousel(position: $offsetPosition, anchorStyle: .red, markStyle: .orange.tertiary)
+            .frame(height: StepCarouselDefaults.markHeight)
+    }
 }
 
 
@@ -68,7 +68,7 @@ private struct PreviewContent {
 
 
 #Preview("Images", traits: .fixedHeader, PreviewContent.layout) {
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.natoPhoneticAlphabet.map(\.capitalized),
         selectedIndex: 10,
         markLength: 100,
@@ -78,7 +78,7 @@ private struct PreviewContent {
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition) { _, item in
+    StepCarousel(position: $carouselPosition) { _, item in
         Group {
             if let image = imageGenerator.images[item] {
                 image
@@ -99,15 +99,81 @@ private struct PreviewContent {
     .debugOverlay(.caption("Enclosed in\nSafeArea"), .infoAlignment(.outerBottomTrailing))
     .safeAreaPadding(.horizontal, 50)
     Text(carouselPosition.selectedValue)
-    Text.caption("\(carouselPosition.selectedIndex)")
+    Text.caption(verbatim: carouselPosition.selectedIndex.description)
+}
+
+
+// MARK: - Effects
+
+
+#Preview("Effects", traits: .paddingSpacing, .fixedHeader, PreviewContent.layout) {
+    @Previewable @State var animatedPosition: StepCarouselPosition = .init(
+        values: Strings.alphabet.map(\.localizedUppercase))
+    @Previewable @State var transitionPosition: StepCarouselPosition = .init(
+        values: ["👨🏻‍💼", "👩🏼‍💻", "🧑🏽‍🔬", "👨🏾‍🎤", "👩🏿‍⚖️"],
+        markLength: 44
+    )
+
+    PreviewCaption("Carousel with animated mark based on selection.")
+
+    VStack(spacing: 2) {
+        Text(animatedPosition.selectedValue)
+            .floatingCaption("\(animatedPosition.selectedIndex)", .alignment(.outerTrailingTop))
+        StepCarousel(position: $animatedPosition) { index, element in
+            let isSelected = animatedPosition.selectedIndex == index
+            let height: CGFloat = isSelected
+                ? StepCarouselDefaults.markHeight
+                : StepCarouselDefaults.markHeight / 2
+            let style: HierarchicalShapeStyle = isSelected
+                ? .primary
+                : .tertiary
+            DefaultMark(style: style)
+            .frame(height: height)
+            .animation(isSelected ? nil : .smooth, value: height)
+            .frame(height: StepCarouselDefaults.markHeight, alignment: .bottom)
+        }
+        .frame(height: StepCarouselDefaults.markHeight)
+    }
+
+    DashedDivider()
+
+    PreviewCaption("""
+        Carousel with `scrollTransition`. Currently the space that is considered _visible_ for the
+        transition phase is reduced since the internal scroll view uses `contentMargins`.
+        """)
+
+    VStack(spacing: 2) {
+        Text(verbatim: transitionPosition.selectedValue)
+            .floatingCaption("\(transitionPosition.selectedIndex)", .alignment(.outerTrailingTop))
+        StepCarousel(position: $transitionPosition) {
+            Text(verbatim: "🎩")
+            .font(.title)
+            .maxHeightFrame(alignment: .top)
+        } markContent: { index, element in
+            Text(verbatim: element)
+            .font(.largeTitle)
+            .maxHeightFrame(alignment: .bottom)
+            .onTapGesture {
+                withAnimation {
+                    transitionPosition.selectIndex(index, immediate: false)
+                }
+            }
+            .scrollTransition(.interactive, axis: .horizontal) { content, phase in
+                content
+                .scaleEffect(1.0 + 0.7 * (1.0 - abs(phase.value)), anchor: .bottom)
+                .offset(x: phase.value * 20.0)
+            }
+        }
+        .frame(height: 80)
+    }
 }
 
 
 // MARK: - Mark Size
 
 
-#Preview("MarkSize", traits: .fixedHeader, PreviewContent.layout) {
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+#Preview("MarkHeight", traits: .fixedHeader, PreviewContent.layout) {
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.natoPhoneticAlphabet.map(\.capitalized),
         selectedValue: "Sierra",
         markLength: 80,
@@ -116,14 +182,15 @@ private struct PreviewContent {
 
     PreviewCaption("""
         The size of the mark is determined by `markLength` in the carousel position, and by the 
-        heigth of the carousel itself.
+        height of the carousel itself.
         """)
 
     Slider.captioned("Fixed Height", value: $fixedHeight, in: 0...200, valueFormat: .shortFraction)
+        .padding(.bottom)
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition) { _, item in
+    StepCarousel(position: $carouselPosition) { _, item in
         GeometryReader { geometry in
             let width = geometry.size.width
             let height = geometry.size.height
@@ -143,7 +210,7 @@ private struct PreviewContent {
 
 #Preview("Controls", traits: .zeroSpacing, PreviewContent.layout) {
     @Previewable @State var printOnce: PrintOnce = .previewStarted
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "M")
     @Previewable @State var updatesImmediately: Bool = false
@@ -161,21 +228,16 @@ private struct PreviewContent {
         isMarked: $valueIsMarked
     )
     .configure(spacing: 20, edge: .trailing)
-    // TODO: could be DRYed into a floatingTextBaselineCaption modifier,
-    // or baseline alignment could be suported by FloatingAlingment?
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("value:")
         .font(.caption)
-        .padding(.horizontal, 5)
         .fixedSize()
-        .alignmentGuide(.leading) { dimensions in
-            dimensions[.trailing]
-        }
+        .alignmentGuide(.leading, moveTo: .trailing, offsetBy: 5)
     }
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition)
+    StepCarousel(position: $carouselPosition)
     .frame(height: 44)
     .onScrollGeometryChange(of: \.contentSize.width, binding: $carouselContentWidth)
     .onChange(of: carouselPosition.selectedValue) { oldValue, newValue in
@@ -194,11 +256,8 @@ private struct PreviewContent {
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("index:")
         .font(.caption)
-        .padding(.horizontal, 5)
         .fixedSize()
-        .alignmentGuide(.leading) { dimensions in
-            dimensions[.trailing]
-        }
+        .alignmentGuide(.leading, moveTo: .trailing, offsetBy: 4)
     }
     .padding(.bottom)
 
@@ -216,7 +275,7 @@ private struct PreviewContent {
 
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 2, 9, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 9, carouselPosition.values.finalIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
@@ -249,7 +308,7 @@ private struct PreviewContent {
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 2, 11, 13, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 11, 13, carouselPosition.values.finalIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
@@ -293,7 +352,7 @@ private struct PreviewContent {
 
 
 #Preview("Controls&Images", traits: .zeroSpacing, PreviewContent.layout) {
-    @Previewable @State var carouselPosition: DiscreteStepCarouselPosition = .init(
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
         values: Strings.alphabet.map(\.localizedUppercase),
         selectedValue: "X",
         markLength: 80,
@@ -306,7 +365,7 @@ private struct PreviewContent {
 
     PreviewContent.indicatorArrow
 
-    DiscreteStepCarousel(position: $carouselPosition) { _, item in
+    StepCarousel(position: $carouselPosition) { _, item in
         ConstrainedFill {
             if let image = imageGenerator.images[item] {
                 image
@@ -333,11 +392,8 @@ private struct PreviewContent {
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("value:")
         .font(.caption)
-        .padding(.horizontal, 5)
         .fixedSize()
-        .alignmentGuide(.leading) { dimensions in
-            dimensions[.trailing]
-        }
+        .alignmentGuide(.leading, moveTo: .trailing, offsetBy: 5)
     }
 
     HistoricValue(
@@ -348,11 +404,8 @@ private struct PreviewContent {
     .overlay(alignment: .leadingLastTextBaseline) {
         Text("index:")
         .font(.caption)
-        .padding(.horizontal, 5)
         .fixedSize()
-        .alignmentGuide(.leading) { dimensions in
-            dimensions[.trailing]
-        }
+        .alignmentGuide(.leading, moveTo: .trailing, offsetBy: 5)
     }
     .padding(.bottom)
 
@@ -361,7 +414,7 @@ private struct PreviewContent {
     List {
         Section("Immediate") {
             HStack {
-                let indices: [Int] = [0, 2, 5, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 5, carouselPosition.values.finalIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
@@ -392,7 +445,7 @@ private struct PreviewContent {
 
         Section("Animated") {
             HStack {
-                let indices: [Int] = [0, 2, 11, 15, carouselPosition.values.beforeEndIndex]
+                let indices: [Int] = [0, 2, 11, 15, carouselPosition.values.finalIndex]
                 ForEach(indices, id: \.self) { index in
                     let value = carouselPosition.values[index]
                     Button(value) {
