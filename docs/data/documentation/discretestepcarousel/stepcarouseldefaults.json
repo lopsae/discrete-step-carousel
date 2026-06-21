@@ -1,0 +1,406 @@
+{
+  "abstract" : [
+    {
+      "text" : "Container of defaults for ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:20DiscreteStepCarousel0bC8DefaultsO",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "enum"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "StepCarouselDefaults"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "DiscreteStepCarousel"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "StepCarouselDefaults"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Enumeration",
+    "symbolKind" : "enum",
+    "title" : "StepCarouselDefaults"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "enum"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "StepCarouselDefaults"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/s8SendableP",
+        "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Type-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/anchorStyle",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markHeight",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markLength",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markStyle"
+      ],
+      "title" : "Type Properties"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/discretestepcarousel\/stepcarouseldefaults"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "DiscreteStepCarousel",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults": {
+  "abstract" : [
+    {
+      "text" : "Container of defaults for ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselDefaults"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselDefaults"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarouselDefaults",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults/anchorStyle": {
+  "abstract" : [
+    {
+      "text" : "Default anchor style used along ",
+      "type" : "text"
+    },
+    {
+      "code" : "DefaultMark",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "anchorStyle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+      "text" : "HierarchicalShapeStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/anchorStyle",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "anchorStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/anchorstyle"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults/markHeight": {
+  "abstract" : [
+    {
+      "text" : "Recommended height for marks using ",
+      "type" : "text"
+    },
+    {
+      "code" : "DefaultMark",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "markHeight"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "markHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/markheight"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults/markLength": {
+  "abstract" : [
+    {
+      "text" : "Default mark length.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "markLength"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markLength",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "markLength",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/marklength"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults/markStyle": {
+  "abstract" : [
+    {
+      "text" : "Default mark style used along ",
+      "type" : "text"
+    },
+    {
+      "code" : "DefaultMark",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "markStyle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+      "text" : "HierarchicalShapeStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markStyle",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "markStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/markstyle"
+},
+"doc://DiscreteStepCarousel/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
+},
+"doc://DiscreteStepCarousel/s8SendableP": {
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+}
+}
+}

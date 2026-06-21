@@ -1,0 +1,267 @@
+{
+  "abstract" : [
+    {
+      "text" : "Default anchor style used along ",
+      "type" : "text"
+    },
+    {
+      "code" : "DefaultMark",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/anchorStyle"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:20DiscreteStepCarousel0bC8DefaultsO11anchorStyle7SwiftUI017HierarchicalShapeF0VvpZ",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "static"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "keyword",
+        "text" : "let"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "anchorStyle"
+      },
+      {
+        "kind" : "text",
+        "text" : ": "
+      },
+      {
+        "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+        "text" : "HierarchicalShapeStyle"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "DiscreteStepCarousel"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Type Property",
+    "symbolKind" : "property",
+    "title" : "anchorStyle"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "attribute",
+              "text" : "@"
+            },
+            {
+              "kind" : "attribute",
+              "preciseIdentifier" : "s:ScM",
+              "text" : "MainActor"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "static"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "let"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "anchorStyle"
+            },
+            {
+              "kind" : "text",
+              "text" : ": "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+              "text" : "HierarchicalShapeStyle"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/anchorstyle"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "DiscreteStepCarousel",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults": {
+  "abstract" : [
+    {
+      "text" : "Container of defaults for ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselDefaults"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselDefaults"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarouselDefaults",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults/anchorStyle": {
+  "abstract" : [
+    {
+      "text" : "Default anchor style used along ",
+      "type" : "text"
+    },
+    {
+      "code" : "DefaultMark",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "anchorStyle"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:7SwiftUI22HierarchicalShapeStyleV",
+      "text" : "HierarchicalShapeStyle"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/anchorStyle",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "anchorStyle",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/anchorstyle"
+}
+}
+}

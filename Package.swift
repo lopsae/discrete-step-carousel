@@ -1,7 +1,5 @@
 // swift-tools-version: 6.2
 
-// https://theswiftdev.com/the-swift-package-manifest-file/
-
 
 import PackageDescription
 
@@ -19,7 +17,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.3.0"..<"1.0.0")
+        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.4.0"..<"1.0.0"),
+        .package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.1.0")
     ],
     targets: [
         .target(
@@ -32,7 +31,7 @@ let package = Package(
         .testTarget(
             name: "DiscreteStepCarouselTests",
             dependencies: ["DiscreteStepCarousel"],
-            path: "tests",
+            path: "unit-tests",
         ),
     ]
 )

@@ -1,0 +1,321 @@
+{
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "DiscreteStepCarousel",
+    "modules" : [
+      {
+        "name" : "DiscreteStepCarousel"
+      }
+    ],
+    "role" : "collection",
+    "roleHeading" : "Framework",
+    "symbolKind" : "module",
+    "title" : "DiscreteStepCarousel"
+  },
+  "primaryContentSections" : [
+    {
+      "content" : [
+        {
+          "anchor" : "Overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " control displays a scrollable sequence of views where each view represents a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "value in a collection. The user can scroll through these views to select one value at a time.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Carousel-Control",
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition"
+      ],
+      "title" : "Carousel Control"
+    },
+    {
+      "anchor" : "Marks",
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/DefaultMark"
+      ],
+      "title" : "Marks"
+    },
+    {
+      "anchor" : "Enumerations",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults"
+      ],
+      "title" : "Enumerations"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/discretestepcarousel"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "DiscreteStepCarousel",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/DefaultMark": {
+  "abstract" : [
+    {
+      "text" : "Default mark for a ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DefaultMark"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/DefaultMark",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DefaultMark"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DefaultMark",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/defaultmark"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel": {
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarousel"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarousel"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarousel",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults": {
+  "abstract" : [
+    {
+      "text" : "Container of defaults for ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "enum"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselDefaults"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselDefaults"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarouselDefaults",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
+  "abstract" : [
+    {
+      "text" : "A structure for reading and updating the selected index of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", and for specifying",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "the values and layout properties.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselPosition"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselPosition"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarouselPosition",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition"
+}
+}
+}

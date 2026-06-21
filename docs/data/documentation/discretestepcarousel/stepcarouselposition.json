@@ -1,0 +1,987 @@
+{
+  "abstract" : [
+    {
+      "text" : "A structure for reading and updating the selected index of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", and for specifying",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "the values and layout properties.",
+      "type" : "text"
+    }
+  ],
+  "hierarchy" : {
+    "paths" : [
+      [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel"
+      ]
+    ]
+  },
+  "identifier" : {
+    "interfaceLanguage" : "swift",
+    "url" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition"
+  },
+  "kind" : "symbol",
+  "metadata" : {
+    "externalID" : "s:20DiscreteStepCarousel0bC8PositionV",
+    "fragments" : [
+      {
+        "kind" : "keyword",
+        "text" : "struct"
+      },
+      {
+        "kind" : "text",
+        "text" : " "
+      },
+      {
+        "kind" : "identifier",
+        "text" : "StepCarouselPosition"
+      }
+    ],
+    "modules" : [
+      {
+        "name" : "DiscreteStepCarousel"
+      }
+    ],
+    "navigatorTitle" : [
+      {
+        "kind" : "identifier",
+        "text" : "StepCarouselPosition"
+      }
+    ],
+    "role" : "symbol",
+    "roleHeading" : "Structure",
+    "symbolKind" : "struct",
+    "title" : "StepCarouselPosition"
+  },
+  "primaryContentSections" : [
+    {
+      "declarations" : [
+        {
+          "languages" : [
+            "swift"
+          ],
+          "platforms" : [
+            "macOS"
+          ],
+          "tokens" : [
+            {
+              "kind" : "keyword",
+              "text" : "struct"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "identifier",
+              "text" : "StepCarouselPosition"
+            },
+            {
+              "kind" : "text",
+              "text" : "<"
+            },
+            {
+              "kind" : "genericParameter",
+              "text" : "Values"
+            },
+            {
+              "kind" : "text",
+              "text" : "> "
+            },
+            {
+              "kind" : "keyword",
+              "text" : "where"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Values"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:Sk",
+              "text" : "RandomAccessCollection"
+            },
+            {
+              "kind" : "text",
+              "text" : ", "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "text" : "Values"
+            },
+            {
+              "kind" : "text",
+              "text" : "."
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:ST7ElementQa",
+              "text" : "Element"
+            },
+            {
+              "kind" : "text",
+              "text" : " : "
+            },
+            {
+              "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:SQ",
+              "text" : "Equatable"
+            }
+          ]
+        }
+      ],
+      "kind" : "declarations"
+    },
+    {
+      "content" : [
+        {
+          "anchor" : "overview",
+          "level" : 2,
+          "text" : "Overview",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "A ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " uses a binding to an instance of this type store the state of the selected",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "index. The instance also contains the collection of selectable values and layout properties.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        }
+      ],
+      "kind" : "content"
+    }
+  ],
+  "relationshipsSections" : [
+    {
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/s8CopyableP",
+        "doc:\/\/DiscreteStepCarousel\/SQ",
+        "doc:\/\/DiscreteStepCarousel\/s9EscapableP",
+        "doc:\/\/DiscreteStepCarousel\/s8SendableP",
+        "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP"
+      ],
+      "kind" : "relationships",
+      "title" : "Conforms To",
+      "type" : "conformsTo"
+    }
+  ],
+  "schemaVersion" : {
+    "major" : 0,
+    "minor" : 3,
+    "patch" : 0
+  },
+  "sections" : [
+
+  ],
+  "seeAlsoSections" : [
+    {
+      "anchor" : "Carousel-Control",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel"
+      ],
+      "title" : "Carousel Control"
+    }
+  ],
+  "topicSections" : [
+    {
+      "anchor" : "Initializers",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/init(values:selectedIndex:markLength:spacing:)",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/init(values:selectedValue:markLength:spacing:)"
+      ],
+      "title" : "Initializers"
+    },
+    {
+      "anchor" : "Instance-Properties",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/markLength",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectedIndex",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectedValue",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/spacing",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/totalMarkLength",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/values"
+      ],
+      "title" : "Instance Properties"
+    },
+    {
+      "anchor" : "Instance-Methods",
+      "generated" : true,
+      "identifiers" : [
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectIndex(_:immediate:)",
+        "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectValue(_:immediate:)"
+      ],
+      "title" : "Instance Methods"
+    }
+  ],
+  "variants" : [
+    {
+      "paths" : [
+        "\/documentation\/discretestepcarousel\/stepcarouselposition"
+      ],
+      "traits" : [
+        {
+          "interfaceLanguage" : "swift"
+        }
+      ]
+    }
+  ]
+, 
+"references": {
+"doc://DiscreteStepCarousel/SQ": {
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/SQ",
+  "title" : "Swift.Equatable",
+  "type" : "unresolvable"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel",
+  "kind" : "symbol",
+  "role" : "collection",
+  "title" : "DiscreteStepCarousel",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel": {
+  "abstract" : [
+    {
+      "text" : "A control for selecting a value from a collection, with each value represented by a view in a",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "scrollable surface.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarousel"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarousel"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarousel",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
+  "abstract" : [
+    {
+      "text" : "A structure for reading and updating the selected index of a ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ", and for specifying",
+      "type" : "text"
+    },
+    {
+      "text" : " ",
+      "type" : "text"
+    },
+    {
+      "text" : "the values and layout properties.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselPosition"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "StepCarouselPosition"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "StepCarouselPosition",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/init(values:selectedIndex:markLength:spacing:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a position for a carousel control, selecting an initial index.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "values"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "selectedIndex"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sl5IndexQa",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : "?, "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "markLength"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "spacing"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/init(values:selectedIndex:markLength:spacing:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(values:selectedIndex:markLength:spacing:)",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/init(values:selectedindex:marklength:spacing:)"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/init(values:selectedValue:markLength:spacing:)": {
+  "abstract" : [
+    {
+      "text" : "Creates a position for a carousel control, selecting an initial value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "identifier",
+      "text" : "init"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "values"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "selectedValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "markLength"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "spacing"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/init(values:selectedValue:markLength:spacing:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "init(values:selectedValue:markLength:spacing:)",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/init(values:selectedvalue:marklength:spacing:)"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/markLength": {
+  "abstract" : [
+    {
+      "text" : "Space available for each mark in the carousel.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "markLength"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/markLength",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "markLength",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/marklength"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectIndex(_:immediate:)": {
+  "abstract" : [
+    {
+      "text" : "Updates the carousel selection to the given index.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "selectIndex"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sl5IndexQa",
+      "text" : "Index"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "immediate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectIndex(_:immediate:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "selectIndex(_:immediate:)",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectindex(_:immediate:)"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectValue(_:immediate:)": {
+  "abstract" : [
+    {
+      "text" : "Updates the carousel selection to the given value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "func"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "selectValue"
+    },
+    {
+      "kind" : "text",
+      "text" : "("
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    },
+    {
+      "kind" : "text",
+      "text" : ", "
+    },
+    {
+      "kind" : "externalParam",
+      "text" : "immediate"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sb",
+      "text" : "Bool"
+    },
+    {
+      "kind" : "text",
+      "text" : ")"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectValue(_:immediate:)",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "selectValue(_:immediate:)",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectvalue(_:immediate:)"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectedIndex": {
+  "abstract" : [
+    {
+      "text" : "Index of the selected value.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "selectedIndex"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sl5IndexQa",
+      "text" : "Index"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectedIndex",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "selectedIndex",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectedindex"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/selectedValue": {
+  "abstract" : [
+    {
+      "text" : "Selected value, which is ",
+      "type" : "text"
+    },
+    {
+      "code" : "values[selectedIndex]",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "selectedValue"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    },
+    {
+      "kind" : "text",
+      "text" : "."
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:ST7ElementQa",
+      "text" : "Element"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectedValue",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "selectedValue",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/selectedvalue"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/spacing": {
+  "abstract" : [
+    {
+      "text" : "Additional space between marks.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "spacing"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/spacing",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "spacing",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/spacing"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/totalMarkLength": {
+  "abstract" : [
+    {
+      "text" : "The total length used by each mark.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "var"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "totalMarkLength"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/totalMarkLength",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "totalMarkLength",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/totalmarklength"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/values": {
+  "abstract" : [
+    {
+      "text" : "Collection of values the carousel can select.",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "values"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "text" : "Values"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/values",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "values",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/values"
+},
+"doc://DiscreteStepCarousel/s16SendableMetatypeP": {
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP",
+  "title" : "Swift.SendableMetatype",
+  "type" : "unresolvable"
+},
+"doc://DiscreteStepCarousel/s8CopyableP": {
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/s8CopyableP",
+  "title" : "Swift.Copyable",
+  "type" : "unresolvable"
+},
+"doc://DiscreteStepCarousel/s8SendableP": {
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/s8SendableP",
+  "title" : "Swift.Sendable",
+  "type" : "unresolvable"
+},
+"doc://DiscreteStepCarousel/s9EscapableP": {
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/s9EscapableP",
+  "title" : "Swift.Escapable",
+  "type" : "unresolvable"
+}
+}
+}
