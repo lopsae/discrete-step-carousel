@@ -1,11 +1,6 @@
 Next Features
 =============
 
-Documentation release
----------------------
-+ Add license.
-+ Update readme to links to documentation.
-
 
 Future Features
 ---------------
