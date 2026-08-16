@@ -17,7 +17,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.4.0"..<"1.0.0"),
+//        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.4.0"..<"1.0.0"),
+        .package(url: "https://github.com/lopsae/preview-utilities.git", branch: "feature/debug-alignment-guide-modifier"),
         .package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.1.0")
     ],
     targets: [
@@ -51,7 +52,10 @@ for target in package.targets {
         .enableUpcomingFeature("NonisolatedNonsendingByDefault"),
 
         // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0470-isolated-conformances.md
-        .enableUpcomingFeature("InferIsolatedConformances")
+        .enableUpcomingFeature("InferIsolatedConformances"),
+
+        // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0409-access-level-on-imports.md
+//        .enableUpcomingFeature("InternalImportsByDefault"),
     ])
     target.swiftSettings = settings
 }
