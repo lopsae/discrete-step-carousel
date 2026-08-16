@@ -49,13 +49,8 @@ struct SelectionAnimationExample: View {
             }
             .frame(height: StepCarouselDefaults.markHeight)
 
-//            StepCarousel(position: $carouselPosition) { index, element in
-//                
-//            }
-//            .frame(height: StepCarouselDefaults.markHeight)
-
             Text(carouselPosition.selectedIndex.description)
-                .font(.caption)
+            .font(.caption)
         }
     }
 }
