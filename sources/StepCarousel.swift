@@ -4,7 +4,7 @@
 //
 
 
-import SwiftUI
+public import SwiftUI
 
 
 /// A control for selecting a value from a collection, with each value represented by a view in a
