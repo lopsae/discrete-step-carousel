@@ -8,6 +8,11 @@ scrollable surface.
 The ``StepCarousel`` control displays a scrollable sequence of views where each view represents a
 value in a collection. The user can scroll through these views to select one value at a time.
 
+@Video(
+    source: "animated-demo.mov",
+    alt: "Demonstration video of a Step Carousel scrolling through different values.",
+)
+
 
 ## Topics
 
