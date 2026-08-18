@@ -11,4 +11,4 @@ target.
 > `DemoApp` uses the local files of `DiscreteStepCarousel`, make sure the `DiscreteStepCarousel`
 > package itself is not open in a separate Xcode window. If both are open, the DemoApp build is
 > likely to fail with a `Missing package product 'DiscreteStepCarousel'` error. If the DemoApp 
-> is already displaying this error, the DemoApp project must be closed and reopened.
+> is already displaying this error, its Xcode window must be closed and reopened.
