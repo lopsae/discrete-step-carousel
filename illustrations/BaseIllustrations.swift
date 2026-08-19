@@ -28,10 +28,33 @@ struct BaseIllustrations {
     }
 
 
+    struct StepCarouselWithDefaultMark: View {
+        @State var position = StepCarouselPosition(
+            values: ["Q", "R", "S", "T", "U", "V"],
+            selectedValue: "S"
+        )
+        var body: some View {
+            Text(position.selectedValue)
+            StepCarousel(position: $position)
+                .frame(height: StepCarouselDefaults.markHeight)
+            Text(position.selectedIndex.description)
+                .font(.caption)
+        }
+    }
+
+
     @Test func testIllustration() throws {
-        try storage.renderAndStore("step-carousel", "test") {
+        try storage.renderAndStore("step-carousel", "with-default-mark") {
             DocumentationIllustration(sizing: .regular) {
-                Text("Test Illustration")
+//                StepCarouselWithDefaultMark()
+                ScrollView(.horizontal) {
+                    HStack {
+                        Text("A")
+                        Text("B")
+                        Text("C")
+                        Text("D")
+                    }
+                }
             }
         }
     }
