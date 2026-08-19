@@ -55,7 +55,7 @@ for target in package.targets {
         .enableUpcomingFeature("InferIsolatedConformances"),
 
         // https://github.com/swiftlang/swift-evolution/blob/main/proposals/0409-access-level-on-imports.md
-//        .enableUpcomingFeature("InternalImportsByDefault"),
+        .enableUpcomingFeature("InternalImportsByDefault"),
     ])
     target.swiftSettings = settings
 }
