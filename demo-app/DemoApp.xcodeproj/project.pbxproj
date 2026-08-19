@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2D19D9D92FE36B6800820B8D /* DiscreteStepCarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 2D19D9D82FE36B6800820B8D /* DiscreteStepCarousel */; };
 		2D6A6BEA30319D9500CB152D /* DiscreteStepCarousel in Frameworks */ = {isa = PBXBuildFile; productRef = 2D6A6BE930319D9500CB152D /* DiscreteStepCarousel */; };
+		2D6A70293035FD8500CB152D /* Illustrations.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 2D6A70283035FD8500CB152D /* Illustrations.xctestplan */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		2D19D9EA2FE36E2500820B8D /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
 		2D6A701F3035F8FB00CB152D /* Illustrations.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Illustrations.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2D6A70283035FD8500CB152D /* Illustrations.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = Illustrations.xctestplan; path = illustrations/Illustrations.xctestplan; sourceTree = "<group>"; };
 		2D8E07172EEFC33800BAC573 /* DemoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DemoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -63,6 +65,7 @@
 		2D8E070E2EEFC33800BAC573 = {
 			isa = PBXGroup;
 			children = (
+				2D6A70283035FD8500CB152D /* Illustrations.xctestplan */,
 				2D19D9EA2FE36E2500820B8D /* readme.md */,
 				2D8E07192EEFC33800BAC573 /* sources */,
 				2D6A70203035F8FB00CB152D /* illustrations */,
@@ -183,6 +186,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D6A70293035FD8500CB152D /* Illustrations.xctestplan in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

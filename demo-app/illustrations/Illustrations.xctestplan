@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "BE353629-F461-417D-ADB4-B26E7DC0AA11",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:DemoApp.xcodeproj",
+        "identifier" : "2D6A701E3035F8FB00CB152D",
+        "name" : "Illustrations"
+      }
+    }
+  ],
+  "version" : 1
+}

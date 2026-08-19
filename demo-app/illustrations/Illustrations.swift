@@ -11,8 +11,10 @@ import SwiftUI
 import Testing
 
 
-@MainActor
-struct BaseIllustrations {
+/// Documentation illustrations for `DiscreteStepCarousel`.
+///
+/// Each test produces an image saved to the package documentation catalog.
+@MainActor struct Illustrations {
 
     let storage: IllustrationStorage
 
