@@ -33,14 +33,6 @@ let package = Package(
             name: "DiscreteStepCarouselTests",
             dependencies: ["DiscreteStepCarousel"],
             path: "unit-tests",
-        ),
-        .testTarget(
-            name: "Illustrations",
-            dependencies: [
-                "DiscreteStepCarousel",
-                .product(name: "PreviewUtilities", package: "preview-utilities")
-            ],
-            path: "illustrations",
         )
     ]
 )
