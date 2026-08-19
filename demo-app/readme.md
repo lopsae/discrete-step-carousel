@@ -12,3 +12,12 @@ target.
 > package itself is not open in a separate Xcode window. If both are open, the DemoApp build is
 > likely to fail with a `Missing package product 'DiscreteStepCarousel'` error. If the DemoApp 
 > is already displaying this error, its Xcode window must be closed and reopened.
+
+
+## Illustrations
+
+The DemoApp also contains a testing target to generate the documentation illustrations. Certain 
+views, like `ScrollView`, require a hosting app to properly render those effects into illustrations. 
+The DemoApp provides the hosting app. 
+
+
