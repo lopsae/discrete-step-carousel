@@ -46,12 +46,44 @@ import Testing
     }
 
 
-    @Test func testIllustration() throws {
+    @Test func withDefaultMark() throws {
         try storage.renderAndStore("step-carousel", "with-default-mark", strategy: .windowHierarchy) {
             DocumentationIllustration(sizing: .regular) {
                 StepCarouselWithDefaultMark()
             }
         }
     }
+
+
+    struct StepCarouselWithImages: View {
+        @State var position: StepCarouselPosition = .init(
+            values: [
+                "moon", "flame", "bolt", "drop", "ladybug",
+                "cloud", "lizard", "leaf", "carrot"],
+            selectedIndex: 4,
+            markLength: 44,
+            spacing: 4
+        )
+        var body: some View {
+            Text(position.selectedValue)
+            StepCarousel(position: $position) { index, element in
+                Image(systemName: element)
+                .font(.title)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+                .background(.gray.quinary, in: RoundedRectangle(cornerRadius: 4))
+            }
+            .frame(height: 44)
+        }
+    }
+
+
+    @Test func withImages() throws {
+        try storage.renderAndStore("step-carousel", "with-images", strategy: .windowHierarchy) {
+            DocumentationIllustration(sizing: .regular) {
+                StepCarouselWithImages()
+            }
+        }
+    }
+
 
 }
