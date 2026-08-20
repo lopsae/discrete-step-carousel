@@ -71,6 +71,63 @@
             }
           ],
           "type" : "paragraph"
+        },
+        {
+          "identifier" : "animated-demo.mov",
+          "type" : "video"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The control is configured through a ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ", which defines the selectable values,",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "layout properties, and provides access to read and modify the current selected value.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "@State var position = StepCarouselPosition(",
+            "    values: [\"N\", \"O\", \"P\", \"Q\", \"R\", \"S\", \"T\", \"U\", \"V\", \"W\", \"X\"],",
+            "    selectedValue: \"S\"",
+            ")",
+            "",
+            "\/\/ ...",
+            "    ",
+            "Text(position.selectedValue)",
+            "StepCarousel(position: $position)",
+            "    .frame(height: StepCarouselDefaults.markHeight)",
+            "Text(position.selectedIndex.description)",
+            "    .font(.caption)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "step-carousel-with-default-mark",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
         }
       ],
       "kind" : "content"
@@ -123,6 +180,21 @@
   ]
 , 
 "references": {
+"animated-demo.mov": {
+  "alt" : "Demonstration video of a Step Carousel scrolling through different values.",
+  "identifier" : "animated-demo.mov",
+  "poster" : null,
+  "type" : "video",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/videos\/DiscreteStepCarousel\/animated-demo.mov"
+    }
+  ]
+},
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel": {
   "abstract" : [
     {
@@ -316,6 +388,27 @@
   "title" : "StepCarouselPosition",
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition"
+},
+"step-carousel-with-default-mark": {
+  "alt" : "Step Carousel control using the default marks, currently selecting the mark associated with S.",
+  "identifier" : "step-carousel-with-default-mark",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/DiscreteStepCarousel\/step-carousel-with-default-mark@3x.png"
+    },
+    {
+      "traits" : [
+        "3x",
+        "dark"
+      ],
+      "url" : "\/images\/DiscreteStepCarousel\/step-carousel-with-default-mark~dark@3x.png"
+    }
+  ]
 }
 }
 }

@@ -267,6 +267,154 @@
           "type" : "paragraph"
         },
         {
+          "identifier" : "animated-demo.mov",
+          "type" : "video"
+        },
+        {
+          "anchor" : "Carousel-Position",
+          "level" : 3,
+          "text" : "Carousel Position",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " stores the state of the selected index, the collection of selectable",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "values, and the layout information for a step carousel. The view associated with each value, a",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "inlineContent" : [
+                {
+                  "text" : "mark",
+                  "type" : "text"
+                }
+              ],
+              "type" : "emphasis"
+            },
+            {
+              "text" : ", can be provided to some of the ",
+              "type" : "text"
+            },
+            {
+              "code" : "StepCarousel",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " initializers:",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "@State var position: StepCarouselPosition = .init(",
+            "    values: [Color.red, .orange, .yellow, .green, .teal, .blue, .indigo, .purple, .brown],",
+            "    selectedIndex: 4, markLength: 40, spacing: 8",
+            ")",
+            "",
+            "\/\/ ...",
+            "",
+            "Text(position.selectedValue.description)",
+            "StepCarousel(position: $position) { index, value in",
+            "    RoundedRectangle(cornerRadius: 8)",
+            "    .fill(value.gradient)",
+            "}",
+            ".frame(height: 60)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "step-carousel-with-colors",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "The selected index or value can be read and set through the position instance with ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectValue(_:immediate:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "or ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectIndex(_:immediate:)",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : ". Calling this functions in an animation",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "block will animate the carousel to the selected position.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "inlineContent" : [
+            {
+              "text" : "See ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " for more details.",
+              "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Marks-and-Sizing",
+          "level" : 3,
+          "text" : "Marks and Sizing",
+          "type" : "heading"
+        },
+        {
           "inlineContent" : [
             {
               "text" : "Each of the views that represent a carousel value is referred as a ",
@@ -308,104 +456,15 @@
         {
           "inlineContent" : [
             {
-              "text" : "The collection of values is not required to contain unique values. Each mark is identified by",
+              "text" : "The carousel control will expand to occupy all available space. Use a ",
               "type" : "text"
             },
             {
-              "text" : " ",
-              "type" : "text"
+              "code" : "frame",
+              "type" : "codeVoice"
             },
             {
-              "text" : "its index, not the value it represents. The view for each mark is created lazily, as each view",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "needed, Both the index and value are provided to the closure that creates the mark.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "anchor" : "Carousel-Position",
-          "level" : 3,
-          "text" : "Carousel Position",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition",
-              "isActive" : true,
-              "type" : "reference"
-            },
-            {
-              "text" : " stores the state of the selected index, the collection of selectable",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "values, and the layout information for a step carousel. The selected index or value can be read",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "and set through the position instance, calling ",
-              "type" : "text"
-            },
-            {
-              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectValue(_:immediate:)",
-              "isActive" : true,
-              "type" : "reference"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "or ",
-              "type" : "text"
-            },
-            {
-              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselPosition\/selectIndex(_:immediate:)",
-              "isActive" : true,
-              "type" : "reference"
-            },
-            {
-              "text" : " in a animation block will animate the",
-              "type" : "text"
-            },
-            {
-              "text" : " ",
-              "type" : "text"
-            },
-            {
-              "text" : "carousel to the selected position.",
-              "type" : "text"
-            }
-          ],
-          "type" : "paragraph"
-        },
-        {
-          "anchor" : "Marks-and-Sizing",
-          "level" : 3,
-          "text" : "Marks and Sizing",
-          "type" : "heading"
-        },
-        {
-          "inlineContent" : [
-            {
-              "text" : "The carousel control will expand to occupy all available space. Use a frame or other layout",
+              "text" : " or other layout",
               "type" : "text"
             },
             {
@@ -438,8 +497,45 @@
               "type" : "text"
             },
             {
-              "text" : "control itself. Each mark is centered in its available space.",
+              "text" : "control itself. The content for each mark is constrained and centered to its available space:",
               "type" : "text"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "code" : [
+            "@State var position: StepCarouselPosition = .init(",
+            "    values: [\"moon\", \"flame\", \"drop\", \"cloud\", \"ladybug\", \"leaf\", \"carrot\"],",
+            "    selectedValue: \"cloud\",",
+            "    markLength: 44, \/\/ Determines the width of each mark.",
+            "    spacing: 8",
+            ")",
+            "",
+            "\/\/ ...",
+            "",
+            "Text(position.selectedValue)",
+            "StepCarousel(position: $position) {",
+            "    \/\/ Anchor Content",
+            "    Image(systemName: \"arrowtriangle.down.fill\")",
+            "    .foregroundStyle(.orange)",
+            "    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)",
+            "} markContent: { index, value in",
+            "    Image(systemName: value)",
+            "    .font(.title)",
+            "    .frame(maxWidth: .infinity, maxHeight: .infinity)",
+            "    .background(.gray.tertiary, in: RoundedRectangle(cornerRadius: 4))",
+            "}",
+            ".frame(height: 44) \/\/ Determines the height of the step carousel control."
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
+          "inlineContent" : [
+            {
+              "identifier" : "step-carousel-with-images",
+              "type" : "image"
             }
           ],
           "type" : "paragraph"
@@ -465,7 +561,7 @@
               "type" : "reference"
             },
             {
-              "text" : " initializers to use the",
+              "text" : " initializers to use",
               "type" : "text"
             },
             {
@@ -473,34 +569,87 @@
               "type" : "text"
             },
             {
-              "text" : "default marks.",
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/DefaultMark",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " as the marks and anchor. Using the default ",
+              "type" : "text"
+            },
+            {
+              "code" : "markLength",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " and ",
+              "type" : "text"
+            },
+            {
+              "code" : "spacing",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : ", along",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "with ",
+              "type" : "text"
+            },
+            {
+              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markHeight",
+              "isActive" : true,
+              "type" : "reference"
+            },
+            {
+              "text" : " creates a carousel control with the default appearance:",
               "type" : "text"
             }
           ],
           "type" : "paragraph"
         },
         {
+          "code" : [
+            "@State var position = StepCarouselPosition(",
+            "    values: [\"N\", \"O\", \"P\", \"Q\", \"R\", \"S\", \"T\", \"U\", \"V\", \"W\", \"X\"],",
+            "    selectedValue: \"S\"",
+            ")",
+            "",
+            "\/\/ ...",
+            "",
+            "Text(position.selectedValue)",
+            "StepCarousel(position: $position)",
+            "    .frame(height: StepCarouselDefaults.markHeight)",
+            "Text(position.selectedIndex.description)",
+            "    .font(.caption)"
+          ],
+          "syntax" : "swift",
+          "type" : "codeListing"
+        },
+        {
           "inlineContent" : [
             {
-              "text" : "Use the ",
-              "type" : "text"
-            },
+              "identifier" : "step-carousel-with-default-mark",
+              "type" : "image"
+            }
+          ],
+          "type" : "paragraph"
+        },
+        {
+          "anchor" : "Value-identity",
+          "level" : 3,
+          "text" : "Value identity",
+          "type" : "heading"
+        },
+        {
+          "inlineContent" : [
             {
-              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel\/init(position:anchorContent:markContent:)",
-              "isActive" : true,
-              "type" : "reference"
-            },
-            {
-              "text" : " or ",
-              "type" : "text"
-            },
-            {
-              "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarousel\/init(position:markContent:)",
-              "isActive" : true,
-              "type" : "reference"
-            },
-            {
-              "text" : " to",
+              "text" : "The collection of selectable values provided to the carousel are not required to contain unique",
               "type" : "text"
             },
             {
@@ -508,7 +657,23 @@
               "type" : "text"
             },
             {
-              "text" : "provide a closure that builds the view for each mark.",
+              "text" : "values since each mark is identified by its index, not the value itself. Internally the marks",
+              "type" : "text"
+            },
+            {
+              "text" : " ",
+              "type" : "text"
+            },
+            {
+              "text" : "are created using a ",
+              "type" : "text"
+            },
+            {
+              "code" : "LazyHStack",
+              "type" : "codeVoice"
+            },
+            {
+              "text" : " to create the mark views only as needed.",
               "type" : "text"
             }
           ],
@@ -575,6 +740,21 @@
   ]
 , 
 "references": {
+"animated-demo.mov": {
+  "alt" : "Demonstration video of a Step Carousel scrolling through different values.",
+  "identifier" : "animated-demo.mov",
+  "poster" : null,
+  "type" : "video",
+  "variants" : [
+    {
+      "traits" : [
+        "1x",
+        "light"
+      ],
+      "url" : "\/videos\/DiscreteStepCarousel\/animated-demo.mov"
+    }
+  ]
+},
 "doc://DiscreteStepCarousel/7SwiftUI4ViewP": {
   "identifier" : "doc:\/\/DiscreteStepCarousel\/7SwiftUI4ViewP",
   "title" : "SwiftUICore.View",
@@ -601,6 +781,48 @@
   "title" : "DiscreteStepCarousel",
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel"
+},
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/DefaultMark": {
+  "abstract" : [
+    {
+      "text" : "Default mark for a ",
+      "type" : "text"
+    },
+    {
+      "code" : "StepCarousel",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "struct"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "DefaultMark"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/DefaultMark",
+  "kind" : "symbol",
+  "navigatorTitle" : [
+    {
+      "kind" : "identifier",
+      "text" : "DefaultMark"
+    }
+  ],
+  "role" : "symbol",
+  "title" : "DefaultMark",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/defaultmark"
 },
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarousel": {
   "abstract" : [
@@ -1328,6 +1550,59 @@
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel\/stepcarousel\/init(position:markcontent:)"
 },
+"doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselDefaults/markHeight": {
+  "abstract" : [
+    {
+      "text" : "Recommended height for marks using ",
+      "type" : "text"
+    },
+    {
+      "code" : "DefaultMark",
+      "type" : "codeVoice"
+    },
+    {
+      "text" : ".",
+      "type" : "text"
+    }
+  ],
+  "fragments" : [
+    {
+      "kind" : "keyword",
+      "text" : "static"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "keyword",
+      "text" : "let"
+    },
+    {
+      "kind" : "text",
+      "text" : " "
+    },
+    {
+      "kind" : "identifier",
+      "text" : "markHeight"
+    },
+    {
+      "kind" : "text",
+      "text" : ": "
+    },
+    {
+      "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:Sd",
+      "text" : "Double"
+    }
+  ],
+  "identifier" : "doc:\/\/DiscreteStepCarousel\/documentation\/DiscreteStepCarousel\/StepCarouselDefaults\/markHeight",
+  "kind" : "symbol",
+  "role" : "symbol",
+  "title" : "markHeight",
+  "type" : "topic",
+  "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/markheight"
+},
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition": {
   "abstract" : [
     {
@@ -1381,7 +1656,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/markLength": {
   "abstract" : [
     {
-      "text" : "Space available for each mark in the carousel.",
+      "text" : "Length available for each mark in the carousel.",
       "type" : "text"
     }
   ],
@@ -1556,6 +1831,69 @@
   "identifier" : "doc:\/\/DiscreteStepCarousel\/s8SendableP",
   "title" : "Swift.Sendable",
   "type" : "unresolvable"
+},
+"step-carousel-with-colors": {
+  "alt" : "Step Carousel control using colors as elements, with each mark displaying the selectable colors.”",
+  "identifier" : "step-carousel-with-colors",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/DiscreteStepCarousel\/step-carousel-with-colors@3x.png"
+    },
+    {
+      "traits" : [
+        "3x",
+        "dark"
+      ],
+      "url" : "\/images\/DiscreteStepCarousel\/step-carousel-with-colors~dark@3x.png"
+    }
+  ]
+},
+"step-carousel-with-default-mark": {
+  "alt" : "Step Carousel control using the default marks, currently selecting the mark associated with S.”",
+  "identifier" : "step-carousel-with-default-mark",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/DiscreteStepCarousel\/step-carousel-with-default-mark@3x.png"
+    },
+    {
+      "traits" : [
+        "3x",
+        "dark"
+      ],
+      "url" : "\/images\/DiscreteStepCarousel\/step-carousel-with-default-mark~dark@3x.png"
+    }
+  ]
+},
+"step-carousel-with-images": {
+  "alt" : "Step Carousel control using image name strings as elements, with each mark displaying the corresponding image in a gray rounded rectangle background.”",
+  "identifier" : "step-carousel-with-images",
+  "type" : "image",
+  "variants" : [
+    {
+      "traits" : [
+        "3x",
+        "light"
+      ],
+      "url" : "\/images\/DiscreteStepCarousel\/step-carousel-with-images@3x.png"
+    },
+    {
+      "traits" : [
+        "3x",
+        "dark"
+      ],
+      "url" : "\/images\/DiscreteStepCarousel\/step-carousel-with-images~dark@3x.png"
+    }
+  ]
 }
 }
 }
