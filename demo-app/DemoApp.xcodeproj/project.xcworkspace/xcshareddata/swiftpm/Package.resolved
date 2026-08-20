@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
-        "branch" : "feature/debug-alignment-guide-modifier",
-        "revision" : "d30d4e7e4202cfa372d2a92b765d8db4d1da8b29"
+        "revision" : "abb7790d7c96e79795ea4bfd35104b6d91def401",
+        "version" : "0.4.1"
       }
     }
   ],
