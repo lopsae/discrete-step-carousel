@@ -12,6 +12,20 @@ import SwiftUI
 ///
 /// A ``StepCarousel`` uses a binding to an instance of this type store the state of the selected
 /// index. The instance also contains the collection of selectable values and layout properties.
+///
+/// Use ``StepCarouselPosition/selectValue(_:immediate:)`` and ``StepCarouselPosition/selectIndex(_:immediate:)``
+/// to update the carousel selection by either value or index.
+///
+///
+/// ### Animation
+///
+/// The selection functions ``StepCarouselPosition/selectValue(_:immediate:)`` and ``StepCarouselPosition/selectIndex(_:immediate:)``
+/// can be used within animation blocks to animate the carousel to a new selected value. For
+/// animations it is recommended to call these functions with the parameter `immediate: false` to
+/// prevent flickering of the selected value.
+///
+/// See the documentation of ``StepCarouselPosition/selectValue(_:immediate:)`` and ``StepCarouselPosition/selectIndex(_:immediate:)``
+/// for more details.
 public struct StepCarouselPosition<Values>
 where
     Values: RandomAccessCollection,

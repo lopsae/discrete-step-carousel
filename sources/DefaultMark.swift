@@ -11,6 +11,9 @@ public import SwiftUI
 ///
 /// View used as the default mark and anchor in a ``StepCarousel`` when no custom views
 /// are provided.
+///
+/// Expands to the available space and draws a vertical line in the middle of the view, styled with
+/// the configured `ShapeStyle`.
 public struct DefaultMark<Style: ShapeStyle>: View {
 
     let style: Style
