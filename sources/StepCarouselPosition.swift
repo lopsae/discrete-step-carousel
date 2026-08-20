@@ -30,7 +30,7 @@ where
     /// a precondition failure when initialized.
     public let values: Values
 
-    /// Space available for each mark in the carousel.
+    /// Length available for each mark in the carousel.
     ///
     /// The space available for each mark is determined by this property and the height of the
     /// carousel control.
