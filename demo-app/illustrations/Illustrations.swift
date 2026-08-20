@@ -33,7 +33,7 @@ import Testing
 
     struct StepCarouselWithDefaultMark: View {
         @State var position = StepCarouselPosition(
-            values: ["P", "Q", "R", "S", "T", "U", "V"],
+            values: ["N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X"],
             selectedValue: "S"
         )
         var body: some View {
@@ -55,24 +55,52 @@ import Testing
     }
 
 
+    struct StepCarouselWithColors: View {
+        @State var position: StepCarouselPosition = .init(
+            values: [Color.red, .orange, .yellow, .green, .teal, .blue, .indigo, .purple, .brown],
+            selectedIndex: 4, markLength: 40, spacing: 8
+        )
+        var body: some View {
+            Text(position.selectedValue.description)
+            StepCarousel(position: $position) { index, value in
+                RoundedRectangle(cornerRadius: 8)
+                .fill(value.gradient)
+            }
+            .frame(height: 60)
+        }
+    }
+
+
+    @Test func withColors() throws {
+        try storage.renderAndStore("step-carousel", "with-colors", strategy: .windowHierarchy) {
+            DocumentationIllustration(sizing: .regular) {
+                StepCarouselWithColors()
+            }
+        }
+    }
+
+
     struct StepCarouselWithImages: View {
         @State var position: StepCarouselPosition = .init(
-            values: [
-                "moon", "flame", "bolt", "drop", "ladybug",
-                "cloud", "lizard", "leaf", "carrot"],
-            selectedIndex: 4,
-            markLength: 44,
-            spacing: 4
+            values: ["moon", "flame", "drop", "cloud", "ladybug", "leaf", "carrot"],
+            selectedValue: "cloud",
+            markLength: 44, // Determines the width of each mark.
+            spacing: 8
         )
         var body: some View {
             Text(position.selectedValue)
-            StepCarousel(position: $position) { index, element in
-                Image(systemName: element)
+            StepCarousel(position: $position) {
+                // Anchor Content
+                Image(systemName: "arrowtriangle.down.fill")
+                .foregroundStyle(.orange)
+                .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+            } markContent: { index, value in
+                Image(systemName: value)
                 .font(.title)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
-                .background(.gray.quinary, in: RoundedRectangle(cornerRadius: 4))
+                .background(.gray.tertiary, in: RoundedRectangle(cornerRadius: 4))
             }
-            .frame(height: 44)
+            .frame(height: 44) // Determines the height of the step carousel control.
         }
     }
 
