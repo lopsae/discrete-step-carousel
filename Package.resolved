@@ -1,13 +1,13 @@
 {
-  "originHash" : "2c72841d738adc1673e086c46bb8bbef5136890a4339c4ffbe591a883bbd4f17",
+  "originHash" : "eb99d1c3d28a4912338d576890a73e2fbe3d4ac95ee6f3f52092abb57d1ab646",
   "pins" : [
     {
       "identity" : "preview-utilities",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
-        "branch" : "feature/debug-alignment-guide-modifier",
-        "revision" : "107be3dcd67d953ad248e93c4ca342e3ee369f9a"
+        "revision" : "abb7790d7c96e79795ea4bfd35104b6d91def401",
+        "version" : "0.4.1"
       }
     },
     {
