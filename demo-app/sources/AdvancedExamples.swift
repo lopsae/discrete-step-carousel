@@ -26,9 +26,16 @@ struct AdvancedExamples: View {
 
 struct SelectionAnimationExample: View {
 
-    @State var  carouselPosition: StepCarouselPosition = .init(
-        values: Strings.alphabet.map(\.localizedUppercase)
-    )
+    @State var carouselPosition: StepCarouselPosition<[String]>
+
+    init(initialSelection: String? = nil) {
+        let values = Strings.alphabet.map(\.localizedUppercase)
+        let selectedValue = initialSelection ?? values.first!
+        carouselPosition = .init(
+            values: Strings.alphabet.map(\.localizedUppercase),
+            selectedValue: selectedValue
+        )
+    }
 
     var body: some View {
         VStack(spacing: 2) {
@@ -49,13 +56,8 @@ struct SelectionAnimationExample: View {
             }
             .frame(height: StepCarouselDefaults.markHeight)
 
-//            StepCarousel(position: $carouselPosition) { index, element in
-//                
-//            }
-//            .frame(height: StepCarouselDefaults.markHeight)
-
             Text(carouselPosition.selectedIndex.description)
-                .font(.caption)
+            .font(.caption)
         }
     }
 }

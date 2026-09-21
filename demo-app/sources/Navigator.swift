@@ -20,6 +20,12 @@ struct Navigator: View {
                     AdvancedExamples()
                     .navigationTitle("Advanced Examples")
                 }
+
+                NavigationLink("Documentation Examples") {
+                    DocumentationExamples()
+                    .navigationTitle("StepCarousel")
+                    .navigationBarTitleDisplayMode(.inline)
+                }
             }
             .navigationTitle("DiscreteStepCarousel")
             .navigationSubtitle("DemoApp")

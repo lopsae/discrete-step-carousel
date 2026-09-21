@@ -137,6 +137,7 @@ private struct PreviewContent {
 
     DashedDivider()
 
+    // FUTURE: figure out how alternatives to content margins, so that effects can apply using the entire space for the scrollview.
     PreviewCaption("""
         Carousel with `scrollTransition`. Currently the space that is considered _visible_ for the
         transition phase is reduced since the internal scroll view uses `contentMargins`.

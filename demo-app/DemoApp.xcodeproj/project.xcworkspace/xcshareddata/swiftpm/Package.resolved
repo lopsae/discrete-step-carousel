@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
-        "branch" : "feature/documentation-second-batch",
-        "revision" : "4c20d7efd5f99d089d485e45f50609d7f85e8d2d"
+        "revision" : "abb7790d7c96e79795ea4bfd35104b6d91def401",
+        "version" : "0.4.1"
       }
     }
   ],

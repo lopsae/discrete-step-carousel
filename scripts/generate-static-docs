@@ -11,7 +11,8 @@ set -v
 export DOCC_JSON_PRETTYPRINT="YES"
 
 swift package --allow-writing-to-directory ./docs \
-    generate-documentation --target "DiscreteStepCarousel" \
+    generate-documentation --verbose \
+    --target "DiscreteStepCarousel" \
     --disable-indexing \
     --experimental-skip-synthesized-symbols \
     --transform-for-static-hosting \

@@ -4,7 +4,7 @@
 //
 
 
-import SwiftUI
+public import SwiftUI
 
 
 /// A control for selecting a value from a collection, with each value represented by a view in a
@@ -14,34 +14,118 @@ import SwiftUI
 /// collection. The user can scroll through these views to select one value at a time, when the user
 /// stops scrolling the scrollable surface snaps back to the currently selected view.
 ///
-/// Each of the views that represent a carousel value is referred as a _mark_. A secondary _anchor_
-/// view that is overlaid centered on the selected position can also be provided.
+/// @Video(
+///     source: "animated-demo.mov",
+///     alt: "Demonstration video of a Step Carousel scrolling through different values.",
+/// )
 ///
-/// The collection of values is not required to contain unique values. Each mark is identified by
-/// its index, not the value it represents. The view for each mark is created lazily, as each view
-/// needed, Both the index and value are provided to the closure that creates the mark.
 ///
 /// ### Carousel Position
 ///
 /// ``StepCarouselPosition`` stores the state of the selected index, the collection of selectable
-/// values, and the layout information for a step carousel. The selected index or value can be read
-/// and set through the position instance, calling ``StepCarouselPosition/selectValue(_:immediate:)``
-/// or ``StepCarouselPosition/selectIndex(_:immediate:)`` in a animation block will animate the
-/// carousel to the selected position.
+/// values, and the layout information for a step carousel. The view associated with each value, a
+/// _mark_, can be provided to some of the `StepCarousel` initializers:
+///
+/// ```swift
+/// @State var position: StepCarouselPosition = .init(
+///     values: [Color.red, .orange, .yellow, .green, .teal, .blue, .indigo, .purple, .brown],
+///     selectedIndex: 4, markLength: 40, spacing: 8
+/// )
+///
+/// // ...
+///
+/// Text(position.selectedValue.description)
+/// StepCarousel(position: $position) { index, value in
+///     RoundedRectangle(cornerRadius: 8)
+///     .fill(value.gradient)
+/// }
+/// .frame(height: 60)
+/// ```
+///
+/// @Image(
+///     source: step-carousel-with-colors,
+///     alt: "Step Carousel control using colors as elements, with each mark displaying the selectable colors.”
+/// )
+///
+///
+/// The selected index or value can be read and set through the position instance with ``StepCarouselPosition/selectValue(_:immediate:)``
+/// or ``StepCarouselPosition/selectIndex(_:immediate:)``. Calling this functions in an animation
+/// block will animate the carousel to the selected position.
+///
+/// See ``StepCarouselPosition`` for more details.
+///
 ///
 /// ### Marks and Sizing
 ///
-/// The carousel control will expand to occupy all available space. Use a frame or other layout
+/// Each of the views that represent a carousel value is referred as a _mark_. A secondary _anchor_
+/// view that is overlaid centered on the selected position can also be provided.
+///
+/// The carousel control will expand to occupy all available space. Use a `frame` or other layout
 /// modifiers to constrain its size to the appropriate dimensions. The space available for each mark
 /// is determined by the ``StepCarouselPosition/markLength`` property and the height of the carousel
-/// control itself. Each mark is centered in its available space.
+/// control itself. The content for each mark is constrained and centered to its available space:
 ///
-/// Use the ``init(position:)`` or ``init(position:anchorStyle:markStyle:)`` initializers to use the
-/// default marks.
+/// ```swift
+/// @State var position: StepCarouselPosition = .init(
+///     values: ["moon", "flame", "drop", "cloud", "ladybug", "leaf", "carrot"],
+///     selectedValue: "cloud",
+///     markLength: 44, // Determines the width of each mark.
+///     spacing: 8
+/// )
 ///
-/// Use the ``init(position:anchorContent:markContent:)`` or ``init(position:markContent:)`` to
-/// provide a closure that builds the view for each mark.
+/// // ...
 ///
+/// Text(position.selectedValue)
+/// StepCarousel(position: $position) {
+///     // Anchor Content
+///     Image(systemName: "arrowtriangle.down.fill")
+///     .foregroundStyle(.orange)
+///     .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+/// } markContent: { index, value in
+///     Image(systemName: value)
+///     .font(.title)
+///     .frame(maxWidth: .infinity, maxHeight: .infinity)
+///     .background(.gray.tertiary, in: RoundedRectangle(cornerRadius: 4))
+/// }
+/// .frame(height: 44) // Determines the height of the step carousel control.
+/// ```
+///
+/// @Image(
+///     source: step-carousel-with-images,
+///     alt: "Step Carousel control using image name strings as elements, with each mark displaying the corresponding image in a gray rounded rectangle background.”
+/// )
+///
+///
+/// Use the ``init(position:)`` or ``init(position:anchorStyle:markStyle:)`` initializers to use
+/// ``DefaultMark`` as the marks and anchor. Using the default `markLength` and `spacing`, along
+/// with ``StepCarouselDefaults/markHeight`` creates a carousel control with the default appearance:
+///
+/// ```swift
+/// @State var position = StepCarouselPosition(
+///     values: ["N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X"],
+///     selectedValue: "S"
+/// )
+///
+/// // ...
+///
+/// Text(position.selectedValue)
+/// StepCarousel(position: $position)
+///     .frame(height: StepCarouselDefaults.markHeight)
+/// Text(position.selectedIndex.description)
+///     .font(.caption)
+/// ```
+///
+/// @Image(
+///     source: step-carousel-with-default-mark,
+///     alt: "Step Carousel control using the default marks, currently selecting the mark associated with S.”
+/// )
+///
+///
+/// ### Value identity
+///
+/// The collection of selectable values provided to the carousel are not required to contain unique
+/// values since each mark is identified by its index, not the value itself. Internally the marks
+/// are created using a `LazyHStack` to create the mark views only as needed.
 @MainActor
 public struct StepCarousel<Values, AnchorContent, MarkContent> : View
 where

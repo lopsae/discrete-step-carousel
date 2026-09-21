@@ -1,7 +1,7 @@
 {
   "abstract" : [
     {
-      "text" : "Space available for each mark in the carousel.",
+      "text" : "Length available for each mark in the carousel.",
       "type" : "text"
     }
   ],
@@ -229,7 +229,7 @@
 "doc://DiscreteStepCarousel/documentation/DiscreteStepCarousel/StepCarouselPosition/markLength": {
   "abstract" : [
     {
-      "text" : "Space available for each mark in the carousel.",
+      "text" : "Length available for each mark in the carousel.",
       "type" : "text"
     }
   ],
