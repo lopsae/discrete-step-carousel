@@ -33,12 +33,13 @@ public struct DefaultMark<Style: ShapeStyle>: View {
 }
 
 
+nonisolated
 struct MarkShape: Shape {
 
     let lineWidth: CGFloat
 
     func path(in rect: CGRect) -> Path {
-        let center = rect.center
+        let center = rect.centerPoint
         var path = Path()
         path.move(to: [center.x, rect.minY + lineWidth/2])
         path.addLine(to: [center.x, rect.maxY - lineWidth/2])
