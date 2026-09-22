@@ -95,7 +95,7 @@ private struct PreviewContent {
     .frame(height: 100)
     .stackAbove {
         Image(systemName: "arrowtriangle.down.fill")
-            .foregroundStyle(.secondary)
+        .foregroundStyle(.secondary)
     }
 
     DashedDivider()
