@@ -7,6 +7,7 @@ In development.
 
 + Updated PreviewUtilities package to `...`.
 + Fixed isolation issues with iOS and macOS 27.
++ Added release notes.
 
 
 
@@ -32,7 +33,7 @@ v0.8.0 - Documentation and API Cleanup
 --------------------------------------
 Released 2026 June 21st.
 
-+ Cleanup of public api: `DiscreteStepCarouse` renamed to `StepCarousel`.
++ Cleanup of public API: `DiscreteStepCarouse` renamed to `StepCarousel`.
 + Updated default styling of `StepCarousel`
 + Cleanup of DemoApp.
 + Fixed `StepCarouselPosition` bugs.
