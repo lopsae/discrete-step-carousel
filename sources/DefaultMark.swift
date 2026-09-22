@@ -16,6 +16,9 @@ public import SwiftUI
 /// the configured `ShapeStyle`.
 public struct DefaultMark<Style: ShapeStyle>: View {
 
+    // TODO: Move to StepCarouselDefaults.
+    static var lineWidth: CGFloat { 2.5 }
+
     let style: Style
 
     /// Create a default mark with the given style.
@@ -25,14 +28,14 @@ public struct DefaultMark<Style: ShapeStyle>: View {
     }
 
     public var body: some View {
-        let lineWidth: CGFloat = 2.5
-        let strokeStyle = StrokeStyle(lineWidth: lineWidth, lineCap: .round)
-        MarkShape(lineWidth: lineWidth)
+        let strokeStyle = StrokeStyle(lineWidth: Self.lineWidth, lineCap: .round)
+        MarkShape(lineWidth: Self.lineWidth)
         .stroke(style, style: strokeStyle)
     }
 }
 
 
+// TODO: Could use AxialLine from PreviewUtilities instead.
 nonisolated
 struct MarkShape: Shape {
 
@@ -66,10 +69,9 @@ private struct PreviewContent {
     Spacer()
 
     HStack(spacing: 40) {
-
         DefaultMark(style: .primary)
             .frame(squareOf: 44)
-            .border(.red.tertiary, width: 3)
+            .border(.red.tertiary, width: 2)
         DefaultMark(style: .secondary)
             .frame(squareOf: 44)
         DefaultMark(style: .primary)
