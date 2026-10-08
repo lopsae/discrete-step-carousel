@@ -17,7 +17,8 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.4.1"..<"1.0.0"),
+//        .package(url: "https://github.com/lopsae/preview-utilities.git", "0.4.2"..<"1.0.0"),
+        .package(url: "https://github.com/lopsae/preview-utilities.git", branch: "feature/separate-geometry-additions"),
         .package(url: "https://github.com/swiftlang/swift-docc-plugin", from: "1.1.0")
     ],
     targets: [
