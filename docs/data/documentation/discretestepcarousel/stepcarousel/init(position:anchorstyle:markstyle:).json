@@ -170,6 +170,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
         "text" : "Values"
       },
       {
@@ -186,6 +187,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V8position11anchorStyle04markF0ACyxAA11DefaultMarkVyqd__GAHyqd_0_GG7SwiftUI7BindingVyAA0bC8PositionVyxGG_qd__qd_0_tcAIRs_AJRs0_AL05ShapeF0Rd__AlSRd_0_r0_lufc06AnchorF0L_qd__mfp",
         "text" : "AnchorStyle"
       },
       {
@@ -202,6 +204,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V8position11anchorStyle04markF0ACyxAA11DefaultMarkVyqd__GAHyqd_0_GG7SwiftUI7BindingVyAA0bC8PositionVyxGG_qd__qd_0_tcAIRs_AJRs0_AL05ShapeF0Rd__AlSRd_0_r0_lufc0iF0L_qd_0_mfp",
         "text" : "MarkStyle"
       },
       {
@@ -296,6 +299,7 @@
             },
             {
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
               "text" : "Values"
             },
             {
@@ -312,6 +316,7 @@
             },
             {
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V8position11anchorStyle04markF0ACyxAA11DefaultMarkVyqd__GAHyqd_0_GG7SwiftUI7BindingVyAA0bC8PositionVyxGG_qd__qd_0_tcAIRs_AJRs0_AL05ShapeF0Rd__AlSRd_0_r0_lufc06AnchorF0L_qd__mfp",
               "text" : "AnchorStyle"
             },
             {
@@ -328,6 +333,7 @@
             },
             {
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V8position11anchorStyle04markF0ACyxAA11DefaultMarkVyqd__GAHyqd_0_GG7SwiftUI7BindingVyAA0bC8PositionVyxGG_qd__qd_0_tcAIRs_AJRs0_AL05ShapeF0Rd__AlSRd_0_r0_lufc0iF0L_qd_0_mfp",
               "text" : "MarkStyle"
             },
             {
@@ -761,6 +767,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -777,6 +784,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V8position11anchorStyle04markF0ACyxAA11DefaultMarkVyqd__GAHyqd_0_GG7SwiftUI7BindingVyAA0bC8PositionVyxGG_qd__qd_0_tcAIRs_AJRs0_AL05ShapeF0Rd__AlSRd_0_r0_lufc06AnchorF0L_qd__mfp",
       "text" : "AnchorStyle"
     },
     {
@@ -793,6 +801,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V8position11anchorStyle04markF0ACyxAA11DefaultMarkVyqd__GAHyqd_0_GG7SwiftUI7BindingVyAA0bC8PositionVyxGG_qd__qd_0_tcAIRs_AJRs0_AL05ShapeF0Rd__AlSRd_0_r0_lufc0iF0L_qd_0_mfp",
       "text" : "MarkStyle"
     },
     {

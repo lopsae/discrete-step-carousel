@@ -65,6 +65,19 @@
           ],
           "tokens" : [
             {
+              "kind" : "attribute",
+              "text" : "@"
+            },
+            {
+              "kind" : "attribute",
+              "preciseIdentifier" : "s:ScM",
+              "text" : "MainActor"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
               "kind" : "keyword",
               "text" : "enum"
             },
@@ -85,8 +98,7 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/DiscreteStepCarousel\/s8SendableP",
-        "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP"
+        "doc:\/\/DiscreteStepCarousel\/s8SendableP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -391,11 +403,6 @@
   "title" : "markStyle",
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel\/stepcarouseldefaults\/markstyle"
-},
-"doc://DiscreteStepCarousel/s16SendableMetatypeP": {
-  "identifier" : "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP",
-  "title" : "Swift.SendableMetatype",
-  "type" : "unresolvable"
 },
 "doc://DiscreteStepCarousel/s8SendableP": {
   "identifier" : "doc:\/\/DiscreteStepCarousel\/s8SendableP",

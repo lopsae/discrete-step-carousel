@@ -57,6 +57,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
         "text" : "Values"
       },
       {
@@ -73,6 +74,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V13AnchorContentq_mfp",
         "text" : "AnchorContent"
       },
       {
@@ -89,6 +91,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
         "text" : "Values"
       },
       {
@@ -106,6 +109,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
         "text" : "Values"
       },
       {
@@ -123,6 +127,7 @@
       },
       {
         "kind" : "typeIdentifier",
+        "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V11MarkContentq0_mfp",
         "text" : "MarkContent"
       },
       {
@@ -201,6 +206,7 @@
             },
             {
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
               "text" : "Values"
             },
             {
@@ -230,14 +236,15 @@
             },
             {
               "kind" : "attribute",
-              "text" : "@escaping "
+              "text" : "@escaping"
             },
             {
               "kind" : "text",
-              "text" : "() -> "
+              "text" : " () -> "
             },
             {
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V13AnchorContentq_mfp",
               "text" : "AnchorContent"
             },
             {
@@ -267,14 +274,15 @@
             },
             {
               "kind" : "attribute",
-              "text" : "@escaping "
+              "text" : "@escaping"
             },
             {
               "kind" : "text",
-              "text" : "("
+              "text" : " ("
             },
             {
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
               "text" : "Values"
             },
             {
@@ -292,6 +300,7 @@
             },
             {
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
               "text" : "Values"
             },
             {
@@ -309,6 +318,7 @@
             },
             {
               "kind" : "typeIdentifier",
+              "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V11MarkContentq0_mfp",
               "text" : "MarkContent"
             },
             {
@@ -498,6 +508,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -514,6 +525,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V13AnchorContentq_mfp",
       "text" : "AnchorContent"
     },
     {
@@ -530,6 +542,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -547,6 +560,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -564,6 +578,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC0V11MarkContentq0_mfp",
       "text" : "MarkContent"
     },
     {
