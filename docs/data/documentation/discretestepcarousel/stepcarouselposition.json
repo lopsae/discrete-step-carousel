@@ -77,6 +77,19 @@
           ],
           "tokens" : [
             {
+              "kind" : "attribute",
+              "text" : "@"
+            },
+            {
+              "kind" : "attribute",
+              "preciseIdentifier" : "s:ScM",
+              "text" : "MainActor"
+            },
+            {
+              "kind" : "text",
+              "text" : " "
+            },
+            {
               "kind" : "keyword",
               "text" : "struct"
             },
@@ -316,11 +329,8 @@
   "relationshipsSections" : [
     {
       "identifiers" : [
-        "doc:\/\/DiscreteStepCarousel\/s8CopyableP",
         "doc:\/\/DiscreteStepCarousel\/SQ",
-        "doc:\/\/DiscreteStepCarousel\/s9EscapableP",
-        "doc:\/\/DiscreteStepCarousel\/s8SendableP",
-        "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP"
+        "doc:\/\/DiscreteStepCarousel\/s8SendableP"
       ],
       "kind" : "relationships",
       "title" : "Conforms To",
@@ -537,6 +547,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -553,6 +564,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -636,6 +648,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -652,6 +665,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -772,6 +786,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -838,6 +853,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -904,6 +920,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -957,6 +974,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV6Valuesxmfp",
       "text" : "Values"
     },
     {
@@ -1076,6 +1094,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel0bC8PositionV6Valuesxmfp",
       "text" : "Values"
     }
   ],
@@ -1086,24 +1105,9 @@
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel\/stepcarouselposition\/values"
 },
-"doc://DiscreteStepCarousel/s16SendableMetatypeP": {
-  "identifier" : "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP",
-  "title" : "Swift.SendableMetatype",
-  "type" : "unresolvable"
-},
-"doc://DiscreteStepCarousel/s8CopyableP": {
-  "identifier" : "doc:\/\/DiscreteStepCarousel\/s8CopyableP",
-  "title" : "Swift.Copyable",
-  "type" : "unresolvable"
-},
 "doc://DiscreteStepCarousel/s8SendableP": {
   "identifier" : "doc:\/\/DiscreteStepCarousel\/s8SendableP",
   "title" : "Swift.Sendable",
-  "type" : "unresolvable"
-},
-"doc://DiscreteStepCarousel/s9EscapableP": {
-  "identifier" : "doc:\/\/DiscreteStepCarousel\/s9EscapableP",
-  "title" : "Swift.Escapable",
   "type" : "unresolvable"
 }
 }

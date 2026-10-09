@@ -173,6 +173,7 @@ where
     }
 
 
+    // FIXME: Add internal visibility to other body functions.
     @_documentation(visibility: internal)
     public var body: some View {
         ZStack {
@@ -188,7 +189,9 @@ where
                         // Selection is done entirely by geometry changes.
                         ForEach(position.values.indices, id: \.self) { index in
                             let value = position.values[index]
-                            markContent(index, value)
+                            ZStack {
+                                markContent(index, value)
+                            }
                             .frame(width: position.markLength, alignment: .center)
                             .padding(.horizontal, position.spacing/2)
                         }

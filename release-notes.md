@@ -1,12 +1,11 @@
 Release Notes
 =============
 
-v0.8.2 - 
----------
-In development.
-
-+ Updated PreviewUtilities package to `...`.
+v0.8.3 - Fix multiple view mark 
+-------------------------------
 + Fixed isolation issues with iOS and macOS 27.
++ Fixed issue when multiple views are produced for each mark.
++ Updated PreviewUtilities package to `0.4.2`.
 + Added release notes.
 
 

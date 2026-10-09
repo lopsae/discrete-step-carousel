@@ -221,9 +221,8 @@ private struct PreviewContent {
         spacing: 20)
     @Previewable @State var fixedHeight: Double = 100
 
-    // FIXME: Multiple views are not colapsed into a single view. Use a ZStack and update docs.
     PreviewCaption("""
-        FIXME.
+        All views provided as the mark are contained in center-aligned `ZStack`.
         """)
 
     Slider.captioned(
@@ -236,9 +235,13 @@ private struct PreviewContent {
     PreviewContent.indicatorArrow
 
     StepCarousel(position: $carouselPosition) { _, item in
-        Text(item)
         Text("First")
+            .foregroundStyle(.tertiary)
+            .font(.largeTitle)
         Text("Second")
+            .foregroundStyle(.tertiary)
+            .font(.title)
+        Text(item)
     }
     .frame(height: fixedHeight)
     Text(carouselPosition.selectedValue)
