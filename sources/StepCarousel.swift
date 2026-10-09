@@ -98,7 +98,8 @@ public import SwiftUI
 ///
 /// Use the ``init(position:)`` or ``init(position:anchorStyle:markStyle:)`` initializers to use
 /// ``DefaultMark`` as the marks and anchor. Using the default `markLength` and `spacing`, along
-/// with ``StepCarouselDefaults/markHeight`` creates a carousel control with the default appearance:
+/// with [`StepCarouselDefaults/markHeight`](doc:StepCarouselDefaults/markHeight) creates a carousel
+/// control with the default appearance:
 ///
 /// ```swift
 /// @State var position = StepCarouselPosition(
@@ -146,6 +147,7 @@ where
 
 
     /// Creates a carousel with custom marks and anchor.
+    ///
     /// - Parameters:
     ///   - position: The binding to the position structure that contains the carousel state.
     ///   - anchorContent: The view overlaid over the selected position.
@@ -166,10 +168,12 @@ where
         let valuesCount = positionValue.values.count.asDouble
         self.initialAnchor = .init(
             x: (selectedIndexDistance * totalMarkLength / ((valuesCount - 1) * totalMarkLength)),
-            y: 0.5)
+            y: 0.5
+        )
     }
 
 
+    // FIXME: Add internal visibility to other body functions.
     @_documentation(visibility: internal)
     public var body: some View {
         ZStack {
@@ -185,7 +189,9 @@ where
                         // Selection is done entirely by geometry changes.
                         ForEach(position.values.indices, id: \.self) { index in
                             let value = position.values[index]
-                            markContent(index, value)
+                            ZStack {
+                                markContent(index, value)
+                            }
                             .frame(width: position.markLength, alignment: .center)
                             .padding(.horizontal, position.spacing/2)
                         }
@@ -206,11 +212,13 @@ where
                     (geometry.size.width - position.totalMarkLength) / 2,
                     for: .scrollContent)
                 .onScrollGeometryChange(for: Int.self) { scrollGeometry in
+                    // FIXME: Move to function and document.
                     let contentPosition = scrollGeometry.contentOffset.x + scrollGeometry.contentInsets.leading
                     let indexDistance = (contentPosition / position.totalMarkLength).arithmeticRoundedInt
                     let clampedIndexDistance = position.values.clampDistance(indexDistance)
                     return clampedIndexDistance ?? 0
                 } action: { oldValue, newIndexDistance in
+                    // FIXME: Move to function and document.
                     // Main calculation and set for both `selectedIndex` and `selectedValue`.
                     // Updates the position values as the user drags the scroll view.
                     // When `position.selectIndex` or `position.selectValue` are used, this code

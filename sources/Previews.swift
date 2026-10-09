@@ -170,7 +170,7 @@ private struct PreviewContent {
 }
 
 
-// MARK: - Mark Size
+// MARK: - MarkHeight
 
 
 #Preview("MarkHeight", traits: .fixedHeader, PreviewContent.layout) {
@@ -186,8 +186,12 @@ private struct PreviewContent {
         height of the carousel itself.
         """)
 
-    Slider.captioned("Fixed Height", value: $fixedHeight, in: 0...200, valueFormat: .shortFraction)
-        .padding(.bottom)
+    Slider.captioned(
+        "Fixed Height", value: $fixedHeight, in: 0...200,
+        currentValueFormat: .shortFraction,
+        boundsValueFormat: .arithmeticRoundedInteger
+    )
+    .padding(.bottom)
 
     PreviewContent.indicatorArrow
 
@@ -199,6 +203,45 @@ private struct PreviewContent {
                 "\(item)\n`w: \(shortFraction: width)`\n`h: \(shortFraction: height)`", color: .orange,
                 traits: .alignment(.topLeading))
         }
+    }
+    .frame(height: fixedHeight)
+    Text(carouselPosition.selectedValue)
+    Text.caption("\(carouselPosition.selectedIndex)")
+}
+
+
+// MARK: - MultipleViews
+
+
+#Preview("MultipleViews", traits: .fixedHeader, PreviewContent.layout) {
+    @Previewable @State var carouselPosition: StepCarouselPosition = .init(
+        values: Strings.natoPhoneticAlphabet.map(\.capitalized),
+        selectedValue: "Sierra",
+        markLength: 80,
+        spacing: 20)
+    @Previewable @State var fixedHeight: Double = 100
+
+    PreviewCaption("""
+        All views provided as the mark are contained in center-aligned `ZStack`.
+        """)
+
+    Slider.captioned(
+        "Fixed Height", value: $fixedHeight, in: 0...200,
+        currentValueFormat: .shortFraction,
+        boundsValueFormat: .arithmeticRoundedInteger
+    )
+    .padding(.bottom)
+
+    PreviewContent.indicatorArrow
+
+    StepCarousel(position: $carouselPosition) { _, item in
+        Text("First")
+            .foregroundStyle(.tertiary)
+            .font(.largeTitle)
+        Text("Second")
+            .foregroundStyle(.tertiary)
+            .font(.title)
+        Text(item)
     }
     .frame(height: fixedHeight)
     Text(carouselPosition.selectedValue)

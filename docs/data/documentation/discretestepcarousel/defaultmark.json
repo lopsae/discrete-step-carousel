@@ -198,7 +198,6 @@
     {
       "identifiers" : [
         "doc:\/\/DiscreteStepCarousel\/s8SendableP",
-        "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP",
         "doc:\/\/DiscreteStepCarousel\/7SwiftUI4ViewP"
       ],
       "kind" : "relationships",
@@ -383,6 +382,7 @@
     },
     {
       "kind" : "typeIdentifier",
+      "preciseIdentifier" : "s:20DiscreteStepCarousel11DefaultMarkV5Stylexmfp",
       "text" : "Style"
     },
     {
@@ -438,11 +438,6 @@
   "title" : "StepCarousel",
   "type" : "topic",
   "url" : "\/documentation\/discretestepcarousel\/stepcarousel"
-},
-"doc://DiscreteStepCarousel/s16SendableMetatypeP": {
-  "identifier" : "doc:\/\/DiscreteStepCarousel\/s16SendableMetatypeP",
-  "title" : "Swift.SendableMetatype",
-  "type" : "unresolvable"
 },
 "doc://DiscreteStepCarousel/s8SendableP": {
   "identifier" : "doc:\/\/DiscreteStepCarousel\/s8SendableP",

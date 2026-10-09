@@ -1,13 +1,22 @@
 {
-  "originHash" : "eb99d1c3d28a4912338d576890a73e2fbe3d4ac95ee6f3f52092abb57d1ab646",
+  "originHash" : "4f69bada8b38d461ead487705b62770cee29865815cbb707036c5e271e5d0828",
   "pins" : [
+    {
+      "identity" : "geometry-additions",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/lopsae/geometry-additions",
+      "state" : {
+        "revision" : "5d7f4ab79e18865df940fbb438a58eab5ed626ae",
+        "version" : "0.6.1"
+      }
+    },
     {
       "identity" : "preview-utilities",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
-        "revision" : "abb7790d7c96e79795ea4bfd35104b6d91def401",
-        "version" : "0.4.1"
+        "revision" : "85ffed0741ff93dd36e6ff6d7b5ebfee4404f2b0",
+        "version" : "0.4.2"
       }
     },
     {
