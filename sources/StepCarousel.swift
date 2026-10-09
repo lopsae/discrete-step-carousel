@@ -173,6 +173,7 @@ where
     }
 
 
+    // FIXME: Add internal visibility to other body functions.
     @_documentation(visibility: internal)
     public var body: some View {
         ZStack {
