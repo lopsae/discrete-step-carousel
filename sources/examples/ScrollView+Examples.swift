@@ -4,7 +4,7 @@
 //
 
 
-import PreviewUtilities
+@_spi(ItemStacks) import PreviewUtilities
 import SwiftUI
 
 
@@ -21,7 +21,8 @@ import SwiftUI
 
     Slider.captioned("Slider Value", value: $sliderValue, valueFormat: .fractionLength(2))
     ScrollView(.horizontal) {
-        HStack(0...9, id: \.self) { index in
+        // FIXME: Update other stacks to use items init.
+        HStack(items: 0...9) { index in
             CaptionRectangle("Item \(index)", color: .purple, size: .square(of: 100))
         }
     }

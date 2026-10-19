@@ -1,5 +1,5 @@
 {
-  "originHash" : "4f69bada8b38d461ead487705b62770cee29865815cbb707036c5e271e5d0828",
+  "originHash" : "915ff40222b5d1dcadda3645f43dcbe33516350caa83be1daaca16ae51f538a3",
   "pins" : [
     {
       "identity" : "geometry-additions",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
-        "revision" : "85ffed0741ff93dd36e6ff6d7b5ebfee4404f2b0",
-        "version" : "0.4.2"
+        "branch" : "feature/debug-geometry",
+        "revision" : "35ce2668187cf4f12295abb456fbc05bc7f5dce0"
       }
     },
     {

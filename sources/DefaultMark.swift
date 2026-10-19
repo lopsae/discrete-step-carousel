@@ -77,7 +77,7 @@ private struct PreviewContent {
         DefaultMark(style: .primary)
             .frame(squareOf: 44)
             .scaleEffect(5)
-            .debugOverlay(.hairline)
+            .debugGeometry(.hairline)
         DefaultMark(style: .red)
             .frame(squareOf: 44)
         DefaultMark(style: .orange)

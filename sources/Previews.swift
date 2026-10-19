@@ -89,14 +89,14 @@ private struct PreviewContent {
             }
         }
         .frame(size: .square(of: 100))
-        .roundedRectangleClip(cornerRadius: Defaults.padding/2)
+        .roundedRectangleClip(cornerRadius: SpacingDefaults.padding/2)
         .task {
             // `generateImage` automatically cancels image generation if the task is cancelled.
             await imageGenerator.generateImage(with: item)
         }
     }
     .frame(height: 100)
-    .debugOverlay(.caption("Enclosed in\nSafeArea"), .infoAlignment(.outerBottomTrailing))
+    .debugGeometry(.caption("Enclosed in\nSafeArea"), .alignment(.outerBottomTrailing))
     .safeAreaPadding(.horizontal, 50)
     Text(carouselPosition.selectedValue)
     Text.caption(verbatim: carouselPosition.selectedIndex.description)
@@ -419,7 +419,7 @@ private struct PreviewContent {
                 Rectangle().fill(.secondary)
             }
         }
-        .roundedRectangleClip(cornerRadius: Defaults.padding/2)
+        .roundedRectangleClip(cornerRadius: SpacingDefaults.padding/2)
         .task {
             // `generateImage` automatically cancels image generation if the task is cancelled.
             await imageGenerator.generateImage(with: item)

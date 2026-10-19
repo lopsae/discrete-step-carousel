@@ -110,7 +110,7 @@ private struct PreviewContent {
         .scrollTargetLayout()
         .padding(.horizontal)
     } // ScrollView
-    .debugOverlay()
+    .debugGeometry()
     .frame(height: 160)
     .safeAreaPadding(.horizontal, 40)
     // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
@@ -216,7 +216,7 @@ func withAnimation(_ animation: Animation, condition: Bool, body: () -> Void) {
         .scrollTargetLayout()
         .padding(.horizontal)
     } // ScrollView
-    .debugOverlay()
+    .debugGeometry()
     .frame(height: 160)
     .safeAreaPadding(.horizontal, 140)
     // Note: `threshold` value of 0.0 will report as visible the same views that LazyHStack loads,
