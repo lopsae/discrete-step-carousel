@@ -1,13 +1,13 @@
 {
-  "originHash" : "915ff40222b5d1dcadda3645f43dcbe33516350caa83be1daaca16ae51f538a3",
+  "originHash" : "d50b4753364adad9ff566eb4e8bc4281aad2cba21f1ba760e6c7f4af8e531639",
   "pins" : [
     {
       "identity" : "geometry-additions",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lopsae/geometry-additions",
       "state" : {
-        "revision" : "5d7f4ab79e18865df940fbb438a58eab5ed626ae",
-        "version" : "0.6.1"
+        "branch" : "feature/additions-for-0.6.2",
+        "revision" : "7e68241a6cfb27bbc8275b5d4971372465174361"
       }
     },
     {
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/lopsae/preview-utilities.git",
       "state" : {
-        "branch" : "feature/debug-geometry",
-        "revision" : "35ce2668187cf4f12295abb456fbc05bc7f5dce0"
+        "branch" : "feature/floating-alignment-parameter",
+        "revision" : "1e936fde691477819b5cf2ac3ada1c795f00c147"
       }
     },
     {
