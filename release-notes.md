@@ -1,8 +1,15 @@
 Release Notes
 =============
 
+v0.8.4 - Edge Spacers 
+---------------------
+In Development.
++ Use spacers to center selectable views, instead of contentMargins, in order to be able to properly use scrollTransition.
+
+
 v0.8.3 - Fix multiple view mark 
 -------------------------------
+// FIXME: Release date.
 + Fixed isolation issues with iOS and macOS 27.
 + Fixed issue when multiple views are produced for each mark.
 + Updated PreviewUtilities package to `0.4.2`.
