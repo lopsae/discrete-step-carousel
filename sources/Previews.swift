@@ -38,7 +38,7 @@ private struct PreviewContent {
 
     VStack(spacing: 2) {
         Text(carouselPosition.selectedValue)
-            .floatingCaption("\(carouselPosition.selectedIndex)", . alignment(.outerTrailingTop))
+            .floatingCaption(verbatim: carouselPosition.selectedIndex.description, alignment: .outerTrailingTop)
         StepCarousel(position: $carouselPosition)
             .frame(height: StepCarouselDefaults.markHeight)
     }
@@ -47,7 +47,7 @@ private struct PreviewContent {
 
     VStack(spacing: 2) {
         Text(styledPosition.selectedValue)
-            .floatingCaption("\(styledPosition.selectedIndex)", .alignment(.outerTrailingTop))
+            .floatingCaption(verbatim: styledPosition.selectedIndex.description, alignment: .outerTrailingTop)
         StepCarousel(position: $styledPosition, anchorStyle: .red, markStyle: .orange.tertiary)
             .frame(height: StepCarouselDefaults.markHeight)
     }
@@ -57,7 +57,7 @@ private struct PreviewContent {
 
     VStack(spacing: 2) {
         Text(offsetPosition.selectedValue)
-            .floatingCaption("\(offsetPosition.selectedIndex)", .alignment(.outerTrailingTop))
+            .floatingCaption(verbatim: offsetPosition.selectedIndex.description, alignment: .outerTrailingTop)
         StepCarousel(position: $offsetPosition, anchorStyle: .red, markStyle: .orange.tertiary)
             .frame(height: StepCarouselDefaults.markHeight)
     }
@@ -118,7 +118,7 @@ private struct PreviewContent {
 
     VStack(spacing: 2) {
         Text(animatedPosition.selectedValue)
-            .floatingCaption("\(animatedPosition.selectedIndex)", .alignment(.outerTrailingTop))
+            .floatingCaption(verbatim: animatedPosition.selectedIndex.description, alignment: .outerTrailingTop)
         StepCarousel(position: $animatedPosition) { index, element in
             let isSelected = animatedPosition.selectedIndex == index
             let height: CGFloat = isSelected
@@ -145,7 +145,7 @@ private struct PreviewContent {
 
     VStack(spacing: 2) {
         Text(verbatim: transitionPosition.selectedValue)
-            .floatingCaption("\(transitionPosition.selectedIndex)", .alignment(.outerTrailingTop))
+            .floatingCaption(verbatim: transitionPosition.selectedIndex.description, alignment: .outerTrailingTop)
         StepCarousel(position: $transitionPosition) {
             Text(verbatim: "🎩")
             .font(.title)
